@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 549 192">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill: #fff;
+      }
+
+      .cls-1 {
+        font-size: 88px;
+        font-family: GoogleSans-Medium, Google Sans;
+        font-weight: 500;
+      }
+
+      .cls-2 {
+        font-size: 65px;
+        font-family: GoogleSans-Regular, Google Sans;
+        opacity: 0.8;
+      }
+    </style>
+  </defs>
+  <g id="InfoText" transform="translate(-6881 -4466)">
+    <text id="Coming_Soon" data-name="Coming Soon" class="cls-1" transform="translate(6881 4551)"><tspan x="0" y="0">Coming Soon</tspan></text>
+    <text id="Preview" class="cls-2" transform="translate(6881 4639)"><tspan x="0" y="0">Preview</tspan></text>
+  </g>
+</svg>

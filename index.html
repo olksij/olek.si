@@ -12,7 +12,7 @@
                 right: 35%;
             }
 
-            #NavBar{
+            #NavLogo{
                 background-color: white;
                 position: fixed;
                 top: 10px;
@@ -25,7 +25,7 @@
                 animation: md-button-hover-false linear 0.3s;
                 box-shadow: 0px 1px 7px rgba(0,0,0,0.05);
             }
-            #NavBar:hover{
+            #NavLogo:hover{
 
                 animation: md-button-hover-true linear 0.3s;
                 box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
@@ -129,6 +129,106 @@
                 }
             }
 
+            #NavBar{
+                background-color: white;
+                position: fixed;
+                top: 10px;
+                right: 10px;
+                width: 230px;
+                height: 50px;
+                border-radius: 5px;     
+                border: 0px solid;
+
+                animation: nav-bar-hover-false linear 0.3s;
+                box-shadow: 0px 1px 7px rgba(0,0,0,0.03);
+            }
+
+            #NavBar:hover{
+                animation: nav-bar-hover-true linear 0.3s;
+                box-shadow: 0px 2px 10px rgba(0,0,0,0.05);
+            }
+
+            @keyframes nav-bar-hover-false{
+                from {
+                    box-shadow: 0px 2px 10px rgba(0,0,0,0.05);
+                }
+                to{
+                    box-shadow: 0px 1px 7px rgba(0,0,0,0.03);
+                }
+            }
+
+            @keyframes nav-bar-hover-true{
+                from {
+                    box-shadow: 0px 1px 7px rgba(0,0,0,0.03);
+                }
+                to{
+                    box-shadow: 0px 2px 10px rgba(0,0,0,0.05);
+                }
+            }
+
+            .NavBarButtons{
+                background-color: white;
+                position: fixed;
+                top: 10px;
+                height: 50px;
+                border-radius: 5px;     
+                border: 0px solid;
+
+                animation: nav-button-hover-false linear 0.3s;
+                box-shadow: 0px 1px 7px rgba(0,0,0,0);
+            }
+
+            .NavBarButtons:hover{
+                animation: nav-button-hover-true linear 0.3s;
+                box-shadow: 0px 2px 10px rgba(0,0,0,0.05);
+                z-index: 1;
+            }
+
+            .NavBarButtons#Home{
+                border-top-left-radius: 0px;
+                border-top-right-radius: 5px;
+                border-bottom-right-radius: 5px;
+                border-bottom-left-radius: 0px;
+
+                right: 10px;
+                width: 100px;
+
+            }
+            .NavBarButtons#Contact{
+                border-top-left-radius: 5px;
+                border-top-right-radius: 0px;
+                border-bottom-right-radius: 0px;
+                border-bottom-left-radius: 5px;
+
+                right: 110px;
+                width: 130px;
+
+            }
+
+            @keyframes nav-button-hover-false{
+                from {
+                    box-shadow: 0px 2px 10px rgba(0,0,0,0.05);
+                }
+                to{
+                    box-shadow: 0px 1px 7px rgba(0,0,0,0);
+                }
+            }
+
+            @keyframes nav-button-hover-true{
+                from {
+                    box-shadow: 0px 1px 7px rgba(0,0,0,0);
+                }
+                to{
+                    box-shadow: 0px 2px 10px rgba(0,0,0,0.05);
+                }
+            }
+
+            p.NavText{
+                text-align: center;
+                top: 50%;
+            }
+
+
         </style>
     </head>
     <body>
@@ -147,8 +247,19 @@
         
 
 
-        <div id=NavBar>
+        <div id=NavLogo>
             <img src="svg/AlexBesidaLogo.svg" id=LogoNavBar></img>
         </div>
+
+        <div id=NavBar>
+            <div class="NavBarButtons" id="Home">
+                <p class="NavText">HOME</p>
+            </div>
+            <div class="NavBarButtons" id="Contact">
+                <p class="NavText">CONTACT</p>
+            </div>
+        </div>
+
+        
     </body>
 </html>

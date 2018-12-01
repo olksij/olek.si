@@ -57,7 +57,8 @@
         position: absolute;
         top: 500px;
         left: 0px;
-        width: 100%;
+        width: 110%;
+        left: -5%;
     }
 
     .PageBackground{

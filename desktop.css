@@ -3,7 +3,7 @@
         height: auto;
         width:30%;
         position: fixed;
-        top: 30%;
+        top: 40%;
         left:35%;
         right: 35%;
     }
@@ -131,7 +131,7 @@
         position: fixed;
         top: 10px;
         right: 10px;
-        width: 230px;
+        width: 201.7px;
         height: 50px;
         border-radius: 5px;     
         border: 0px solid;
@@ -188,7 +188,7 @@
         border-bottom-left-radius: 0px;
 
         right: 10px;
-        width: 100px;
+        width: 85.2px;
 
     }
     .NavBarButtons#Contact{
@@ -197,8 +197,8 @@
         border-bottom-right-radius: 0px;
         border-bottom-left-radius: 5px;
 
-        right: 110px;
-        width: 130px;
+        right: 95.2px;
+        width: 116.5px;
 
     }
 
@@ -220,10 +220,11 @@
         }
     }
 
-    p.NavText{
-        text-align: center;
-        top: 50%;
-        font-family: Google Sans;
+    .NavText{
+        position: relative;        
+        top: 17px;
+        left: 18.5px;
+        height: 13px;
     }
     
     #Menu{

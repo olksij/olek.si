@@ -19,13 +19,13 @@
 
         animation: nav-button-hover-false linear 0.3s;
         box-shadow: 0px 1px 7px rgba(0,0,0,0);
-        z-index:0;
+        z-index:1;
     }
     #NavLogo:hover{
 
         animation: nav-button-hover-true linear 0.3s;
         box-shadow: 0px 2px 10px rgba(0,0,0,0.05);
-        z-index:1;
+        z-index:2;
 
     }
 
@@ -168,13 +168,13 @@
 
         animation: nav-button-hover-false linear 0.3s;
         box-shadow: 0px 1px 7px rgba(0,0,0,0);
-        z-index:0;
+        z-index:1;
 
     }
     #Menu:hover{
         animation: nav-button-hover-true linear 0.3s;
         box-shadow: 0px 2px 10px rgba(0,0,0,0.05);
-        z-index:1;
+        z-index:2;
     }
     #MenuIcon{
         position: fixed;

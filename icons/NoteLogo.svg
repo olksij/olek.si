@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 192 192">
+  <defs>
+    <style>
+      .cls-1 {
+        clip-path: url(#clip-NoteLogo);
+      }
+
+      .cls-2 {
+        fill: #ffffff;
+      }
+
+      .cls-3 {
+        fill: #4285F350
+      }
+    </style>
+    <clipPath id="clip-NoteLogo">
+      <rect width="192" height="192"/>
+    </clipPath>
+  </defs>
+  <g id="NoteLogo" class="cls-1">
+    <g id="Group_14" data-name="Group 14" transform="translate(-80.764 95.53) rotate(-45)">
+      <path id="pen" class="cls-2" d="M99.249,22.652c-1.905,1.905-3.755,3.754-3.811,5.6-.168,1.793,1.737,3.642,3.531,5.379,2.69,2.8,5.324,5.323,5.212,8.069s-2.97,5.6-5.828,8.405l-23.145,23.2L67.25,65.351,91.067,41.592l-5.38-5.379-4.65,4.593L60.021,19.793,78.234,1.639a5.581,5.581,0,0,1,7.9,0L99.249,14.751A5.579,5.579,0,0,1,99.249,22.652ZM0,79.864,53.575,26.238,74.591,47.251,21.015,100.877H0V79.864Z" transform="translate(123.49 52.159) rotate(45)"/>
+      <path id="Path_32" data-name="Path 32" class="cls-3" d="M2.049,0H64.2V8.269H2.049L-2.086,4.134Z" transform="translate(68.723 119.367)"/>
+    </g>
+  </g>
+</svg>

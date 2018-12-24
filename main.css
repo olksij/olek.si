@@ -1,50 +1,22 @@
 #go-down-button{
-    width:50px;
-    height: 50px;
-    background-color: #ffffff;
-    border-radius: 5px;
-    position: fixed;
-    right: 10px;
-    bottom: 10px;
-
-    animation: go-down-button-hover-false linear 0.3s;
-    box-shadow: 0px 1px 7px rgba(0,0,0,0.1);
+    width:100px;
+    height: 100px;
+    background-color: #f5f5f5;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    transition: 0.2s;
 }
 
 #go-down-button:hover{
-    animation: go-down-button-hover-true linear 0.3s;
-    box-shadow: 0px 2px 10px rgba(0,0,0,0.3);
-    background-color: #f5f5f5;
-
-}
-
-@keyframes go-down-button-hover-true{
-    from{    
-        box-shadow: 0px 1px 7px rgba(0,0,0,0.1);
-        background-color: #ffffff;
-    }
-    to{
-        box-shadow: 0px 2px 10px rgba(0,0,0,0.3);
-        background-color: #f5f5f5;
-    }
-}
-
-@keyframes go-down-button-hover-false{
-    from{    
-        box-shadow: 0px 2px 10px rgba(0,0,0,0.3);
-        background-color: #f5f5f5;
-    }
-    to{
-        box-shadow: 0px 1px 7px rgba(0,0,0,0.1);
-        background-color: #ffffff;
-    }
+    background-color: #eeeeee;
 }
 
 #go-down-icon{
-    width: 20px;
-    height: 20px;
-    top: 16px;
-    left: 15px;
+    width: 24px;
+    height: 24px;
+    top: 39px;
+    left: 39px;
     position: relative;
 
 }
@@ -64,7 +36,7 @@ html {
   overflow-x: hidden;
 }
 
- .sidenav {
+.sidenav {
     height: 100%; /* 100% Full-height */
     width: 0; /* 0 width - change this with JavaScript */
     position: fixed; /* Stay in place */
@@ -76,30 +48,115 @@ html {
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 60px; /* Place content 60px from the top */
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
-  }
-  
-  .sidenav a {
+}
+
+.sidenav a {
     padding: 8px 8px 8px 26px;
     text-decoration: none;
     font-size: 18px;
     color: #151515;
     display: block;
     transition: 0.3s;
-  }
-  
-  .sidenav a:hover {
+}
+
+.sidenav a:hover {
     color: #707070;
-  }
-  
-  .sidenav .closebtn {
+}
+
+.sidenav .closebtn {
     position: absolute;
     top: 0;
     right: 25px;
     font-size: 36px;
     margin-left: 50px;
-  }
-  
-  #main {
+}
+
+#main {
     transition: margin-left .5s;
     padding: 20px;
-  }
+}
+
+.ProjectCard#Atlass{background-color: #0F142A;}
+.ProjectCard#Notes{background-color: #4285F3;
+}
+.ProjectCard{
+    position: absolute;
+    top: 20px;
+    left:20px;
+    width:60px;
+    height: 60px;
+    border-radius: 5px;     
+    border: 0px solid;
+
+    animation: info-box-hover-false linear 0.3s;
+    box-shadow: 0px 1px 10px rgba(0,0,0,0.2);
+}
+
+.ProjectElement{
+    height: 100px;
+    width: 100%;
+    position: relative;
+    left: 0px;
+    top: 0px;
+    background-color: #f5f5f5;
+    transition: 0.3s;
+}
+
+#projects{
+    position: absolute;
+    top: 100px;
+    width:100%;
+}
+
+.ProjectElement:hover{
+    background-color: #eeeeee;
+}
+
+.ProjectIcon{
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    left: 6px;
+    top: 6px;
+}
+
+.ProjectText{
+    position: relative;
+    font-size: 26px;
+    left: 80px;
+    top: -10px;
+    font-family: gsans-medium;
+}
+
+#InfoIcon{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 30px;
+    left: 30px;
+}
+
+#InfoText{
+    position: absolute;
+    font-size: 30px;
+    font-family: 'gsans-medium';
+    top: 2px;
+    left: 100px;
+}
+
+#NoteText{
+    color:#4285F3;
+}
+
+#AtlassText{
+    color:#0F142A;
+}
+
+div#project-page{
+    left:0px;
+    top: 100%;
+    width: 100%;
+    height: 310px;
+    position: absolute;
+    background-color: #f5f5f5;
+}

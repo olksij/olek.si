@@ -1,0 +1,18 @@
+@font-face{
+    font-family: 'gsans-regular';
+    src: url(fonts/GoogleSans-Regular.ttf);                    
+}
+
+@font-face{
+    font-family: 'gsans-medium';
+    src: url(fonts/GoogleSans-Medium.ttf);                    
+}
+
+@font-face{
+    font-family: 'gsans-bold';
+    src: url(fonts/GoogleSans-Bold.ttf);                    
+}
+
+body {width: 100%; overflow-x:hidden;}
+
+*{font-family: gsans-regular}

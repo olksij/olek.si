@@ -1,11 +1,23 @@
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 600px) {
     #LogoType{
-        height: auto;
-        width:30%;
-        position: fixed;
-        top: 40%;
-        left:35%;
-        right: 35%;
+        height: 200px;
+        width:300px;
+        position: absolute;
+        top: 30%;
+        left: 100px;
+        right:100px;
+        display: inline-block;    
+    }
+    #AlexLogotypeDiv{
+        height: 100%;
+        width:500px;
+        position: relative;
+        top: 0px;
+        display: inline-block;     
+    }
+
+    div#top{
+        text-align: center;
     }
 
     #NavLogo{
@@ -70,43 +82,6 @@
         width: 100%;
         height: 300px;
         visibility: hidden;
-    }
-
-    
-
-    #ComingSoon{
-        background-color: black;
-        position: absolute;
-        top: 115px;
-        left:100px;
-        width:70px;
-        height: 70px;
-        border-radius: 5px;     
-        border: 0px solid;
-
-        animation: info-box-hover-false linear 0.3s;
-        box-shadow: 0px 1px 10px rgba(0,0,0,0.2);
-    }
-    #ComingSoon:hover{
-
-        animation: info-box-hover-true linear 0.3s;
-        box-shadow: 0px 3px 15px rgba(0,0,0,0.3);
-
-    }
-
-    #InfoIcon{
-        position: absolute;
-        width: 40px;
-        height: 40px;
-        top: 15px;
-        left: 15px;
-    }
-
-    #InfoText{
-        position: absolute;
-        height: 50px;
-        top: 130px;
-        left: 200px;
     }
 
     .cls-1, .cls-2 {
@@ -244,7 +219,7 @@
         left:0px;
     }
 
-    div#coming-soon{
+    div#project-page{
         left:0px;
         top: 100%;
         width: 100%;
@@ -258,12 +233,5 @@
     }
 
     
-    div#coming-soon{
-        left:0px;
-        top: 100%;
-        width: 100%;
-        height: 300px;
-        position: absolute;
-        background-color: #f5f5f5;
-    }
+
 }

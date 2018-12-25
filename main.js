@@ -36,3 +36,8 @@ function activeNav() {
     document.getElementById("mySidenav").style.width = "0";
   }
 } 
+
+function PageLoaded(){
+  var height = document.getElementById('top').offsetHeight;
+  document.getElementById('project-page').style.top=(height-100)+"px";
+}

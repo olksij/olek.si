@@ -232,6 +232,7 @@
         visibility: hidden;
     }
 
-    
-
+    .sidenav a {
+        visibility: hidden;
+    } 
 }

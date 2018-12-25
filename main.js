@@ -41,3 +41,9 @@ function PageLoaded(){
   var height = document.getElementById('top').offsetHeight;
   document.getElementById('project-page').style.top=(height-100)+"px";
 }
+
+
+function Resized(){
+  var height = document.getElementById('top').offsetHeight;
+  document.getElementById('project-page').style.top=(height-100)+"px";
+}

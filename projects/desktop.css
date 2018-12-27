@@ -7,6 +7,9 @@
         left: 100px;
         right:100px;
         display: inline-block;    
+        color: #4285F3;
+        font-size: 72px;
+        font-family: gsans-medium;
     }
     #AlexLogotypeDiv{
         height: 100%;

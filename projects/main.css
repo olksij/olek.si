@@ -3,16 +3,16 @@
     height: 60px;
     background-color: #ffffff;
     border-radius: 5px;
-    box-shadow: 0px 1px 7px #4285F330;    
+    box-shadow: 0px 1px 10px #00000020;    
     position: absolute;
     right: 20px;
-    top: 20px;
+    bottom: 20px;
     transition: 0.5s;
 }
 
 #go-down-button:hover{
     background-color: #ffffff;
-    box-shadow: 0px 1px 15px #4285F348;
+    box-shadow: 0px 1px 20px #00000035;
 }
 
 #go-down-icon{
@@ -44,8 +44,8 @@ html {
     padding: 20px;
 }
 
-.ProjectCard#Atlass{background-color: #0F142A;}
-.ProjectCard#Notes{background-color: #4285F3;}
+.ProjectCard#atlass{background-color: #0F142A;}
+.ProjectCard#notes{background-color: #4285F3;}
 
 .ProjectCard{
     position: absolute;
@@ -55,9 +55,13 @@ html {
     height: 60px;
     border-radius: 5px;     
     border: 0px solid;
+    transition: 0.5s;
 
-    animation: info-box-hover-false linear 0.3s;
-    box-shadow: 0px 1px 10px rgba(0,0,0,0.2);
+    box-shadow: 0px 1px 10px #4285F360;
+}
+
+.ProjectCard:hover{
+    box-shadow: 0px 1px 20px #4285F390;
 }
 
 .ProjectElement{
@@ -121,11 +125,24 @@ html {
     color:#0F142A;
 }
 
-div#project-page{
+div.project-page{
     left:0px;
-    top: 100%;
+    top: 0px;
     width: 100%;
     height: 310px;
     position: absolute;
     background-color: #EBF2FD;
+}
+div.project-page#notes{
+    top:100%;
+}
+
+.ProjectInfo{
+    width:auto;
+    top: 80px;
+    left: 100px;
+    right: 20px;
+    position: absolute;
+    margin:0px;
+    font-size: 20px;
 }

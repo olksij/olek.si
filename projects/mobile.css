@@ -1,42 +1,31 @@
-@media only screen and (min-width: 600px) {
-    #LogoType{
-        height: 200px;
-        width:300px;
-        position: absolute;
-        top: 30%;
-        left: 100px;
-        right:100px;
-        display: inline-block;    
-    }
-    #AlexLogotypeDiv{
-        height: 100%;
-        width:500px;
+@media only screen and (max-width: 600px) {
+    #HomeLogo{
+        height: 70px;
+        width:70px;
         position: relative;
-        top: 0px;
-        display: inline-block;     
-    }
-
-    div#top{
-        text-align: center;
+        top: 150px;
+        display: inline-block;
     }
 
     #NavLogo{
         background-color: white;
         position: fixed;
         top: 10px;
-        left:10px;
+        left:60px;
         width:50px;
         height: 50px;
         border-radius: 5px;     
         border: 0px solid;
 
-        animation: md-button-hover-false linear 0.3s;
-        box-shadow: 0px 1px 7px rgba(0,0,0,0.05);
+        animation: nav-button-hover-false linear 0.3s;
+        box-shadow: 0px 1px 7px rgba(0,0,0,0);
+        z-index:1;
     }
     #NavLogo:hover{
 
-        animation: md-button-hover-true linear 0.3s;
-        box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
+        animation: nav-button-hover-true linear 0.3s;
+        box-shadow: 0px 2px 10px rgba(0,0,0,0.05);
+        z-index:2;
 
     }
 
@@ -63,19 +52,19 @@
         width: 20px;
         height: 20px;
         top: 25px;
-        left: 25px;
+        left: 75px;
     }
 
     .ScrollWave{
         position: absolute;
-        top: 90%;
+        top: 500px;
         left: 0px;
         width: 110%;
         left: -5%;
     }
 
     .PageBackground{
-        background-color: #f5f5f5;
+        background-color: #222222;
         position: absolute;
         top: 0px;
         left:0px;
@@ -110,23 +99,49 @@
         background-color: white;
         position: fixed;
         top: 10px;
-        right: 10px;
-        width: 201.7px;
+        left:10px;
+        width:100px;
         height: 50px;
         border-radius: 5px;     
         border: 0px solid;
-
-        visibility: hidden;
 
         animation: nav-bar-hover-false linear 0.3s;
         box-shadow: 0px 1px 7px rgba(0,0,0,0.03);
     }
 
-    #NavBar:hover{
-        animation: nav-bar-hover-true linear 0.3s;
+    #Menu{
+        background-color: white;
+        position: fixed;
+        top: 10px;
+        left:10px;
+        width:50px;
+        height: 50px;
+        border-radius: 5px;     
+        border: 0px solid;
+
+        animation: nav-button-hover-false linear 0.3s;
+        box-shadow: 0px 1px 7px rgba(0,0,0,0);
+        z-index:1;
+
+    }
+    #Menu:hover{
+        animation: nav-button-hover-true linear 0.3s;
         box-shadow: 0px 2px 10px rgba(0,0,0,0.05);
+        z-index:2;
+    }
+    #MenuIcon{
+        position: fixed;
+        width: 24px;
+        height: 24px;
+        top: 23px;
+        left: 23px;
+
     }
 
+    #NavBar:hover{
+        animation: nav-bar-hover-false linear 0.3s;
+        box-shadow: 0px 2px 10px rgba(0,0,0,0.05);
+    }
     @keyframes nav-bar-hover-false{
         from {
             box-shadow: 0px 2px 10px rgba(0,0,0,0.05);
@@ -145,43 +160,21 @@
         }
     }
 
-    .NavBarButtons{
-        background-color: white;
-        position: fixed;
-        top: 10px;
-        height: 50px;
-        border-radius: 5px;     
-        border: 0px solid;
+    
 
-        animation: nav-button-hover-false linear 0.3s;
-        box-shadow: 0px 1px 7px rgba(0,0,0,0);
+    .NavBarButtons{
+        visibility: hidden;
     }
 
     .NavBarButtons:hover{
-        animation: nav-button-hover-true linear 0.3s;
-        box-shadow: 0px 2px 10px rgba(0,0,0,0.05);
-        z-index: 1;
+        visibility: hidden;
     }
 
     .NavBarButtons#Home{
-        border-top-left-radius: 0px;
-        border-top-right-radius: 5px;
-        border-bottom-right-radius: 5px;
-        border-bottom-left-radius: 0px;
-
-        right: 10px;
-        width: 85.2px;
-
+        visibility: hidden;
     }
     .NavBarButtons#Contact{
-        border-top-left-radius: 5px;
-        border-top-right-radius: 0px;
-        border-bottom-right-radius: 0px;
-        border-bottom-left-radius: 5px;
-
-        right: 95.2px;
-        width: 116.5px;
-
+        visibility: hidden;
     }
 
     @keyframes nav-button-hover-false{
@@ -202,39 +195,49 @@
         }
     }
 
-    .NavText{
-        position: relative;        
-        top: 17px;
-        left: 18.5px;
-        height: 13px;
+    p.NavText{
+        top: 50%;
+        font-family: Google Sans;
     }
-    
-    #Menu{
+
+
+    #LogoType{
         visibility: hidden;
     }
 
-    div#top{
-        width: 100%;
-        height: 100%;
-        position: fixed;
-        top:0px;
-        left:0px;
-    }
+    .sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: #ffffff; /* Black*/
+    box-shadow: 1px 0px 10px rgba(0,0,0,0.1);
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
 
-    div#project-page{
-        left:0px;
-        top: 100%;
-        width: 100%;
-        height: 300px;
-        position: absolute;
-        background-color: #f5f5f5;
-    }
+.sidenav a {
+    padding: 8px 8px 8px 26px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #151515;
+    display: block;
+    transition: 0.3s;
+}
 
-    #HomeLogo{
-        visibility: hidden;
-    }
+.sidenav a:hover {
+    color: #707070;
+}
 
-    .sidenav a {
-        visibility: hidden;
-    } 
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
 }

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2296.658 80">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        fill: #222;
+      }
+    </style>
+  </defs>
+  <g id="ScrollWave" transform="translate(-6501.247 -3672.98)">
+    <path id="ScrollWave-2" data-name="ScrollWave" class="cls-1" d="M-165.753,0H2130.905V69.98H-165.753Z" transform="translate(6667 3673)"/>
+    <path id="ScrollWave-3" data-name="ScrollWave" class="cls-2" d="M-165.753,0S98.036,69.98,422.036,69.98C575.611,69.98,1082.988-1.38,1457.479,0s673.427,69.98,673.427,69.98v10H-165.753Z" transform="translate(6667 3673)"/>
+  </g>
+</svg>

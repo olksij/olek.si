@@ -1,16 +1,16 @@
 @font-face{
     font-family: 'gsans-regular';
-    src: url(alexbesida.github.io/files/fonts/GoogleSans-Regular.ttf);                    
+    src: url(files/fonts/GoogleSans-Regular.ttf);                    
 }
 
 @font-face{
     font-family: 'gsans-medium';
-    src: url(alexbesida.github.io/files/fonts/GoogleSans-Medium.ttf);                    
+    src: url(files/fonts/GoogleSans-Medium.ttf);                    
 }
 
 @font-face{
     font-family: 'gsans-bold';
-    src: url(alexbesida.github.io/files/fonts/GoogleSans-Bold.ttf);                    
+    src: url(files/fonts/GoogleSans-Bold.ttf);                    
 }
 
 body {width: 100%; overflow-x:hidden;}

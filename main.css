@@ -129,3 +129,8 @@ div#project-page{
     position: absolute;
     background-color: #EBF2FD;
 }
+
+#ComingSoon{
+    width: 100%;
+    height: 100px;
+}

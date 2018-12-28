@@ -38,12 +38,25 @@ function activeNav() {
 } 
 
 function PageLoaded(){
-  var height = document.getElementById('top').offsetHeight;
-  document.getElementById('project-page').style.top=(height-100)+"px";
+  var nsw=document.getElementById("NoteScreenshot").style.offset.width;
+  document.getElementById("NoteScreenshot").style.height=nsw*0.5 + "px";
+
+  var pagetop=document.getElementById("note-page").style.top;
+
 }
 
+function PageResized(){
+  var nsw=document.getElementById("NoteScreenshot").style.offset.width;
+  document.getElementById("NoteScreenshot").style.height=nsw*0.5 + "px";
+}
 
-function Resized(){
-  var height = document.getElementById('top').offsetHeight;
-  document.getElementById('project-page').style.top=(height-100)+"px";
+function Scrolled(){
+  var scrolled = window.pageYOffset || document.documentElement.scrollTop;
+
+  if (scrolled<250){
+    document.getElementById("body").style.backgroundColor='#ffffff';
+  }
+  else{
+    document.getElementById("body").style.backgroundColor='#E0EBFC';
+  }
 }

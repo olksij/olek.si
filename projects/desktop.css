@@ -1,4 +1,4 @@
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 700px) {
     #LogoType{
         height: 200px;
         width:300px;
@@ -32,14 +32,13 @@
         height: 50px;
         border-radius: 5px;     
         border: 0px solid;
+        transition: 0.3s;
 
-        animation: md-button-hover-false linear 0.3s;
-        box-shadow: 0px 1px 7px rgba(0,0,0,0.05);
+        box-shadow: 0px 1px 7px rgba(0,0,0,0);
     }
     #NavLogo:hover{
 
-        animation: md-button-hover-true linear 0.3s;
-        box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
+        box-shadow: 0px 1px 13px rgba(0,0,0,0.05);
 
     }
 
@@ -107,27 +106,6 @@
         to{
             box-shadow: 0px 3px 15px rgba(0,0,0,0.3);
         }
-    }
-
-    #NavBar{
-        background-color: white;
-        position: fixed;
-        top: 10px;
-        right: 10px;
-        width: 201.7px;
-        height: 50px;
-        border-radius: 5px;     
-        border: 0px solid;
-
-        visibility: hidden;
-
-        animation: nav-bar-hover-false linear 0.3s;
-        box-shadow: 0px 1px 7px rgba(0,0,0,0.03);
-    }
-
-    #NavBar:hover{
-        animation: nav-bar-hover-true linear 0.3s;
-        box-shadow: 0px 2px 10px rgba(0,0,0,0.05);
     }
 
     @keyframes nav-bar-hover-false{
@@ -219,7 +197,7 @@
     div#top{
         width: 100%;
         height: 100%;
-        position: fixed;
+        position: absolute;
         top:0px;
         left:0px;
     }
@@ -240,4 +218,9 @@
     .sidenav a {
         visibility: hidden;
     } 
+
+    .ProjectScreenshot{
+        width: 550px;
+        height: 300px;
+    }
 }

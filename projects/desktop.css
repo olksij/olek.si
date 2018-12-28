@@ -223,4 +223,8 @@
         width: 550px;
         height: 300px;
     }
+    
+    #SiteName{
+        visibility: hidden;
+    }
 }

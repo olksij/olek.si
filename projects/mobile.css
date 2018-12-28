@@ -192,17 +192,17 @@
     }
 
     .sidenav {
-    height: 100%; /* 100% Full-height */
-    width: 0; /* 0 width - change this with JavaScript */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Stay on top */
-    top: 0; /* Stay at the top */
-    left: 0;
-    background-color: #ffffff; /* Black*/
-    box-shadow: 1px 0px 10px rgba(0,0,0,0.1);
-    overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 60px; /* Place content 60px from the top */
-    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+        height: 100%; /* 100% Full-height */
+        width: 0; /* 0 width - change this with JavaScript */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Stay on top */
+        top: 0; /* Stay at the top */
+        left: 0;
+        background-color: #ffffff; /* Black*/
+        box-shadow: 1px 0px 10px rgba(0,0,0,0.1);
+        overflow-x: hidden; /* Disable horizontal scroll */
+        padding-top: 60px; /* Place content 60px from the top */
+        transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
     }
 
     .sidenav a {
@@ -230,5 +230,16 @@
         height: 230px;
         left:40px;
         width: auto;
-    }    
+    } 
+    
+    #SiteName{
+        height: 70px;
+        width:200px;
+        position: fixed;
+        top: 0px;
+        left: 120px;
+        color: #4285F3;
+        font-size: 22px;
+        font-family: gsans-medium;
+    }
 }

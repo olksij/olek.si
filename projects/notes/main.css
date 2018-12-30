@@ -1,0 +1,110 @@
+#go-down-button{
+    width: 60px;
+    height: 60px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0px 1px 7px #4285F330;    
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    transition: 0.5s;
+    visibility: hidden;
+}
+
+#go-down-button:hover{
+    background-color: #ffffff;
+    box-shadow: 0px 1px 15px #4285F348;
+}
+
+#go-down-icon{
+    width: 24px;
+    height: 24px;
+    top: 18.5px;
+    left: 18px;
+    position: relative;
+
+}
+
+div#top{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top:0px;
+    left:0px;
+    text-align: center;
+}
+
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+#main {
+    transition: margin-left .5s;
+    padding: 20px;
+}
+
+.ProjectCard#Atlass{background-color: #0F142A;}
+.ProjectCard#Notes{background-color: #4285F3;}
+
+.ProjectCard{
+    position: absolute;
+    top: 40%;
+    width:100px;
+    height: 100px;
+    border-radius: 10px;     
+    border: 0px solid;
+    transition: 0.5s;
+    box-shadow: 0px 1px 20px rgba(0,0,0,0.1);
+}
+
+.ProjectCard:hover{
+    box-shadow: 0px 3px 30px rgba(0,0,0,0.15);
+}
+
+.ProjectIcon{
+    position: absolute;
+    width: 88px;
+    height: 88px;
+    left: 6px;
+    top: 6px;
+}
+
+.ProjectText{
+    position: relative;
+    font-size: 50px;
+    left: 140px;
+    top: 18px;
+    margin-top: 0px;
+    font-family: gsans-medium;
+}
+
+#InfoIcon{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 30px;
+    left: 30px;
+}
+
+#InfoText{
+    position: absolute;
+    font-size: 30px;
+    font-family: 'gsans-medium';
+    top: 2px;
+    left: 100px;
+    color: #4285F3;
+}
+
+#NoteText{
+    color:#4285F3;
+}
+
+#AlexLogotypeDiv{
+    height: 100%;
+    width:200px;
+    position: relative;
+    top: 0px;
+    display: inline-block;     
+}

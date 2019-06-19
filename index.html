@@ -2,76 +2,17 @@
 <html lang="en">
     <head>
         <title>Alex Besida</title>
-        <meta name="Description" content="Alex Besida WebPage">
+        <meta name="Description" content="Coming Soon">
         <link id="favicon" rel="shortcut icon" href="files/png/SiteIcon.ico" type="image/x-icon">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="mobile.css" type="text/css" >    
-        <link rel="stylesheet" href="desktop.css" type="text/css" >    
         <link rel="stylesheet" href="main.css" type="text/css" >  
-        <link rel="stylesheet" href="font.css" type="text/css" >  
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  
         <script src="main.js"></script>  
     </head>
     <body onresize="Resized()" onload="PageLoaded()">
-        <div id="mySidenav" class="sidenav">
-            <a href="#">Projects</a>
+        <div id="div1">
+            <div id="ComingSoonDiv">
+                <p id="p1">Site is coming </p><p id="p2">soon</p>
+            </div>            
         </div>
-        <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
-        <div id="main">
-            <div id="page-top" style="position: absolute"></div>
-            <div id="top">
-                <div id=AlexLogotypeDiv>
-                    <img src="files/svg/AlexBesidaLogotype.svg" id=LogoType alt="Alex Besida Logotype"></img>
-                    <img src="files/svg/AlexBesidaLogo.svg" id=HomeLogo alt="Alex Besida Logo"></img>
-                </div>
-            </div>
-    
-            <div id="project-page">
-                <div id="align-center">
-                    <a id="ComingSoon" href="https://alexbesida.github.io/projects">
-                        <img src="files/icons/outline-folder-24px.svg" id=InfoIcon alt="Info Icon"></img>
-                        <p id="InfoText">Projects</p>
-                    </a> 
-                </div>
-
-                <div id="projects">
-                    <div class="ProjectElement">
-                        <div class="ProjectCard" id="Notes">
-                            <img src="files/icons/NoteLogo.svg" id=NoteLogo class="ProjectIcon" alt="Image"></img>
-                            <p class="ProjectText" id="NoteText">Notes</p>
-                        </div>
-                    </div>
-
-                    <div class="ProjectElement">
-                            <div class="ProjectCard" id="Atlass">
-                                <img src="files/icons/AtlassLogo.svg" id=AtlassLogo class="ProjectIcon" alt="Image"></img>
-                                <p class="ProjectText" id="AtlassText">Atlass</p>
-                            </div>
-                    </div>
-                </div>
-
-                <a id="go-down-button" href="#project-page">
-                    <img src="files/svg/Arrow-Down.svg" id=go-down-icon alt="Icon"></img>
-                </a>
-            </div>
-            
-            <div id="navigation">
-                <div id=NavBar>
-                    <div class="NavBarButtons" id="Home">
-                        <img src="files/svg/Home.svg" class="NavText" alt="Home"></img>
-                    </div>
-                    <div class="NavBarButtons" id="Contact">
-                        <img src="files/svg/Contact.svg" class="NavText" alt="Contact"></img>
-                    </div>
-                </div>
-            </div>    
-        </div> 
-        <a id=NavLogo href="#page-top">
-            <img src="files/svg/AlexBesidaLogo.svg" id=LogoNavBar alt="Home"></img>
-        </a>
-        <div id="Menu" onclick="activeNav()">
-            <img src="files/svg/MenuIcon.svg" id=MenuIcon alt="MenuIcon"></img>
-        </div>            
-        
     </body>
 </html>

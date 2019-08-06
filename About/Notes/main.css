@@ -1,0 +1,187 @@
+/* --------------------------------------------------
+                 ~~~ GENERAL ~~~
+-------------------------------------------------- */
+
+html { scroll-behavior: smooth; }
+
+p{ font-family: 'gsans-m'; }
+
+body,html{ margin:0px; height: 100%; overflow-x: hidden;}
+
+svg{transition:0s;}
+
+*{ transition: 0.7s; transition-timing-function: cubic-bezier(0.25, 0, 0, 1);}
+
+@font-face { font-family: 'gsans-medium'; src: url(fonts/GoogleSans-Medium.ttf); }
+
+@media only screen and ( max-width:600px ) { #SSPD { display:none; } }
+
+/* --------------------------------------------------
+            ~~~ NAVIGATION - MOBILE ~~~
+-------------------------------------------------- */
+
+#NavBar{
+    width:100%;
+    height:82px;
+    position:fixed;
+    left:0px;
+    top:0px;
+    text-align: center;
+}
+
+#HomeLogo{
+    position:fixed;
+    left:30px;
+    top:30px;
+}
+
+#MessageMe{
+    position: fixed;
+    right: 0px;
+    top: 0px;
+    fill: #05050A;
+}
+
+#PageTitle{
+    display:inline-block;
+    margin-top: 21.6px;
+}
+
+#MessageMe:hover > #MessageMePath{ fill: #0075FF; }
+
+/* --------------------------------------------------
+            ~~~ TOP SLIDE - MOBILE ~~~
+-------------------------------------------------- */
+
+#TopSlide{
+    width: 100%;
+    height: 100%;
+    background: #FBFBFF;
+    position: relative;
+    left:0px;
+    top:0px;
+    box-shadow: 0px 0px 15px #05050A20;
+    z-index: 0;
+}
+
+#TSBGI {
+    position:absolute;
+}
+
+#ScrollDown{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+
+#ScrollDownPath{ fill: #05050A; }
+
+#ScrollDown:hover > #ScrollDownPath{ fill: #0075FF; }
+
+
+
+
+#LogoIconBoxMobile{
+    position: absolute;
+    top: 50%;
+    margin-top: -25px;
+    width: 100%;
+    text-align: center;
+}  
+
+#TypeFaceBoxMobile{
+    top: 40px;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+}
+
+#TypeFaceMobile{
+    height: 22px !important;
+    display: inline-block;
+}
+
+#LogoIconMobile{
+    display: inline-block;
+    width: 120px !important;
+}
+
+#LogoIconBox{
+    position: absolute;
+    top: 50%;
+    margin-top: -47px;
+    width: 100%;
+    text-align: center;
+}
+
+/* --------------------------------------------------
+            ~~~ SECOND SLIDE - MOBILE ~~~
+-------------------------------------------------- */
+
+#Scroll{ width:100%; }
+
+#SSP1M, #SSP2M{
+    color: white;
+    font-size:35px;
+    margin: 10px;
+}
+
+#SSMBP{
+    color: white;
+    font-size: 24px;
+    font-family: 'gsans-b';
+    margin:15px;
+}
+
+#SecondSlide{
+    width: 100%;
+    position: relative;
+    left:0px;
+    top:0px;
+    background: #0075ff;
+    box-shadow: 0px 0px 15px #0075FF30;
+    text-align: center;
+    z-index: -1;
+    /* --- */
+    height: 360px;
+}
+
+#SecondSlideTitleBox{
+    position: absolute;
+    top: 45px;
+    width: 100%;
+    text-align: center;
+}
+
+#SecondSlideTitle{
+    display: inline-block;
+}
+
+#SSContentBox{
+    position: absolute;
+    top: 105px;
+    width: 100%;
+    text-align: center;
+}
+
+#SSMB{
+    box-shadow: 0px 1px 15px #00000020;
+    background: #0055CC;
+    /* --- */
+    border-radius: 10px;
+    width: 130px;
+    height: 60px;    
+    display: inline-block;
+    /* --- */
+    margin-top: 248px;
+}
+
+#SSMBP{ color:#FFFFFF; }
+
+#SSMB:hover{
+    box-shadow: 0px 4px 20px #00000040;
+    background: white;
+    margin-top:245px;
+}
+
+#SSMB:hover > #SSMBP { color: #0075FF }

@@ -1,36 +1,871 @@
-@font-face{
-    font-family: 'gsans-medium';
-    src: url(fonts/GoogleSans-Medium.ttf);                    
+/* --------------------------------------------------
+                 ~~~ GENERAL ~~~
+-------------------------------------------------- */
+
+html { scroll-behavior: smooth; overflow-x: hidden;}
+
+p{ font-family: 'gsans-m'; }
+
+body,html{ margin:0px; height: 100%; }
+
+svg{transition:0s;}
+
+*{ transition: 0.7s; transition-timing-function: cubic-bezier(0.25, 0, 0, 1);}
+
+@font-face { font-family: 'gsans-medium'; src: url(fonts/GoogleSans-Medium.ttf); }
+
+@media only screen and ( max-width:600px ) { #TopSlideDesktop, #GSPD, #SSPD { display:none; } }
+
+#PSTop, #PSBottom, #DSTop, #DSBottom, #TGTSTop, #TGTSBottom, #GVTSTop, #GVTSBottom { width:100%; height:100%; top:0px; position:absolute; }
+
+#PSTop, #DSTop, #TGTSTop, #GVTSTop { height:1px; }
+
+#PSTitleDiv, #DSTitleDiv, #TGTSTitleDiv, #GVTSTitleDiv { position:relative; width: 100%; height: 30px; display:inline-block; } 
+
+/* --------------------------------------------------
+            ~~~ TOP SLIDE - MOBILE ~~~
+-------------------------------------------------- */
+
+#ScrollDown{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
 }
 
-p{
-    font-size: 24pt;
-    font-family: gsans-medium;
+#ScrollDownPath{ fill: #05050A; }
+
+#ScrollDown:hover > #ScrollDownPath{ fill: #0075FF; }
+
+#MessageMe{
+    position: absolute;
+    right: 74px;
+    bottom: 10px;
+    fill: #05050A;
+}
+
+#MessageMe:hover > #MessageMePath{ fill: #0075FF; }
+
+#Scroll{ width:100%; }
+
+#TopSlide{
+    width: 100%;
+    height: 100%;
+    background: white;
+    position: relative;
+    left:0px;
+    top:0px;
+    box-shadow: 0px 0px 15px #05050A20;
+    z-index: 3;
+}
+
+#LogoIconBoxMobile{
+    position: absolute;
     top: 50%;
-    position: relative;
+    margin-top: -25px;
+    width: 100%;
+    text-align: center;
+}  
+
+#TypeFaceBoxMobile{
+    top: 40px;
+    position: absolute;
+    width: 100%;
+    text-align: center;
 }
-#p1{
-    color: #05050A;
-    margin-right: 76px;
-}
-#p2{
-    color: #0075FF;
-    margin-top: -72px;
-    right:0px;
-    position: relative;
-    margin-left: 217px;
-}
-#ComingSoonDiv{
+
+#TypeFaceMobile{
+    height: 22px !important;
     display: inline-block;
 }
-html,body,#div1{
-    width: 100%;
-    margin: 0;
+
+#LogoIconMobile{
+    display: inline-block;
+    width: 120px !important;
 }
 
-#div1{
-    text-align: center;
-    top:50%;
+#LogoIconBox{
     position: absolute;
-    margin-top:-40px;
+    top: 50%;
+    margin-top: -47px;
+    width: 100%;
+    text-align: center;
+}
+
+/* --------------------------------------------------
+            ~~~ SECOND SLIDE - MOBILE ~~~
+-------------------------------------------------- */
+
+#SSP1M, #SSP2M{
+    color: white;
+    font-size:35px;
+    margin: 10px;
+}
+
+
+#SSMBP{
+    color: white;
+    font-size: 24px;
+    font-family: 'gsans-b';
+    margin:15px;
+}
+
+#SecondSlide{
+    width: 100%;
+    position: relative;
+    left:0px;
+    top:0px;
+    background: #0075ff;
+    box-shadow: 0px 0px 15px #0075FF30;
+    text-align: center;
+    z-index: 2;
+    /* --- */
+    height: 360px;
+}
+
+#SecondSlideTitleBox{
+    position: absolute;
+    top: 45px;
+    width: 100%;
+    text-align: center;
+}
+
+#SecondSlideTitle{
+    display: inline-block;
+}
+
+#SSContentBox{
+    position: absolute;
+    top: 105px;
+    width: 100%;
+    text-align: center;
+}
+
+#SSMB{
+    box-shadow: 0px 1px 15px #00000020;
+    background: #0055CC;
+    /* --- */
+    border-radius: 10px;
+    width: 130px;
+    height: 60px;    
+    display: inline-block;
+    /* --- */
+    margin-top: 248px;
+}
+
+#SSMBP{ color:#FFFFFF; }
+
+#SSMB:hover{
+    box-shadow: 0px 4px 20px #00000040;
+    background: white;
+    margin-top:245px;
+}
+
+#SSMB:hover > #SSMBP { color: #0075FF }
+
+/* --------------------------------------------------
+            ~~~ PROJECT SLIDE - MOBILE ~~~
+-------------------------------------------------- */
+
+#ProjectSlide{
+    width: 100%;
+    position: relative;
+    left:0px;
+    top:0px;
+    background: #FDFDFE;
+    box-shadow: 0px 0px 15px #05050A20;
+    text-align: center;
+    z-index: 1;
+    /* --- */
+    height: 315px;
+}
+
+#PSTitleIcon{
+    position:absolute;
+    left: 25px;
+    top: 25px;
+    transition: 0.7s;
+}
+
+#PSTitleP{
+    position:absolute;
+    left: 70px;
+    top: 23.5px;
+    margin:0px;
+    font-size: 19px;
+    color: #05050A;
+    font-family:'gsans-medium';
+}
+
+#PSWIPT{
+    position:absolute;
+    right: 18px;
+    top: 18px;
+    transition: 0.7s;
+    border-radius: 19px;
+} 
+
+@media only screen and (max-width: 450px) { #PSWIPT {display: none; } }
+
+#PSWIPT:hover { box-shadow: 0px 2px 20px #05050A30; top:17px; }
+
+#PSWIPT:hover > #WIPTR{opacity:1;}
+
+#PSWIPT:hover > #WIPTP{fill:#FFFFFF;}
+
+#PSWIPTT{
+    background: #FFF;
+    padding: 15px 20px 15px 20px;
+    position: absolute;
+    right: 0px;
+    box-shadow: 0px 2px 20px #05050A30;
+    border-radius: 12px;
+    font-size: 16px;
+    font-family: 'gsans-m';
+    color:#05050A;
+}
+
+#PSWIPTTA{
+    left: 18px;
+    position:absolute;
+    height:20px;
+    right:18px;
+}
+
+#PSProjectsBar{
+    right:0px;
+    width: 100%;
+    height: 100%;
+    top:0px; 
+    position:relative;     
+    left:0px;
+    scroll-behavior: smooth;
+    z-index:2;
+    overflow-x:hidden;
+}
+
+.PSP{
+    position:absolute;
+    border-radius: 12px;
+
+    top:17px;
+}
+
+.PSP:hover{
+    top:15px;
+}
+
+#PSPNotes{ left:25px; box-shadow: 0px 2px 20px #0075FF40; } #PSPNotes:hover{ box-shadow: 0px 5px 25px #0075FF80; }
+#PSPEditor{ left:230px; box-shadow: 0px 2px 20px #05050A30; } #PSPEditor:hover{ box-shadow: 0px 5px 25px #05050A40; }
+#PSPFluxUI{ left:435px; box-shadow: 0px 2px 20px #05050A30; } #PSPFluxUI:hover{ box-shadow: 0px 5px 25px #05050A40; }
+
+#PSPBScrollRight{
+    border-radius: 10px;
+    width: 60px;
+    height: 60px;
+    box-shadow: 0px 1px 15px #05050A20;
+    position:absolute;
+    right: 25px;
+    top: 150px;
+    background: white;
+    opacity: 0;
+}
+
+#PSPBScrollRight:hover > #PSPBSIRight { fill: #0075FF; }
+
+#PSPBScrollRight:hover{ box-shadow: 0px 3px 20px #05050A40; top: 148px; }
+
+#PSPBSIRight{ margin-top: 20px; }
+
+#PSPBScrollLeft{
+    border-radius: 10px;
+    width: 60px;
+    height: 60px;
+    box-shadow: 0px 1px 15px #05050A20;
+    position:absolute;
+    left: 25px;
+    top: 150px;
+    background: white;
+    opacity:0;
+}
+
+#PSPBScrollLeft:hover > #PSPBSILeft { fill: #0075FF; }
+
+#PSPBScrollLeft:hover{ box-shadow: 0px 3px 20px #05050A40; top: 148px; }
+
+#PSPBSILeft{ margin-top: 20px; transform: rotate(180deg)}
+
+#PSPBScrollableArea{
+    height: 1px;
+    width: 640px;
+    position:relative;
+    display:inline-block;
+    top:40px;
+}
+
+/* --------------------------------------------------
+            ~~~ SOCIAL SLIDE - MOBILE ~~~
+-------------------------------------------------- */
+
+#DesignSlide{
+    width: 100%;
+    position: relative;
+    left:0px;
+    top:0px;
+    background: #FDFDFE;
+    box-shadow: 0px 0px 15px #000000FF;
+    text-align: center;
+    z-index: 0;
+    /* --- */
+    height: 280px;
+}
+
+#DSTitleIcon{
+    position:absolute;
+    left: 25px;
+    top: 25px;
+    transition: 0.7s;
+}
+
+#DSTitleP{
+    position:absolute;
+    left: 70px;
+    top: 23.5px;
+    margin:0px;
+    font-size: 19px;
+    color: #05050A;
+    font-family:'gsans-medium';
+}
+
+#DSSocialBar{
+    right:0px;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left:0px;
+    top: 0px;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    z-index:2;
+}
+
+.DSP{
+    position:absolute;
+    border-radius: 12px;
+    top:17px;
+}
+
+.DSP:hover{ top:15px; }
+
+#DSTwitter{ left:25px; box-shadow: 0px 2px 20px #1DA1F240; } #DSTwitter:hover{ box-shadow: 0px 5px 25px #1DA1F280; }
+#DSDribbble{ left:230px; box-shadow: 0px 2px 20px #E74D8940; } #DSDribbble:hover{ box-shadow: 0px 5px 25px #E74D8980; }
+#DSBehance{ left:435px; box-shadow: 0px 2px 20px #1769FF40; } #DSBehance:hover{ box-shadow: 0px 5px 25px #1769FF80; }
+#DSUpLabs{ left:640px; box-shadow: 0px 2px 20px #4738E140; } #DSUpLabs:hover{ box-shadow: 0px 5px 25px #4738E180; }
+
+#DSScrollRight{
+    border-radius: 10px;
+    width: 60px;
+    height: 60px;
+    box-shadow: 0px 1px 15px #05050A20;
+    position:absolute;
+    right: 25px;
+    top: 130px;
+    background: white;
+    opacity: 0;
+}
+
+#DSScrollRight:hover > #DSSIRight { fill: #0075FF; }
+
+#DSSIRight{ margin-top: 20px; }
+
+#DSScrollLeft{
+    border-radius: 10px;
+    width: 60px;
+    height: 60px;
+    box-shadow: 0px 1px 15px #05050A20;
+    position:absolute;
+    left: 25px;
+    top: 130px;
+    background: white;
+    opacity:0;
+}
+
+#DSScrollLeft:hover > #DSSILeft { fill: #0075FF; }
+
+#DSScrollLeft:hover, #DSScrollRight:hover{ box-shadow: 0px 3px 20px #05050A40; top: 127px; }
+
+#DSSILeft{ margin-top: 20px; transform: rotate(180deg)}
+
+#DSScrollableArea{
+    height: 1px;
+    width: 845px;
+    position:relative;
+    display:inline-block;
+    top:40px;
+}
+
+/* --------------------------------------------------
+            ~~~ GALLERY SLIDE - MOBILE ~~~
+-------------------------------------------------- */
+
+#GSP1M, #GSP2M{
+    color: white;
+    font-size:35px;
+    margin: 10px;
+}
+
+
+#GSMBP{
+    color: white;
+    font-size: 24px;
+    font-family: 'gsans-b';
+    margin:15px;
+}
+
+#GallerySlide{
+    width: 100%;
+    position: relative;
+    left:0px;
+    top:0px;
+    background: #05050A;
+    box-shadow: 0px 0px 15px #05050A30;
+    text-align: center;
+    z-index: -1;
+    /* --- */
+    height: 265px;
+}
+
+#GSTitleBox{
+    position: absolute;
+    top: 45px;
+    width: 100%;
+    text-align: center;
+}
+
+#GSTitle{
+    display: inline-block;
+}
+
+#GSContentBox{
+    position: absolute;
+    top: 105px;
+    width: 100%;
+    text-align: center;
+}
+
+#GSMB{
+    box-shadow: 0px 1px 15px #00000020;
+    background: #0055CC;
+    /* --- */
+    border-radius: 10px;
+    width: 130px;
+    height: 60px;    
+    display: inline-block;
+    /* --- */
+    margin-top: 248px;
+}
+
+#GSMBP{ color:#FFFFFF; }
+
+#GSMB:hover{
+    box-shadow: 0px 4px 20px #00000040;
+    background: white;
+    margin-top:245px;
+}
+
+#GSMB:hover > #GSMBP { color: #0075FF }
+
+/* --------------------------------------------------
+        ~~~ TELEGRAM THEMES SLIDE - MOBILE ~~~
+-------------------------------------------------- */
+
+#TGTSlide{
+    width: 100%;
+    position: relative;
+    left:0px;
+    top:0px;
+    background: #FDFDFE;
+    box-shadow: 0px 0px 15px #05050A20;
+    text-align: center;
+    z-index: -2;
+    overflow-y: hidden;
+    /* --- */
+    height: 300px;
+}
+
+#TGTSTitleIcon{
+    position:absolute;
+    left: 25px;
+    top: 27px;
+    transition: 0.7s;
+}
+
+#TGTSTitleP{
+    position:absolute;
+    left: 70px;
+    top: 23.5px;
+    margin:0px;
+    font-size: 19px;
+    color: #05050A;
+    font-family:'gsans-medium';
+}
+
+#TGTSThemesBar{
+    right:0px;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left:0px;
+    top: 0px;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    z-index:2;
+}
+
+.TGTST{
+    position:absolute;
+    border-radius: 12px;
+    top:17px;
+}
+
+.TGTST:hover{ top:15px; }
+
+#TGTGXLight{ left:25px; box-shadow: 0px 2px 20px #05050A15; } #TGTGXLight:hover{ box-shadow: 0px 5px 25px #05050A30; }
+#TGTGXDark{ left:230px; box-shadow: 0px 2px 20px #05050A40; } #TGTGXDark:hover{ box-shadow: 0px 5px 25px #05050A80; }
+#TGTGXPaperPlane{ left:435px; box-shadow: 0px 2px 20px #55AAFF40; } #TGTGXPaperPlane:hover{ box-shadow: 0px 5px 25px #55AAFF80; }
+
+#TGTSScrollRight{
+    border-radius: 10px;
+    width: 60px;
+    height: 60px;
+    box-shadow: 0px 1px 15px #05050A20;
+    position:absolute;
+    right: 25px;
+    top: 142.5px;
+    background: white;
+    opacity: 0;
+}
+
+#TGTSScrollRight:hover > #TGTSSIRight { fill: #0075FF; }
+
+#TGTSSIRight{ margin-top: 20px; }
+
+#TGTSScrollLeft{
+    border-radius: 10px;
+    width: 60px;
+    height: 60px;
+    box-shadow: 0px 1px 15px #05050A20;
+    position:absolute;
+    left: 25px;
+    top: 142.5px;
+    background: white;
+    opacity:0;
+}
+
+#TGTSScrollLeft:hover > #TGTSSILeft { fill: #0075FF; }
+
+#TGTSScrollLeft:hover, #TGTSScrollRight:hover{ box-shadow: 0px 3px 20px #05050A40; top: 139.5px; }
+
+#TGTSSILeft{ margin-top: 20px; transform: rotate(180deg)}
+
+#TGTSScrollableArea{
+    height: 1px;
+    width: 640px;
+    position:relative;
+    display:inline-block;
+    top:40px;
+}
+
+/* --------------------------------------------------
+        ~~~ TELEGRAM THEMES SLIDE - MOBILE ~~~
+-------------------------------------------------- */
+
+#GVTSlide{
+    width: 100%;
+    position: relative;
+    left:0px;
+    top:0px;
+    background: #FDFDFE;
+    box-shadow: 0px 0px 15px #000000FF;
+    text-align: center;
+    z-index: -3;
+    overflow-y: hidden;
+    /* --- */
+    height: 300px;
+}
+
+#GVTSTitleIcon{
+    position:absolute;
+    left: 25px;
+    top: 30px;
+    transition: 0.7s;
+}
+
+#GVTSTitleP{
+    position:absolute;
+    left: 70px;
+    top: 23.5px;
+    margin:0px;
+    font-size: 19px;
+    color: #05050A;
+    font-family:'gsans-medium';
+}
+
+#GVTSThemesBar{
+    right:0px;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left:0px;
+    top: 0px;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    z-index:2;
+}
+
+.GVTST{
+    position:absolute;
+    border-radius: 12px;
+    top:17px;
+}
+
+.GVTST:hover{ top:15px; }
+
+#GVLight{ left:25px; box-shadow: 0px 2px 20px #05050A15; } #GVLight:hover{ box-shadow: 0px 5px 25px #05050A30; }
+#GVDark{ left:230px; box-shadow: 0px 2px 20px #05050A40; } #GVDark:hover{ box-shadow: 0px 5px 25px #05050A80; }
+#GVNight{ left:435px; box-shadow: 0px 2px 20px #05050A15; } #GVNight:hover{ box-shadow: 0px 5px 25px #05050A30; }
+
+#GVTSScrollRight{
+    border-radius: 10px;
+    width: 60px;
+    height: 60px;
+    box-shadow: 0px 1px 15px #05050A20;
+    position:absolute;
+    right: 25px;
+    top: 142.5px;
+    background: white;
+    opacity: 0;
+}
+
+#GVTSScrollRight:hover > #GVTSSIRight { fill: #0075FF; }
+
+#GVTSSIRight{ margin-top: 20px; }
+
+#GVTSScrollLeft{
+    border-radius: 10px;
+    width: 60px;
+    height: 60px;
+    box-shadow: 0px 1px 15px #05050A20;
+    position:absolute;
+    left: 25px;
+    top: 142.5px;
+    background: white;
+    opacity:0;
+}
+
+#GVTSScrollLeft:hover > #GVTSSILeft { fill: #0075FF; }
+
+#GVTSScrollLeft:hover, #GVTSScrollRight:hover{ box-shadow: 0px 3px 20px #05050A40; top: 139.5px; }
+
+#GVTSSILeft{ margin-top: 20px; transform: rotate(180deg)}
+
+#GVTSScrollableArea{
+    height: 1px;
+    width: 640px;
+    position:relative;
+    display:inline-block;
+    top:40px;
+}
+
+/* --------------------------------------------------
+                 ~~~ LAPTOP & PC ~~~
+-------------------------------------------------- */
+
+
+@media only screen and (min-width: 601px) { #TopSlideMobile, #SSP1M, #SSP2M, #GSP1M, #GSP2M{ display:none; }
+
+    /* --- TOP SLIDE -- */
+
+    #TypeFaceDesktop{ display: inline-block; }
+    
+    #LogoIconDesktop {
+        position: absolute;
+        left: 30px;
+        top: 30px;
+        width: 44px;
+        height: 22px;
+    }
+    
+    #TypeFaceBoxDesktop{
+        position: absolute;
+        top: 50%;
+        margin-top: -47px;
+        width: 100%;
+        text-align: center;
+    }   
+
+    /* --- SECOND SLIDE --- */
+
+    #SSMB{ margin-top: 190px; }
+    
+    #SecondSlide{ height: 310px; }
+
+    #SSPD{
+        color: white;
+        font-size: 35px;
+        margin: 0px;
+    }
+
+    #SSMB:hover{ margin-top:187px; }
+
+    /* --- PROJECT SLIDE --- */
+
+    #ProjectSlide { height: 365px; }
+
+    #PSTitleIcon { left: 50px; top: 50px;}
+
+    #PSTitleP { left: 95px; top: 48px;}
+
+    #PSWIPT { right: 40px; top: 40px;}
+
+    #PSWIPT:hover { top: 37px;}
+
+    #PSPBScrollableArea{ width: 690px; top:65px; }
+
+    #PSPNotes{ left:50px; }
+    #PSPEditor{ left:255px; }
+    #PSPFluxUI{ left:460px; }
+
+    #PSPBScrollLeft, #PSPBScrollRight { top: 175px; }
+
+    #PSPBScrollLeft:hover, #PSPBScrollRight:hover { top: 173px; }
+
+    #PSPBScrollLeft { left: 50px; }
+
+    #PSPBScrollRight { right: 50px; }
+
+    /* --- DESIGN SLIDE --- */
+
+    #DesignSlide { height: 325px; }
+
+    #DSTitleIcon { left: 50px; top: 50px; transition: 0.7s;}
+
+    #DSTitleP { left: 95px; top: 48px;}
+
+    #DSTwitter{ left:50px; }
+    #DSDribbble{ left:255px; }
+    #DSBehance{ left:460px; }
+    #DSUpLabs{ left:665px; }
+
+    #DSScrollLeft, #DSScrollRight { top: 155px; }
+
+    #DSScrollLeft:hover, #DSScrollRight:hover { top: 152px; }
+
+    #DSScrollLeft { left: 50px; }
+
+    #DSScrollableArea { width: 890px; top:65px; }
+
+    #DSScrollRight { right: 50px; }
+
+    /* --- GALLERY SLIDE --- */
+
+    #GallerySlide{ height: 199px; }
+
+    #GSPD{
+        color: white;
+        font-size: 35px;
+        margin: 0px;
+        transition: 0s;
+    }    
+
+    /* --- TELEGRAM THEMES SLIDE --- */
+
+    #TGTSlide { height: 350px; }
+
+    #TGTSTitleIcon { left: 50px; top: 50px;}
+
+    #TGTSTitleP { left: 95px; top: 48px;}
+
+    #TGTSScrollableArea{ width: 690px; top:65px; }
+
+    #TGTGXLight{ left:50px; }
+    #TGTGXDark{ left:255px; }
+    #TGTGXPaperPlane{ left:460px; }
+
+    #TGTSScrollLeft, #TGTSScrollRight { top: 167.5px; }
+
+    #TGTSScrollLeft:hover, #TGTSScrollRight:hover { top: 165.5px; }
+
+    #TGTSPBScrollLeft { left: 50px; }
+
+    #TGTSPBScrollRight { right: 50px; }
+
+    /* --- TELEGRAM THEMES SLIDE --- */
+
+    #GVTSlide { height: 350px; }
+
+    #GVTSTitleIcon { left: 50px; top: 53px;}
+
+    #GVTSTitleP { left: 95px; top: 48px;}
+
+    #GVTSScrollableArea{ width: 690px; top:65px; }
+
+    #GVLight{ left:50px; }
+    #GVDark{ left:255px; }
+    #GVNight{ left:460px; }
+
+    #GVTSScrollLeft, #GVTSScrollRight { top: 167.5px; }
+
+    #GVTSScrollLeft:hover, #GVTSScrollRight:hover { top: 165.5px; }
+
+    #GVTSPBScrollLeft { left: 50px; }
+
+    #GVTSPBScrollRight { right: 50px; }
+}
+
+/* --------------------------------------------------
+                     ~~~ PC ~~~
+-------------------------------------------------- */
+
+@media only screen and (min-width: 707px) {
+
+    /* --- GENERAL --- */
+
+    .PSP, .TGTSP, .DSP { top:29.5px }
+
+    .PSP:hover, .TGTSP:hover, .DSP:hover { top:27.5px }
+
+    #DSTitleDiv, #PSTitleDiv, #TGTSTitleDiv, #GVTSTitleDiv { position:relative; height: 30px; display:inline-block; }
+
+    #DSTitleIcon, #PSTitleIcon, #TGTSTitleIcon, #GVTSTitleIcon { left:0px; }
+
+    #DSSocialBar, #PSProjectsBar, #TGTSProjectsBar, #GVTSProjectsBar { position:relative; left:unset; right:unset; display:inline-block; width:100%;}  
+
+    #DSPBScrollableArea, #PSPBScrollableArea, #TGTSScrollableArea, #GVTSScrollableArea { position:relative; left:unset; right:unset; display:inline-block;}    
+
+    /* --- PROJECT SLIDE --- */
+
+    #PSTitleDiv { width: 393px; }
+
+    #PSTitleP { left: 50px; }
+
+    #PSWIPT { right:0px; }
+
+    /* --- DESIGN SLIDE --- */
+
+    #DSTitleDiv { width: 160px; }
+
+    #DSTitleP { left: 47px; }
+
+    /* --- TELEGRAM THEMES SLIDE --- */
+
+    #TGTSTitleDiv { width: 204px;}
+
+    #TGTSTitleP { left: 47px; }
+
+    /* --- TELEGRAM THEMES SLIDE --- */
+
+    #GVTSTitleDiv { width: 204px;}
+
+    #GVTSTitleP { left: 47px; }
+
 }

@@ -1,0 +1,22 @@
+@font-face { font-family: 'gsans-medium'; src: url(https://alexbesida.github.io/fonts/GoogleSans-Medium.ttf); }
+
+p {
+    font-size: 24pt;
+    font-family: gsans-medium;
+    top: 50%;
+    position: relative;
+}
+#p1 { color: #05050A; margin-right: 76px; }
+
+#p2 { color: #0075FF; margin-top: -72px; right:0px; position: relative; margin-left: 233.75px; }
+
+#ComingSoonDiv { display: inline-block; width: 304.75px}
+
+html,body { width: 100%; margin: 0; }
+
+body {
+    text-align: center;
+    top:50%;
+    position: absolute;
+    margin-top:-40px;
+}

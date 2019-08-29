@@ -4,15 +4,13 @@
 
 html { scroll-behavior: smooth; overflow-x: hidden;}
 
-p{ font-family: 'gsans-m'; }
+p{ font-family: 'Open Sans'; font-weight:500; }
 
 body,html{ margin:0px; height: 100%; }
 
 svg{transition:0s;}
 
 *{ transition: 0.7s; transition-timing-function: cubic-bezier(0.25, 0, 0, 1);}
-
-@font-face { font-family: 'gsans-medium'; src: url(fonts/GoogleSans-Medium.ttf); }
 
 @media only screen and ( max-width:600px ) { #TopSlideDesktop, #GSPD, #SSPD { display:none; } }
 
@@ -32,9 +30,9 @@ svg{transition:0s;}
     bottom: 10px;
 }
 
-#ScrollDownPath{ fill: #05050A; }
+#ScrollDownPath{ fill: rgb(5, 5, 10); }
 
-#ScrollDown:hover > #ScrollDownPath{ fill: #0075FF; }
+#ScrollDown:hover > #ScrollDownPath{ fill: rgb(0, 117, 255); }
 
 #MessageMe{
     position: absolute;
@@ -43,7 +41,7 @@ svg{transition:0s;}
     fill: #05050A;
 }
 
-#MessageMe:hover > #MessageMePath{ fill: #0075FF; }
+#MessageMe:hover > #MessageMePath{ fill: rgb(0, 117, 255); }
 
 #Scroll{ width:100%; }
 
@@ -105,8 +103,9 @@ svg{transition:0s;}
 #SSMBP{
     color: white;
     font-size: 24px;
-    font-family: 'gsans-b';
-    margin:15px;
+    font-family: 'Open Sans';
+    font-weight: 700;
+    margin:13px 15px;
 }
 
 #SecondSlide{
@@ -193,7 +192,7 @@ svg{transition:0s;}
     margin:0px;
     font-size: 19px;
     color: #05050A;
-    font-family:'gsans-medium';
+    font-family:'Open Sans';
 }
 
 #PSWIPT{
@@ -220,7 +219,8 @@ svg{transition:0s;}
     box-shadow: 0px 2px 20px #05050A30;
     border-radius: 12px;
     font-size: 16px;
-    font-family: 'gsans-m';
+    font-family: 'Open Sans';
+    font-weight:500;
     color:#05050A;
 }
 
@@ -333,7 +333,8 @@ svg{transition:0s;}
     margin:0px;
     font-size: 19px;
     color: #05050A;
-    font-family:'gsans-medium';
+    font-family:'Open Sans';
+    font-weight:500;
 }
 
 #DSSocialBar{
@@ -506,7 +507,8 @@ svg{transition:0s;}
     margin:0px;
     font-size: 19px;
     color: #05050A;
-    font-family:'gsans-medium';
+    font-family:'Open Sans';
+    font-weight:500;
 }
 
 #TGTSThemesBar{
@@ -607,7 +609,8 @@ svg{transition:0s;}
     margin:0px;
     font-size: 19px;
     color: #05050A;
-    font-family:'gsans-medium';
+    font-family:'Open Sans';
+    font-weight:500;
 }
 
 #GVTSThemesBar{
@@ -852,19 +855,19 @@ svg{transition:0s;}
 
     /* --- DESIGN SLIDE --- */
 
-    #DSTitleDiv { width: 160px; }
+    #DSTitleDiv { width: 165px; }
 
     #DSTitleP { left: 47px; }
 
     /* --- TELEGRAM THEMES SLIDE --- */
 
-    #TGTSTitleDiv { width: 204px;}
+    #TGTSTitleDiv { width: 210px;}
 
     #TGTSTitleP { left: 47px; }
 
     /* --- TELEGRAM THEMES SLIDE --- */
 
-    #GVTSTitleDiv { width: 204px;}
+    #GVTSTitleDiv { width: 205px;}
 
     #GVTSTitleP { left: 47px; }
 

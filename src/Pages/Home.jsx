@@ -1,9 +1,14 @@
 import React from 'react';
+import HeadBgSrc from '../Assets/HomeHeadBg.png';
 import ImportVector from '../Assets/Vectors';
-import HeadBg from '../Assets/HomeHeadBg.png';
+import { ScrollFade } from './Fade';
 const de = r => { return document.getElementById(r) }
 
 var HeadNavFocus = false; var HeadNavExpanded = false;
+var HeadBg = new Image();
+HeadBg.src = HeadBgSrc;
+HeadBg.style.opacity=0;
+
 
 class Head extends React.Component { 
     componentDidMount(){
@@ -12,7 +17,7 @@ class Head extends React.Component {
             de('HomeNavLinks').style.opacity = 0; de('BlurImage').style.opacity = 0; HeadNavFocus=false; de('HomeHeadLeft').style.opacity=1;
             de('HomeHeadLeft').style.filter = 'blur(0px)'; setTimeout(() => { de('HomeNavLinks').style.display = 'block' },500) }
         
-        const pageScroll=()=>{if(!HeadNavFocus)
+        const pageScroll=()=>{ ScrollFade(); if(!HeadNavFocus)
             de('BlurImage').style.opacity=(document.scrollingElement.scrollTop<document.body.offsetHeight/2)?0:1}
 
         const pageResize = () => {
@@ -55,21 +60,25 @@ class Head extends React.Component {
 
     render(){return( <div id="HomeHead">
         <div id="HomeHeadLeft">
-            <ImportVector i='HomeHeadTitle'/> 
-            <div id="HomeHeadScrollArea"><ImportVector i='HomeHeadScroll'/></div>
+            <div id="HomeHeadTitle" className="fade">
+                <ImportVector fd="0" i='HomeHeadTitle1'/> 
+                <ImportVector fd="150" i='HomeHeadTitle2'/> 
+                <ImportVector fd="300" i='HomeHeadTitle3'/> 
+            </div>
+            <div id="HomeHeadScrollArea" className="fade"><ImportVector fd="1500" i='HomeHeadScroll'/></div>
         </div>
         <div id="HomeHeadRight">
-            <div id="HomeNavigation">
-                <ImportVector i="HomeHeadNavigationButton"/>
-                <ImportVector i="HomeHeadNavigationButtonDesktop"/>
-                <div id="HomeNavLinks">
-                    <p>Annoucement</p>
-                    <p>Gallery & Projects</p>
-                    <p>About me</p>
-                    <p>Branding</p>
-                    <p>Skills & Experience</p>
-                    <p>Also by me</p>
-                    <p>Contact me</p>
+            <div id="HomeNavigation" className="fade">
+                <ImportVector fd="600" i="HomeHeadNavigationButton"/>
+                <ImportVector fd="600" i="HomeHeadNavigationButtonDesktop"/>
+                <div id="HomeNavLinks" className="fade">
+                    <p fadeDelay="625">Annoucement</p>
+                    <p fadeDelay="650">Gallery & Projects</p>
+                    <p fadeDelay="675">About me</p>
+                    <p fadeDelay="700">Branding</p>
+                    <p fadeDelay="725">Skills & Experience</p>
+                    <p fadeDelay="750">Also by me</p>
+                    <p fadeDelay="775">Contact me</p>
                 </div>
             </div>
         </div>
@@ -79,20 +88,26 @@ class Head extends React.Component {
 
 function Projects(){
     return(
-        <div id="HomeProjects">
+        <div id="HomeProjects" className="fade">
             <div id="HomeProjectsLeft">COMING SOON
             </div>
         </div>
     )
 }
 
-export default function Home(){
-    return(
-        <div id="HomePage" className="Page">
-            <img id="BgImage" src={HeadBg}></img>
-            <img id="BlurImage" src={HeadBg}></img>
-            <Head/>
-            <Projects/>
+export default class Home extends React.Component{
+    componentDidMount(){
+        document.getElementById('BgImage').onload = () => {
+            document.getElementById('BgImage').style.opacity=1;
+        }
+    }
+
+    render(){ return( <div id="HomePage" className="Page">
+        <div id="HeadBgDiv">
+        <img id="BgImage" src={HeadBgSrc} alt=""></img>
+        <img id="BlurImage" src={HeadBgSrc} alt=""></img>
         </div>
-    );
+        <Head/>
+        <Projects/>
+    </div> );}
 }

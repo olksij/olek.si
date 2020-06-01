@@ -5,6 +5,7 @@
 	--Black: #0F1B33;
 	--Blue: #4d88ff;
 	--Light: #CCDDFF;
+	--LeftPadding: calc(calc(100vh*1.75 + 100vw)*0.03);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -20,7 +21,7 @@ p{ font-family: 'ManropeSemiBold'; color:var(--Black); }
 
 body { background: #ECF0FF; }
 
-body,html,#root,.App{ height:100%; overflow-x: hidden; }
+body,html,#root,.App{ height:100%; overflow-x: hidden; margin:0px }
 
 .Page{ position: absolute; width:100%; height:100%; }
 
@@ -36,13 +37,13 @@ body,html,#root,.App{ height:100%; overflow-x: hidden; }
 
 /* --- --- --- HOME HEAD --- --- --- */
 
-.fade>*,.fdr{
-	opacity:0;
+.fadeChild>*:not(.faded), .fadeSelf:not(.faded){
+	opacity:0 !important;
 	transform: translateY(40px);
 }
 
-.faded{
-	animation: fade 1s cubic-bezier(0, 0, 0, 1);
+.faded, .faded>*{
+	animation: fade 1s cubic-bezier(0.1, 0.2, 0, 1);
 	opacity:1;
 	transform: translateY(0px);
 }
@@ -107,7 +108,8 @@ body,html,#root,.App{ height:100%; overflow-x: hidden; }
 
 #HomeNavigation { text-align:left; position: relative; transform: translateY(calc(50vh - 50%)); }
 
-#HomeHeadNavigationButtonDesktopSvg { opacity: 0.15; display:block; fill:var(--Black); transition: 0.5s; }
+#HomeHeadNavigationButtonDesktopSvg { display:inline-block; fill:var(--Black); transition: 0.5s; } 
+#HomeHeadNavigationButtonDesktop:not(.faded) {opacity: 0 !important;}
 
 #HomeHeadNavigationButtonSvg { display:none; }
 
@@ -158,9 +160,19 @@ body,html,#root,.App{ height:100%; overflow-x: hidden; }
 
 }
 
-/* --- HomeProjects --- */
+/* --- --- --- HOME GALLERY --- --- --- */
 
-#HomeProjects{ position: relative; height:200px; }
+#HomeGallery{ position: relative; height:500px; }
 
-#HomeProjectsLeft{ position: relative; }
+#HomeGalleryTitleSvg { font-family: 'ManropeSemiBold'; margin:calc(var(--LeftPadding)*0.75) var(--LeftPadding); }
+
+#HomeGalleryMobileTitleSvg { display: none; }
+
+@media only screen and ( max-width:699px ) {
+	#HomeGallery { text-align: center; }
+
+	#HomeGalleryMobileTitleSvg { display:inline-block; height:50px; width:146px; font-family: 'ManropeSemiBold'; margin:calc(var(--LeftPadding)*0.75) var(--LeftPadding); }
+
+	#HomeGalleryTitleSvg { display: none; }
+}
 

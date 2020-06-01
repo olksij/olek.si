@@ -1,22 +1,20 @@
-import React from 'react';
-import HeadBgSrcLight from '../Assets/HomeBgLight.png';
-import HeadBgSrcDark from '../Assets/HomeBgDark.png';
-import ImportVector from '../Assets/Vectors';
-import { ScrollFade } from './Fade';
 const de = r => { return document.getElementById(r) }
 const ds = (n,v) => { return document.documentElement.style.setProperty(n,v); }
+class HomeHead extends HTMLElement{
+    constructor() { super(); }
+    connectedCallback() { this.render();
+        var HeadNavFocus = false; var HeadNavExpanded = false; document.scrollingElement.style.scrollBehavior='smooth';
 
-var HeadNavFocus = false; var HeadNavExpanded = false;
+        document.getElementById("BgImage").setAttribute('src',window.matchMedia('(prefers-color-scheme: dark)').matches?'./Assets/HomeBgDark.png':'./Assets/HomeBgLight.png')
+        document.getElementById("BlurImage").setAttribute('src',window.matchMedia('(prefers-color-scheme: dark)').matches?'./Assets/HomeBgDark.png':'./Assets/HomeBgLight.png')
 
-class Head extends React.Component { 
-    componentDidMount(){
         var ViewMobile=window.innerWidth<700?true:false;
         if (window.innerWidth < 700) { 
             ds('--HomeNavOpacity', 0); de('BlurImage').style.opacity = 0; HeadNavFocus=false; de('HomeHeadLeft').style.opacity=1;
             de('HomeHeadLeft').style.filter = 'blur(0px)'; setTimeout(() => { /*de('HomeNavLinks').style.display = 'block'*/ },500) }
         
-        const pageScroll=()=>{ ScrollFade(); if(!HeadNavFocus)
-            de('BlurImage').style.opacity=(document.scrollingElement.scrollTop<document.body.offsetHeight/2)?0:1}
+        const pageScroll=()=>{ ScrollFade(); if(!HeadNavFocus){ var ob=(document.scrollingElement.scrollTop<document.body.offsetHeight/2);
+            /*de('BlurImage').style.opacity=ob?0:1;de('BgImage').style.opacity=ob?1:0*/}}
 
         const pageResize = () => {
             if(window.innerWidth<700 & !ViewMobile){
@@ -29,19 +27,22 @@ class Head extends React.Component {
             }
         }
 
-        window.addEventListener('scroll', pageScroll); pageScroll();
+        window.addEventListener('scroll', pageScroll);
         window.addEventListener('resize', pageResize); pageResize();
+        if(!HeadNavFocus){ var ob=(document.scrollingElement.scrollTop<document.body.offsetHeight/2);
+            de('BlurImage').style.opacity=ob?0:1;de('BgImage').style.opacity=ob?1:0}
+        setTimeout(()=>{ScrollFade()},500);
 
         de('HomeHeadRight').addEventListener('mouseenter',() => { if ( window.innerWidth >= 700 ) {
             de('HomeHeadLeft').style.filter = 'blur('+(window.innerWidth*document.body.offsetHeight)**0.5/10+'px)';
-            de('BlurImage').style.opacity = 1; de('BgImage').style.opacity = 0;
-            HeadNavFocus=true; }
+            de('BlurImage').style.opacity = 1; de('BgImage').style.opacity = 0; de('HomeHeadLeft').style.opacity=0.5;
+            HeadNavFocus=true; document.scrollingElement.scrollTop='0px'; }
         })
 
         de('HomeHeadRight').addEventListener('mouseleave',() => { if ( window.innerWidth >= 700 ) {
             de('HomeHeadLeft').style.filter = 'blur(0px)'
             de('BlurImage').style.opacity = 0; de('BgImage').style.opacity = 1;
-            HeadNavFocus=false; }
+            HeadNavFocus=false; de('HomeHeadLeft').style.opacity=1; }
         })
         
         de('HomeHeadNavigationButton').addEventListener('click',() => { if (window.innerWidth < 700) { 
@@ -56,20 +57,20 @@ class Head extends React.Component {
         }})
     }
 
-    render(){return( <div id="HomeHead">
+    render() { this.innerHTML = `<div id="HomeHead">
         <div id="HomeHeadLeft">
-            <div id="HomeHeadTitle" className="fade">
-                <ImportVector fd="0" i='HomeHeadTitle1'/> 
-                <ImportVector fd="150" i='HomeHeadTitle2'/> 
-                <ImportVector fd="300" i='HomeHeadTitle3'/> 
+            <div id="HomeHeadTitle" class="fadeChild">
+                <iv- fd="0" id='HomeHeadTitle1'></iv-> 
+                <iv- fd="150" id='HomeHeadTitle2'></iv->
+                <iv- fd="300" id='HomeHeadTitle3'></iv->
             </div>
-            <div id="HomeHeadScrollArea" className="fade"><ImportVector fd="1500" i='HomeHeadScroll'/></div>
+            <div id="HomeHeadScrollArea" class="fadeChild"><iv- fd="1500" id='HomeHeadScroll'></iv-></div>
         </div>
         <div id="HomeHeadRight">
             <div id="HomeNavigation">
-                <ImportVector fd="600" cls="fdr" i="HomeHeadNavigationButton"/>
-                <ImportVector fd="600" cls="fdr" i="HomeHeadNavigationButtonDesktop"/>
-                <div id="HomeNavLinks" className="fade">
+                <iv- fd="600" class="fadeSelf" id="HomeHeadNavigationButton"></iv->
+                <iv- fd="600" class="fadeSelf" id="HomeHeadNavigationButtonDesktop"></iv->
+                <div id="HomeNavLinks" class="fadeChild">
                     <p fd="650">Annoucement</p>
                     <p fd="675">Gallery & Projects</p>
                     <p fd="700">About me</p>
@@ -80,32 +81,25 @@ class Head extends React.Component {
                 </div>
             </div>
         </div>
-        <div id="hey"></div>
-    </div>);}
+    </div>`}
 }
 
-function Projects(){
-    return(
-        <div id="HomeProjects" className="fade">
-            <div id="HomeProjectsLeft">COMING SOON
-            </div>
-        </div>
-    )
-}
+customElements.define("home-head", HomeHead);
 
-export default class Home extends React.Component{
-    componentDidMount(){
-        document.getElementById('BgImage').onload = () => {
-            document.getElementById('BgImage').setAttribute('class','loaded');
-        }
+
+class HomeGallery extends HTMLElement {
+    constructor(){ super(); }
+
+    connectedCallback(){
+        this.render();
     }
 
-    render(){ return( <div id="HomePage" className="Page">
-        <div id="HeadBgDiv">
-        <img id="BgImage" src={window.matchMedia('(prefers-color-scheme: dark)').matches?HeadBgSrcDark:HeadBgSrcLight} alt=""></img>
-        <img id="BlurImage" src={window.matchMedia('(prefers-color-scheme: dark)').matches?HeadBgSrcDark:HeadBgSrcLight} alt=""></img>
-        </div>
-        <Head/>
-        <Projects/>
-    </div> );}
+    render(){
+        this.innerHTML = `<div id="HomeGallery">
+            <iv- fd="0" class="fadeSelf" id="HomeGalleryTitle"/>
+            <iv- fd="0" class="fadeSelf" id="HomeGalleryMobileTitle"/>
+        </div>`
+    }
 }
+
+customElements.define("home-gallery", HomeGallery);

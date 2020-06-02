@@ -1,7 +1,7 @@
 const ScrollFade = () => {
     const fadeFunc = (node, fadeDelay) => {
         setTimeout(() => {
-        node.className += ' faded' }, fadeDelay)
+        node.className += ' faded' }, parseInt(fadeDelay)+400)
     }
     var fadeChild = document.getElementsByClassName('fadeChild');
     var fadeSelf = document.getElementsByClassName('fadeSelf');

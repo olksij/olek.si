@@ -21,14 +21,12 @@ p{ font-family: 'ManropeSemiBold'; color:var(--Black); }
 
 body { background: #ECF0FF; }
 
-body,html,#root,.App{ height:100%; overflow-x: hidden; margin:0px }
-
-.Page{ position: absolute; width:100%; height:100%; }
+body,html{ height:100%; overflow-x: hidden; margin:0px }
 
 #BgImage{ left:0px; background-size: cover; height:calc(100% + 100px); 
 	object-fit: cover; width:100%; position: fixed; top:0px; transition: .5s cubic-bezier(0.85, 0.1, 0.15, 0.9);; opacity:0; }
 
-#BgImage.loaded{ animation: BgImageLoad 2s; opacity:1; }
+#BgImage.loaded{ animation: BgImageLoad 2s cubic-bezier(0.5, 0.5, 0.3, 1); opacity:1; }
 
 @keyframes BgImageLoad{0%{opacity:0}100%{opacity:1}}
 

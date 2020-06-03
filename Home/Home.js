@@ -1,6 +1,11 @@
 const de = r => { return document.getElementById(r) }
 const ds = (n,v) => { return document.documentElement.style.setProperty(n,v); }
 
+var elem = document.createElement('canvas');
+if (!!(elem.getContext && elem.getContext('2d')))
+    var webp = elem.toDataURL('image/webp').indexOf('data:image/webp') == 0;
+else var webp = false;
+
 // -- Head --
 
 class HomeHead extends HTMLElement{ constructor() { super(); }
@@ -9,15 +14,15 @@ class HomeHead extends HTMLElement{ constructor() { super(); }
         var HeadNavFocus = false; var HeadNavExpanded = false; var ViewMobile = window.innerWidth < 700 ? true:false;
         document.scrollingElement.style.scrollBehavior='smooth';
 
+        // Check if mobile
         if (window.innerWidth < 700) { 
             ds('--HomeNavOpacity', 0); de('BlurImage').style.opacity = 0; HeadNavFocus=false; de('HomeHeadLeft').style.opacity=1;
-            de('HomeHeadLeft').style.filter = 'blur(0px)'; setTimeout(() => { /*de('HomeNavLinks').style.display = 'block'*/ },500) 
-        }
+            de('HomeHeadLeft').style.filter = 'blur(0px)'; }
         
         const pageScroll = () => { 
             ScrollFade(); 
             if(!HeadNavFocus){ 
-                var ob = document.scrollingElement.scrollTop < document.body.offsetHeight/2;
+                var ob = document.body.scrollTop < document.body.offsetHeight/2;
                 de('BlurImage').style.opacity=ob?0:1; 
                 de('BgImage').style.opacity=ob?1:0;
             }
@@ -39,18 +44,18 @@ class HomeHead extends HTMLElement{ constructor() { super(); }
         }
 
         const Theme = () => {
-            console.log('nnnnnnn')
             var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
             var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
             link.type = 'image/x-icon'; link.rel = 'shortcut icon';
             link.href = './Assets/'+(dark?'Dark':'Light')+'Icon.ico';
             document.getElementsByTagName('head')[0].appendChild(link);
-        
-            document.getElementById("BgImage").setAttribute('src', './Assets/HomeBg'+(dark?'Dark':'Light')+'.jpeg');
-            document.getElementById("BlurImage").setAttribute('src', './Assets/HomeBg'+(dark?'Dark':'Light')+'.jpeg'); 
+            
+            var img = './Assets/HomeBg'+(dark?'Dark':'Light')+(webp?'.webp':'.jpeg');
+            document.getElementById("BgImage").setAttribute('src', img);
+            document.getElementById("BlurImage").setAttribute('src', img); 
         }        
 
-        // -- NavigationPaneAnimation Desktop --
+        // -- NavigationPaneAnimation Desktop
 
         de('HomeHeadRight').addEventListener('mouseenter',() => { if ( window.innerWidth >= 700 ) {
             de('HomeHeadLeft').style.filter = 'blur('+(window.innerWidth*document.body.offsetHeight)**0.5/10+'px)';
@@ -64,7 +69,7 @@ class HomeHead extends HTMLElement{ constructor() { super(); }
             HeadNavFocus=false; de('HomeHeadLeft').style.opacity=1; }
         })
         
-        // -- NavigationPaneAnimation Mobile --
+        // -- NavigationPaneAnimation Mobile
 
         de('HomeHeadNavigationButton').addEventListener('click',() => { if (window.innerWidth < 700) { 
             if (!HeadNavExpanded) { HeadNavExpanded=true; ds('--HomeNavOpacity', 1); de('HomeHeadLeft').style.opacity=0.6;

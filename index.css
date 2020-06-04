@@ -14,12 +14,12 @@
 		--Blue: #9ABBFF;
 		--Light: #364159;
 	}
-	html>body{background: #171B26;}
+	html>body{background: /*#171B26*/ #0F1219;}
 }
 
 p{ font-family: 'ManropeSemiBold'; color:var(--Black); }
 
-body { background: #ECF0FF; }
+body { background: /*#ECF0FF*/ #FFFFFF; }
 
 body,html{ height:100%; overflow-x: hidden; margin:0px }
 

@@ -1,10 +1,10 @@
 const de = r => { return document.getElementById(r) }
 const ds = (n,v) => { return document.documentElement.style.setProperty(n,v); }
 
-var elem = document.createElement('canvas');
+/*var elem = document.createElement('canvas');
 if (!!(elem.getContext && elem.getContext('2d')))
     var webp = elem.toDataURL('image/webp').indexOf('data:image/webp') == 0;
-else var webp = false;
+else var webp = false;*/
 
 // -- Head --
 
@@ -16,16 +16,16 @@ class HomeHead extends HTMLElement{ constructor() { super(); }
 
         // Check if mobile
         if (window.innerWidth < 700) { 
-            ds('--HomeNavOpacity', 0); de('BlurImage').style.opacity = 0; HeadNavFocus=false; de('HomeHeadLeft').style.opacity=1;
+            ds('--HomeNavOpacity', 0); /*de('BlurImage').style.opacity = 0;*/ HeadNavFocus=false; de('HomeHeadLeft').style.opacity=1;
             de('HomeHeadLeft').style.filter = 'blur(0px)'; }
         
         const pageScroll = () => { 
             ScrollFade(); 
-            if(!HeadNavFocus){ 
+            /*if(!HeadNavFocus){ 
                 var ob = document.body.scrollTop < document.body.offsetHeight/2;
                 de('BlurImage').style.opacity=ob?0:1; 
                 de('BgImage').style.opacity=ob?1:0;
-            }
+            }*/
         }
 
         const pageResize = () => {
@@ -38,7 +38,7 @@ class HomeHead extends HTMLElement{ constructor() { super(); }
                 ds('--HomeNavOpacity', 1); 
                 de('HomeHeadLeft').style.filter = 'blur(0px)'; 
                 de('HomeNavLinks').style.opacity=1;
-                de('BlurImage').style.opacity = 0; 
+                //de('BlurImage').style.opacity = 0; 
                 de('HomeHeadLeft').style.opacity=1;
             }
         }
@@ -50,22 +50,22 @@ class HomeHead extends HTMLElement{ constructor() { super(); }
             link.href = './Assets/'+(dark?'Dark':'Light')+'Icon.ico';
             document.getElementsByTagName('head')[0].appendChild(link);
             
-            var img = './Assets/HomeBg'+(dark?'Dark':'Light')+(webp?'.webp':'.jpeg');
+            /*var img = './Assets/HomeBg'+(dark?'Dark':'Light')+(webp?'.webp':'.jpeg');
             document.getElementById("BgImage").setAttribute('src', img);
-            document.getElementById("BlurImage").setAttribute('src', img); 
+            document.getElementById("BlurImage").setAttribute('src', img); */
         }        
 
         // -- NavigationPaneAnimation Desktop
 
         de('HomeHeadRight').addEventListener('mouseenter',() => { if ( window.innerWidth >= 700 ) {
             de('HomeHeadLeft').style.filter = 'blur('+(window.innerWidth*document.body.offsetHeight)**0.5/10+'px)';
-            de('BlurImage').style.opacity = 1; de('BgImage').style.opacity = 0; de('HomeHeadLeft').style.opacity=0.5;
+            /*de('BlurImage').style.opacity = 1; de('BgImage').style.opacity = 0;*/ de('HomeHeadLeft').style.opacity=0.5;
             HeadNavFocus=true; document.scrollingElement.scrollTop='0px'; }
         })
 
         de('HomeHeadRight').addEventListener('mouseleave',() => { if ( window.innerWidth >= 700 ) {
             de('HomeHeadLeft').style.filter = 'blur(0px)'
-            de('BlurImage').style.opacity = 0; de('BgImage').style.opacity = 1;
+            //de('BlurImage').style.opacity = 0; de('BgImage').style.opacity = 1;
             HeadNavFocus=false; de('HomeHeadLeft').style.opacity=1; }
         })
         
@@ -74,11 +74,11 @@ class HomeHead extends HTMLElement{ constructor() { super(); }
         de('HomeHeadNavigationButton').addEventListener('click',() => { if (window.innerWidth < 700) { 
             if (!HeadNavExpanded) { HeadNavExpanded=true; ds('--HomeNavOpacity', 1); de('HomeHeadLeft').style.opacity=0.6;
                 de('HomeHeadLeft').style.filter = 'blur('+(window.innerWidth*document.body.offsetHeight)**0.5/5+'px)';
-                de('BlurImage').style.opacity = 1; /*de('HomeNavLinks').style.display = 'block';*/ HeadNavFocus=true; de('HomeNavLinks').style.opacity = 1} 
+                /*de('BlurImage').style.opacity = 1;*/ HeadNavFocus=true; de('HomeNavLinks').style.opacity = 1} 
 
             else { HeadNavExpanded=false; de('HomeNavLinks').style.opacity = 0;
                 de('HomeHeadLeft').style.filter = 'blur(0px)'; setTimeout(() => { /*de('HomeNavLinks').style.display = 'none'*/ },500)
-                de('BlurImage').style.opacity = 0; HeadNavFocus=false; de('HomeHeadLeft').style.opacity=1;
+                /*de('BlurImage').style.opacity = 0;*/ HeadNavFocus=false; de('HomeHeadLeft').style.opacity=1;
             }
         }})
 

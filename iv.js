@@ -31,8 +31,8 @@ var Icons = [
     </svg>`,
 
     `<svg id="HomeHeadScrollSvg" width="127" height="30" viewBox="0 0 127 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd" clip-rule="evenodd" d="M0 15L1.7625 13.2375L8.75 20.2125V5H11.25V20.2125L18.225 13.225L20 15L10 25L0 15Z" fill="var(--Blue)"/>
-        <text fill="var(--Blue)" xml:space="preserve" style="white-space: pre" font-size="22" font-family="ManropeSemiBold" letter-spacing="0em"><tspan x="42" y="23.25">Explore</tspan></text>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M0 15L1.7625 13.2375L8.75 20.2125V5H11.25V20.2125L18.225 13.225L20 15L10 25L0 15Z"/>
+        <text xml:space="preserve" style="white-space: pre" font-size="22" font-family="ManropeSemiBold" letter-spacing="0em"><tspan x="42" y="23.25">Explore</tspan></text>
     </svg>`,
 
     `<svg id="HomeHeadNavigationButtonSvg" width="162" height="30" viewBox="0 0 162 30" fill="none" xmlns="http://www.w3.org/2000/svg">

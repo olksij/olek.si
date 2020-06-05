@@ -6,6 +6,11 @@ if (!!(elem.getContext && elem.getContext('2d')))
     var webp = elem.toDataURL('image/webp').indexOf('data:image/webp') == 0;
 else var webp = false;*/
 
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js')
+    .catch((e) => { console.log(e)})
+}
+
 // -- Head --
 
 class HomeHead extends HTMLElement{ constructor() { super(); }

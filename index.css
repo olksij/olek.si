@@ -1,5 +1,5 @@
 @font-face{ font-family: 'ManropeBold'; src: url('./Fonts/Bold.ttf'); }
-@font-face{ font-family: 'ManropeSemiBold'; src: url('Fonts/Semibold.ttf'); }
+@font-face{ font-family: 'ManropeSemiBold'; src: url('./Fonts/Semibold.ttf'); }
 
 :root{
 	--Black: #0F1B33;

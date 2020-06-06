@@ -33,8 +33,6 @@ body,html{ height:100%; overflow-x: hidden; margin:0px }
 #BlurImage{ left:0px; background-size: cover; height:calc(100% + 100px); object-fit: cover; width:100%;
 	position: fixed; top:0px; opacity:0; filter: blur(50px); transition: 0.5s; }
 
-/* --- --- --- HOME HEAD --- --- --- */
-
 .fadeChild>*:not(.faded), .fadeSelf:not(.faded){
 	opacity:0 !important;
 	transform: translateY(40px);
@@ -46,17 +44,41 @@ body,html{ height:100%; overflow-x: hidden; margin:0px }
 	transform: translateY(0px);
 }
 
-@keyframes fade {
-	from {
-		transform: translateY(40px);
-		opacity:0;
-	}
-  
-	to {
-		transform: translateY(0px);
-		opacity:1;
-	}
-  }
+@keyframes fade { from {
+	transform: translateY(40px);
+	opacity:0;
+} to {
+	transform: translateY(0px);
+	opacity:1;
+} }
+
+@keyframes blur { from {
+	filter: blur(0px);
+	opacity:1;
+} to {
+	filter: blur(50px);
+	opacity:0.5;
+
+} }
+
+@keyframes notblur { from {
+	filter: blur(50px);
+	opacity:0.5;
+} to {
+	filter: blur(0px);
+	opacity:1;
+
+} }
+
+.blur>*{
+	animation: blur 0.7s cubic-bezier(0.8, 0, 0.2, 1);
+	filter: blur(50px);
+}
+
+.notblur>*{
+	animation: notblur 0.7s cubic-bezier(0.8, 0, 0.2, 1);
+	filter: blur(0px);
+}
 
 /* --- --- --- HOME HEAD --- --- --- */
 

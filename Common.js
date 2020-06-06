@@ -1,9 +1,71 @@
+var beforeScroll = 0;
+
+if ('serviceWorker' in navigator && !(location.hostname == "localhost" || location.hostname == "127.0.0.1")) {
+    navigator.serviceWorker.register('./sw.js')
+    .catch((e) => { console.log(e)})
+}
+
+const ScrollFade = () => {
+    const fadeFunc = (node, fadeDelay) => {
+        setTimeout(() => { if(!node.classList.contains('faded'))
+        node.className += ' faded' }, parseInt(fadeDelay)+400)
+    }
+    var fadeChild = document.getElementsByClassName('fadeChild');
+    var fadeSelf = document.getElementsByClassName('fadeSelf');
+    for(var i=0; i<fadeChild.length; i++) {
+        if(fadeChild[i].offsetTop-document.body.scrollHeight < screen.height*0.7){
+            childrens = fadeChild[i].childNodes;
+            for(j=0; j<childrens.length; j++) { if(childrens[j].nodeName!='#text') {
+                fadeFunc(childrens[j],childrens[j].getAttribute('fd'))
+            } }
+        }
+    } for(var i=0; i<fadeSelf.length; i++) {
+        if(fadeSelf[i].getBoundingClientRect().top < screen.height*0.7) {
+            fadeFunc(fadeSelf[i],fadeSelf[i].getAttribute('fd'));
+        }
+    }
+}
+
+const ScrollBlur = () => {
+    if (Math.abs(beforeScroll-document.body.scrollTop)>20){
+        var blurEl = document.getElementsByClassName('section');
+        for(var i=0; i<blurEl.length; i++) {
+            var elPos = blurEl[i].firstChild.getBoundingClientRect();
+            var scrollToTop = (elPos.top > screen.height*0.3 || elPos.bottom < screen.height*0.2);
+            var scrollToBottom = (elPos.top > screen.height*0.7 || elPos.bottom < screen.height*0.3);
+            if((beforeScroll>document.body.scrollTop && scrollToTop) || (beforeScroll<document.body.scrollTop && scrollToBottom)) {
+                if(!blurEl[i].classList.contains('blur')) blurEl[i].className += ' blur';
+                if(blurEl[i].classList.contains('notblur')) blurEl[i].classList.remove('notblur');;
+            }
+            else if(blurEl[i].classList.contains('blur')) 
+            { blurEl[i].classList.remove('blur'); blurEl[i].className += ' notblur' }
+        }
+        beforeScroll = document.body.scrollTop;    
+    }
+}
+
+const Theme = () => {
+    var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+    link.type = 'image/x-icon'; link.rel = 'shortcut icon';
+    link.href = './Assets/'+(dark?'Dark':'Light')+'Icon.ico';
+    document.getElementsByTagName('head')[0].appendChild(link);
+} 
+
+const pageScroll = () => { ScrollFade(); ScrollBlur() }
+
+const onload = () => {
+    document.body.addEventListener('scroll', pageScroll); pageScroll();
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(Theme); Theme();
+}
+
 class IV extends HTMLElement {
     constructor() { super() }
     connectedCallback() {
         this.innerHTML=Icons[IconsList.indexOf(this.getAttribute("id"))];
     }
 }
+customElements.define("iv-", IV)
 
 var IconsList = ['HomeHeadTitle1','HomeHeadTitle2','HomeHeadTitle3','HomeHeadScroll','HomeHeadNavigationButton','HomeHeadNavigationButtonDesktop', 'HomeGalleryTitle','HomeGalleryMobileTitle']; 
 
@@ -57,5 +119,3 @@ var Icons = [
         <text fill="var(--Black)" xml:space="preserve" style="white-space: pre" font-size="28" font-weight="600" letter-spacing="0em"><tspan x="0" y="30">Designs</tspan></text>
     </svg>`
 ]
-
-customElements.define("iv-", IV);

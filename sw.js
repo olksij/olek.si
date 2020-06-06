@@ -1,4 +1,4 @@
-var AppVersion = '0049';
+var AppVersion = '0050';
 
 self.addEventListener('install', event => {
 	self.skipWaiting();
@@ -6,9 +6,7 @@ self.addEventListener('install', event => {
 		return cache.addAll([
 			'./', './index.html',
 			'./index.css',
-			'./iv.js',
-			'./Fade.js',
-			'./Home.js',
+			'./Common.js',
 			'./Fonts/Bold.ttf',
 			'./Fonts/Semibold.ttf',
 			'./Assets/LightIcon.ico',

@@ -4,17 +4,16 @@
         <title>Alexey Besida</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Alexey Besida. 15 y.o. hobby designer and developer">
-        <script src="./Fade.js"></script>
-        <script src="./iv.js"></script>
+        <script src="./Common.js"></script>
         <script src="./Home.js"></script>
         <link rel='stylesheet' href='index.css'>  
     </head>
-    <body>
+    <body onload="onload()">
         <!--<div id="HeadBgDiv">
             <img id="BgImage" onload="this.setAttribute('class','loaded')" alt=""></img>
             <img id="BlurImage" alt=""></img>
         </div>-->
-        <home-head></home-head>
-        <home-gallery></home-gallery>
+        <home-head class="section"></home-head>
+        <home-gallery class="section"></home-gallery>
     </body>
 </html>

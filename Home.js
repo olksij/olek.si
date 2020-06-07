@@ -1,14 +1,8 @@
 const de = r => { return document.getElementById(r) }
 const ds = (n,v) => { return document.documentElement.style.setProperty(n,v); }
 
-/*var elem = document.createElement('canvas');
-if (!!(elem.getContext && elem.getContext('2d')))
-    var webp = elem.toDataURL('image/webp').indexOf('data:image/webp') == 0;
-else var webp = false;*/
-
 // -- Head --
-
-class HomeHead extends HTMLElement{ constructor() { super(); }
+customElements.define("home-head", class extends HTMLElement{ constructor() { super(); }
 
     connectedCallback() { this.render();
         var HeadNavFocus = false; var HeadNavExpanded = false; var ViewMobile = window.innerWidth < 700 ? true:false;
@@ -16,7 +10,7 @@ class HomeHead extends HTMLElement{ constructor() { super(); }
 
         // Check if mobile
         if (window.innerWidth < 700) { 
-            ds('--HomeNavOpacity', 0); /*de('BlurImage').style.opacity = 0;*/ HeadNavFocus=false; de('HomeHeadLeft').style.opacity=1;
+            ds('--HomeNavOpacity', 0); HeadNavFocus=false; de('HomeHeadLeft').style.opacity=1;
             de('HomeHeadLeft').style.filter = 'blur(0px)'; 
         }
 
@@ -30,7 +24,6 @@ class HomeHead extends HTMLElement{ constructor() { super(); }
                 ds('--HomeNavOpacity', 1); 
                 de('HomeHeadLeft').style.filter = 'blur(0px)'; 
                 de('HomeNavLinks').style.opacity=1;
-                //de('BlurImage').style.opacity = 0; 
                 de('HomeHeadLeft').style.opacity=1;
             }
         }      
@@ -39,13 +32,12 @@ class HomeHead extends HTMLElement{ constructor() { super(); }
 
         de('HomeHeadRight').addEventListener('mouseenter',() => { if ( window.innerWidth >= 700 ) {
             de('HomeHeadLeft').style.filter = 'blur('+(window.innerWidth*document.body.offsetHeight)**0.5/10+'px)';
-            /*de('BlurImage').style.opacity = 1; de('BgImage').style.opacity = 0;*/ de('HomeHeadLeft').style.opacity=0.5;
+            de('HomeHeadLeft').style.opacity=0.5;
             HeadNavFocus=true; document.scrollingElement.scrollTop='0px'; }
         })
 
         de('HomeHeadRight').addEventListener('mouseleave',() => { if ( window.innerWidth >= 700 ) {
             de('HomeHeadLeft').style.filter = 'blur(0px)'
-            //de('BlurImage').style.opacity = 0; de('BgImage').style.opacity = 1;
             HeadNavFocus=false; de('HomeHeadLeft').style.opacity=1; }
         })
         
@@ -54,11 +46,11 @@ class HomeHead extends HTMLElement{ constructor() { super(); }
         de('HomeHeadNavigationButton').addEventListener('click',() => { if (window.innerWidth < 700) { 
             if (!HeadNavExpanded) { HeadNavExpanded=true; ds('--HomeNavOpacity', 1); de('HomeHeadLeft').style.opacity=0.6;
                 de('HomeHeadLeft').style.filter = 'blur('+(window.innerWidth*document.body.offsetHeight)**0.5/5+'px)';
-                /*de('BlurImage').style.opacity = 1;*/ HeadNavFocus=true; de('HomeNavLinks').style.opacity = 1} 
+                HeadNavFocus=true; de('HomeNavLinks').style.opacity = 1} 
 
             else { HeadNavExpanded=false; de('HomeNavLinks').style.opacity = 0;
-                de('HomeHeadLeft').style.filter = 'blur(0px)'; setTimeout(() => { /*de('HomeNavLinks').style.display = 'none'*/ },500)
-                /*de('BlurImage').style.opacity = 0;*/ HeadNavFocus=false; de('HomeHeadLeft').style.opacity=1;
+                de('HomeHeadLeft').style.filter = 'blur(0px)';
+                HeadNavFocus=false; de('HomeHeadLeft').style.opacity=1;
             }
         }})
 
@@ -89,26 +81,27 @@ class HomeHead extends HTMLElement{ constructor() { super(); }
                 </div>
             </div>
         </div>
+        <div class="section-separator"></div>
     </div>`}
-}
-
-customElements.define("home-head", HomeHead);
+} );
 
 // -- Gallery --
 
-class HomeGallery extends HTMLElement {
-    constructor(){ super(); }
+customElements.define("home-featured", class extends HTMLElement { constructor(){ super(); }
 
-    connectedCallback(){
-        this.render();
-    }
+    connectedCallback(){ this.render(); }
 
     render(){
-        this.innerHTML = `<div id="HomeGallery">
-            <iv- fd="0" class="fadeSelf" id="HomeGalleryTitle"/>
-            <iv- fd="0" class="fadeSelf" id="HomeGalleryMobileTitle"/>
+        this.innerHTML = `<div id="HomeFeatured">
+            <div id="HomeFeaturedLeft">
+                <div id="HomeFeaturedTitle" class="fadeChild">
+                    <iv- fd="0" id='HomeFeaturedSubtitle'></iv-> 
+                    <iv- fd="0" id='HomeFeaturedTitle1'></iv-> 
+                    <iv- fd="0" id='HomeFeaturedTitle2'></iv-> 
+                    <iv- fd="0" id='HomeFeaturedTitle3'></iv-> 
+                </div>
+            </div>
         </div>`
     }
-}
+} );
 
-customElements.define("home-gallery", HomeGallery);

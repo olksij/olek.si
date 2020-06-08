@@ -96,9 +96,9 @@ customElements.define("home-featured", class extends HTMLElement { constructor()
             <div id="HomeFeaturedLeft">
                 <div id="HomeFeaturedTitle" class="fadeChild">
                     <iv- fd="0" id='HomeFeaturedSubtitle'></iv-> 
-                    <iv- fd="0" id='HomeFeaturedTitle1'></iv-> 
-                    <iv- fd="0" id='HomeFeaturedTitle2'></iv-> 
-                    <iv- fd="0" id='HomeFeaturedTitle3'></iv-> 
+                    <iv- fd="125" id='HomeFeaturedTitle1'></iv-> 
+                    <iv- fd="250" id='HomeFeaturedTitle2'></iv-> 
+                    <iv- fd="375" id='HomeFeaturedTitle3'></iv-> 
                 </div>
             </div>
         </div>`

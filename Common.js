@@ -1,4 +1,4 @@
-if ('serviceWorker' in navigator && !(location.hostname == "localhost" || location.hostname == "127.0.0.1")) {
+if ('serviceWorker' in navigator && location.hostname != "127.0.0.1") {
     navigator.serviceWorker.register('./sw.js')
     .catch((e) => { console.log(e)})}
 
@@ -10,14 +10,14 @@ const ScrollFade = () => {
     var fadeChild = document.getElementsByClassName('fadeChild');
     var fadeSelf = document.getElementsByClassName('fadeSelf');
     for(var i=0; i<fadeChild.length; i++) {
-        if(fadeChild[i].offsetTop-document.body.scrollHeight < screen.height*0.7){
+        if(fadeChild[i].getBoundingClientRect().top < screen.height*0.6){
             childrens = fadeChild[i].childNodes;
             for(j=0; j<childrens.length; j++) { if(childrens[j].nodeName!='#text') {
                 fadeFunc(childrens[j],childrens[j].getAttribute('fd'))
             } }
         }
     } for(var i=0; i<fadeSelf.length; i++) {
-        if(fadeSelf[i].getBoundingClientRect().top < screen.height*0.7) {
+        if(fadeSelf[i].getBoundingClientRect().top < screen.height*0.6) {
             fadeFunc(fadeSelf[i],fadeSelf[i].getAttribute('fd'));
         }
     }
@@ -87,11 +87,12 @@ var Icons = [
 
     // -- HomeFeatured -- //
 
-    `<svg id="HomeFeaturedSubtitleSvg" width="116" height="33" viewBox="0 0 116 33" fill="none"><text opacity="0.3" fill="#0F0F33" xml:space="preserve" style="white-space: pre" font-family="ManropeBold" font-size="24" font-weight="bold" letter-spacing="0em"><tspan x="0" y="25.5">PLANNER</tspan></text></svg>`,
+    `<svg id="HomeFeaturedSubtitleSvg" height="33" viewBox="0 0 116 33" fill="none"><text opacity="0.3" fill="#0F0F33" xml:space="preserve" style="white-space: pre" font-family="ManropeBold" font-size="24" font-weight="bold" letter-spacing="0em"><tspan x="0" y="25.5">PLANNER</tspan></text></svg>`,
 
-    `<svg id="HomeFeaturedTitle1Svg" width="438" height="142" viewBox="0 0 438 142" fill="none"><rect x="24" y="71" width="181" height="40" fill="#CCCCFF"/><g filter="url(#filter0_d)"><text fill="#0F0F33" xml:space="preserve" style="white-space: pre" font-family="ManropeBold" font-size="80" font-weight="bold" letter-spacing="0em"><tspan x="24" y="91">Plan your</tspan></text></g><defs><filter id="filter0_d" x="0.666992" y="0.75" width="436.755" height="141.25" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/><feOffset dy="1"/><feGaussianBlur stdDeviation="15"/><feColorMatrix type="matrix" values="0 0 0 0 0.12 0 0 0 0 0.213333 0 0 0 0 0.4 0 0 0 0.2 0"/><feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/><feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/></filter></defs></svg>`,
+    `<svg id="HomeFeaturedTitle1Svg" height="100" viewBox="0 0 386 100" fill="none"><rect y="60" width="181" height="40" fill="#CCCCFF"/><text fill="#0F0F33" xml:space="preserve" style="white-space: pre" font-size="80" font-weight="bold" letter-spacing="0em"><tspan x="0" y="80">Plan your</tspan></text></svg>`,
 
-    `<svg id="HomeFeaturedTitle2Svg" width="517" height="134" viewBox="0 0 517 134" fill="none"><g filter="url(#filter0_d)"><text fill="#0F0F33" xml:space="preserve" style="white-space: pre" font-family="ManropeBold" font-size="80" font-weight="bold" letter-spacing="0em"><tspan x="30" y="91">future, and</tspan></text></g><defs><filter id="filter0_d" x="0.833008" y="0.583252" width="515.312" height="132.833" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/><feOffset dy="1"/><feGaussianBlur stdDeviation="15"/><feColorMatrix type="matrix" values="0 0 0 0 0.12 0 0 0 0 0.213333 0 0 0 0 0.4 0 0 0 0.2 0"/><feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/><feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/></filter></defs></svg>`,
+    `<svg id="HomeFeaturedTitle2Svg" height="100" viewBox="0 0 462 100" fill="none"><text fill="#0F0F33" xml:space="preserve" style="white-space: pre" font-family="Manrope" font-size="80" font-weight="bold" letter-spacing="0em"><tspan x="0" y="80">future, and</tspan></text></svg>`,
 
-    `<svg id="HomeFeaturedTitle3Svg" width="487" height="142" viewBox="0 0 487 142" fill="none"><rect x="25" y="71" width="233" height="40" fill="#CCCCFF"/><g filter="url(#filter0_d)"><text fill="#0F0F33" xml:space="preserve" style="white-space: pre" font-family="ManropeBold" font-size="80" font-weight="bold" letter-spacing="0em"><tspan x="25" y="91">recall past</tspan></text></g><defs><filter id="filter0_d" x="0.833008" y="0.75" width="485.307" height="141.25" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/><feOffset dy="1"/><feGaussianBlur stdDeviation="15"/><feColorMatrix type="matrix" values="0 0 0 0 0.12 0 0 0 0 0.213333 0 0 0 0 0.4 0 0 0 0.2 0"/><feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/><feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/></filter></defs></svg>`
+    `<svg id="HomeFeaturedTitle3Svg" height="100" viewBox="0 0 436 100" fill="none"><rect y="60" width="233" height="40" fill="#CCCCFF"/><text fill="#0F0F33" xml:space="preserve" style="white-space: pre" font-family="Manrope" font-size="80" font-weight="bold" letter-spacing="0em"><tspan x="0" y="80">recall past</tspan></text></svg>`
+
 ]

@@ -17,7 +17,7 @@ const ScrollFade = () => {
             } }
         }
     } for(var i=0; i<fadeSelf.length; i++) {
-        if(fadeSelf[i].getBoundingClientRect().top < screen.height*0.6) {
+        if(fadeSelf[i].getBoundingClientRect().top < screen.height*(fadeSelf[i].getAttribute('fs') || 0.6)) {
             fadeFunc(fadeSelf[i],fadeSelf[i].getAttribute('fd'));
         }
     }
@@ -29,8 +29,8 @@ const ScrollBlur = () => {
         var blurEl = document.getElementsByClassName('section');
         for(var i=0; i<blurEl.length; i++) {
             var elPos = blurEl[i].firstChild.getBoundingClientRect();
-            var scrollToTop = (elPos.top > screen.height*0.3 || elPos.bottom < screen.height*0.2);
-            var scrollToBottom = (elPos.top > screen.height*0.7 || elPos.bottom < screen.height*0.5);
+            var scrollToTop = (elPos.top > screen.height*0.5 || elPos.bottom < screen.height*0.5);
+            var scrollToBottom = (elPos.top > screen.height*0.5 || elPos.bottom < screen.height*0.5);
             if((beforeScroll>document.body.scrollTop && scrollToTop) || (beforeScroll<document.body.scrollTop && scrollToBottom)) {
                 if(!blurEl[i].classList.contains('blur')) blurEl[i].className += ' blur';
                 if(blurEl[i].classList.contains('notblur')) blurEl[i].classList.remove('notblur');;

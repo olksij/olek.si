@@ -87,12 +87,12 @@ var Icons = [
 
     // -- HomeFeatured -- //
 
-    `<svg id="HomeFeaturedSubtitleSvg" height="33" viewBox="0 0 116 33" fill="none"><text opacity="0.3" fill="#0F0F33" xml:space="preserve" style="white-space: pre" font-family="ManropeBold" font-size="24" font-weight="bold" letter-spacing="0em"><tspan x="0" y="25.5">PLANNER</tspan></text></svg>`,
+    `<svg id="HomeFeaturedSubtitleSvg" height="33" viewBox="0 0 116 33" fill="none"><text opacity="0.3" fill="var(--Black)" xml:space="preserve" style="white-space: pre" font-family="ManropeBold" font-size="24" font-weight="bold" letter-spacing="0em"><tspan x="0" y="25.5">PLANNER</tspan></text></svg>`,
 
-    `<svg id="HomeFeaturedTitle1Svg" height="100" viewBox="0 0 386 100" fill="none"><rect y="60" width="181" height="40" fill="#CCCCFF"/><text fill="#0F0F33" xml:space="preserve" style="white-space: pre" font-size="80" font-weight="bold" letter-spacing="0em"><tspan x="0" y="80">Plan your</tspan></text></svg>`,
+    `<svg id="HomeFeaturedTitle1Svg" height="100" viewBox="0 0 386 100" fill="none"><rect y="60" width="181" height="40" fill="var(--Light)"/><text fill="var(--Black)" xml:space="preserve" style="white-space: pre" font-size="80" font-weight="bold" letter-spacing="0em"><tspan x="0" y="80">Plan your</tspan></text></svg>`,
 
-    `<svg id="HomeFeaturedTitle2Svg" height="100" viewBox="0 0 462 100" fill="none"><text fill="#0F0F33" xml:space="preserve" style="white-space: pre" font-family="Manrope" font-size="80" font-weight="bold" letter-spacing="0em"><tspan x="0" y="80">future, and</tspan></text></svg>`,
+    `<svg id="HomeFeaturedTitle2Svg" height="100" viewBox="0 0 462 100" fill="none"><text fill="var(--Black)" xml:space="preserve" style="white-space: pre" font-family="Manrope" font-size="80" font-weight="bold" letter-spacing="0em"><tspan x="0" y="80">future, and</tspan></text></svg>`,
 
-    `<svg id="HomeFeaturedTitle3Svg" height="100" viewBox="0 0 436 100" fill="none"><rect y="60" width="233" height="40" fill="#CCCCFF"/><text fill="#0F0F33" xml:space="preserve" style="white-space: pre" font-family="Manrope" font-size="80" font-weight="bold" letter-spacing="0em"><tspan x="0" y="80">recall past</tspan></text></svg>`
+    `<svg id="HomeFeaturedTitle3Svg" height="100" viewBox="0 0 436 100" fill="none"><rect y="60" width="233" height="40" fill="var(--Light)"/><text fill="var(--Black)" xml:space="preserve" style="white-space: pre" font-family="Manrope" font-size="80" font-weight="bold" letter-spacing="0em"><tspan x="0" y="80">recall past</tspan></text></svg>`
 
 ]

@@ -177,9 +177,9 @@ body,html{ height:100%; overflow-x: hidden; margin:0px }
 
 /* --- --- --- HOME GALLERY --- --- --- */
 
-#HomeFeatured { display:flex; position: relative; width:100%; height:100%; margin-top: -20vh; }
+#HomeFeatured { display:flex; position: relative; width:100%; height:75% }
 
-#HomeFeaturedLeft { width:var(--PaneWidth); height:100%; display: flex; flex-direction: column;
+#HomeFeaturedLeft { width:var(--PaneWidth); height:calc(140vw - var(--PaneWidth)); display: flex; flex-direction: column;
 	justify-content: center; position: relative; margin: 0 5vw; }
 
 #HomeFeaturedTitle { display: flex; flex-direction: column; }

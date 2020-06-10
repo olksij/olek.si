@@ -28,10 +28,8 @@ const ScrollBlur = () => {
     if (Math.abs(beforeScroll-document.body.scrollTop)>20){
         var blurEl = document.getElementsByClassName('section');
         for(var i=0; i<blurEl.length; i++) {
-            var elPos = blurEl[i].firstChild.getBoundingClientRect();
-            var scrollToTop = (elPos.top > screen.height*0.5 || elPos.bottom < screen.height*0.5);
-            var scrollToBottom = (elPos.top > screen.height*0.5 || elPos.bottom < screen.height*0.5);
-            if((beforeScroll>document.body.scrollTop && scrollToTop) || (beforeScroll<document.body.scrollTop && scrollToBottom)) {
+            var elPos = blurEl[i].firstChild.getBoundingClientRect(); var scrh = screen.height*0.5
+            if(elPos.top > scrh || elPos.bottom <= scrh) {
                 if(!blurEl[i].classList.contains('blur')) blurEl[i].className += ' blur';
                 if(blurEl[i].classList.contains('notblur')) blurEl[i].classList.remove('notblur');;
             }

@@ -22,7 +22,7 @@ p{ font-family: 'ManropeSemiBold'; color:var(--Black); }
 
 body { background: #FFFFFF; }
 
-body,html{ height:100%; overflow-x: hidden; margin:0px }
+body,html{ height:100%; overflow-x: hidden; margin:0px; scroll-behavior: smooth}
 
 /*.section-separator{ left:var(--LeftPadding); width:calc(100vw - calc(var(--LeftPadding)*2)); height: 1.5px; background: var(--Black); opacity: 0.1; position: absolute; bottom: -0.75px;}
 */

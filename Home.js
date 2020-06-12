@@ -64,18 +64,18 @@ customElements.define("home-head", class extends HTMLElement{ constructor() { su
                 <iv- fd="150" id='HomeHeadTitle2'></iv->
                 <iv- fd="300" id='HomeHeadTitle3'></iv->
             </div>
-            <div id="HomeHeadScrollArea"><iv- class="fadeSelf" fs="1" fd="1500" id='HomeHeadScroll'></iv-></div>
+            <div id="HomeHeadScrollArea" onclick="ScrollTo('HomeFeatured')"><iv- class="fadeSelf" fs="1" fd="1500" id='HomeHeadScroll'></iv-></div>
         </div>
         <div id="HomeHeadRight">
             <div id="HomeNavigation">
                 <iv- fd="600" class="fadeSelf" id="HomeHeadNavigationButton"></iv->
                 <iv- fd="600" class="fadeSelf" id="HomeHeadNavigationButtonDesktop"></iv->
                 <div id="HomeNavLinks" class="fadeChild">
-                    <p fd="750">Featured</p>
-                    <p fd="775">By me</p>
-                    <p fd="800">About me</p>
-                    <p fd="825">Branding</p>
-                    <p fd="850">Contact me</p>
+                    <p fd="750" onclick="ScrollTo('HomeFeatured')">Featured</p>
+                    <p fd="775" onclick="ScrollTo('HomeFeatured')">By me</p>
+                    <p fd="800" onclick="ScrollTo('HomeFeatured')">About me</p>
+                    <p fd="825" onclick="ScrollTo('HomeFeatured')">Branding</p>
+                    <p fd="850" onclick="ScrollTo('HomeFeatured')">Contact me</p>
                 </div>
             </div>
         </div>

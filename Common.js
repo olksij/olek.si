@@ -40,6 +40,8 @@ const ScrollBlur = () => {
     }
 }
 
+const ScrollTo = el => { location.href = "#"; location.href = "#"+el }
+
 const Theme = () => {
     var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     var link = document.querySelector("link[rel*='icon']") || document.createElement('link');

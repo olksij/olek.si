@@ -1,5 +1,5 @@
-@font-face{ font-family: 'ManropeBold'; src: url('./Fonts/Bold.ttf'); }
-@font-face{ font-family: 'ManropeSemiBold'; src: url('./Fonts/Semibold.ttf'); }
+@font-face{ font-family: 'Manrope'; font-weight: 800; src: url(https://fonts.gstatic.com/s/manrope/v1/xn7gYHE41ni1AdIRggexSg.woff2) format('woff2'); }
+@font-face{ font-family: 'Manrope'; font-weight: 700; src: url(https://fonts.gstatic.com/s/manrope/v1/xn7gYHE41ni1AdIRggexSg.woff2) format('woff2'); }
 
 :root{
 	--Black: #0F1B33;
@@ -18,7 +18,7 @@
 	html>body{background: #0F1219;}
 }
 
-p{ font-family: 'ManropeSemiBold'; color:var(--Black); }
+p{ font-family: 'Manrope'; font-weight: 700; color:var(--Black); }
 
 body { background: #FFFFFF; }
 
@@ -91,7 +91,7 @@ body,html{ height:100%; overflow-x: hidden; margin:0px; scroll-behavior: smooth}
 
 /* HomeHeadLeft */
 
-#HomeHeadLeft { width:60%; height: 100%; position: relative; left:0px; top:0px; transition: 0.5s; font-family: 'ManropeBold';
+#HomeHeadLeft { width:60%; height: 100%; position: relative; left:0px; top:0px; transition: 0.5s; font-family: 'Manrope'; font-weight: 700;
 	margin-right:calc(calc(100vh*1.75 + 100vw)*0.015); margin-left:calc(calc(100vh*1.75 + 100vw)*0.03); }
 
 #HomeHeadTitle { max-width:calc(40vh*1.87); width:calc(90% + 60px); max-height:40vh; 
@@ -100,7 +100,8 @@ body,html{ height:100%; overflow-x: hidden; margin:0px; scroll-behavior: smooth}
 
 #HomeHeadTitle * svg{
 	width:100%;
-	font-family: 'ManropeBold';
+	font-family: 'Manrope';
+	font-weight: 800;
 }
 
 #HomeHeadScroll { padding:calc(calc(100vw + 175vh)*0.03);  bottom:0px;
@@ -192,7 +193,7 @@ body,html{ height:100%; overflow-x: hidden; margin:0px; scroll-behavior: smooth}
 
 #HomeFeaturedTitle>iv->svg { height:calc(var(--PaneWidth)*0.74/3.431/1.5) }
 
-#HomeFeaturedTitle text { font-family: 'ManropeBold'; }
+#HomeFeaturedTitle text { font-family: 'Manrope'; font-weight: 800; }
 
 @media only screen and (max-width:699px){ :root{ --PaneWidth:100vw } #HomeFeaturedTitle{display: inline-flex} 
 	#HomeFeaturedLeft{text-align: center} }

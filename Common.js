@@ -52,7 +52,7 @@ const Theme = () => {
 
 const pageScroll = () => { ScrollFade(); ScrollBlur() }
 
-const onload = () => {
+const load = () => {
     document.body.addEventListener('scroll', pageScroll); pageScroll();
     window.matchMedia('(prefers-color-scheme: dark)').addListener(Theme); Theme();
 }

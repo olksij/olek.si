@@ -114,11 +114,11 @@ body,html{ height:100%; overflow-x: hidden; margin:0px; scroll-behavior: smooth}
 /* Right Side */
 
 #HomeHeadRight { width:calc(40% - calc(100vh*1.75 + 100vw)*0.045); height: 100%; position: absolute; top:0px; right:0px;
-	transition:0.5s; padding-left:calc(calc(100vh*1.75 + 100vw)*0.03); opacity: 0.8; font-size: 20px; }
+	transition:0.5s; padding-left:calc(calc(100vh*1.75 + 100vw)*0.03); opacity: 0.8; font-size: 22px; }
 
 #HomeHeadRight:hover { width:calc(40% - calc(100vh*1.75 + 100vw)*0.045 + 100px); opacity:1 }
 
-#HomeHeadRight:hover div p { font-size: 22px; }
+#HomeHeadRight:hover div p { font-size: 24px; }
 
 #HomeNavLinks { margin-top:10px; transition: 0.3s; }
 
@@ -129,7 +129,7 @@ body,html{ height:100%; overflow-x: hidden; margin:0px; scroll-behavior: smooth}
 
 #HomeHeadNavigationButtonSvg { display:none; }
 
-#HomeNavLinks p.faded { padding:10px 0px; margin:0px; transition: all 0.5s, margin 0s, padding 0s, padding-left .3s; opacity: var(--HomeNavOpacity); }
+#HomeNavLinks p.faded { padding:12px 0px; margin:0px; transition: all 0.5s, margin 0s, padding 0s, padding-left .3s; opacity: var(--HomeNavOpacity); }
 
 #HomeNavLinks p:hover.faded { color: var(--Blue); padding-left:5px; }
 

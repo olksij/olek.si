@@ -60,9 +60,9 @@ customElements.define("home-head", class extends HTMLElement{ constructor() { su
     render() { this.innerHTML = `<div id="HomeHead">
         <div id="HomeHeadLeft">
             <div id="HomeHeadTitle" class="fadeChild">
-                <iv- fd="0" id='HomeHeadTitle1'></iv-> 
-                <iv- fd="150" id='HomeHeadTitle2'></iv->
-                <iv- fd="300" id='HomeHeadTitle3'></iv->
+                <iv- fd="0" id='HomeHeadSubtitle'></iv-> 
+                <iv- fd="150" id='HomeHeadTitle1'></iv->
+                <iv- fd="300" id='HomeHeadTitle2'></iv->
             </div>
             <div id="HomeHeadScrollArea" onclick="ScrollTo('HomeFeatured')"><iv- class="fadeSelf" fs="1" fd="1500" id='HomeHeadScroll'></iv-></div>
         </div>

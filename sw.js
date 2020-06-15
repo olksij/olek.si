@@ -1,4 +1,4 @@
-var AppVersion = '0064';
+var AppVersion = '0065';
 
 self.addEventListener('install', event => {
 	self.skipWaiting();

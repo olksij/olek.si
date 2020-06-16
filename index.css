@@ -24,8 +24,6 @@ body { background: #FFFFFF; }
 
 body,html{ height:100%; overflow-x: hidden; margin:0px; scroll-behavior: smooth}
 
-/*.section-separator{ left:var(--LeftPadding); width:calc(100vw - calc(var(--LeftPadding)*2)); height: 1.5px; background: var(--Black); opacity: 0.1; position: absolute; bottom: -0.75px;}
-*/
 .fadeChild>*:not(.faded), .fadeSelf:not(.faded){
 	opacity:0 !important;
 	transform: translateY(40px);
@@ -80,7 +78,7 @@ body,html{ height:100%; overflow-x: hidden; margin:0px; scroll-behavior: smooth}
 #HomeHead { display:flex; position: relative; width:100%; height:100%; transition: 0.5s; }
 
 #HomeHeadLeft { width:var(--PaneWidth); height:100%; display: flex; flex-direction: column;
-	justify-content: center; position: relative; margin: 0 5vw;}
+	justify-content: center; position: relative; margin: 0 5vw; transition: 0.5s }
 
 #HomeHeadTitle { --MaxHeadHead:calc(100vh - 20vw - 60px); max-height: var(--MaxHeadHead/var(--TitleDivider)); display: flex; 
 	flex-direction: column; font-family: 'Manrope'; font-weight: 800 }

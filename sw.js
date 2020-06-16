@@ -1,4 +1,4 @@
-var AppVersion = '0065';
+var AppVersion = '0066';
 
 self.addEventListener('install', event => {
 	self.skipWaiting();
@@ -8,8 +8,6 @@ self.addEventListener('install', event => {
 			'./index.css',
 			'./Common.js',
 			'./Home.js',
-			'./Fonts/Bold.ttf',
-			'./Fonts/Semibold.ttf',
 			'./Assets/LightIcon.ico',
 			'./Assets/DarkIcon.ico',
 		]);

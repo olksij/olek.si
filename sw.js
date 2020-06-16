@@ -1,4 +1,4 @@
-var AppVersion = '0066';
+var AppVersion = '0067';
 
 self.addEventListener('install', event => {
 	self.skipWaiting();
@@ -17,7 +17,7 @@ self.addEventListener('install', event => {
 self.addEventListener('activate', event => {
 	event.waitUntil(caches.keys().then(versions => {
 		return Promise.all(versions.filter(ver => {
-			return AppVersion != ver;
+			return parseInt(AppVersion) > parseInt(ver);
 		}).map(ver => { return caches.delete(ver) }));
 	}));
 	return self.clients.claim();

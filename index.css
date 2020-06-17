@@ -91,7 +91,7 @@ body,html{ height:100%; overflow-x: hidden; margin:0px; scroll-behavior: smooth}
 
 /* HomeHeadLeft */
 
-#HomeHeadScroll { padding:calc(calc(100vw + 175vh)*0.03);  bottom:0px;
+#HomeHeadScroll { padding:5vw;  bottom:0px;
 	margin-left: calc(calc(100vw + 175vh)*-0.03); position: absolute; }
 
 #HomeHeadScroll:hover #HomeHeadScrollSvg { fill: var(--Black) }

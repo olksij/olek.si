@@ -73,7 +73,7 @@ var Icons = [
 
     // -- HomeHead -- //
 
-    `<svg id="HomeHeadSubtitleSvg" height="33" viewBox="0 0 82 33" fill="none"><text opacity="0.1" fill="var(--Black)" xml:space="preserve" style="white-space: pre" font-size="24" letter-spacing="0em"><tspan x="0" y="25.692">HELLO,</tspan></text></svg>`,
+    `<svg id="HomeHeadSubtitleSvg" height="33" viewBox="0 0 82 33" fill="none"><text opacity="0.3" fill="var(--Black)" xml:space="preserve" style="white-space: pre" font-size="24" letter-spacing="0em"><tspan x="0" y="25.692">HELLO,</tspan></text></svg>`,
 
     `<svg id="HomeHeadTitle1Svg" height="120" viewBox="0 0 480 120" fill="none"><rect x="165" y="74" width="315" height="46" fill="var(--Light)"/><text fill="var(--Black)" xml:space="preserve" style="white-space: pre" font-size="96" letter-spacing="0em"><tspan x="0" y="96.768">I'm Alexey</tspan></text></svg>`,
 
@@ -83,7 +83,7 @@ var Icons = [
 
     `<svg id="HomeHeadNavigationButtonSvg" width="162" height="30" viewBox="0 0 162 30" fill="none"><rect y="13.4583" width="18" height="2.58333" fill="var(--Black)"/><rect y="7" width="11.5714" height="2.58333" fill="var(--Black)"/><rect x="6.42847" y="19.9166" width="11.5714" height="2.58333" fill="var(--Black)"/><text fill="var(--Black)" xml:space="preserve" style="white-space: pre" font-family="Manrope" font-weight="700" font-size="22" letter-spacing="0em"><tspan x="41" y="23.25">Navigation</tspan></text></svg>`,
 
-    `<svg id="HomeHeadNavigationButtonDesktopSvg" width="173" height="30" viewBox="0 0 173 30" fill="none"><text opacity="0.15" fill="var(--Black)" xml:space="preserve" style="white-space: pre" font-family="Manrope" font-weight="800" font-size="22" letter-spacing="0em"><tspan x="33" y="23.25">NAVIGATION</tspan></text><g opacity="0.15"><rect y="13.4583" width="18" height="2.58333" fill="var(--Black)"/><rect y="7" width="11.5714" height="2.58333" fill="var(--Black)"/><rect x="6.42871" y="19.9166" width="11.5714" height="2.58333" fill="var(--Black)"/></g></svg>`,
+    `<svg id="HomeHeadNavigationButtonDesktopSvg" width="173" height="30" viewBox="0 0 173 30" fill="none"><text opacity="0.2" fill="var(--Black)" xml:space="preserve" style="white-space: pre" font-family="Manrope" font-weight="800" font-size="22" letter-spacing="0em"><tspan x="33" y="23.25">NAVIGATION</tspan></text><g opacity="0.25"><rect y="13.4583" width="18" height="2.58333" fill="var(--Black)"/><rect y="7" width="11.5714" height="2.58333" fill="var(--Black)"/><rect x="6.42871" y="19.9166" width="11.5714" height="2.58333" fill="var(--Black)"/></g></svg>`,
 
     // -- HomeFeatured -- //
 

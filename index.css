@@ -5,6 +5,7 @@
 	--Black: #0F1B33;
 	--Blue: #4d88ff;
 	--Light: #CCDDFF;
+	--Background: #FFF;
 	--PaneWidth: 45vw;
 	--TitleDivider: 1;
 }
@@ -14,13 +15,13 @@
 		--Black: #F2F6FF;
 		--Blue: #9ABBFF;
 		--Light: #364159;
+		--Background: #0F1219;
 	}
-	html>body{background: #0F1219;}
 }
 
 p{ font-family: 'Manrope'; font-weight: 700; color:var(--Black); }
 
-body { background: #FFFFFF; }
+body { background: var(--Background); }
 
 body,html{ height:100%; overflow-x: hidden; margin:0px; scroll-behavior: smooth}
 

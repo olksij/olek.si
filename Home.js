@@ -1,26 +1,23 @@
 const de = r => { return document.getElementById(r) }
 const ds = (n,v) => { return document.documentElement.style.setProperty(n,v); }
 
-// -- Head --
 customElements.define("home-head", class extends HTMLElement{ constructor() { super(); }
 
     connectedCallback() { this.render();
-        var HeadNavFocus = false; var HeadNavExpanded = false; var ViewMobile = window.innerWidth < 700 ? true:false;
+        var HeadNavExpanded = false; var ViewMobile = window.innerWidth < 700 ? true:false;
         document.scrollingElement.style.scrollBehavior='smooth';
 
-        // Check if mobile
         if (window.innerWidth < 700) { 
-            ds('--HomeNavOpacity', 0); HeadNavFocus=false; de('HomeHeadLeft').style.opacity=1;
-            de('HomeHeadLeft').style.filter = 'blur(0px)'; 
-        }
+            ds('--HomeNavOpacity', 0); de('HomeHeadLeft').style.opacity=1;
+            de('HomeHeadLeft').style.filter = 'blur(0px)'; }
 
         const pageResize = () => {
             if(window.innerWidth<700 & !ViewMobile) {
-                ViewMobile=true; HeadNavFocus = false;
+                ViewMobile=true;
                 ds('--HomeNavOpacity', 0);
                 de('HomeNavLinks').style.opacity=0
             } else if (window.innerWidth >=700 & ViewMobile) {
-                ViewMobile=false; HeadNavFocus=false; 
+                ViewMobile=false; 
                 ds('--HomeNavOpacity', 1); 
                 de('HomeHeadLeft').style.filter = 'blur(0px)'; 
                 de('HomeNavLinks').style.opacity=1;
@@ -33,12 +30,12 @@ customElements.define("home-head", class extends HTMLElement{ constructor() { su
         de('HomeHeadRight').addEventListener('mouseenter',() => { if ( window.innerWidth >= 700 ) {
             de('HomeHeadLeft').style.filter = 'blur('+(window.innerWidth*document.body.offsetHeight)**0.5/10+'px)';
             de('HomeHeadLeft').style.opacity=0.5;
-            HeadNavFocus=true; document.scrollingElement.scrollTop='0px'; }
+            document.scrollingElement.scrollTop='0px'; }
         })
 
         de('HomeHeadRight').addEventListener('mouseleave',() => { if ( window.innerWidth >= 700 ) {
             de('HomeHeadLeft').style.filter = 'blur(0px)'
-            HeadNavFocus=false; de('HomeHeadLeft').style.opacity=1; }
+            de('HomeHeadLeft').style.opacity=1; }
         })
         
         // -- NavigationPaneAnimation Mobile
@@ -46,11 +43,11 @@ customElements.define("home-head", class extends HTMLElement{ constructor() { su
         de('HomeHeadNavigationButton').addEventListener('click',() => { if (window.innerWidth < 700) { 
             if (!HeadNavExpanded) { HeadNavExpanded=true; ds('--HomeNavOpacity', 1); de('HomeHeadLeft').style.opacity=0.6;
                 de('HomeHeadLeft').style.filter = 'blur('+(window.innerWidth*document.body.offsetHeight)**0.5/5+'px)';
-                HeadNavFocus=true; de('HomeNavLinks').style.opacity = 1} 
+                de('HomeNavLinks').style.opacity = 1} 
 
             else { HeadNavExpanded=false; de('HomeNavLinks').style.opacity = 0;
                 de('HomeHeadLeft').style.filter = 'blur(0px)';
-                HeadNavFocus=false; de('HomeHeadLeft').style.opacity=1;
+                de('HomeHeadLeft').style.opacity=1;
             }
         }})
 
@@ -83,10 +80,7 @@ customElements.define("home-head", class extends HTMLElement{ constructor() { su
     </div>`}
 } );
 
-// -- Gallery --
-
 customElements.define("home-featured", class extends HTMLElement { constructor(){ super(); }
-
     connectedCallback(){ this.render(); }
 
     render(){

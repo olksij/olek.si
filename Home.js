@@ -85,6 +85,7 @@ customElements.define("home-featured", class extends HTMLElement { constructor()
 
     render(){
         this.innerHTML = `<div id="HomeFeatured">
+        <div id="HomeFeaturedBg"></div>
             <div id="HomeFeaturedLeft">
                 <div id="HomeFeaturedTitle" class="fadeChild">
                     <iv- fd="0" id='HomeFeaturedSubtitle'></iv-> 

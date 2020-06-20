@@ -89,10 +89,10 @@ var Icons = [
 
     `<svg id="HomeFeaturedSubtitleSvg" height="33" viewBox="0 0 111 33" fill="none"><text opacity="0.3" fill="var(--Black)" xml:space="preserve" style="white-space: pre" font-size="24" letter-spacing="0em"><tspan x="0" y="25.692">PLANNER</tspan></text></svg>`,
 
-    `<svg id="HomeFeaturedTitle1Svg" height="100" viewBox="0 0 368 100" fill="none"><rect y="60" width="174" height="40" fill="var(--Light)"/><text fill="var(--Black)" xml:space="preserve" style="white-space: pre" font-size="80" letter-spacing="0em"><tspan x="0" y="80.64">Plan your</tspan></text></svg>`,
+    `<svg id="HomeFeaturedTitle1Svg" height="100" viewBox="0 0 322 100" fill="none"><text fill="var(--Black)" xml:space="preserve" style="white-space: pre" font-size="80" letter-spacing="0em"><tspan x="0" y="80.64">Let your</tspan></text></svg>`,
 
-    `<svg id="HomeFeaturedTitle2Svg" height="100" viewBox="0 0 498 100" fill="none"><rect x="288" y="62" width="210" height="38" fill="var(--Light)"/><text fill="var(--Black)" xml:space="preserve" style="white-space: pre" font-size="80" letter-spacing="0em"><tspan x="0" y="80.64">future, track</tspan></text></svg>`,
+    `<svg id="HomeFeaturedTitle2Svg" height="100" viewBox="0 0 460 100" fill="none"><rect x="256" y="62" width="204" height="38" fill="var(--Light)"/><text fill="var(--Black)" xml:space="preserve" style="white-space: pre" font-size="80" letter-spacing="0em"><tspan x="0" y="80.64">life be more</tspan></text></svg>`,
 
-    `<svg id="HomeFeaturedTitle3Svg" height="100" viewBox="0 0 309 100" fill="none"><text fill="var(--Black)" xml:space="preserve" style="white-space: pre" font-size="80" letter-spacing="0em"><tspan x="0" y="80.64">present</tspan></text></svg>`
+    `<svg id="HomeFeaturedTitle3Svg" height="100" viewBox="0 0 432 100" fill="none"><rect y="62" width="432" height="38" fill="var(--Light)"/><text fill="var(--Black)" xml:space="preserve" style="white-space: pre" font-size="80" letter-spacing="0em"><tspan x="0" y="80.64">productive</tspan></text></svg>`
 
 ]

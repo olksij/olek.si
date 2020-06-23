@@ -27,10 +27,9 @@ customElements.define("home-head", class extends HTMLElement{ constructor() { su
 
         // -- NavigationPaneAnimation Desktop
 
-        de('HomeHeadRight').addEventListener('mouseenter',() => { if ( window.innerWidth >= 700 ) {
+        de('HomeHeadRight').addEventListener('mouseenter',() => { if ( window.innerWidth >= 700 && !de('HomeHead').parentElement.classList.contains('blur')) {
             de('HomeHeadLeft').style.filter = 'blur('+(window.innerWidth*document.body.offsetHeight)**0.5/10+'px)';
-            de('HomeHeadLeft').style.opacity=0.5;
-            document.scrollingElement.scrollTop='0px'; }
+            de('HomeHeadLeft').style.opacity=0.5; ScrollTo('HomeHead'); document.body.scrollTop = '0px' }
         })
 
         de('HomeHeadRight').addEventListener('mouseleave',() => { if ( window.innerWidth >= 700 ) {

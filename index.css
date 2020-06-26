@@ -12,6 +12,7 @@
 
 
 	--PaneWidth: 35vw;
+	--MaxPaneWidth: 45vw;
 	--TitleDivider: 1;
 }
 
@@ -75,7 +76,7 @@ body,html{ height:100%; overflow-x: hidden; margin:0px; scroll-behavior: smooth}
 	justify-content: center; position: relative; margin: 0 5vw; transition: 0.5s }
 
 #HomeHeadTitle { --MaxHeadHead:calc(100vh - 20vw - 60px); max-height: var(--MaxHeadHead/var(--TitleDivider)); display: flex; 
-	flex-direction: column; font-weight: 800 }
+	flex-direction: column; font-weight: 800; --PanePadding: calc((100vh - calc(var(--PaneWidth)*0.59)/2 - 30)/2) }
 
 #HomeHeadTitle>iv->svg{height:calc(var(--PaneWidth)*0.59/2.38/var(--TitleDivider)); 
 	max-height: calc(var(--MaxHeadHead)/2.38/var(--TitleDivider)) }
@@ -120,8 +121,8 @@ body,html{ height:100%; overflow-x: hidden; margin:0px; scroll-behavior: smooth}
 
 	#HomeHead{ display:block; }
 
-	#HomeHeadLeft{ margin:0px calc((10vw+50px)/2);
-		width:calc(100% - calc(calc(100vh*1.75 + 100vw)*0.03)) }
+	#HomeHeadLeft{ margin:0 10vw;
+		width:var(--PaneWidth) }
 	
 	#HomeHeadRight { width:100%; margin:0px; top:0px; position:absolute; height:0px; opacity: 1; font-size: 22px; }
 
@@ -144,11 +145,9 @@ body,html{ height:100%; overflow-x: hidden; margin:0px; scroll-behavior: smooth}
 
 	#HomeNavLinks p:hover { padding-left:0px; }
 
-	#HomeHeadTitle * svg { max-width:100%; display: block; }
+	#HomeHeadTitle * svg { display: block; }
 
 	#HomeNavLinks p.faded { animation: none; opacity: var(--HomeNavOpacity); }
-
-	#HomeHeadTitle{margin-left:calc(var(--PaneWidth)*0.59/var(--TitleDivider)/4)}
 
 }
 
@@ -175,6 +174,6 @@ body,html{ height:100%; overflow-x: hidden; margin:0px; scroll-behavior: smooth}
 
 #HomeFeaturedTitle text { font-weight: 800; }
 
-@media (max-width:699px){ :root{ --PaneWidth:90vw; } #HomeFeaturedTitle{display: inline-flex} 
+@media (max-width:699px){ :root{ --PaneWidth:80vw; --TitleDivider: 1 } #HomeFeaturedTitle{display: inline-flex} 
 	#HomeFeaturedLeft{text-align: center} }
 

@@ -11,7 +11,7 @@
 	--Light240: #CCCCFF;
 
 
-	--PaneWidth: 45vw;
+	--PaneWidth: 35vw;
 	--TitleDivider: 1;
 }
 
@@ -165,16 +165,16 @@ body,html{ height:100%; overflow-x: hidden; margin:0px; scroll-behavior: smooth}
 
 #HomeFeaturedTitle text {font-size: 80px} #HomeFeaturedSubtitle text {font-size: 24px}
 
-#HomeFeaturedTitle>#HomeFeaturedSubtitle {margin:-21.5px 0px calc(var(--PaneWidth)*0.75/34.3/1.5) 0px} 
+#HomeFeaturedTitle>#HomeFeaturedSubtitle {margin:-21.5px 0px calc(var(--PaneWidth)*0.75/34.3/1.2) 0px} 
 
-#HomeFeaturedTitle>iv->#HomeFeaturedSubtitleSvg { height:calc(var(--PaneWidth)*0.75/10.4/1.5) }
+#HomeFeaturedTitle>iv->#HomeFeaturedSubtitleSvg { height:calc(var(--PaneWidth)*0.75/10.4/1.2) }
 
 #HomeFeaturedTitle>iv-{margin-bottom:calc(var(--PaneWidth)*0.75/60)}
 
-#HomeFeaturedTitle>iv->svg { height:calc(var(--PaneWidth)*0.75/3.431/1.5) }
+#HomeFeaturedTitle>iv->svg { height:calc(var(--PaneWidth)*0.75/3.431/1.2) }
 
 #HomeFeaturedTitle text { font-weight: 800; }
 
-@media (max-width:699px){ :root{ --PaneWidth:100vw; --TitleDivider:1.5 } #HomeFeaturedTitle{display: inline-flex} 
+@media (max-width:699px){ :root{ --PaneWidth:90vw; } #HomeFeaturedTitle{display: inline-flex} 
 	#HomeFeaturedLeft{text-align: center} }
 

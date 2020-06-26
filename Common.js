@@ -25,19 +25,17 @@ const ScrollFade = () => {
 
 var beforeScroll = 0;
 const ScrollBlur = () => {
-    if (Math.abs(beforeScroll-document.body.scrollTop)>20){
-        var blurEl = document.getElementsByClassName('section');
-        for(var i=0; i<blurEl.length; i++) {
-            var elPos = blurEl[i].firstChild.getBoundingClientRect(); var scrh = screen.height*0.5
-            if(elPos.top > scrh || elPos.bottom <= scrh) {
-                if(!blurEl[i].classList.contains('blur')) blurEl[i].className += ' blur';
-                if(blurEl[i].classList.contains('notblur')) blurEl[i].classList.remove('notblur');;
-            }
-            else if(blurEl[i].classList.contains('blur')) 
-            { blurEl[i].classList.remove('blur'); blurEl[i].className += ' notblur' }
+    var blurEl = document.getElementsByClassName('section');
+    for(var i=0; i<blurEl.length; i++) {
+        var elPos = blurEl[i].firstChild.getBoundingClientRect(); var scrh = screen.height*0.5
+        if(elPos.top > scrh || elPos.bottom <= scrh) {
+            if(!blurEl[i].classList.contains('blur')) blurEl[i].className += ' blur';
+            if(blurEl[i].classList.contains('notblur')) blurEl[i].classList.remove('notblur');;
         }
-        beforeScroll = document.body.scrollTop;    
+        else if(blurEl[i].classList.contains('blur')) 
+        { blurEl[i].classList.remove('blur'); blurEl[i].className += ' notblur' }
     }
+    beforeScroll = document.body.scrollTop;    
 }
 
 const ScrollTo = el => { location.href = "#"; location.href = "#"+el }

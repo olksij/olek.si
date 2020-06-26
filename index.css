@@ -75,9 +75,10 @@ body,html{ height:100%; overflow-x: hidden; margin:0px; scroll-behavior: smooth}
 	justify-content: center; position: relative; margin: 0 5vw; transition: 0.5s }
 
 #HomeHeadTitle { --MaxHeadHead:calc(100vh - 20vw - 60px); max-height: var(--MaxHeadHead/var(--TitleDivider)); display: flex; 
-	flex-direction: column; font-family: 'Manrope'; font-weight: 800 }
+	flex-direction: column; font-weight: 800 }
 
-#HomeHeadTitle>iv->svg{height:calc(var(--PaneWidth)*0.59/2.38/var(--TitleDivider)); max-height: calc(var(--MaxHeadHead)/2.38/var(--TitleDivider)) }
+#HomeHeadTitle>iv->svg{height:calc(var(--PaneWidth)*0.59/2.38/var(--TitleDivider)); 
+	max-height: calc(var(--MaxHeadHead)/2.38/var(--TitleDivider)) }
 
 #HomeHeadTitle>#HomeHeadSubtitle {margin:-21.5px 0px calc(var(--PaneWidth)*0.59/28.3) 0px;} 
 
@@ -114,7 +115,7 @@ body,html{ height:100%; overflow-x: hidden; margin:0px; scroll-behavior: smooth}
 
 #HomeNavLinks p:hover.faded { color: var(--Blue); padding-left:5px; }
 
-@media only screen and ( max-width:699px ) {
+@media ( max-width:699px ) {
 	#HomeHeadNavigationButtonSvg{ display:inline-block }
 
 	#HomeHead{ display:block; }
@@ -174,6 +175,6 @@ body,html{ height:100%; overflow-x: hidden; margin:0px; scroll-behavior: smooth}
 
 #HomeFeaturedTitle text { font-weight: 800; }
 
-@media only screen and (max-width:699px){ :root{ --PaneWidth:100vw; --TitleDivider:1.5 } #HomeFeaturedTitle{display: inline-flex} 
+@media (max-width:699px){ :root{ --PaneWidth:100vw; --TitleDivider:1.5 } #HomeFeaturedTitle{display: inline-flex} 
 	#HomeFeaturedLeft{text-align: center} }
 

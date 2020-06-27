@@ -10,7 +10,7 @@ const ScrollFade = () => {
     var fadeChild = document.getElementsByClassName('fadeChild');
     var fadeSelf = document.getElementsByClassName('fadeSelf');
     for(var i=0; i<fadeChild.length; i++) {
-        if(fadeChild[i].getBoundingClientRect().top < screen.height*0.6){
+        if(fadeChild[i].getBoundingClientRect().top < screen.height*0.5){
             childrens = fadeChild[i].childNodes;
             for(j=0; j<childrens.length; j++) { if(childrens[j].nodeName!='#text') {
                 fadeFunc(childrens[j],childrens[j].getAttribute('fd'))

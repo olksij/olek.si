@@ -1,6 +1,8 @@
 const de = r => { return document.getElementById(r) }
 const ds = (n,v) => { return document.documentElement.style.setProperty(n,v); }
 
+//TODO: Loading priority
+
 customElements.define("home-head", class extends HTMLElement{ constructor() { super(); }
 
     connectedCallback() { this.render();
@@ -53,12 +55,13 @@ customElements.define("home-head", class extends HTMLElement{ constructor() { su
         window.addEventListener('resize', pageResize); pageResize();
     }
 
+    //TODO: JSX
     render() { this.innerHTML = `<div id="HomeHead">
         <div id="HomeHeadLeft">
             <div id="HomeHeadTitle" class="fadeChild">
                 <iv- fd="0" id='HomeHeadSubtitle'></iv-> 
-                <iv- fd="150" id='HomeHeadTitle1'></iv->
-                <iv- fd="300" id='HomeHeadTitle2'></iv->
+                <iv- fd="125" id='HomeHeadTitle1'></iv->
+                <iv- fd="250" id='HomeHeadTitle2'></iv->
             </div>
             <div id="HomeHeadScrollArea" onclick="ScrollTo('HomeFeatured')"><iv- class="fadeSelf" fs="1" fd="1500" id='HomeHeadScroll'></iv-></div>
         </div>
@@ -67,6 +70,7 @@ customElements.define("home-head", class extends HTMLElement{ constructor() { su
                 <iv- fd="600" class="fadeSelf" id="HomeHeadNavigationButton"></iv->
                 <iv- fd="600" class="fadeSelf" id="HomeHeadNavigationButtonDesktop"></iv->
                 <div id="HomeNavLinks" class="fadeChild">
+                `/*TODO: Hide on mobile*/+`
                     <p fd="750" onclick="ScrollTo('HomeFeatured')">Featured</p>
                     <p fd="775" onclick="ScrollTo('HomeFeatured')">By me</p>
                     <p fd="800" onclick="ScrollTo('HomeFeatured')">About me</p>
@@ -82,6 +86,7 @@ customElements.define("home-head", class extends HTMLElement{ constructor() { su
 customElements.define("home-featured", class extends HTMLElement { constructor(){ super(); }
     connectedCallback(){ this.render(); }
 
+    //TODO: Finish second section
     render(){
         this.innerHTML = `<div id="HomeFeatured">
         <div id="HomeFeaturedBg"></div>
@@ -96,4 +101,6 @@ customElements.define("home-featured", class extends HTMLElement { constructor()
         </div>`
     }
 } );
+
+//TODO: By me page
 

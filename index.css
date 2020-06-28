@@ -140,7 +140,8 @@ body,html{ height:100%; overflow-x: hidden; margin:0px; scroll-behavior: smooth}
 	#HomeHeadNavigationButtonDesktopSvg { display:none; }
 
 	#HomeHeadNavigationButtonSvg { fill: var(--Black); transition:0.5s }
-
+	
+	/* TODO: Smooth animation */
 	#HomeHeadNavigationButton { display:inline-block; position:relative; margin-top: 55px; width:unset; padding:20px; 
 		top:calc(75px - 100%); text-align: center; }
 

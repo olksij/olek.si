@@ -11,18 +11,20 @@ customElements.define("home-head", class extends HTMLElement{ constructor() { su
 
         if (window.innerWidth < 700) { 
             ds('--HomeNavOpacity', 0); de('HomeHeadLeft').style.opacity=1;
-            de('HomeHeadLeft').style.filter = 'blur(0px)'; }
+            de('HomeHeadLeft').style.filter = 'blur(0px)'; de('HomeNavLinks').style.display='none' }
 
         const pageResize = () => {
             if(window.innerWidth<700 & !ViewMobile) {
                 ViewMobile=true;
                 ds('--HomeNavOpacity', 0);
+                setTimeout(()=>{de('HomeNavLinks').style.display='none'},300)
                 de('HomeNavLinks').style.opacity=0
             } else if (window.innerWidth >=700 & ViewMobile) {
                 ViewMobile=false; 
                 ds('--HomeNavOpacity', 1); 
                 de('HomeHeadLeft').style.filter = 'blur(0px)'; 
                 de('HomeNavLinks').style.opacity=1;
+                de('HomeNavLinks').style.display='block'
                 de('HomeHeadLeft').style.opacity=1;
             }
         }      
@@ -44,9 +46,10 @@ customElements.define("home-head", class extends HTMLElement{ constructor() { su
         de('HomeHeadNavigationButton').addEventListener('click',() => { if (window.innerWidth < 700) { 
             if (!HeadNavExpanded) { HeadNavExpanded=true; ds('--HomeNavOpacity', 1); de('HomeHeadLeft').style.opacity=0.6;
                 de('HomeHeadLeft').style.filter = 'blur('+(window.innerWidth*document.body.offsetHeight)**0.5/5+'px)';
-                de('HomeNavLinks').style.opacity = 1} 
+                de('HomeNavLinks').style.opacity = 1; de('HomeNavLinks').style.display='block'} 
 
             else { HeadNavExpanded=false; de('HomeNavLinks').style.opacity = 0;
+                setTimeout(()=>{de('HomeNavLinks').style.display='none'},300)
                 de('HomeHeadLeft').style.filter = 'blur(0px)';
                 de('HomeHeadLeft').style.opacity=1;
             }
@@ -70,7 +73,6 @@ customElements.define("home-head", class extends HTMLElement{ constructor() { su
                 <iv- fd="600" class="fadeSelf" id="HomeHeadNavigationButton"></iv->
                 <iv- fd="600" class="fadeSelf" id="HomeHeadNavigationButtonDesktop"></iv->
                 <div id="HomeNavLinks" class="fadeChild">
-                `/*TODO: Hide on mobile*/+`
                     <p fd="750" onclick="ScrollTo('HomeFeatured')">Featured</p>
                     <p fd="775" onclick="ScrollTo('HomeFeatured')">By me</p>
                     <p fd="800" onclick="ScrollTo('HomeFeatured')">About me</p>

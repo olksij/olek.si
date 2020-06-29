@@ -43,7 +43,7 @@ body,html{ height:100%; overflow-x: hidden; margin:0px; scroll-behavior: smooth}
 }
 
 .faded, .faded>*{
-	animation: fade 1.2s cubic-bezier(.5, 0, 0, 1);
+	animation: fade 1.2s cubic-bezier(0, 0.5, 0, 1);
 	opacity:1;
 	transform: translateY(0px);
 }
@@ -74,23 +74,21 @@ body,html{ height:100%; overflow-x: hidden; margin:0px; scroll-behavior: smooth}
 #HomeHead { display:flex; position: relative; width:100%; height:100%; transition: 0.5s }
 
 #HomeHeadLeft { width:var(--PaneWidth); height:100%; display: flex; flex-direction: column;
-	justify-content: center; position: relative; margin: 0 5vw; transition: 0.5s }
+	justify-content: center; position: relative; margin: 0 12.5vh; transition: .5s cubic-bezier(0.5, 0, 0.5, 1); }
 
-/* TODO: Sizing by page height
-   TODO: Equal padding */
-#HomeHeadTitle { --MaxHeadHead:calc(100vh - 20vw - 60px); max-height: var(--MaxHeadHead/var(--TitleDivider)); display: flex; 
-	flex-direction: column; font-weight: 800; --PanePadding: calc((100vh - calc(var(--PaneWidth)*0.59)/2 - 30)/2) }
+#HomeHeadTitle { max-height: calc(75vw*0.59/var(--TitleDivider)); display: flex; 
+	flex-direction: column; font-weight: 800 }
 
-#HomeHeadTitle>iv->svg{height:calc(var(--PaneWidth)*0.59/2.38/var(--TitleDivider)); 
-	max-height: calc(var(--MaxHeadHead)/2.38/var(--TitleDivider)) }
+#HomeHeadTitle>iv->svg{height:calc((50vh - 60px)/2.38/var(--TitleDivider)); 
+	max-height: calc(75vw*0.59/2.38/var(--TitleDivider)) }
 
 #HomeHeadTitle>#HomeHeadSubtitle {margin:-21.5px 0px calc(var(--PaneWidth)*0.59/28.3) 0px;} 
 
-#HomeHeadTitle>iv->#HomeHeadSubtitleSvg { height:calc(var(--PaneWidth)*0.59/8.58/var(--TitleDivider)); max-height: calc(var(--MaxHeadHead)/8.58/var(--TitleDivider)); } 
+#HomeHeadTitle>iv->#HomeHeadSubtitleSvg { height:calc((50vh - 60px)/8.58/var(--TitleDivider)); max-height: calc(var(--MaxHeadHead)/8.58/var(--TitleDivider)); } 
 
 /* HomeHeadLeft */
 
-#HomeHeadScroll { padding:5vw;  bottom:0px;
+#HomeHeadScroll { padding:12.5vh;  bottom:0px;
 	padding-left: 0px; position: absolute; }
 
 #HomeHeadScroll:hover #HomeHeadScrollSvg { fill: var(--Black) }
@@ -133,9 +131,9 @@ body,html{ height:100%; overflow-x: hidden; margin:0px; scroll-behavior: smooth}
 
 	#HomeNavigation { transform: translateY(0px); text-align: center; }
 
-	#HomeHeadScrollArea{ text-align: center; position: absolute; bottom:75px; left:0px; width:100%; height:30px}
+	#HomeHeadScrollArea{ text-align: center; position: absolute; bottom:25vh; left:0px; width:100%; height:30px}
 
-	#HomeHeadScroll{ position: relative; display:inline-block; padding:20px; margin-left:0px; }	
+	#HomeHeadScroll{ position: relative; display:inline-block; padding:12.5vh; margin-left:0px; }	
 
 	#HomeHeadNavigationButtonDesktopSvg { display:none; }
 

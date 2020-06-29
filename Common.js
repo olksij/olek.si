@@ -5,7 +5,7 @@ if ('serviceWorker' in navigator && location.hostname != "127.0.0.1") {
 const ScrollFade = () => {
     const fadeFunc = (node, fadeDelay) => {
         setTimeout(() => { if(!node.classList.contains('faded'))
-        node.className += ' faded' }, parseInt(fadeDelay)+200)
+        node.className += ' faded' }, parseInt(fadeDelay)+400)
     }
     var fadeChild = document.getElementsByClassName('fadeChild');
     var fadeSelf = document.getElementsByClassName('fadeSelf');

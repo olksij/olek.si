@@ -76,13 +76,12 @@ body,html{ height:100%; overflow-x: hidden; margin:0px; scroll-behavior: smooth}
 #HomeHeadLeft { width:var(--PaneWidth); height:100%; display: flex; flex-direction: column;
 	justify-content: center; position: relative; margin: 0 12.5vh; transition: .5s cubic-bezier(0.5, 0, 0.5, 1); }
 
-#HomeHeadTitle { max-height: calc(75vw*0.59/var(--TitleDivider)); display: flex; 
-	flex-direction: column; font-weight: 800 }
+#HomeHeadTitle { display: flex; flex-direction: column; font-weight: 800 }
 
 #HomeHeadTitle>iv->svg{height:calc((50vh - 60px)/2.38/var(--TitleDivider)); 
 	max-height: calc(75vw*0.59/2.38/var(--TitleDivider)) }
 
-#HomeHeadTitle>#HomeHeadSubtitle {margin:-21.5px 0px calc(var(--PaneWidth)*0.59/28.3) 0px;} 
+#HomeHeadTitle>#HomeHeadSubtitle {margin:-21.5px 0px calc((50vh - 60px)/28.3) 0px;} 
 
 #HomeHeadTitle>iv->#HomeHeadSubtitleSvg { height:calc((50vh - 60px)/8.58/var(--TitleDivider)); max-height: calc(var(--MaxHeadHead)/8.58/var(--TitleDivider)); } 
 
@@ -97,8 +96,8 @@ body,html{ height:100%; overflow-x: hidden; margin:0px; scroll-behavior: smooth}
 
 /* Right Side */
 
-#HomeHeadRight { width:calc(40% - calc(100vh*1.75 + 100vw)*0.045); height: 100%; position: absolute; top:0px; right:0px;
-	transition:0.5s; padding-left:calc(calc(100vh*1.75 + 100vw)*0.03); opacity: 0.8; font-size: 22px; }
+#HomeHeadRight { width:calc(100px + 20vw); height: 100%; position: absolute; top:0px; right:0px;
+	transition:0.5s; padding-left:12.5vh; opacity: 0.8; font-size: 22px; }
 
 #HomeHeadRight:hover { width:calc(40% - calc(100vh*1.75 + 100vw)*0.045 + 100px); opacity:1 }
 
@@ -117,7 +116,7 @@ body,html{ height:100%; overflow-x: hidden; margin:0px; scroll-behavior: smooth}
 
 #HomeNavLinks p:hover.faded { color: var(--Blue); padding-left:5px; }
 
-@media ( max-width:699px ) {
+@media ( max-width: 699px ) {
 	#HomeHeadNavigationButtonSvg{ display:inline-block }
 
 	#HomeHead{ display:block; }
@@ -166,13 +165,13 @@ body,html{ height:100%; overflow-x: hidden; margin:0px; scroll-behavior: smooth}
 
 #HomeFeaturedTitle text {font-size: 80px} #HomeFeaturedSubtitle text {font-size: 24px}
 
-#HomeFeaturedTitle>#HomeFeaturedSubtitle {margin:-21.5px 0px calc(var(--PaneWidth)*0.75/34.3/1.2) 0px} 
+#HomeFeaturedTitle>#HomeFeaturedSubtitle {margin:-21.5px 0px calc((50vh - 60px)/34.3) 0px} 
 
-#HomeFeaturedTitle>iv->#HomeFeaturedSubtitleSvg { height:calc(var(--PaneWidth)*0.75/10.4/1.2) }
+#HomeFeaturedTitle>iv->#HomeFeaturedSubtitleSvg { height:calc((50vh - 60px)/10.4) }
 
-#HomeFeaturedTitle>iv-{margin-bottom:calc(var(--PaneWidth)*0.75/60)}
+#HomeFeaturedTitle>iv-{margin-bottom:calc((50vh - 60px)/60)}
 
-#HomeFeaturedTitle>iv->svg { height:calc(var(--PaneWidth)*0.75/3.431/1.2) }
+#HomeFeaturedTitle>iv->svg { height:calc((50vh - 60px)/3.431) }
 
 #HomeFeaturedTitle text { font-weight: 800; }
 

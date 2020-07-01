@@ -8,12 +8,10 @@
 	--Background: #FFF;
 
 	--FeaturedBg: #F2F2FF;
+	--Blue240: #4D4DFF;
 	--Light240: #CCCCFF;
 
-
 	--PaneWidth: 35vw;
-	--MaxPaneWidth: 45vw;
-	--TitleDivider: 1;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -25,6 +23,7 @@
 
 		--FeaturedBg: #0F0F19;
 		--Light240: #353559;
+		--Blue240: #9999FF;
 
 	}
 }
@@ -78,12 +77,12 @@ body,html{ height:100%; overflow-x: hidden; margin:0px; scroll-behavior: smooth}
 
 #HomeHeadTitle { display: flex; flex-direction: column; font-weight: 800 }
 
-#HomeHeadTitle>iv->svg{height:calc((50vh - 60px)/2.38/var(--TitleDivider)); 
-	max-height: calc(75vw*0.59/2.38/var(--TitleDivider)) }
+#HomeHeadTitle>iv->svg{height:calc((50vh - 60px)/2.38); 
+	max-height: calc(75vw*0.59/2.38) }
 
 #HomeHeadTitle>#HomeHeadSubtitle {margin:-21.5px 0px calc((50vh - 60px)/28.3) 0px;} 
 
-#HomeHeadTitle>iv->#HomeHeadSubtitleSvg { height:calc((50vh - 60px)/8.58/var(--TitleDivider)); max-height: calc(var(--MaxHeadHead)/8.58/var(--TitleDivider)); } 
+#HomeHeadTitle>iv->#HomeHeadSubtitleSvg { height:calc((50vh - 60px)/8.58); max-height: calc(75vw*0.59/8.58); } 
 
 /* HomeHeadLeft */
 
@@ -154,12 +153,12 @@ body,html{ height:100%; overflow-x: hidden; margin:0px; scroll-behavior: smooth}
 
 /* --- HOME FEATURED --- */
 
-#HomeFeatured { display:flex; position: relative; width:100%; height:85% }
+#HomeFeatured { display:flex; position: relative; width:100%; height:100% }
 
 #HomeFeaturedBg{background: var(--FeaturedBg); position: absolute; width: 100%; height: 100%; filter: blur(50px);}
 
 #HomeFeaturedLeft { width:var(--PaneWidth); height:100%; display: flex; flex-direction: column;
-	justify-content: center; position: relative; margin: 0 5vw; }
+	justify-content: center; position: relative; margin: 0 12.5vh; }
 
 #HomeFeaturedTitle { display: flex; flex-direction: column }
 
@@ -167,13 +166,19 @@ body,html{ height:100%; overflow-x: hidden; margin:0px; scroll-behavior: smooth}
 
 #HomeFeaturedTitle>#HomeFeaturedSubtitle {margin:-21.5px 0px calc((50vh - 60px)/34.3) 0px} 
 
-#HomeFeaturedTitle>iv->#HomeFeaturedSubtitleSvg { height:calc((50vh - 60px)/10.4) }
+#HomeFeaturedTitle>iv->#HomeFeaturedSubtitleSvg { height:calc((50vh - 60px)/10.4); max-height: calc(75vw*0.75/10.4) }
 
 #HomeFeaturedTitle>iv-{margin-bottom:calc((50vh - 60px)/60)}
 
-#HomeFeaturedTitle>iv->svg { height:calc((50vh - 60px)/3.431) }
+#HomeFeaturedTitle>iv->svg { height:calc((50vh - 60px)/3.431); max-height: calc(75vw*0.75/3.431); }
 
 #HomeFeaturedTitle text { font-weight: 800; }
+
+#HomeFeaturedAbout { margin-bottom: -25vh; padding: 12.5vh; padding-left: 0; transition: .5s cubic-bezier(0.5, 0, 0.5, 1); height: 30px; }
+
+#HomeFeaturedAbout > * > * { transition: .5s cubic-bezier(0.5, 0, 0.5, 1); }
+
+#HomeFeaturedAbout:hover > * > * { fill:var(--Black) }
 
 @media (max-width:699px){ :root{ --PaneWidth:80vw; --TitleDivider: 1 } #HomeFeaturedTitle{display: inline-flex} 
 	#HomeFeaturedLeft{text-align: center} }

@@ -65,7 +65,7 @@ customElements.define("iv-", IV)
 
 var IconsList = ['HomeHeadSubtitle','HomeHeadTitle1','HomeHeadTitle2','HomeHeadScroll','HomeHeadNavigationButton',
     'HomeHeadNavigationButtonDesktop', 'HomeFeaturedSubtitle', 'HomeFeaturedTitle1', 'HomeFeaturedTitle2', 
-    'HomeFeaturedTitle3']; 
+    'HomeFeaturedTitle3', 'HomeFeaturedAbout']; 
 
 var Icons = [
 
@@ -91,6 +91,8 @@ var Icons = [
 
     `<svg id="HomeFeaturedTitle2Svg" height="100" viewBox="0 0 460 100"><rect x="256" y="62" width="204" height="38" fill="var(--Light240)"/><text fill="var(--Black)"><tspan x="0" y="80.64">life be more</tspan></text></svg>`,
 
-    `<svg id="HomeFeaturedTitle3Svg" height="100" viewBox="0 0 432 100"><rect y="62" width="432" height="38" fill="var(--Light240)"/><text fill="var(--Black)"><tspan x="0" y="80.64">productive</tspan></text></svg>`
+    `<svg id="HomeFeaturedTitle3Svg" height="100" viewBox="0 0 432 100"><rect y="62" width="432" height="38" fill="var(--Light240)"/><text fill="var(--Black)"><tspan x="0" y="80.64">productive</tspan></text></svg>`,
+
+    `<svg id="HomeFeaturedAboutSvg" width="97" height="30" viewBox="0 0 97 30"><path d="M10 25L8.2375 23.2375L15.2125 16.25H0V13.75L15.2125 13.75L8.225 6.775L10 5L20 15L10 25Z" fill="var(--Blue240)"/><text fill="var(--Blue240)" font-size="22" font-weight="700"><tspan x="42" y="23.426">More</tspan></text></svg>`,
 
 ]

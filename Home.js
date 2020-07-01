@@ -99,6 +99,7 @@ customElements.define("home-featured", class extends HTMLElement { constructor()
                     <iv- fd="250" id='HomeFeaturedTitle2'></iv-> 
                     <iv- fd="375" id='HomeFeaturedTitle3'></iv-> 
                 </div>
+                <iv- fd="1500" fs='1' class="fadeSelf" id="HomeFeaturedAbout"></iv->
             </div>
         </div>`
     }

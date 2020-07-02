@@ -55,7 +55,7 @@ body,html{ height:100%; overflow-x: hidden; margin:0px; scroll-behavior: smooth}
 	opacity:1;
 }}
 
-.blur>*,.notblur>*{transition: filter 0.7s cubic-bezier(0.5, 0, 0.5, 1), opacity 0.7s cubic-bezier(0.5, 0, 0.5, 1) }
+.blur>*,.notblur>*{transition: filter 0.5s cubic-bezier(0.6, 0, 0.6, 1), opacity 0.5s cubic-bezier(0.6, 0, 0.6, 1) }
 
 .blur>*{
 	filter: blur(50px);
@@ -153,7 +153,11 @@ body,html{ height:100%; overflow-x: hidden; margin:0px; scroll-behavior: smooth}
 
 /* --- HOME FEATURED --- */
 
+/* TODO: Fix fading */
+
 #HomeFeatured { display:flex; position: relative; width:100%; height:100% }
+
+/* TODO: Improve background */
 
 #HomeFeaturedBg{background: var(--FeaturedBg); position: absolute; width: 100%; height: 100%; filter: blur(50px);}
 
@@ -176,10 +180,22 @@ body,html{ height:100%; overflow-x: hidden; margin:0px; scroll-behavior: smooth}
 
 #HomeFeaturedAbout { margin-bottom: -25vh; padding: 12.5vh; padding-left: 0; transition: .5s cubic-bezier(0.5, 0, 0.5, 1); height: 30px; }
 
+/* TODO: Improve mobile view */
+
 #HomeFeaturedAbout > * > * { transition: .5s cubic-bezier(0.5, 0, 0.5, 1); }
 
 #HomeFeaturedAbout:hover > * > * { fill:var(--Black) }
 
 @media (max-width:699px){ :root{ --PaneWidth:80vw; --TitleDivider: 1 } #HomeFeaturedTitle{display: inline-flex} 
-	#HomeFeaturedLeft{text-align: center} }
+   #HomeFeaturedLeft{text-align: center} 
+}
+
+/* --- HOME BYME --- */
+
+#HomeByme { display:flex; position: relative; width:100%; height:100% }
+
+#HomeBymeTitle { margin:12.5vh; height: min-content; position: relative; display: flex; justify-content: center;
+    transition: .5s cubic-bezier(0.5, 0, 0.5, 1); width: min-content}
+
+@media (max-width:699px){ #HomeBymeTitle { width:100%} }
 

@@ -1,4 +1,4 @@
-var AppVersion = '0082';
+var AppVersion = '0083';
 
 self.addEventListener('install', event => {
 	self.skipWaiting();
@@ -29,6 +29,6 @@ self.addEventListener('fetch', event => {
 			.then(cacheItem => {
 				return cacheItem || fetch(event.request);
 			}
-		)
+			)
 	);
 });

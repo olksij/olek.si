@@ -70,7 +70,6 @@ customElements.define("home-head", class extends HTMLElement {
         window.addEventListener('resize', pageResize); pageResize();
     }
 
-    //TODO: JSX
     render() {
         this.innerHTML = `<div id="HomeHead">
         <div id="HomeHeadLeft">

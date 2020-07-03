@@ -3,31 +3,32 @@ if ('serviceWorker' in navigator && location.hostname != "127.0.0.1") {
         .catch((e) => { console.log(e) })
 }
 
-const ScrollFade = () => {
+const ElFade = section => {
     const fadeFunc = (node, fadeDelay) => {
         setTimeout(() => {
             if (!node.classList.contains('faded'))
                 node.className += ' faded'
         }, parseInt(fadeDelay) + 400)
     }
-    var fadeChild = document.getElementsByClassName('fadeChild');
-    var fadeSelf = document.getElementsByClassName('fadeSelf');
+    var fadeChild = section.getElementsByClassName('fadeChild');
+    var fadeSelf = section.getElementsByClassName('fadeSelf');
     for (var i = 0; i < fadeChild.length; i++) {
-        if (fadeChild[i].getBoundingClientRect().top < screen.height * 0.5) {
+        //if (fadeChild[i].getBoundingClientRect().top < screen.height * 0.5) {
             childrens = fadeChild[i].childNodes;
             for (j = 0; j < childrens.length; j++) {
                 if (childrens[j].nodeName != '#text') {
                     fadeFunc(childrens[j], childrens[j].getAttribute('fd'))
                 }
             }
-        }
+        //}
     } for (var i = 0; i < fadeSelf.length; i++) {
-        if (fadeSelf[i].getBoundingClientRect().top < screen.height * (fadeSelf[i].getAttribute('fs') || 0.6)) {
+        //if (fadeSelf[i].getBoundingClientRect().top < screen.height * (fadeSelf[i].getAttribute('fs') || 0.6)) {
             fadeFunc(fadeSelf[i], fadeSelf[i].getAttribute('fd'));
-        }
+        //}
     }
 }
 
+/*
 var beforeScroll = 0;
 const ScrollBlur = () => {
     var blurEl = document.getElementsByClassName('section');
@@ -40,7 +41,32 @@ const ScrollBlur = () => {
         else if (blurEl[i].classList.contains('blur')) { blurEl[i].classList.remove('blur'); blurEl[i].className += ' notblur' }
     }
     beforeScroll = document.body.scrollTop;
+}*/
+
+
+const ScrollEffect = () => {
+    var blurEl = document.getElementsByClassName('section');
+    for (var i = 0; i < blurEl.length; i++) {
+        var elPos = blurEl[i].firstChild.getBoundingClientRect(); var scrh = screen.height * 0.5
+        if (elPos.top > scrh || elPos.bottom <= scrh) {
+            if (!blurEl[i].classList.contains('blur')) {
+                if (blurEl[i].classList.contains('notblur')) 
+                    blurEl[i].classList.remove('notblur');
+                blurEl[i].className += ' blur';
+                var fadedEl = new Array(...blurEl[i].getElementsByClassName('faded'))
+                fadedEl.forEach(el=>{ console.log(el); el.classList.remove('faded') })
+            }
+        }
+        else { 
+            ElFade(blurEl[i])
+            if (blurEl[i].classList.contains('blur')) { 
+                blurEl[i].classList.remove('blur'); 
+                blurEl[i].className += ' notblur' 
+            }
+        }
+    }
 }
+
 
 const ScrollTo = el => { location.href = "#"; location.href = "#" + el }
 
@@ -52,10 +78,8 @@ const Theme = () => {
     document.getElementsByTagName('head')[0].appendChild(link);
 }
 
-const pageScroll = () => { ScrollFade(); ScrollBlur() }
-
 const load = () => {
-    document.body.addEventListener('scroll', pageScroll); pageScroll();
+    document.body.addEventListener('scroll', ScrollEffect); ScrollEffect();
     window.matchMedia('(prefers-color-scheme: dark)').addListener(Theme); Theme();
 }
 

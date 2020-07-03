@@ -178,9 +178,7 @@ body,html{ height:100%; overflow-x: hidden; margin:0px; scroll-behavior: smooth}
 
 #HomeFeaturedTitle text { font-weight: 800; }
 
-#HomeFeaturedAbout { margin-bottom: -25vh; padding: 12.5vh; padding-left: 0; transition: .5s cubic-bezier(0.5, 0, 0.5, 1); height: 30px; }
-
-/* TODO: Improve mobile view */
+#HomeFeaturedAbout { margin-bottom: -25vh; padding: 12.5vh 0; transition: .5s cubic-bezier(0.5, 0, 0.5, 1); height: 30px; }
 
 #HomeFeaturedAbout > * > * { transition: .5s cubic-bezier(0.5, 0, 0.5, 1); }
 

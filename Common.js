@@ -5,10 +5,8 @@ if ('serviceWorker' in navigator && location.hostname != "127.0.0.1") {
 
 const ElFade = section => {
     const fadeFunc = (node, fadeDelay) => {
-        setTimeout(() => {
-            if (!node.classList.contains('faded'))
-                node.className += ' faded'
-        }, parseInt(fadeDelay) + 400)
+        setTimeout(() => { node.classList.add('faded')}, 
+        parseInt(fadeDelay) + 400)
     }
     var fadeChild = section.getElementsByClassName('fadeChild');
     var fadeSelf = section.getElementsByClassName('fadeSelf');
@@ -28,41 +26,18 @@ const ElFade = section => {
     }
 }
 
-/*
-var beforeScroll = 0;
-const ScrollBlur = () => {
-    var blurEl = document.getElementsByClassName('section');
-    for (var i = 0; i < blurEl.length; i++) {
-        var elPos = blurEl[i].firstChild.getBoundingClientRect(); var scrh = screen.height * 0.5
-        if (elPos.top > scrh || elPos.bottom <= scrh) {
-            if (!blurEl[i].classList.contains('blur')) blurEl[i].className += ' blur';
-            if (blurEl[i].classList.contains('notblur')) blurEl[i].classList.remove('notblur');;
-        }
-        else if (blurEl[i].classList.contains('blur')) { blurEl[i].classList.remove('blur'); blurEl[i].className += ' notblur' }
-    }
-    beforeScroll = document.body.scrollTop;
-}*/
-
-
 const ScrollEffect = () => {
     var blurEl = document.getElementsByClassName('section');
     for (var i = 0; i < blurEl.length; i++) {
         var elPos = blurEl[i].firstChild.getBoundingClientRect(); var scrh = screen.height * 0.5
         if (elPos.top > scrh || elPos.bottom <= scrh) {
-            if (!blurEl[i].classList.contains('blur')) {
-                if (blurEl[i].classList.contains('notblur')) 
-                    blurEl[i].classList.remove('notblur');
-                blurEl[i].className += ' blur';
-                var fadedEl = new Array(...blurEl[i].getElementsByClassName('faded'))
-                fadedEl.forEach(el=>{ console.log(el); el.classList.remove('faded') })
-            }
+            blurEl[i].classList.remove('notblur');
+            blurEl[i].classList.add('blur');
         }
         else { 
             ElFade(blurEl[i])
-            if (blurEl[i].classList.contains('blur')) { 
-                blurEl[i].classList.remove('blur'); 
-                blurEl[i].className += ' notblur' 
-            }
+            blurEl[i].classList.remove('blur'); 
+            blurEl[i].classList.add('notblur') 
         }
     }
 }

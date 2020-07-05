@@ -99,7 +99,14 @@ customElements.define("home-head", class extends HTMLElement {
 
 customElements.define("home-featured", class extends HTMLElement {
     constructor() { super(); }
-    connectedCallback() { this.render(); }
+    connectedCallback() { this.render(); 
+        document.body.addEventListener('scroll', () => {
+            if (document.getElementById('HomeFeatured').parentNode.classList.contains('notblur')) {
+                document.documentElement.style.setProperty('--BodyBackground', 
+                getComputedStyle(document.body).getPropertyValue('--Background240')) }
+            else document.documentElement.style.setProperty('--BodyBackground', 
+            getComputedStyle(document.body).getPropertyValue('--Background'))
+        }) }
 
     //TODO: Finish second section
     render() {

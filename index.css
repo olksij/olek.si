@@ -6,6 +6,8 @@
 	--Blue: #4d88ff;
 	--Light: #CCDDFF;
 	--Background: #FFF;
+	--BodyBackground: #FFF;
+
 
 	--Background240: #F2F2FF;
 	--Blue240: #4D4DFF;
@@ -20,6 +22,7 @@
 		--Blue: #9ABBFF;
 		--Light: #364159;
 		--Background: #0F1219;
+		--BodyBackground: #0F1219;
 
 		--Background240: #0F0F19;
 		--Light240: #353559;
@@ -131,8 +134,8 @@ body,html{ height:100%; overflow-x: hidden; margin:0px; scroll-behavior: smooth}
 
 	#HomeHead{ display:block; }
 
-	#HomeHeadLeft{ margin:0 10vw;
-		width:var(--PaneWidth) }
+	#HomeHeadLeft{ margin:0 12.5vw;
+		width:75vw }
 	
 	#HomeHeadRight { width:100%; margin:0px; top:0px; position:absolute; height:0px; opacity: 1; font-size: 22px; }
 
@@ -200,4 +203,4 @@ body,html{ height:100%; overflow-x: hidden; margin:0px; scroll-behavior: smooth}
 #HomeBymeTitle { margin:12.5vh; height: min-content; position: relative; display: flex; justify-content: center;
     transition: .5s cubic-bezier(0.5, 0, 0.5, 1); width: min-content}
 
-@media (max-width:699px){ #HomeBymeTitle { width:100%} }
+@media (max-width:699px){ #HomeBymeTitle { width:100% } #HomeFeaturedLeft { margin: 0 12.5vw } }

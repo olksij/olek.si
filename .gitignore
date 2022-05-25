@@ -2,13 +2,13 @@
 /node_modules
 
 # production
-/dist
+dist
 
 # debug
-/npm-debug.log*
+npm-debug.log*
 
 # local env files
-/.env*.local
+.env*.local
 
 #local
-/.parcel-cache
+.parcel-cache

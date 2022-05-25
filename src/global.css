@@ -21,14 +21,22 @@ html,
 body {
   padding: 0;
   margin: 0;
-  width: 100%;
   height: 100%;
   letter-spacing: -0.04em;
   font-family: 'Google Sans Display';
   background: var(--background);
   color: var(--text);
+
+  display: flex;
+  flex-direction: column;
+  align-content: center;
 }
 
 p {
   margin: 0;
+  user-select: none;
+}
+
+img {
+  user-select: none;
 }

@@ -40,3 +40,78 @@ p {
 img {
   user-select: none;
 }
+
+.top {
+  text-align: center;
+  margin-top: 32px;
+  font-size: 18px;
+  user-select: auto;
+  font-family: 'Google Sans Display';
+}
+
+.top>span {
+  color: var(--accent)
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin: auto;
+  gap: 48px;
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  justify-content: center;
+}
+
+.title>p {
+  font-weight: 700;
+  position: relative;
+  font-family: 'Google Sans Display';
+}
+
+.title>img {
+  border-radius: 96px;
+  z-index: 1;
+}
+
+.description {
+  opacity: 0.6;
+  color: var(--secondary);
+}
+
+.profiles {
+  display: flex;
+  justify-content: center;
+}
+
+.profiles>img {
+  height: 48px;
+  border-radius: 24px;
+  outline: #2E284D14 1px solid;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  opacity: 0.3;
+  color: var(--secondary);
+  margin-bottom: 16px;
+}
+
+.footer>img {
+  display: inline;
+  width: 16px;
+  height: 16px;
+}
+
+.footer>p {
+  font-size: 12px;
+  line-height: 16px;
+  user-select: auto;
+}

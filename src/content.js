@@ -5,7 +5,7 @@ var content = `
     <img id="pf" alt="Profile picture"></img>
     <p>Oleksii</p>
   </div>
-  <p class=description>Redefining the way humans interact with computers.</p>
+  <p class=description>Redefining the way humans interact<br>with computers.</p>
   <div class="profiles">
     <img id="tg" alt="Telegram" />
     <img id="ig" alt="Instagram" />

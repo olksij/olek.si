@@ -3,6 +3,7 @@
   margin-top: 32px;
   font-size: 18px;
   user-select: auto;
+  font-family: 'Google Sans Display';
 }
 
 .top>span {
@@ -31,6 +32,7 @@
   letter-spacing: -5.12px;
   position: relative;
   left: -36px;
+  font-family: 'Google Sans Display';
 }
 
 .title>img {
@@ -43,7 +45,6 @@
 
 .description {
   font-size: 22px;
-  font-family: 'Google Sans Text';
   opacity: 0.6;
   color: var(--secondary);
 }
@@ -76,7 +77,6 @@
 
 .footer>p {
   font-size: 12px;
-  font-family: "Google Sans Text";
   line-height: 16px;
   user-select: auto;
 }

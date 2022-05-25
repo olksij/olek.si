@@ -23,7 +23,7 @@ body {
   margin: 0;
   height: 100%;
   letter-spacing: -0.04em;
-  font-family: 'Google Sans Display';
+  font-family: 'Google Sans Text';
   background: var(--background);
   color: var(--text);
 

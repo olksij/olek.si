@@ -1,0 +1,60 @@
+:root {
+  --background: #FAF7F9;
+  --text: #0F0D1A;
+  --accent: #6549F2;
+  --secondary: #332E4D99;
+  --element: #332E4D3A;
+  --border: #332E4D14;
+}
+
+.loader {
+  left: 50%;
+  top: 50%;
+  width: 96px;
+  height: 96px;
+  position: fixed;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.loader svg {
+  width: 96px;
+  height: 96px;
+}
+
+.loader #spinner {
+  box-sizing: border-box;
+  stroke: var(--secondary);
+  stroke-width: 2px;
+  stroke-linecap: round;
+  transform-origin: 50%;
+  animation: line 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite, rotate 1.6s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(450deg);
+  }
+}
+
+@keyframes line {
+  0% {
+    stroke-dasharray: 2, 92.2;
+    transform: rotate(0);
+  }
+
+  50% {
+    stroke-dasharray: 70.65, 23.25;
+    stroke-dashoffset: 0;
+  }
+
+  100% {
+    stroke-dasharray: 2, 92.2;
+    stroke-dashoffset: -70.65;
+    transform: rotate(90deg);
+  }
+}

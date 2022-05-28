@@ -7,11 +7,11 @@ var content = `
   </div>
   <p delay="800" id="description" class="torender"></p>
   <div delay="2700" id="profiles" class="torender">
-    <img delay="2700" class="torender" id="tg" alt="Telegram" />
-    <img delay="2750" class="torender" id="ig" alt="Instagram" />
-    <img delay="2800" class="torender" id="gh" alt="GitHub" />
-    <img delay="2850" class="torender" id="tw" alt="Twitter" />
-    <img delay="2900" class="torender" id="mt" alt="Email" />
+    <a href="http://t.me/oleksiibesida" target="_blank"><img delay="2700" class="torender" id="tg" alt="Telegram" /></a>
+    <a href="http://instagram.com/oleksiibesidaa" target="_blank"><img delay="2750" class="torender" id="ig" alt="Instagram" /></a>
+    <a href="http://github.com/oleksiibesida" target="_blank"><img delay="2800" class="torender" id="gh" alt="GitHub" /></a>
+    <a href="http://twitter.com/oleksiibesida" target="_blank"><img delay="2850" class="torender" id="tw" alt="Twitter" /></a>
+    <a href="mailto:besida@oleksii.xyz" target="_blank" id="mta"><img delay="2900" class="torender" id="mt" alt="Email" /></a>
   </div>
 </div>
 <div delay="2500" id="footer" class="torender">

@@ -19,7 +19,6 @@ body,
   letter-spacing: -0.04em;
   font-family: 'Google Sans Text';
   color: var(--text);
-
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -103,12 +102,21 @@ img {
   height: 48px;
 }
 
-#profiles>img {
+#profiles>a>img {
   height: 48px;
   border-radius: 24px;
   outline: #2E284D14 1px solid;
   background: var(--background);
   box-shadow: 0 0 2px 8px var(--background);
+}
+
+#profiles>a:hover>img {
+  background: #332E4D0A;
+  transition: background .3s;
+}
+
+#profiles>a:hover>path {
+  fill: var(--accent);
 }
 
 #footer {

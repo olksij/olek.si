@@ -20,7 +20,7 @@
 }
 
 #pf {
-  animation: appear .4s cubic-bezier(0.48, 0, 0.56, 1);
+  animation: appear .4s cubic-bezier(0.72, 0, 0.24, 1);
 }
 
 @keyframes appear {
@@ -62,8 +62,4 @@
   height: 0;
   margin-top: -48px;
   transform: translateY(48px);
-}
-
-#profiles>img.torender {
-  opacity: 0;
 }

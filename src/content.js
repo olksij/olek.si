@@ -1,5 +1,5 @@
 var content = `
-<p id="top" class="torender" delay="275">oleksii<span>besida</span></p>
+<p id="top" class="torender" delay="3000">oleksii<span>besida</span></p>
 <div id="container" delay="800" class="torender">
   <div delay="500" id="title" class="torender">
     <img id="pf" alt="Profile picture"></img>
@@ -14,7 +14,7 @@ var content = `
     <a href="mailto:besida@oleksii.xyz" target="_blank" id="mta"><img delay="2900" class="torender" id="mt" alt="Email" /></a>
   </div>
 </div>
-<div delay="2500" id="footer" class="torender">
+<div delay="3000" id="footer" class="torender">
   <img id="cr" alt="(c)" />
   <p>2018-2022 Oleksii Besida</p>
 </div>`;

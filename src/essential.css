@@ -14,15 +14,27 @@
   display: flex;
 }
 
+@media only screen and (min-width: 620px) {
+  #loader svg {
+    width: 192px;
+    height: 192px;
+  }
+}
+
+@media only screen and (max-width: 620px) {
+  #loader svg {
+    width: 96px;
+    height: 96px;
+  }
+}
+
 #loader svg {
-  width: 96px;
-  height: 96px;
   margin: auto;
 }
 
 #loader #spinner {
   box-sizing: border-box;
-  stroke: var(--secondary);
+  stroke: var(--element);
   stroke-width: 2px;
   stroke-linecap: round;
   transform-origin: 50%;

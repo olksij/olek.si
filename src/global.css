@@ -81,7 +81,6 @@ img {
 
 #title>p {
   font-weight: 700;
-  width: 215px;
   position: relative;
   font-family: 'Google Sans Display';
 }
@@ -93,7 +92,6 @@ img {
 
 #description {
   color: var(--secondary);
-  height: 48px;
 }
 
 #profiles {

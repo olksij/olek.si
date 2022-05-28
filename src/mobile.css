@@ -1,22 +1,22 @@
-.container {
+#container {
   padding: 0 32px;
 }
 
-.description {
+#description {
   font-size: 18;
 }
 
-.profiles {
+#profiles {
   gap: 20px;
 }
 
-.title>p {
+#title>p {
   font-size: 72px;
   margin-left: -54px;
   letter-spacing: -2.56px;
 }
 
-.title>img {
+#pf {
   width: 96px;
   height: 96px;
   outline: solid 12px var(--background);

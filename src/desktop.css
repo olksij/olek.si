@@ -1,22 +1,22 @@
-.container {
+#container {
   max-width: 532px;
 }
 
-.description {
+#description {
   font-size: 22;
 }
 
-.profiles {
+#profiles {
   gap: 24px;
 }
 
-.title>p {
+#title>p {
   font-size: 128px;
   margin-left: -36px;
   letter-spacing: -5.12px;
 }
 
-.title>img {
+#title>img {
   width: 192px;
   height: 192px;
   outline: solid 24px var(--background);

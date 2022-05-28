@@ -1,18 +1,26 @@
-* {
-  transition: .6s cubic-bezier(0.6, 0, 0.6, 1);
+:root {
+  --animat: .6s cubic-bezier(0.6, 0, 0.4, 1);
 }
 
-.torender :not(.title>*) {
+* {
+  transition: var(--animat);
+  transform: translateY(0);
+}
+
+.torender :not(#pf):not(#title) {
   opacity: 0;
 }
 
-.title.torender p {
-  width: 0;
-  margin-left: 0;
+#title.torender p {
+  margin-left: -215px;
 }
 
-.title>img {
-  animation: appear .5s linear normal;
+#title>p {
+  transition: all var(--animat), opacity 0s;
+}
+
+#pf {
+  animation: appear .4s cubic-bezier(0.48, 0, 0.56, 1);
 }
 
 @keyframes appear {
@@ -25,13 +33,37 @@
   }
 }
 
-.description.torender {
+#container {
+  opacity: 1;
+}
+
+#container {
+  height: 96px;
+}
+
+#container.rendered {
+  /* 48*4 + #pf*/
+  height: 288px;
+}
+
+#description.torender {
   height: 0;
   opacity: 0;
   margin-top: -48px;
+  transform: translateY(48px);
 }
 
-.profiles.torender {
+#profiles {
+  transition: 1.5s;
+  transition: .3s cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+#profiles.torender {
   height: 0;
   margin-top: -48px;
+  transform: translateY(48px);
+}
+
+#profiles>img.torender {
+  opacity: 0;
 }

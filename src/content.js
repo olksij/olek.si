@@ -1,20 +1,20 @@
 var content = `
-<p class="top">oleksii<span>besida</span></p>
+<p class="top torender" delay="275">oleksii<span>besida</span></p>
 <div class="container">
-  <div class="title">
+  <div delay="1000" class="title torender">
     <img id="pf" alt="Profile picture"></img>
     <p>Oleksii</p>
   </div>
-  <p class=description>Redefining the way humans interact<br>with computers.</p>
-  <div class="profiles">
-    <img id="tg" alt="Telegram" />
-    <img id="ig" alt="Instagram" />
-    <img id="gh" alt="GitHub" />
-    <img id="tw" alt="Twitter" />
-    <img id="mt" alt="Email" />
+  <p delay="1500" class="description torender">Redefining the way humans interact<br>with computers.</p>
+  <div delay="1800" class="profiles torender">
+    <img delay="1825" class="torender" id="tg" alt="Telegram" />
+    <img delay="1850" class="torender" id="ig" alt="Instagram" />
+    <img delay="1875" class="torender" id="gh" alt="GitHub" />
+    <img delay="1900" class="torender" id="tw" alt="Twitter" />
+    <img delay="1925" class="torender" id="mt" alt="Email" />
   </div>
 </div>
-<div class="footer">
+<div delay="2500" class="footer torender">
   <img id="cr" alt="(c)" />
   <p>2018-2022 Oleksii Besida</p>
 </div>`;
@@ -41,12 +41,23 @@ var fetched = new Promise((resolve, reject) => {
 });
 
 window.addEventListener('load', async () => {
+  await new Promise((resolve) => setTimeout(resolve, 1000))
   console.log("--- LOAD ---");
-  document.body.innerHTML = content;
+  document.getElementById("content").innerHTML += content;
   await fetched;
   console.log(fetches);
   fetches.forEach((value, key) => {
     console.log(key);
     document.getElementById(key).src = value;
   });
+
+  render();
+  await new Promise((resolve) => setTimeout(resolve, 1000))
+  document.getElementById('loader').remove();
 });
+
+function render() {
+  for (let element of document.getElementsByClassName("torender")) {
+    setTimeout(() => element.classList.replace('torender', 'rendered'), element.getAttribute('delay'))
+  }
+}

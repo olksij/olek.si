@@ -11,7 +11,8 @@
 }
 
 html,
-body {
+body,
+#content {
   padding: 0;
   margin: 0;
   height: 100%;
@@ -49,6 +50,7 @@ img {
 .top {
   margin-top: 32px;
   font-size: 18px;
+  line-height: 24px;
   user-select: auto;
   font-family: 'Google Sans Display';
   align-self: center;
@@ -75,10 +77,13 @@ img {
   align-items: center;
   padding: 0px;
   justify-content: center;
+  overflow: hidden;
+  align-self: center;
 }
 
 .title>p {
   font-weight: 700;
+  width: 215px;
   position: relative;
   font-family: 'Google Sans Display';
 }
@@ -112,6 +117,7 @@ img {
   opacity: 0.6;
   color: var(--secondary);
   margin-bottom: 16px;
+  margin-top: 24px;
 }
 
 .footer>img {
@@ -125,4 +131,9 @@ img {
   font-size: 12px;
   line-height: 16px;
   user-select: auto;
+}
+
+::selection {
+  color: #FFF;
+  background: var(--accent);
 }

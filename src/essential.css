@@ -7,22 +7,20 @@
   --border: #332E4D14;
 }
 
-.loader {
-  left: 50%;
-  top: 50%;
-  width: 96px;
-  height: 96px;
+#loader {
+  width: 100%;
+  height: 100%;
   position: fixed;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+  display: flex;
 }
 
-.loader svg {
+#loader svg {
   width: 96px;
   height: 96px;
+  margin: auto;
 }
 
-.loader #spinner {
+#loader #spinner {
   box-sizing: border-box;
   stroke: var(--secondary);
   stroke-width: 2px;

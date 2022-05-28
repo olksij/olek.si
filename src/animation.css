@@ -1,0 +1,37 @@
+* {
+  transition: .6s cubic-bezier(0.6, 0, 0.6, 1);
+}
+
+.torender :not(.title>*) {
+  opacity: 0;
+}
+
+.title.torender p {
+  width: 0;
+  margin-left: 0;
+}
+
+.title>img {
+  animation: appear .5s linear normal;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.description.torender {
+  height: 0;
+  opacity: 0;
+  margin-top: -48px;
+}
+
+.profiles.torender {
+  height: 0;
+  margin-top: -48px;
+}

@@ -24,6 +24,11 @@
   outline: solid 12px var(--background);
 }
 
+#pf img {
+  width: 100px;
+  height: 100px;
+}
+
 #mta {
   display: none;
 }

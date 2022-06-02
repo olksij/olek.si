@@ -2,18 +2,6 @@
   --background-position: left 50% top calc(50%);
 }
 
-/*@font-face {
-  font-family: 'Google Sans Display';
-  font-weight: 700;
-  src: url("/assets/fonts/GoogleSansDisplay-Bold.woff2");
-}
-
-@font-face {
-  font-family: 'Google Sans Text';
-  font-weight: 500;
-  src: url("/assets/fonts/GoogleSansText-Medium.woff2");
-}*/
-
 html,
 body,
 #content {
@@ -92,11 +80,17 @@ img {
 
 #pf {
   border-radius: 96px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
   z-index: 1;
 }
 
 #description {
   color: var(--secondary);
+  white-space: nowrap;
 }
 
 #profiles {

@@ -6,7 +6,7 @@
   transition: var(--animat);
 }
 
-.torender :not(#title):not(#title>#pf) {
+.torender :not(#title):not(#pf):not(#pfi) {
   opacity: 0;
 }
 
@@ -14,7 +14,7 @@
   transition: all var(--animat), opacity 0s;
 }
 
-#pf {
+#pfi {
   animation: appear .4s cubic-bezier(0.72, 0, 0.24, 1);
 }
 

@@ -2,7 +2,7 @@ var content = `
 <p id="top" class="torender" delay="3000">oleksii<span>besida</span></p>
 <div id="container" delay="800" class="torender">
   <div delay="500" id="title" class="torender">
-    <img id="pf" alt="Profile picture"></img>
+    <div id="pf"><img id="pfi" alt="Profile picture"></img></div>
     <p>Oleksii</p>
   </div>
   <p delay="800" id="description" class="torender"></p>
@@ -22,7 +22,7 @@ var content = `
 var description = "Redefining the way humans interact*with computers.";
 
 var source = new Map([
-  ["pf", new URL("/assets/profilePicture.png?as=webp&width=512", import.meta.url)],
+  ["pfi", new URL("/assets/profilePicture.jpg?as=webp&width=512", import.meta.url)],
   ["tg", new URL("/assets/telegram.svg", import.meta.url)],
   ["ig", new URL("/assets/instagram.svg", import.meta.url)],
   ["gh", new URL("/assets/github.svg", import.meta.url)],
@@ -72,6 +72,20 @@ window.addEventListener('load', async () => {
   render();
   await new Promise((resolve) => setTimeout(resolve, 500))
   document.getElementById('loader').remove();
+
+  var gtagjs = document.createElement('script');
+  gtagjs.async = true;
+  gtagjs.src = 'https://www.googletagmanager.com/gtag/js?id=G-W39LBGQKD0';
+
+  document.head.appendChild(gtagjs);
+
+  var gtagscript = document.createElement('script');
+  gtagscript.innerHTML = `window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-W39LBGQKD0');`;
+
+  document.head.appendChild(gtagscript);
 });
 
 function render() {

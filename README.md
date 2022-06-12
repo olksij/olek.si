@@ -1,8 +1,16 @@
-# Landing page
-`🚧 Under development`
-
-Check out current [Production](rr) or [2020 version]() branch.
+<center>
+<h1>Landing page</h1>
+🚀 <i>Production branch is <code>deployed</code> to <a href="https://oleksii.xyz"><b>oleksii.xyz</b></a></i>
+</center>
 
 <br>
 
-🚀 Production branch is deployed to [`oleksii.xyz`](https://oleksii.xyz)
+<img style="border-radius: 12px;" src="preview.gif"></img>
+
+<br>
+
+---
+
+<br>
+
+<center><i>Check out also <a href="https://github.com/oleksiibesida/oleksii.xyz/tree/2020">2020 version</a> branch</i></center>

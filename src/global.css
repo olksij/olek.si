@@ -91,6 +91,7 @@ img {
 #description {
   color: var(--secondary);
   white-space: nowrap;
+  user-select: auto;
 }
 
 #profiles {
@@ -112,7 +113,7 @@ img {
 }
 
 #profiles>a:hover>img {
-  background: #332E4D0A;
+  background: #F0EFF3;
   transition: background .3s;
 }
 
@@ -152,4 +153,5 @@ img {
 ::selection {
   color: #FFF;
   background: var(--accent);
+  text-shadow: none;
 }

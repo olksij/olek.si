@@ -2,5 +2,8 @@
   "devDependencies": {
     "parcel": "^2.5.0",
     "sharp": "^0.29.1"
+  },
+  "dependencies": {
+    "web-vitals": "^2.1.4"
   }
 }

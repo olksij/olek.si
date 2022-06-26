@@ -61,34 +61,18 @@ var fetched = new Promise((resolve) => {
 });
 
 window.addEventListener('load', async () => {
-  //await new Promise((resolve) => setTimeout(resolve, 1000))
-  console.log("--- LOAD ------");
+  console.log("--- LOAD ---");
   await fetched;
   await fonts;
   document.getElementById("content").innerHTML += content;
   console.log(fetches);
   fetches.forEach((value, key) => {
-    console.log(key);
     document.getElementById(key).src = value;
   });
 
   render();
   await new Promise((resolve) => setTimeout(resolve, 500))
   document.getElementById('loader').remove();
-
-  var gtagjs = document.createElement('script');
-  gtagjs.async = true;
-  gtagjs.src = 'https://www.googletagmanager.com/gtag/js?id=G-W39LBGQKD0';
-
-  document.head.appendChild(gtagjs);
-
-  var gtagscript = document.createElement('script');
-  gtagscript.innerHTML = `window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-W39LBGQKD0');`;
-
-  document.head.appendChild(gtagscript);
 });
 
 function render() {

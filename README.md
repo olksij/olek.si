@@ -1,15 +1,11 @@
 <center>
 <h1>Landing page</h1>
-🚀 <i>Production branch is <code>deployed</code> to <a href="https://oleksii.xyz"><b>oleksii.xyz</b></a></i>
+🚀 <i>Production is <code>deployed</code> to <a href="https://oleksii.xyz"><b>oleksii.xyz</b></a></i>
 </center>
 
 <br>
 
-<img style="border-radius: 12px;" src="preview.gif"></img>
-
-<br>
-
----
+![Preview](preview.gif)
 
 <br>
 

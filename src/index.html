@@ -2,29 +2,125 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <title>Oleksii Besida</title>
-  <meta name="description"
-    content="Oleksii Besida  |  Ukrainian he/him UI&UX designer and Frontend developer living in Stockholm, Sweden.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
-  <link rel="stylesheet" href="essential.css">
+  <!--<script src="./content.js" type="module"></script>-->
 
-  <script src="./content.js" type="module"></script>
-  <link rel="stylesheet" href="global.css">
-  <link rel="stylesheet" media="screen and (min-width: 620px)" href="desktop.css">
-  <link rel="stylesheet" media="screen and (max-width: 620px)" href="mobile.css">
-  <link rel="stylesheet" href="animation.css">
-  <script src="./webvitals.js" type="module"></script>
+  <style>
+    :root {
+      --bg: #EDEBF0;
+    }
+
+    html {
+      height: 100%;
+    }
+
+    #cnt {
+      display: flex;
+      margin-bottom: auto;
+    }
+
+    #lf {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+      margin: 128px;
+    }
+
+    #title {
+      display: flex;
+      align-items: center;
+    }
+
+    #pf {
+      width: 160px;
+      height: 160px;
+      border-radius: 80px;
+      background: var(--bg);
+      z-index: 1;
+      outline: #fff 24px solid;
+    }
+
+    #tt {
+      margin-left: -32px;
+      width: 377px;
+      height: 112px;
+      background: var(--bg);
+      border-radius: 24px;
+    }
+
+    #d1,
+    #d2 {
+      height: 28px;
+      background-color: var(--bg);
+      width: 300px;
+      border-radius: 8px 8px 8px 0;
+    }
+
+    #d2 {
+      width: 128px;
+      border-radius: 0 0 8px 8px;
+    }
+
+    #ps {
+      display: flex;
+      gap: 24px;
+    }
+
+    #ps>a {
+      border-radius: 24px;
+      display: block;
+      width: 48px;
+      height: 48px;
+      background: var(--bg);
+    }
+
+    #rg {
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    #rg>a {
+      display: block;
+      height: 24px;
+      border-radius: 6px;
+      width: 128px;
+      background: var(--bg);
+    }
+  </style>
 </head>
 
 <body>
-  <div id="loader">
-    <svg viewBox="0 0 32 32">
-      <circle id="spinner" cx="16" cy="16" r="15" fill="none"></circle>
-    </svg>
+  <div id="cnt">
+    <div id="lf">
+      <div id="title">
+        <div id="pf"></div>
+        <div id="tt"></div>
+      </div>
+      <div>
+        <div id="d1"></div>
+        <div id="d2"></div>
+      </div>
+      <div id="ps">
+        <a />
+        <a />
+        <a />
+        <a />
+        <a />
+      </div>
+    </div>
+    <div id="rg">
+      <a class="s" />
+      <a />
+      <a />
+      <a />
+    </div>
   </div>
-  <div id="content"></div>
+  <div id="ft">
+    <div id="cr"></div>
+    <div id="lg"></div>
+  </div>
 </body>
 
 </html>

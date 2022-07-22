@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Oleksii Besida</title>
+  <meta name="description"
+    content="Oleksii Besida  |  Ukrainian he/him UI&UX designer and Frontend developer living in Stockholm, Sweden.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+  <script src="./webvitals.js" type="module"></script>
+
+  <style>
+    :root {
+      --background: #FAF7F9;
+      --text: #0F0D1A;
+      --accent: #6549F2;
+      --secondary: #858391;
+      --element: #39364D3A;
+      --border: #39364D14;
+      --background-position: left 50% top calc(50%);
+    }
+
+    @font-face {
+      font-family: 'Google Sans Text';
+      font-weight: 500;
+      src: url("/assets/fonts/GoogleSansText-Medium.woff2");
+    }
+
+    html,
+    body {
+      height: 100%;
+      font-family: 'Google Sans Text';
+      color: var(--secondary);
+      display: flex;
+      flex-direction: column;
+      align-content: center;
+    }
+
+    body {
+      background:
+        linear-gradient(90deg, var(--background) 23px, transparent 1%) var(--background-position),
+        linear-gradient(var(--background) 23px, transparent 1%) var(--background-position),
+        var(--element);
+      background-size: 24px 24px;
+    }
+
+    p {
+      margin: auto;
+      line-height: 24px;
+      font-size: 16px;
+    }
+
+    a {
+      color: var(--accent);
+    }
+
+    ::selection {
+      color: #FFF;
+      background: var(--accent);
+      text-shadow: none;
+    }
+  </style>
+</head>
+
+<body align="center">
+  <p>Oups! Wrong page 😅<br>You can go back to <a href="https://oleksii.xyz">oleksii.xyz</a></p>
+</body>
+
+</html>

@@ -27,7 +27,7 @@
     }
 
     * {
-      transition: .5s;
+      transition: .6s cubic-bezier(0, 0.5, 0, 1);
     }
 
     #cnt {
@@ -119,31 +119,17 @@
   </style>
   <script>
     document.addEventListener("DOMContentLoaded", async () => {
-      var ids = ["pf", "tt", "d1", "d2", "ps", "rg", "cr", "lg"];
+      var ids = ["pf", "tt", "d1", "d2", "ps", "rg", "cr", "lg"], cnt = 400;
       ids.forEach((id) => {
-        if (id == "ps" || id == "rg") {
-          var chld = document.getElementById(id).children;
-          for (var it of chld)
-            it.classList.add("tr");
-        } else {
-          document.getElementById(id).classList.add("tr");
+        var chld = document.getElementById(id);
+        chld = ["ps", "rg"].includes(id) ? chld.children : [chld];
+        for (var i = 0; i < chld.length; i++) {
+          var it = chld[i];
+          it.classList.add("tr"), it.id == "" ? it.id = id + i : 0;
+          setTimeout((it) => { it.classList.remove("tr"); }, cnt, it);
+          cnt += 100 / chld.length;
         }
       });
-
-      await new Promise((resolve) => setTimeout(resolve, 300))
-
-      for (var id of ids) {
-        if (id == "ps" || id == "rg") {
-          var chld = document.getElementById(id).children;
-          for (var it of chld) {
-            it.classList.remove("tr");
-            await new Promise((resolve) => setTimeout(resolve, 100 / chld.length));
-          }
-        } else {
-          document.getElementById(id).classList.remove("tr");
-        }
-        await new Promise((resolve) => setTimeout(resolve, 100));
-      }
     });
   </script>
 </head>

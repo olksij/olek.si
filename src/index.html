@@ -10,24 +10,37 @@
       --bg: #EDEBF0;
     }
 
-    html {
+    #cnt,
+    #lf,
+    #title,
+    #ps,
+    #rg,
+    #ft {
+      display: flex;
+    }
+
+    html,
+    body {
       height: 100%;
+      background: #FAFAFC;
+      margin: 0;
+    }
+
+    * {
+      transition: .5s;
     }
 
     #cnt {
-      display: flex;
       margin-bottom: auto;
     }
 
     #lf {
-      display: flex;
       flex-direction: column;
       gap: 48px;
       margin: 128px;
     }
 
     #title {
-      display: flex;
       align-items: center;
     }
 
@@ -37,7 +50,7 @@
       border-radius: 80px;
       background: var(--bg);
       z-index: 1;
-      outline: #fff 24px solid;
+      outline: #FAFAFC 24px solid;
     }
 
     #tt {
@@ -53,16 +66,16 @@
       height: 28px;
       background-color: var(--bg);
       width: 300px;
-      border-radius: 8px 8px 8px 0;
+      border-radius: 8px;
     }
 
     #d2 {
       width: 128px;
-      border-radius: 0 0 8px 8px;
+      height: 56px;
+      margin-top: -28px;
     }
 
     #ps {
-      display: flex;
       gap: 24px;
     }
 
@@ -76,7 +89,6 @@
 
     #rg {
       margin: auto;
-      display: flex;
       flex-direction: column;
       gap: 24px;
     }
@@ -88,7 +100,52 @@
       width: 128px;
       background: var(--bg);
     }
+
+    #ft {
+      margin: 0 128px 0 128px;
+      justify-content: space-between;
+    }
+
+    #ft>div {
+      height: 16px;
+      width: 128px;
+      border-radius: 8px;
+      background: var(--bg);
+    }
+
+    .tr {
+      width: 0 !important;
+    }
   </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      var ids = ["pf", "tt", "d1", "d2", "ps", "rg", "cr", "lg"];
+      ids.forEach((id) => {
+        if (id == "ps" || id == "rg") {
+          var chld = document.getElementById(id).children;
+          for (var it of chld)
+            it.classList.add("tr");
+        } else {
+          document.getElementById(id).classList.add("tr");
+        }
+      });
+
+      await new Promise((resolve) => setTimeout(resolve, 300))
+
+      for (var id of ids) {
+        if (id == "ps" || id == "rg") {
+          var chld = document.getElementById(id).children;
+          for (var it of chld) {
+            it.classList.remove("tr");
+            await new Promise((resolve) => setTimeout(resolve, 100 / chld.length));
+          }
+        } else {
+          document.getElementById(id).classList.remove("tr");
+        }
+        await new Promise((resolve) => setTimeout(resolve, 100));
+      }
+    });
+  </script>
 </head>
 
 <body>
@@ -103,18 +160,18 @@
         <div id="d2"></div>
       </div>
       <div id="ps">
-        <a />
-        <a />
-        <a />
-        <a />
-        <a />
+        <a></a>
+        <a></a>
+        <a></a>
+        <a></a>
+        <a></a>
       </div>
     </div>
     <div id="rg">
-      <a class="s" />
-      <a />
-      <a />
-      <a />
+      <a class="s"></a>
+      <a></a>
+      <a></a>
+      <a></a>
     </div>
   </div>
   <div id="ft">

@@ -3,11 +3,11 @@
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!--<script src="./content.js" type="module"></script>-->
 
   <style>
     :root {
-      --bg: #EDEBF0;
+      --el: #EDEBF0;
+      --bg: #FAFAFC;
     }
 
     #cnt,
@@ -22,7 +22,7 @@
     html,
     body {
       height: 100%;
-      background: #FAFAFC;
+      background: var(--bg);
       margin: 0;
     }
 
@@ -48,23 +48,20 @@
       width: 160px;
       height: 160px;
       border-radius: 80px;
-      background: var(--bg);
       z-index: 1;
-      outline: #FAFAFC 24px solid;
+      outline: var(--bg) 24px solid;
     }
 
     #tt {
       margin-left: -32px;
       width: 377px;
       height: 112px;
-      background: var(--bg);
       border-radius: 24px;
     }
 
     #d1,
     #d2 {
       height: 28px;
-      background-color: var(--bg);
       width: 300px;
       border-radius: 8px;
     }
@@ -84,7 +81,6 @@
       display: block;
       width: 48px;
       height: 48px;
-      background: var(--bg);
     }
 
     #rg {
@@ -98,7 +94,6 @@
       height: 24px;
       border-radius: 6px;
       width: 128px;
-      background: var(--bg);
     }
 
     #ft {
@@ -110,24 +105,43 @@
       height: 16px;
       width: 128px;
       border-radius: 8px;
-      background: var(--bg);
     }
 
     .tr {
       width: 0 !important;
     }
+
+    .sl {
+      background: -100vw 0/75% 100% fixed no-repeat linear-gradient(0.25turn, transparent, #FAFAFC88, transparent),
+        linear-gradient(var(--el), var(--el));
+    }
   </style>
   <script>
+    var anim = [[
+      { backgroundPosition: '-100vw 0, 0 0' },
+      { backgroundPosition: '100vw 0, 0 0' }
+    ], {
+      duration: 1500,
+      iterations: Infinity
+    }];
     document.addEventListener("DOMContentLoaded", async () => {
-      var ids = ["pf", "tt", "d1", "d2", "ps", "rg", "cr", "lg"], cnt = 400;
-      ids.forEach((id) => {
-        var chld = document.getElementById(id);
-        chld = ["ps", "rg"].includes(id) ? chld.children : [chld];
-        for (var i = 0; i < chld.length; i++) {
-          var it = chld[i];
-          it.classList.add("tr"), it.id == "" ? it.id = id + i : 0;
-          setTimeout((it) => { it.classList.remove("tr"); }, cnt, it);
-          cnt += 100 / chld.length;
+      // timeout counter
+      var cnt = 400;
+      // iterate over skeleton loader elements
+      ["pf", "tt", "d1", "d2", "ps", "rg", "cr", "lg"].forEach((id) => {
+        // HTMLElement
+        var element = document.getElementById(id);
+        // make it iterable ..
+        element = (["ps", "rg"].includes(id) ? element.children : [element]);
+        // .. & iterate
+        for (var item of element) {
+          // to render mark
+          item.classList.add("tr");
+          // replace "tr" with "psl" - prepeared skeleton loader
+          setTimeout((item) => item.classList.replace("tr", "sl"), cnt, item);
+          setTimeout((item) => item.animate(...anim), 200, item);
+          // increase wait counter
+          cnt += 100 / element.length;
         }
       });
     });
@@ -135,16 +149,23 @@
 </head>
 
 <body>
+  <!--container-->
   <div id="cnt">
+    <!--left side-->
     <div id="lf">
       <div id="title">
+        <!--profile picture-->
         <div id="pf"></div>
+        <!--title-->
         <div id="tt"></div>
       </div>
       <div>
+        <!--description 1-->
         <div id="d1"></div>
+        <!--description 2-->
         <div id="d2"></div>
       </div>
+      <!--profiles-->
       <div id="ps">
         <a></a>
         <a></a>
@@ -153,7 +174,9 @@
         <a></a>
       </div>
     </div>
+    <!--right side-->
     <div id="rg">
+      <!--selected-->
       <a class="s"></a>
       <a></a>
       <a></a>
@@ -161,7 +184,9 @@
     </div>
   </div>
   <div id="ft">
+    <!--copyright-->
     <div id="cr"></div>
+    <!--language-->
     <div id="lg"></div>
   </div>
 </body>

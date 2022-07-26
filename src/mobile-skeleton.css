@@ -1,0 +1,118 @@
+:root {
+  --el: #EDEBF0;
+  --bg: #FAFAFC;
+}
+
+*:not(script) {
+  display: flex;
+}
+
+html,
+body {
+  height: 100%;
+  background: var(--bg);
+  flex-direction: column;
+  margin: 0;
+  align-items: center;
+}
+
+* {
+  transition: .6s cubic-bezier(0, 0.5, 0, 1);
+}
+
+#cnt {
+  flex-direction: column-reverse;
+  margin: auto;
+}
+
+#lf {
+  flex-direction: column;
+  gap: 48px;
+  align-items: center;
+}
+
+#title {
+  align-items: center;
+}
+
+#pf {
+  width: 96px;
+  height: 96px;
+  border-radius: 80px;
+  z-index: 1;
+  outline: var(--bg) 12px solid;
+}
+
+#tt {
+  margin-left: -54px;
+  width: 215px;
+  height: 64px;
+  border-radius: 18px;
+}
+
+#dd {
+  flex-direction: column;
+}
+
+#d1,
+#d2 {
+  height: 24px;
+  width: 300px;
+  border-radius: 8px;
+}
+
+#d2 {
+  width: 128px;
+  height: 48px;
+  margin-top: -24px;
+}
+
+#ps {
+  gap: 20px;
+}
+
+#ps>a:last-child {
+  display: none;
+}
+
+#ps>a {
+  border-radius: 24px;
+  width: 48px;
+  height: 48px;
+}
+
+#rg {
+  margin: auto;
+  flex-direction: column;
+  gap: 24px;
+}
+
+#rg>a {
+  display: none;
+}
+
+#nav {
+  margin: 24px;
+}
+
+#ft {
+  margin: 24px 128px;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+#ft>div,
+#nav {
+  height: 16px;
+  width: 96px;
+  border-radius: 8px;
+}
+
+.tr {
+  width: 0 !important;
+}
+
+.sl {
+  background: -100vw 0/75% 100% fixed no-repeat linear-gradient(0.25turn, transparent, #FAFAFC88, transparent),
+    linear-gradient(var(--el), var(--el));
+}

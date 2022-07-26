@@ -3,122 +3,10 @@
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <style>
-    :root {
-      --el: #EDEBF0;
-      --bg: #FAFAFC;
-    }
-
-    #cnt,
-    #lf,
-    #title,
-    #ps,
-    #rg,
-    #ft {
-      display: flex;
-    }
-
-    html,
-    body {
-      height: 100%;
-      background: var(--bg);
-      margin: 0;
-    }
-
-    * {
-      transition: .6s cubic-bezier(0, 0.5, 0, 1);
-    }
-
-    #cnt {
-      margin-bottom: auto;
-    }
-
-    #lf {
-      flex-direction: column;
-      gap: 48px;
-      margin: 128px;
-    }
-
-    #title {
-      align-items: center;
-    }
-
-    #pf {
-      width: 160px;
-      height: 160px;
-      border-radius: 80px;
-      z-index: 1;
-      outline: var(--bg) 24px solid;
-    }
-
-    #tt {
-      margin-left: -32px;
-      width: 377px;
-      height: 112px;
-      border-radius: 24px;
-    }
-
-    #d1,
-    #d2 {
-      height: 28px;
-      width: 300px;
-      border-radius: 8px;
-    }
-
-    #d2 {
-      width: 128px;
-      height: 56px;
-      margin-top: -28px;
-    }
-
-    #ps {
-      gap: 24px;
-    }
-
-    #ps>a {
-      border-radius: 24px;
-      display: block;
-      width: 48px;
-      height: 48px;
-    }
-
-    #rg {
-      margin: auto;
-      flex-direction: column;
-      gap: 24px;
-    }
-
-    #rg>a {
-      display: block;
-      height: 24px;
-      border-radius: 6px;
-      width: 128px;
-    }
-
-    #ft {
-      margin: 0 128px 0 128px;
-      justify-content: space-between;
-    }
-
-    #ft>div {
-      height: 16px;
-      width: 128px;
-      border-radius: 8px;
-    }
-
-    .tr {
-      width: 0 !important;
-    }
-
-    .sl {
-      background: -100vw 0/75% 100% fixed no-repeat linear-gradient(0.25turn, transparent, #FAFAFC88, transparent),
-        linear-gradient(var(--el), var(--el));
-    }
-  </style>
+  <link rel="stylesheet" media="(min-width: 920px)" href="desktop-skeleton.css">
+  <link rel="stylesheet" media="(max-width: 920px)" href="mobile-skeleton.css">
   <script>
     var anim = [[
-      { backgroundPosition: '-100vw 0, 0 0' },
       { backgroundPosition: '100vw 0, 0 0' }
     ], {
       duration: 1500,
@@ -128,11 +16,11 @@
       // timeout counter
       var cnt = 400;
       // iterate over skeleton loader elements
-      ["pf", "tt", "d1", "d2", "ps", "rg", "cr", "lg"].forEach((id) => {
+      ["pf", "tt", "d1", "d2", "ps", "nav", "rg", "ft"].forEach((id) => {
         // HTMLElement
         var element = document.getElementById(id);
         // make it iterable ..
-        element = (["ps", "rg"].includes(id) ? element.children : [element]);
+        element = (["ps", "rg", "ft"].includes(id) ? element.children : [element]);
         // .. & iterate
         for (var item of element) {
           // to render mark
@@ -149,6 +37,7 @@
 </head>
 
 <body>
+  <a id="nav"></a>
   <!--container-->
   <div id="cnt">
     <!--left side-->
@@ -159,7 +48,7 @@
         <!--title-->
         <div id="tt"></div>
       </div>
-      <div>
+      <div id="dd">
         <!--description 1-->
         <div id="d1"></div>
         <!--description 2-->
@@ -177,7 +66,7 @@
     <!--right side-->
     <div id="rg">
       <!--selected-->
-      <a class="s"></a>
+      <a></a>
       <a></a>
       <a></a>
       <a></a>

@@ -5,6 +5,7 @@
 
 *:not(head>*) {
   display: flex;
+  flex-direction: row;
 }
 
 html,
@@ -12,11 +13,17 @@ body {
   height: 100%;
   background: var(--bg);
   margin: 0;
-  flex-direction: column;
 }
 
 * {
   transition: .6s cubic-bezier(0, 0.5, 0, 1);
+}
+
+#lf,
+#rg,
+#dd,
+body {
+  flex-direction: column;
 }
 
 #cnt {
@@ -24,7 +31,6 @@ body {
 }
 
 #lf {
-  flex-direction: column;
   gap: 48px;
   margin: 128px;
 }
@@ -48,10 +54,6 @@ body {
   border-radius: 24px;
 }
 
-#dd {
-  flex-direction: column;
-}
-
 #d1,
 #d2 {
   height: 28px;
@@ -65,10 +67,6 @@ body {
   margin-top: -28px;
 }
 
-#ps {
-  gap: 24px;
-}
-
 #ps>a {
   border-radius: 24px;
   width: 48px;
@@ -77,7 +75,10 @@ body {
 
 #rg {
   margin: auto;
-  flex-direction: column;
+}
+
+#rg,
+#ps {
   gap: 24px;
 }
 
@@ -104,6 +105,7 @@ body {
 
 .tr {
   width: 0 !important;
+  opacity: 0;
 }
 
 .sl {

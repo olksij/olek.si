@@ -80,8 +80,7 @@ body {
 
 #nav,
 #ft {
-  margin: 24px 128px;
-  justify-content: space-between;
+  margin: 24px;
   gap: 24px;
 }
 

@@ -5,7 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" media="(min-width: 920px)" href="desktop-skeleton.css">
   <link rel="stylesheet" media="(max-width: 920px)" href="mobile-skeleton.css">
-  <script>
+
+  <script type="module">
+    var content = document.createElement('script');
+    content.src = new URL("content.js", import.meta.url);
+    content.type = 'module';
+    document.head.appendChild(content);
     var anim = [[
       { backgroundPosition: '100vw 0, 0 0' }
     ], {
@@ -37,6 +42,7 @@
 </head>
 
 <body>
+  <noscript>the page is powered by js :(</noscript>
   <a id="nav"></a>
   <!--container-->
   <div id="cnt">

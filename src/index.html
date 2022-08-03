@@ -7,10 +7,12 @@
   <link rel="stylesheet" media="(max-width: 920px)" href="mobile-skeleton.css">
 
   <script type="module">
-    var content = document.createElement('script');
-    content.src = new URL("content.js", import.meta.url);
-    content.type = 'module';
-    document.head.appendChild(content);
+    for (var src of [new URL("preloader.js", import.meta.url), new URL("content.js", import.meta.url)]) {
+      var content = document.createElement('script');
+      content.src = src, content.type = 'module';
+      document.head.appendChild(content);
+    }
+
     var anim = [[
       { backgroundPosition: '100vw 0, 0 0' }
     ], {

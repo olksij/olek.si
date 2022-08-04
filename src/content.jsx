@@ -1,5 +1,3 @@
-import { data } from './preloader';
-
 // fonts variable is done as a Promise object to allow code run asynchoriously
 var fonts = new Promise((resolve) => {
   var fontCount = 0;
@@ -16,7 +14,7 @@ var fonts = new Promise((resolve) => {
 
 window.addEventListener('load', async () => {
   console.log("load");
-  console.log(data);
+  //console.log(data);
   await fonts;
   // render();
 });

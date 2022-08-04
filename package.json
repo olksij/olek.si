@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-    "parcel": "^2.5.0",
+    "parcel": "^2.7.0",
     "sharp": "^0.29.1"
   },
   "dependencies": {

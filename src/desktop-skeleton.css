@@ -3,7 +3,7 @@
   --bg: #FAFAFC;
 }
 
-*:not(head>*) {
+*:not(style):not(script) {
   display: flex;
   flex-direction: row;
 }

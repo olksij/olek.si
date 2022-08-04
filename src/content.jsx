@@ -1,4 +1,4 @@
-import { fetched, data } from './preloader';
+import { data } from './preloader';
 
 // fonts variable is done as a Promise object to allow code run asynchoriously
 var fonts = new Promise((resolve) => {
@@ -15,10 +15,12 @@ var fonts = new Promise((resolve) => {
 });
 
 window.addEventListener('load', async () => {
-  console.log("--- LOAD ---");
-  await fetched;
-  await fonts;
+  console.log("load");
   console.log(data);
-
+  await fonts;
   // render();
 });
+
+export function hey() {
+  console.log("hey");
+}

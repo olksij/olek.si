@@ -5,13 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" media="(min-width: 920px)" href="desktop-skeleton.css">
   <link rel="stylesheet" media="(max-width: 920px)" href="mobile-skeleton.css">
-
   <script type="module">
-    for (var src of [new URL("preloader.js", import.meta.url), new URL("content.js", import.meta.url)]) {
-      var content = document.createElement('script');
-      content.src = src, content.type = 'module';
-      document.head.appendChild(content);
-    }
+    import('./preloader').then(p => p.hhh());
 
     var anim = [[
       { backgroundPosition: '100vw 0, 0 0' }

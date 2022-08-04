@@ -40,3 +40,7 @@ export var fetched = new Promise((resolve) => {
     if (!source.size) resolve();
   }));
 });
+
+export function hhh() {
+  import('./content').then(h => h.hey());
+}

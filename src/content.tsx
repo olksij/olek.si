@@ -1,24 +1,25 @@
-// @ts-nocheck
 import { createElement, createFragment } from "./jsx";
 
-/** @jsx createElement */
-/** @jsxFrag createFragment */
-
-
-// in case there is a speacial date
-var date = new Date();
-switch ([date.getMonth(), date.getDate()]) {
-  case [5, 12]:
-    var description = ["🎂 It's my birthday today!", "June 12"];
-    break;
-  // more dates to come soon
-  default:
-    var description = ["Redefining the way humans interact", "with computers."];
-    break;
+function print(message?: any): void {
+  let date = new Date();
+  let time = `[${date.toLocaleTimeString('sv-SE')}.${date.getMilliseconds()}]`;
+  console.log('%c' + message + ' %c' + time, 'font-weight: bold; padding:4px', 'color: #AAA');
 }
 
-// content links to load
-var source = {
+// dates with custom description
+const customDates = {
+  "5-12": ["🎂 It's my birthday today!", "June 12"],
+  // more dates to come such as celebrations and holidays
+};
+
+// font links to load
+const fonts = {
+  'Google Sans Display': new URL('/assets/fonts/GoogleSansDisplay-Bold.woff2', import.meta.url),
+  'Google Sans Text': new URL('/assets/fonts/GoogleSansText-Medium.woff2', import.meta.url),
+};
+
+// image links to load
+const images = {
   "pf": new URL("/assets/profilePicture.jpg?as=webp&width=512", import.meta.url),
   "ps1": new URL("/assets/telegram.svg", import.meta.url),
   "ps2": new URL("/assets/instagram.svg", import.meta.url),
@@ -28,30 +29,59 @@ var source = {
   "cr": new URL("/assets/copyright.svg", import.meta.url),
 };
 
-var fetched = new Promise<void>((resolve) => {
-  let tr = (id) => (Object.keys(source).length - 1) ? delete source[id] : resolve();
-  for (var id in source) {
-    document.head.append(<link rel="preload" id={id} href={source[id]} onLoad={() => console.log(this.id)} as="image" />);
+let internals = {};
+
+var loadInternals = new Promise<void>((resolve) => {
+  // load date
+  const date = new Date();
+  internals['description'] = customDates[date.getMonth() + '-' + date.getDate()] ??
+    ["Redefining the way humans interact", "with computers."];
+  // more things to come soon;
+  resolve();
+});
+
+class PreloadImage {
+  id: string;
+  resolve: any;
+
+  constructor(id: string, resolve: any) {
+    this.id = id;
+    this.resolve = resolve;
+  }
+
+  onLoad(): void {
+    delete images[this.id];
+    if (!Object.keys(images).length) this.resolve(), print('🖼️ Images');
+  }
+
+  render() {
+    //@ts-ignore
+    return <link rel="preload" href={images[this.id]}
+      onLoad={() => this.onLoad()} as="image" />
+  }
+}
+
+var loadImages = new Promise<void>((resolve) => {
+  for (var id in images) {
+    var link = new PreloadImage(id, resolve);
+    document.head.append(link.render());
   };
 });
 
 // fonts variable is done as a Promise object to allow code run asynchoriously
-var fonts = new Promise<void>((resolve) => {
-  var fontCount = 0;
-
-  for (let [font, url] of new Map([
-    ['Google Sans Display', `url(${new URL('/assets/fonts/GoogleSansDisplay-Bold.woff2', import.meta.url)})`],
-    ['Google Sans Text', `url(${new URL('/assets/fonts/GoogleSansText-Medium.woff2', import.meta.url)})`]
-  ])) new FontFace(font, url)
+var loadFonts = new Promise<void>((resolve) => {
+  for (let font in fonts) new FontFace(font, `url(${fonts[font]})`)
     .load().then((fontface) => {
-      document.fonts.add(fontface);
-      if (++fontCount == 2) resolve(), console.log("--- FONTS ---");
+      document.fonts.add(fontface), delete fonts[font];
+      if (!Object.keys(fonts).length) resolve(), print('⌨️ Fonts');
     });
 });
 
 window.addEventListener('load', async () => {
-  console.log("load");
-  //console.log(data);
-  await fonts;
+  print("🔥 Load Event");
+  await loadInternals;
+  await loadFonts;
+  await loadImages;
+  print("🎨 Ready for render");
   // render();
 });

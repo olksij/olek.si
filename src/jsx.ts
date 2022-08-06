@@ -1,4 +1,4 @@
-export const createElement = (tag, props, ...children) => {
+export const createElement = (tag: any, props: Object, ...children: any) => {
   if (typeof tag === "function") return tag(props, ...children);
   const element = document.createElement(tag);
 
@@ -15,13 +15,13 @@ export const createElement = (tag, props, ...children) => {
   return element;
 };
 
-const appendChild = (parent, child) => {
+const appendChild = (parent: { appendChild: (arg0: any) => void; }, child: any) => {
   if (Array.isArray(child))
     child.forEach(nestedChild => appendChild(parent, nestedChild));
   else
     parent.appendChild(child.nodeType ? child : document.createTextNode(child));
 };
 
-export const createFragment = (props, ...children) => {
+export const createFragment = (_: any, ...children: any[]) => {
   return children;
 };

@@ -1,28 +1,33 @@
 import { createElement, createFragment } from "./jsx";
 import { head, dates, fonts, images } from './sources';
-import { print } from './print';
+import print from './print';
 
+/// class used to preload images during skeleton loader animation by 
+/// inserting <link rel="preload" as="image" /> tags
 class PreloadImage {
   id: string;
   resolve: any;
+  list: Set<string>;
 
-  constructor(id: string, resolve: any) {
+  constructor(id: string, list: Set<string>, resolve: any) {
     this.id = id;
+    this.list = list;
     this.resolve = resolve;
   }
 
   onLoad(): void {
-    delete images[this.id];
-    if (!Object.keys(images).length) this.resolve(), print('🖼️ Images');
+    this.list.delete(this.id);
+    if (!this.list.size) this.resolve(), print('🖼️ Images');
   }
 
   render() {
-    return <link rel="preload" href={images[this.id]}
-      onLoad={() => this.onLoad()
-      } as="image" />
+    return <link rel="preload" href={images[this.id]} onLoad={() => this.onLoad()} as="image" />
   }
 }
 
+/// promise mission of which is to insert missing information to document and
+/// provide text information to display in preffered language
+/// and for preffered date
 export const loadInternals = new Promise<Object>((resolve) => {
   let data = {};
 
@@ -37,10 +42,13 @@ export const loadInternals = new Promise<Object>((resolve) => {
   resolve(data);
 });
 
+/// promise mission of which is to take a list of all required images
+/// to load and use PreloadImage class to load them
 export const loadImages = new Promise<void>((resolve) => {
+  let list = new Set<string>();
   for (var id in images) {
-    var link = new PreloadImage(id, resolve);
-    document.head.append(link.render());
+    const link = new PreloadImage(id, list, resolve);
+    list.add(id), document.head.append(link.render());
   };
 });
 

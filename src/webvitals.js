@@ -1,4 +1,5 @@
 import { getCLS, getFCP, getFID, getLCP, getTTFB } from 'web-vitals';
+import print from './print';
 
 const vitalsUrl = 'https://vitals.vercel-analytics.com/v1/vitals';
 
@@ -19,17 +20,18 @@ function sendMetrics(metric) {
     type: 'application/x-www-form-urlencoded',
   });
 
-  //console.log('[Analytics]', metric.name, JSON.stringify(body, null, 2));
+  print('📊 ' + metric.name, metric.value.toString());
+
+  return;
 
   if (navigator.sendBeacon) {
     navigator.sendBeacon(vitalsUrl, blob);
-  } else
-    fetch(vitalsUrl, {
-      body: blob,
-      method: 'POST',
-      credentials: 'omit',
-      keepalive: true,
-    });
+  } else fetch(vitalsUrl, {
+    body: blob,
+    method: 'POST',
+    credentials: 'omit',
+    keepalive: true,
+  });
 }
 
 [getFID, getTTFB, getLCP, getCLS, getFCP].forEach((get) => get((metric) => sendMetrics(metric)));

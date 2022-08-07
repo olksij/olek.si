@@ -3,16 +3,11 @@
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" media="(min-width: 920px)" href="desktop-skeleton.css">
   <script>
     var loadTime, skeletonResolve, skeleton = new Promise((resolve) => skeletonResolve = resolve);
 
-    var anim = [[
-      { backgroundPosition: '100vw 0, 0 0' }
-    ], {
-      duration: 1500,
-      iterations: Infinity
-    }];
+    var anim = [[{ backgroundPosition: '75vw 0, 0 0' }], { duration: 1500, iterations: Infinity }];
+
     document.addEventListener("DOMContentLoaded", async () => {
       //import('./preloader');
       loadTime = new Date();
@@ -41,111 +36,110 @@
     });
   </script>
   <style>
-    @media (max-width: 920px) {
-      :root {
-        --el: #EDEBF0;
-        --bg: #FAFAFC;
-      }
+    :root {
+      --el: #EDEBF0;
+      --bg: #FAFAFC;
+    }
 
-      *:not(style):not(script):not(title) {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-      }
+    *:not(style):not(script):not(title) {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+    }
 
-      html,
-      body {
-        height: 100%;
-        background: var(--bg);
-        margin: 0;
-      }
+    html,
+    body {
+      height: 100%;
+      background: var(--bg);
+      margin: 0;
+    }
 
-      * {
-        transition: .6s cubic-bezier(0, 0.5, 0, 1);
-      }
+    * {
+      transition: .6s cubic-bezier(0, 0.5, 0, 1);
+    }
 
-      #cnt {
-        flex-direction: column-reverse;
-        margin: auto;
-      }
+    #cnt {
+      flex-direction: column-reverse;
+      margin: auto;
+    }
 
-      #lf {
-        gap: 48px;
-      }
+    #lf {
+      gap: 48px;
+    }
 
-      #title,
-      #ps,
-      #ft {
-        flex-direction: row;
-      }
+    #title,
+    #ps,
+    #ft {
+      flex-direction: row;
+    }
 
-      #pf {
-        width: 96px;
-        height: 96px;
-        border-radius: 80px;
-        z-index: 1;
-        outline: var(--bg) 12px solid;
-      }
+    #pf {
+      width: 96px;
+      height: 96px;
+      border-radius: 100%;
+      z-index: 1;
+      outline: var(--bg) 12px solid;
+    }
 
-      #tt {
-        margin-left: -54px;
-        width: 215px;
-        height: 64px;
-        border-radius: 18px;
-      }
+    #tt {
+      margin-left: -54px;
+      width: 215px;
+      height: 64px;
+      border-radius: 18px;
+    }
 
-      #d1,
-      #d2 {
-        height: 24px;
-        width: 300px;
-        border-radius: 8px;
-      }
+    #d1,
+    #d2 {
+      height: 24px;
+      width: 300px;
+      border-radius: 8px;
+    }
 
-      #d2 {
-        width: 128px;
-        height: 48px;
-        margin-top: -24px;
-      }
+    #d2 {
+      width: 128px;
+      height: 48px;
+      margin-top: -24px;
+    }
 
-      #ps {
-        gap: 20px;
-      }
+    #ps {
+      gap: 20px;
+    }
 
-      #ps>a:last-child,
-      #rg {
-        display: none;
-      }
+    #ps>a:last-child,
+    #rg {
+      display: none;
+    }
 
-      #ps>a {
-        border-radius: 24px;
-        width: 48px;
-        height: 48px;
-      }
+    #ps>a {
+      border-radius: 24px;
+      width: 48px;
+      height: 48px;
+    }
 
-      #nav,
-      #ft {
-        margin: 24px;
-        gap: 24px;
-      }
+    #nav,
+    #ft {
+      margin: 24px;
+      gap: 24px;
+    }
 
-      #ft>div,
-      #nav {
-        height: 16px;
-        width: 96px;
-        border-radius: 8px;
-      }
+    #ft>div,
+    #nav {
+      height: 16px;
+      width: 96px;
+      border-radius: 8px;
+    }
 
-      .tr {
-        width: 0 !important;
-        opacity: 50%;
-      }
+    .tr {
+      width: 0 !important;
+      opacity: 50%;
+    }
 
-      .sl {
-        background: -50vw 0/75% 100% fixed no-repeat linear-gradient(0.25turn, transparent, #FAFAFC88, transparent),
-          linear-gradient(var(--el), var(--el));
-      }
+    .sl {
+      background: -50vw 0/75% 100% fixed no-repeat linear-gradient(0.25turn, transparent, #FAFAFC88, transparent),
+        linear-gradient(var(--el), var(--el));
     }
   </style>
+  <link rel="stylesheet" media="(min-width: 920px)" href="desktop-skeleton.css">
 </head>
 
 <body>

@@ -17,7 +17,9 @@ export const imageAlts = {
   "cr": "copyright",
 }
 
-export default function render(): void {
+export default async function render(): Promise<void> {
+  await window["skeleton"];
+
   // restore id's for shortened components
   for (let id in giveIds) {
     let children = document.getElementById(id)?.children!;

@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" media="(min-width: 920px)" href="desktop-skeleton.css">
   <script>
+    var loadTime, skeletonResolve, skeleton = new Promise((resolve) => skeletonResolve = resolve);
+
     var anim = [[
       { backgroundPosition: '100vw 0, 0 0' }
     ], {
@@ -12,7 +14,8 @@
       iterations: Infinity
     }];
     document.addEventListener("DOMContentLoaded", async () => {
-      //import('./preloader').then(p => p.hhh());
+      //import('./preloader');
+      loadTime = new Date();
 
       // timeout counter
       var cnt = 1;
@@ -28,11 +31,13 @@
           item.classList.add("tr");
           // replace "tr" with "psl" - prepeared skeleton loader
           setTimeout((item) => item.classList.replace("tr", "sl"), cnt, item);
-          setTimeout((item) => item.animate(...anim), 200, item);
+          // we can try to animate it already
+          item.animate(...anim);
           // increase wait counter
           cnt += 100 / element.length;
         }
       });
+      setTimeout(skeletonResolve, cnt);
     });
   </script>
   <style>
@@ -136,7 +141,7 @@
       }
 
       .sl {
-        background: -100vw 0/75% 100% fixed no-repeat linear-gradient(0.25turn, transparent, #FAFAFC88, transparent),
+        background: -50vw 0/75% 100% fixed no-repeat linear-gradient(0.25turn, transparent, #FAFAFC88, transparent),
           linear-gradient(var(--el), var(--el));
       }
     }

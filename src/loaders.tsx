@@ -1,27 +1,40 @@
 import { createElement, createFragment } from "./jsx";
-import { head, dates, fonts, images } from './sources';
+import { head, dates, fonts, images, stylesheets } from './sources';
 import print from './print';
 
-/// class used to preload images during skeleton loader animation by 
+/// class used to preload images during skeleton loader animation by
 /// inserting <link rel="preload" as="image" /> tags
-class PreloadImage {
-  id: string;
-  resolve: any;
-  list: Set<string>;
 
-  constructor(id: string, list: Set<string>, resolve: any) {
-    this.id = id;
+enum Asset { stylesheet, image };
+
+class PreloadAsset {
+  type: Asset;
+  asset: string | URL;
+  resolve: any;
+  list: Set<string | URL>;
+  url: URL;
+  id: string;
+
+  constructor(type: Asset, asset: string | URL, list: Set<string | URL>, resolve: any) {
+    this.type = type;
+    this.asset = asset;
+    this.url = asset as URL;
+    this.id = asset as string;
     this.list = list;
     this.resolve = resolve;
   }
 
   onLoad(): void {
-    this.list.delete(this.id);
-    if (!this.list.size) this.resolve(), print('🖼️ Images');
+    this.list.delete(this.asset);
+    if (!this.list.size) this.resolve(),
+      print(['💅🏼 Stylesheets', '🖼️ Images'][this.type]);
   }
 
   render() {
-    return <link rel="preload" href={images[this.id]} onLoad={() => this.onLoad()} as="image" />
+    if (this.type == Asset.image)
+      return <link rel="preload" href={images[this.id]} onLoad={() => this.onLoad()} as="image" />;
+    if (this.type == Asset.stylesheet)
+      return <link rel="stylesheet" href={this.url} onLoad={() => this.onLoad()} />;
   }
 }
 
@@ -47,7 +60,7 @@ export const loadInternals = new Promise<Object>((resolve) => {
 export const loadImages = new Promise<void>((resolve) => {
   let list = new Set<string>();
   for (var id in images) {
-    const link = new PreloadImage(id, list, resolve);
+    const link = new PreloadAsset(Asset.image, id, list, resolve);
     list.add(id), document.head.append(link.render());
   };
 });
@@ -59,4 +72,13 @@ export const loadFonts = new Promise<void>((resolve) => {
       document.fonts.add(fontface), delete fonts[font];
       if (!Object.keys(fonts).length) resolve(), print('⌨️ Fonts');
     });
+});
+
+
+export const loadStylesheets = new Promise<void>((resolve) => {
+  let list = new Set<URL>();
+  for (let style of stylesheets) {
+    const link = new PreloadAsset(Asset.stylesheet, style, list, resolve);
+    list.add(style), document.head.append(link.render());
+  };
 });

@@ -1,4 +1,4 @@
-import { loadInternals, loadFonts, loadImages } from './loaders';
+import { loadInternals, loadFonts, loadImages, loadStylesheets } from './loaders';
 import print from './print';
 import render from './render';
 
@@ -9,6 +9,7 @@ window.addEventListener('load', async () => {
   let internals = await loadInternals;
   await loadFonts;
   await loadImages;
+  await loadStylesheets;
 
   // we are done loading assets and are ready for render!
   print("🎨 Ready for render");

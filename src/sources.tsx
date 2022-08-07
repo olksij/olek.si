@@ -28,3 +28,7 @@ export const images = {
   "email": new URL("/assets/email.svg", import.meta.url),
   "copyright": new URL("/assets/copyright.svg", import.meta.url),
 };
+
+export const stylesheets = [
+  new URL("./index.css", import.meta.url)
+];

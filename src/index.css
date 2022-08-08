@@ -1,3 +1,5 @@
+/* --- RENDER IMAGES --- */
+
 #pf,
 #ps>a {
   overflow: hidden;
@@ -35,5 +37,57 @@ img.rendered {
 
   to {
     opacity: 1;
+  }
+}
+
+/* --- RENDER TITLE --- */
+
+#tt {
+  overflow: hidden;
+}
+
+@keyframes oleksiiload {
+  from {
+    background-position: 0px -24px;
+  }
+
+  to {
+    background-position: -13896px -24px;
+  }
+}
+
+@keyframes oleksiiloadmobile {
+  from {
+    background-position: 0px -16px;
+  }
+
+  to {
+    background-position: -8166px -16px;
+  }
+}
+
+#tt.rendered {
+  background: #0000;
+}
+
+#oleksii {
+  width: 100%;
+  aspect-ratio: 2.25;
+  background-repeat: no-repeat;
+}
+
+#oleksii.rendered {
+  animation: .6s steps(36) oleksiiload;
+  background-position: -13896px -24px;
+}
+
+@media (max-width: 920px) {
+  #oleksii {
+    background-size: auto 94px;
+  }
+
+  #oleksii.rendered {
+    animation: .6s steps(36) oleksiiloadmobile;
+    background-position: -8166px -16px;
   }
 }

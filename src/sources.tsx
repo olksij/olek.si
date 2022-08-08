@@ -27,6 +27,7 @@ export const images = {
   "twitter": new URL("/assets/twitter.svg", import.meta.url),
   "email": new URL("/assets/email.svg", import.meta.url),
   "copyright": new URL("/assets/copyright.svg", import.meta.url),
+  "123": new URL('/assets/oleksii.svg', import.meta.url),
 };
 
 export const stylesheets = [

@@ -20,7 +20,7 @@ export const imageAlts = {
 export default async function render(): Promise<void> {
   if (!sessionStorage.getItem('loaded')) {
     await window["skeleton"];
-    sessionStorage.setItem('loaded', 'true');
+    //sessionStorage.setItem('loaded', 'true');
   }
 
   // restore id's for shortened components
@@ -29,6 +29,11 @@ export default async function render(): Promise<void> {
     for (var i = 0; i < children.length; i++)
       children[i].id = giveIds[id][i];
   }
+
+  setTimeout(() => {
+    document.getElementById('tt')?.append(<div id="oleksii" class="rendered" style={`background-image: url(${new URL('/assets/oleksii.svg', import.meta.url)})`} />);
+    document.getElementById('tt')?.classList.add('rendered');
+  }, 100);
 
   // restore images
   var counter = 0;

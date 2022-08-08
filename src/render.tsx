@@ -28,6 +28,10 @@ export default async function render(): Promise<void> {
   }
 
   // restore images
-  for (let id in imageAlts)
-    document.getElementById(id)?.append(<img src={images[imageAlts[id]]} alt={imageAlts[id]} />);
+  var counter = 0;
+  for (let id in imageAlts) {
+    let node: HTMLElement = <img src={images[imageAlts[id]]} alt={imageAlts[id]} />;
+    document.getElementById(id)?.append(node);
+    setTimeout(() => node.classList.add('rendered'), counter), counter += 75;
+  }
 }

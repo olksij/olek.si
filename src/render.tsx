@@ -18,7 +18,10 @@ export const imageAlts = {
 }
 
 export default async function render(): Promise<void> {
-  await window["skeleton"];
+  if (!sessionStorage.getItem('loaded')) {
+    await window["skeleton"];
+    sessionStorage.setItem('loaded', 'true');
+  }
 
   // restore id's for shortened components
   for (let id in giveIds) {

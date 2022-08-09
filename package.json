@@ -5,6 +5,8 @@
     "sharp": "^0.29.1"
   },
   "dependencies": {
+    "flubber": "^0.4.2",
+    "inline-svg": "^2.2.3",
     "web-vitals": "^2.1.4"
   }
 }

@@ -1,5 +1,9 @@
 /* --- RENDER IMAGES --- */
 
+:root {
+  --text: #0F0D1A;
+}
+
 #pf,
 #ps>a {
   overflow: hidden;
@@ -46,26 +50,6 @@ img.rendered {
   overflow: hidden;
 }
 
-@keyframes oleksiiload {
-  from {
-    background-position: 0px -24px;
-  }
-
-  to {
-    background-position: -13896px -24px;
-  }
-}
-
-@keyframes oleksiiloadmobile {
-  from {
-    background-position: 0px -16px;
-  }
-
-  to {
-    background-position: -8166px -16px;
-  }
-}
-
 #tt.rendered {
   background: #0000;
   display: block;
@@ -74,11 +58,27 @@ img.rendered {
 #tt>svg {
   width: 100%;
   aspect-ratio: 2.25;
-  margin-top: -30px;
+  margin-top: -18px;
 }
 
-@media (max-width: 920px) {
+#tt>p {
+  color: var(--text);
+  font-size: 74px;
+  margin-top: -14px;
+  margin-right: 2px;
+  letter-spacing: -2.56px;
+  font-family: 'Google Sans Display';
+}
+
+@media (min-width: 920px) {
   #tt>svg {
-    margin-top: -18px;
+    margin-top: -30px;
+  }
+
+  #tt>p {
+    font-size: 128px;
+    margin-top: -23px;
+    margin-right: 4px;
+    letter-spacing: -4.42px;
   }
 }

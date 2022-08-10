@@ -40,6 +40,10 @@ export default async function render(): Promise<void> {
     }, function () {
       window["interpolator"] = flubber.interpolateAll(oleksiiFrom, oleksiiTo, { maxSegmentLength: 7, single: true });
       window["animationStart"] = performance.now();
+      document.getElementById('path')?.animate(
+        [{ fill: 'var(--el)' }, { fill: 'var(--text)' }],
+        { delay: 200, duration: 400, easing: 'cubic-bezier(0.87, 0, 0.13, 1)' },
+      );
       requestAnimationFrame(animTitle);
       document.getElementById('tt')?.classList.add('rendered');
     });
@@ -83,11 +87,12 @@ var oleksiiTo = [
 function animTitle(time) {
   var t = (time - window["animationStart"]) / 600;
   t = easeInOutExpo(t);
-  document.getElementById('path')?.setAttribute("opacity", Math.max(0.05, t).toString());
   document.getElementById('path')?.setAttribute("d", window["interpolator"](t));
-  console.log(t);
   if (t + 0.01 < 1) {
     requestAnimationFrame(animTitle);
+  } else {
+    document.getElementById('oleksii')?.remove();
+    document.getElementById('tt')?.append(<p>Oleksii</p>);
   }
 }
 

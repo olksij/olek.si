@@ -1,5 +1,6 @@
 import { createElement, createFragment } from "./jsx";
 import { images } from "./sources";
+import TextToSVG from 'text-to-svg';
 import inlineSVG from 'inline-svg';
 import * as flubber from "flubber"
 
@@ -19,11 +20,16 @@ export const imageAlts = {
   "cr": "copyright",
 }
 
+/* --- --- --- --- ---  --- --- --- --- --- ---
+   --- THE CODE BELOW NEEDS REFACTORING --- ---
+   --- IT'S IN AN ACTIVE DEVELOPMENT STATE- ---
+   --- --- --- --- ---  --- --- --- --- --- --- */
+
 export default async function render(): Promise<void> {
-  //if (!sessionStorage.getItem('loaded')) {
-  await window["skeleton"];
-  //sessionStorage.setItem('loaded', 'true');
-  //}
+  if (!sessionStorage.getItem('loaded')) {
+    await window["skeleton"];
+    sessionStorage.setItem('loaded', 'true');
+  }
 
   // restore id's for shortened components
   for (let id in giveIds) {
@@ -31,6 +37,29 @@ export default async function render(): Promise<void> {
     for (var i = 0; i < children.length; i++)
       children[i].id = giveIds[id][i];
   }
+
+  TextToSVG.load(new URL('/assets/fonts/GoogleSansText-Medium.ttf', import.meta.url), (_, textToSVG) => {
+    const svg1 = textToSVG.getSVG('first', { anchor: 'left top', fontSize: 24 });
+    const node1 = document.createRange().createContextualFragment(svg1);
+    document.body.append(<div id="test-first-second">{node1}</div>);
+    var firstData = document.getElementById("test-first-second")!.getElementsByTagName('path')[0]!.getAttribute('d')!.replaceAll('ZM', 'Z$M').split('$');
+
+    var secondData = textToSVG.getD('second', { anchor: 'left top', fontSize: 24 }).replaceAll('ZM', 'Z$M')?.split('$');
+
+    if (firstData.length < secondData.length)
+      for (var i = firstData.length; i < secondData.length; i++) firstData.push("M 0 0 Z");
+    if (secondData.length < firstData.length)
+      for (var i = secondData.length; i < firstData.length; i++) secondData.push("M 0 0 Z");
+
+    console.log(firstData, secondData);
+    window["interpolator-test"] = flubber.interpolateAll(firstData, secondData, { maxSegmentLength: 3, single: true });
+
+    setTimeout(() => {
+      window["animationStart-test"] = performance.now();
+      requestAnimationFrame(animTest);
+    }, 2000);
+
+  });
 
   setTimeout(() => {
     document.getElementById('tt')?.appendChild(<img id="oleksii" src={new URL('/assets/oleksii.svg', import.meta.url)} />);
@@ -42,12 +71,13 @@ export default async function render(): Promise<void> {
       window["animationStart"] = performance.now();
       document.getElementById('path')?.animate(
         [{ fill: 'var(--el)' }, { fill: 'var(--text)' }],
-        { delay: 200, duration: 400, easing: 'cubic-bezier(0.87, 0, 0.13, 1)' },
+        { delay: 400, duration: 400, easing: 'cubic-bezier(0.87, 0, 0.13, 1)' },
       );
+
       requestAnimationFrame(animTitle);
       document.getElementById('tt')?.classList.add('rendered');
     });
-  }, 100);
+  });
 
   // restore images
   var counter = 0;
@@ -56,6 +86,7 @@ export default async function render(): Promise<void> {
     document.getElementById(id)?.append(node);
     setTimeout(() => node.classList.add('rendered'), counter), counter += 75;
   }
+
 }
 
 var oleksiiFrom = [
@@ -85,14 +116,26 @@ var oleksiiTo = [
 ]
 
 function animTitle(time) {
-  var t = (time - window["animationStart"]) / 600;
-  t = easeInOutExpo(t);
+  var t = (time - window["animationStart"]) / 800;
+  //t = easeInOutExpo(t);
   document.getElementById('path')?.setAttribute("d", window["interpolator"](t));
   if (t + 0.01 < 1) {
     requestAnimationFrame(animTitle);
   } else {
     document.getElementById('oleksii')?.remove();
     document.getElementById('tt')?.append(<p>Oleksii</p>);
+  }
+}
+
+function animTest(time) {
+  var t = (time - window["animationStart-test"]) / 800;
+  t = easeInOutExpo(t);
+  console.log(t);
+  document.getElementById("test-first-second")?.getElementsByTagName('path')[0]?.setAttribute("d", window["interpolator-test"](t));
+  if (t + 0.01 < 1) {
+    requestAnimationFrame(animTest);
+  } else {
+    document.getElementById("test-first-second")?.getElementsByTagName('path')[0]?.setAttribute("d", window["interpolator-test"](1));
   }
 }
 

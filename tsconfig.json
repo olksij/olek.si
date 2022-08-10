@@ -7,7 +7,11 @@
     "strictNullChecks": true,
     "strictFunctionTypes": true,
     "jsxFactory": "createElement",
-    "jsxFragmentFactory": "createFragment"
+    "jsxFragmentFactory": "createFragment",
+    "lib": [
+      "DOM",
+      "ES2021.String"
+    ]
   },
   "exclude": [
     "node_modules",

@@ -15,7 +15,7 @@ export const head: Node[] = [
 // font links to load
 export const fonts = {
   'Google Sans Display': new URL('/assets/fonts/GoogleSansDisplay-Bold.woff2', import.meta.url),
-  'Google Sans Text': new URL('/assets/fonts/GoogleSansText-Medium.woff2', import.meta.url),
+  'Google Sans Text': new URL('/assets/fonts/GoogleSansText-Medium.ttf', import.meta.url),
 };
 
 // image links to load

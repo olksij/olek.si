@@ -20,16 +20,18 @@ export const imageAlts = {
   "cr": "copyright",
 }
 
-/* --- --- --- --- ---  --- --- --- --- --- ---
-   --- THE CODE BELOW NEEDS REFACTORING --- ---
-   --- IT'S IN AN ACTIVE DEVELOPMENT STATE- ---
-   --- --- --- --- ---  --- --- --- --- --- --- */
+/* --- --- --- --- --- --- --- --- --- --- --- --- ---
+   --- THE CODE BELOW NEEDS AN URGENT REFACTORING! ---
+   --- --- IT'S IN AN ACTIVE DEVELOPMENT STATE --- ---
+   --- --- --- --- --- --- --- --- --- --- --- --- --- */
+
 
 export default async function render(): Promise<void> {
   if (!sessionStorage.getItem('loaded')) {
     await window["skeleton"];
     sessionStorage.setItem('loaded', 'true');
   }
+
 
   // restore id's for shortened components
   for (let id in giveIds) {
@@ -38,26 +40,40 @@ export default async function render(): Promise<void> {
       children[i].id = giveIds[id][i];
   }
 
+  /* --- --- --- --- --- --- --- --- ---
+     --- --- I HAVE WARNED YOU - --- ---
+     --- --- --- --- --- --- --- --- --- */
+
   TextToSVG.load(new URL('/assets/fonts/GoogleSansText-Medium.ttf', import.meta.url), (_, textToSVG) => {
-    const svg1 = textToSVG.getSVG('first', { anchor: 'left top', fontSize: 24 });
+    /*const svg1 = textToSVG.getSVG('first                 ', { anchor: 'left top', fontSize: 24 });
     const node1 = document.createRange().createContextualFragment(svg1);
     document.body.append(<div id="test-first-second">{node1}</div>);
     var firstData = document.getElementById("test-first-second")!.getElementsByTagName('path')[0]!.getAttribute('d')!.replaceAll('ZM', 'Z$M').split('$');
+    */
 
-    var secondData = textToSVG.getD('second', { anchor: 'left top', fontSize: 24 }).replaceAll('ZM', 'Z$M')?.split('$');
+    document.getElementById('d1')!.innerHTML += `<svg width="300" height="28" viewBox="0 0 300 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path id="path" fill-rule="evenodd" clip-rule="evenodd" d="M0 0V28H300V0H0Z" fill="var(--el)"/>
+    </svg>`;
 
-    if (firstData.length < secondData.length)
+    var secondData = textToSVG.getD('Redefining the way humans interact', { anchor: 'left top', fontSize: 20 }).replaceAll('ZM', 'Z$M')?.split('$');
+    document.getElementById('d1')?.classList.add('rendered');
+
+    /*if (firstData.length < secondData.length)
       for (var i = firstData.length; i < secondData.length; i++) firstData.push("M 0 0 Z");
     if (secondData.length < firstData.length)
       for (var i = secondData.length; i < firstData.length; i++) secondData.push("M 0 0 Z");
+    */
 
-    console.log(firstData, secondData);
-    window["interpolator-test"] = flubber.interpolateAll(firstData, secondData, { maxSegmentLength: 3, single: true });
+    window["interpolator-test"] = flubber.separate("M0 0V160H386V0H0Z", secondData, { maxSegmentLength: 3, single: true });
 
     setTimeout(() => {
+      document.getElementById("d1")?.getElementsByTagName('path')[0]?.animate(
+        [{ fill: 'var(--el)' }, { fill: 'var(--secondary)' }],
+        { delay: 300, duration: 300, easing: 'cubic-bezier(0.87, 0, 0.13, 1)' },
+      );
       window["animationStart-test"] = performance.now();
-      requestAnimationFrame(animTest);
-    }, 2000);
+      requestAnimationFrame(animDescription);
+    }, 400);
 
   });
 
@@ -86,7 +102,6 @@ export default async function render(): Promise<void> {
     document.getElementById(id)?.append(node);
     setTimeout(() => node.classList.add('rendered'), counter), counter += 75;
   }
-
 }
 
 var oleksiiFrom = [
@@ -117,7 +132,7 @@ var oleksiiTo = [
 
 function animTitle(time) {
   var t = (time - window["animationStart"]) / 800;
-  //t = easeInOutExpo(t);
+  t = easeInOutExpo(t);
   document.getElementById('path')?.setAttribute("d", window["interpolator"](t));
   if (t + 0.01 < 1) {
     requestAnimationFrame(animTitle);
@@ -127,15 +142,15 @@ function animTitle(time) {
   }
 }
 
-function animTest(time) {
-  var t = (time - window["animationStart-test"]) / 800;
+function animDescription(time) {
+  var t = (time - window["animationStart-test"]) / 600;
   t = easeInOutExpo(t);
-  console.log(t);
-  document.getElementById("test-first-second")?.getElementsByTagName('path')[0]?.setAttribute("d", window["interpolator-test"](t));
+  document.getElementById("d1")?.getElementsByTagName('path')[0]?.setAttribute("d", window["interpolator-test"](t));
   if (t + 0.01 < 1) {
-    requestAnimationFrame(animTest);
+    requestAnimationFrame(animDescription);
   } else {
-    document.getElementById("test-first-second")?.getElementsByTagName('path')[0]?.setAttribute("d", window["interpolator-test"](1));
+    document.getElementById("d1")?.getElementsByTagName('path')[0]?.setAttribute("d", window["interpolator-test"](1));
+    document.getElementById("d1")?.getElementsByTagName('path')[0]?.setAttribute("fill", "var(--secondary)");
   }
 }
 

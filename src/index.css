@@ -33,7 +33,7 @@ img {
   opacity: 0;
 }
 
-img.rendered {
+.rendered>img {
   opacity: 1;
   animation: .5s cubic-bezier(0.5, 0, 0.25, .75) imgrender;
 }
@@ -74,7 +74,7 @@ img.rendered {
 
 @media (min-width: 920px) {
   #tt>svg {
-    margin-top: -30px;
+    margin-top: -24px;
   }
 
   #tt>p {

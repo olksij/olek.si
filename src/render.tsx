@@ -4,27 +4,47 @@ import TextToSVG from 'text-to-svg';
 import inlineSVG from 'inline-svg';
 import * as flubber from "flubber"
 
-export const giveIds = {
-  "ps": ["tg", "ig", "gh", "tw", "mt"],
+type RenderType = 'img' | 'text';
+
+interface AnimatingData {
+  type: RenderType;
+  alt?: string;
+  delay: number;
+  children?: boolean;
+}
+
+interface AnimatingTextData {
+  item: string // reference id for other data structures;
+  interpolator: (t: number) => number // function which interpolate path data;
+  start?: number | null // time when anmation started;
+  duration: number // desired animation duration;
+}
+
+// for restoring shortened ids in order to get 
+// relation between records and dom
+const restoreIDs: Record<string, Array<string>> = {
+  "ps": ["telegram", "instagram", "github", "twitter", "email"],
   "rg": ["nav-home", "nav-about", "nav-projects", "nav-work"],
-  "ft": ["cr", "lg"]
+  "ft": ["cr", "lg"],
 }
 
-export const imageAlts = {
-  "pf": "profilePicture",
-  "tg": "telegram",
-  "ig": "instagram",
-  "gh": "github",
-  "tw": "twitter",
-  "mt": "email",
-  "cr": "copyright",
+// order and details of animating each node
+const animatingOrder: Record<string, AnimatingData> = {
+  "pf": { type: 'img', delay: 50, alt: 'pf' },
+  "tt": { type: 'text', delay: 100 },
+  "ps": { type: 'img', delay: 50, children: true },
+  "cr": { type: 'img', delay: 100 },
 }
 
-/* --- --- --- --- --- --- --- --- --- --- --- --- ---
-   --- THE CODE BELOW NEEDS AN URGENT REFACTORING! ---
-   --- --- IT'S IN AN ACTIVE DEVELOPMENT STATE --- ---
-   --- --- --- --- --- --- --- --- --- --- --- --- --- */
+/** Shorthand for getting an `HTMLElement` */
+function byId(id: string): HTMLElement | null {
+  return document.getElementById(id);
+}
 
+/** Retreive child by tag */
+function tagById(id: string, tag: string): Element | undefined {
+  return byId(id)?.getElementsByTagName(tag)[0];
+}
 
 export default async function render(): Promise<void> {
   if (!sessionStorage.getItem('loaded')) {
@@ -32,75 +52,102 @@ export default async function render(): Promise<void> {
     sessionStorage.setItem('loaded', 'true');
   }
 
-
   // restore id's for shortened components
-  for (let id in giveIds) {
-    let children = document.getElementById(id)?.children!;
+  for (let id in restoreIDs) {
+    let children = byId(id)!.children;
     for (var i = 0; i < children.length; i++)
-      children[i].id = giveIds[id][i];
+      children[i].id = restoreIDs[id][i];
   }
 
-  /* --- --- --- --- --- --- --- --- ---
-     --- --- I HAVE WARNED YOU - --- ---
-     --- --- --- --- --- --- --- --- --- */
+  /* --- --- --- --- --- --- --- --- --- --- ---
+     --- CODE BELOW STILL NEEDS REFACTORING- --- 
+     --- --- --- --- --- --- --- --- --- --- --- */
+
+  // --- Title
+
+  TextToSVG.load(new URL('/assets/fonts/GoogleSansDisplay-Bold.ttf', import.meta.url), (_, textToSVG) => {
+    var oleksiiTo = textToSVG.getD('Oleksii', { anchor: 'left top', fontSize: 128, letterSpacing: -.03 }).replaceAll('ZM', 'Z$M')?.split('$');
+
+    byId('tt')!.innerHTML += `<svg width="386" height="160" viewBox="0 0 386 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path id="path" fill-rule="evenodd" clip-rule="evenodd" d="M0 0V160H386V0H0Z" fill="var(--el)"/>
+    </svg>`;
+
+    requestAnimationFrame((time) => animateText({
+      item: 'tt',
+      interpolator: flubber.interpolateAll(oleksiiFrom, oleksiiTo, { maxSegmentLength: 7, single: true }),
+      duration: 800,
+    }, time));
+
+    tagById('tt', 'path')?.animate(
+      [{ fill: 'var(--el)' }, { fill: 'var(--text)' }],
+      { delay: 400, duration: 400, easing: 'cubic-bezier(0.87, 0, 0.13, 1)' },
+    );
+
+    document.getElementById('tt')?.classList.add('rendered');
+  });
+
+  // --- Description
 
   TextToSVG.load(new URL('/assets/fonts/GoogleSansText-Medium.ttf', import.meta.url), (_, textToSVG) => {
-    /*const svg1 = textToSVG.getSVG('first                 ', { anchor: 'left top', fontSize: 24 });
-    const node1 = document.createRange().createContextualFragment(svg1);
-    document.body.append(<div id="test-first-second">{node1}</div>);
-    var firstData = document.getElementById("test-first-second")!.getElementsByTagName('path')[0]!.getAttribute('d')!.replaceAll('ZM', 'Z$M').split('$');
-    */
 
-    document.getElementById('d1')!.innerHTML += `<svg width="300" height="28" viewBox="0 0 300 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+    var secondData = textToSVG.getD('Redefining the way humans interact', { anchor: 'left top', fontSize: 20 }).replaceAll('ZM', 'Z$M')?.split('$');
+
+    byId('d1')!.innerHTML += `<svg width="300" height="28" viewBox="0 0 300 28" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path id="path" fill-rule="evenodd" clip-rule="evenodd" d="M0 0V28H300V0H0Z" fill="var(--el)"/>
     </svg>`;
 
-    var secondData = textToSVG.getD('Redefining the way humans interact', { anchor: 'left top', fontSize: 20 }).replaceAll('ZM', 'Z$M')?.split('$');
-    document.getElementById('d1')?.classList.add('rendered');
+    requestAnimationFrame((time) => animateText({
+      item: 'd1',
+      interpolator: flubber.separate("M0 0V160H386V0H0Z", secondData, { maxSegmentLength: 3, single: true }),
+      duration: 600,
+    }, time));
 
-    /*if (firstData.length < secondData.length)
-      for (var i = firstData.length; i < secondData.length; i++) firstData.push("M 0 0 Z");
-    if (secondData.length < firstData.length)
-      for (var i = secondData.length; i < firstData.length; i++) secondData.push("M 0 0 Z");
-    */
+    byId('d1')?.classList.add('rendered');
 
-    window["interpolator-test"] = flubber.separate("M0 0V160H386V0H0Z", secondData, { maxSegmentLength: 3, single: true });
-
-    setTimeout(() => {
-      document.getElementById("d1")?.getElementsByTagName('path')[0]?.animate(
-        [{ fill: 'var(--el)' }, { fill: 'var(--secondary)' }],
-        { delay: 300, duration: 300, easing: 'cubic-bezier(0.87, 0, 0.13, 1)' },
-      );
-      window["animationStart-test"] = performance.now();
-      requestAnimationFrame(animDescription);
-    }, 400);
-
+    tagById('d1', 'path')?.animate(
+      [{ fill: 'var(--el)' }, { fill: 'var(--secondary)' }],
+      { delay: 300, duration: 300, easing: 'cubic-bezier(0.87, 0, 0.13, 1)' },
+    );
   });
 
-  setTimeout(() => {
-    document.getElementById('tt')?.appendChild(<img id="oleksii" src={new URL('/assets/oleksii.svg', import.meta.url)} />);
-    inlineSVG.init({
-      svgSelector: '#oleksii',
-      initClass: 'js-inlinesvg',
-    }, function () {
-      window["interpolator"] = flubber.interpolateAll(oleksiiFrom, oleksiiTo, { maxSegmentLength: 7, single: true });
-      window["animationStart"] = performance.now();
-      document.getElementById('path')?.animate(
-        [{ fill: 'var(--el)' }, { fill: 'var(--text)' }],
-        { delay: 400, duration: 400, easing: 'cubic-bezier(0.87, 0, 0.13, 1)' },
-      );
+  let delayCounter: number = 0;
 
-      requestAnimationFrame(animTitle);
-      document.getElementById('tt')?.classList.add('rendered');
-    });
-  });
+  // restore everything;
+  for (let item in animatingOrder) {
+    let data: AnimatingData = animatingOrder[item];
+    let node: HTMLElement;
 
-  // restore images
-  var counter = 0;
-  for (let id in imageAlts) {
-    let node: HTMLElement = <img src={images[imageAlts[id]]} alt={imageAlts[id]} />;
-    document.getElementById(id)?.append(node);
-    setTimeout(() => node.classList.add('rendered'), counter), counter += 75;
+    switch (data.type) {
+      case 'img':
+        let queue: Array<string> = [item];
+        // if data.children is true, retreive children
+        if (data.children) queue = [...byId(item)!.children]
+          .map(child => child.id);
+
+        for (let child of queue) {
+          console.log(child, queue)
+          // generate future node;
+          node = <img src={images[child]} alt={item} />;
+          // insert it to appropriate skeleton element;
+          byId(child)?.append(node);
+          // schedule animation
+          setTimeout((child) => byId(child)?.classList.add('rendered'), delayCounter, child);
+        }
+        break;
+
+      /*case 'text':
+        // generate future node;
+        node = <img src={images[item]} alt={item} />;
+        // insert it to appropriate skeleton element;
+        byId(data.insertTo)?.append(node);
+        // schedule animation
+        delayCounter += data.delay;
+        setTimeout(() => node.classList.add('rendered'), delayCounter);
+        break;*/
+
+      default:
+        break;
+    }
   }
 }
 
@@ -130,35 +177,24 @@ var oleksiiTo = [
   "M369.027 53.192C367.576 53.192 366.168 52.936 364.803 52.424C363.523 51.8266 362.371 51.0586 361.347 50.12C360.408 49.096 359.64 47.944 359.043 46.664C358.531 45.384 358.275 43.976 358.275 42.44C358.275 40.904 358.531 39.496 359.043 38.216C359.64 36.936 360.408 35.8266 361.347 34.888C362.371 33.864 363.523 33.096 364.803 32.584C366.168 31.9866 367.576 31.688 369.027 31.688C372.014 31.688 374.574 32.7546 376.707 34.888C378.84 36.936 379.907 39.4533 379.907 42.44C379.907 45.4266 378.84 47.9866 376.707 50.12C374.574 52.168 372.014 53.192 369.027 53.192Z", "M360.707 125V62.28H377.475V125H360.707Z",
 ]
 
-function animTitle(time) {
-  var t = (time - window["animationStart"]) / 800;
-  t = easeInOutExpo(t);
-  document.getElementById('path')?.setAttribute("d", window["interpolator"](t));
-  if (t + 0.01 < 1) {
-    requestAnimationFrame(animTitle);
-  } else {
-    document.getElementById('oleksii')?.remove();
-    document.getElementById('tt')?.append(<p>Oleksii</p>);
-  }
-}
+function animateText(data: AnimatingTextData, current: number): number | void {
+  if (data.start == null) data.start = current;
+  // get current animation time in [0, 1] range && update path data;
+  let t = easeInOutExpo((current - data.start) / data.duration);
+  console.log(t)
+  tagById(data.item, 'path')?.setAttribute("d", data.interpolator(t).toString());
 
-function animDescription(time) {
-  var t = (time - window["animationStart-test"]) / 600;
-  t = easeInOutExpo(t);
-  document.getElementById("d1")?.getElementsByTagName('path')[0]?.setAttribute("d", window["interpolator-test"](t));
-  if (t + 0.01 < 1) {
-    requestAnimationFrame(animDescription);
-  } else {
-    document.getElementById("d1")?.getElementsByTagName('path')[0]?.setAttribute("d", window["interpolator-test"](1));
-    document.getElementById("d1")?.getElementsByTagName('path')[0]?.setAttribute("fill", "var(--secondary)");
-  }
+  // check if we should continue animating;
+  if (data.start + data.duration > current)
+    return requestAnimationFrame((time) => animateText(data, time));
+
+
+  // else changing to real eleemnt;
+  tagById(data.item, 'svg')?.replaceWith(data.item == 'tt' ? <p>Oleksii</p> : <p>Redefining the way humans interact</p>);
 }
 
 function easeInOutExpo(x: number): number {
-  return x === 0
-    ? 0
-    : x === 1
-      ? 1
-      : x < 0.5 ? Math.pow(2, 20 * x - 10) / 2
-        : (2 - Math.pow(2, -20 * x + 10)) / 2;
+  if ([0, 1].includes(x)) return x;
+  return x < 0.5 ? Math.pow(2, 20 * x - 10) / 2
+    : (2 - Math.pow(2, -20 * x + 10)) / 2;
 }

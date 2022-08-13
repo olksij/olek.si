@@ -2,11 +2,10 @@ import { createElement, createFragment } from "./jsx";
 import { head, dates, fonts, images, stylesheets } from './sources';
 import print from './print';
 
-/// class used to preload images during skeleton loader animation by
-/// inserting <link rel="preload" as="image" /> tags
-
 enum Asset { stylesheet, image };
 
+/// class used to preload images during skeleton loader animation by
+/// inserting <link rel="preload" as="image" /> tags
 class PreloadAsset {
   type: Asset;
   asset: string | URL;
@@ -67,13 +66,20 @@ export const loadImages = new Promise<void>((resolve) => {
 
 // fonts variable is done as a Promise object to allow code run asynchoriously
 export const loadFonts = new Promise<void>((resolve) => {
-  for (let font in fonts) new FontFace(font, `url(${fonts[font]})`)
-    .load().then((fontface) => {
-      document.fonts.add(fontface), delete fonts[font];
-      if (!Object.keys(fonts).length) resolve(), print('⌨️ Fonts');
-    });
-});
+  let list = new Set<string>();
 
+  for (let font in fonts) {
+    var request = new XMLHttpRequest();
+    request.open('get', fonts[font], true);
+    request.responseType = 'arraybuffer';
+    request.onload = () => {
+      let fontFace = new FontFace(font, request.response);
+      document.fonts.add(fontFace), list.delete(font);
+      if (!list.size) resolve(), print('⌨️ Fonts')
+    }
+    request.send(), list.add(font);
+  }
+});
 
 export const loadStylesheets = new Promise<void>((resolve) => {
   let list = new Set<URL>();

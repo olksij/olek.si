@@ -15,8 +15,8 @@ export const head: Node[] = [
 
 // font links to load
 export const fonts: Record<string, URL> = {
-  'Display': new URL('/assets/fonts/Display-Bold.woff2', import.meta.url),
-  'Text': new URL('/assets/fonts/Text-Medium.woff2', import.meta.url),
+  'Display': new URL('/assets/fonts/Display-Bold.woff', import.meta.url),
+  'Text': new URL('/assets/fonts/Text-Medium.woff', import.meta.url),
 };
 
 // image links to load

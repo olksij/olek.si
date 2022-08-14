@@ -1,6 +1,7 @@
 import { createElement, createFragment } from "./jsx";
 import { head, dates, fonts, images, stylesheets } from './sources';
 import print from './print';
+import { computeWorker } from "./render";
 
 enum Asset { stylesheet, image };
 
@@ -67,15 +68,21 @@ export const loadImages = new Promise<void>((resolve) => {
 // fonts variable is done as a Promise object to allow code run asynchoriously
 export const loadFonts = new Promise<void>((resolve) => {
   let list = new Set<string>();
+  let fontResult: Record<string, ArrayBuffer> = {};
 
   for (let font in fonts) {
     var request = new XMLHttpRequest();
     request.open('get', fonts[font], true);
     request.responseType = 'arraybuffer';
-    request.onload = () => {
-      let fontFace = new FontFace(font, request.response);
+    request.onload = function (this) {
+      let fontFace = new FontFace(font, this.response);
       document.fonts.add(fontFace), list.delete(font);
-      if (!list.size) resolve(), print('⌨️ Fonts')
+      fontResult[font] = this.response;
+
+      if (!list.size) {
+        resolve(), print('⌨️ Fonts');
+        computeWorker.postMessage({ deliver: 'fonts', data: fontResult }, fontResult);
+      }
     }
     request.send(), list.add(font);
   }

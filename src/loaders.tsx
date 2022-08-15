@@ -2,20 +2,19 @@ import { createElement, createFragment } from "./jsx";
 import { head, dates, fonts, images, stylesheets } from './sources';
 import print from './print';
 import { computeWorker } from "./render";
-
-enum Asset { stylesheet, image };
+import { PreloadAssetType } from "./interfaces";
 
 /// class used to preload images during skeleton loader animation by
 /// inserting <link rel="preload" as="image" /> tags
 class PreloadAsset {
-  type: Asset;
+  type: PreloadAssetType;
   asset: string | URL;
   resolve: any;
   list: Set<string | URL>;
   url: URL;
   id: string;
 
-  constructor(type: Asset, asset: string | URL, list: Set<string | URL>, resolve: any) {
+  constructor(type: PreloadAssetType, asset: string | URL, list: Set<string | URL>, resolve: any) {
     this.type = type;
     this.asset = asset;
     this.url = asset as URL;
@@ -27,13 +26,13 @@ class PreloadAsset {
   onLoad(): void {
     this.list.delete(this.asset);
     if (!this.list.size) this.resolve(),
-      print(['💅🏼 Stylesheets', '🖼️ Images'][this.type]);
+      print(this.type == 'stylesheet' ? '💅🏼 Stylesheets' : '🖼️ Images');
   }
 
   render() {
-    if (this.type == Asset.image)
+    if (this.type == 'image')
       return <link rel="preload" href={images[this.id]} onLoad={() => this.onLoad()} as="image" />;
-    if (this.type == Asset.stylesheet)
+    if (this.type == 'stylesheet')
       return <link rel="stylesheet" href={this.url} onLoad={() => this.onLoad()} />;
   }
 }
@@ -60,7 +59,7 @@ export const loadInternals = new Promise<Object>((resolve) => {
 export const loadImages = new Promise<void>((resolve) => {
   let list = new Set<string>();
   for (var id in images) {
-    const link = new PreloadAsset(Asset.image, id, list, resolve);
+    const link = new PreloadAsset('image', id, list, resolve);
     list.add(id), document.head.append(link.render());
   };
 });
@@ -91,7 +90,7 @@ export const loadFonts = new Promise<void>((resolve) => {
 export const loadStylesheets = new Promise<void>((resolve) => {
   let list = new Set<URL>();
   for (let style of stylesheets) {
-    const link = new PreloadAsset(Asset.stylesheet, style, list, resolve);
+    const link = new PreloadAsset('stylesheet', style, list, resolve);
     list.add(style), document.head.append(link.render());
   };
 });

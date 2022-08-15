@@ -1,7 +1,9 @@
-import { getCLS, getFCP, getFID, getLCP, getTTFB } from 'web-vitals';
+import * as webvitals from 'web-vitals';
 import print from './print';
 
 const vitalsUrl = 'https://vitals.vercel-analytics.com/v1/vitals';
+
+for (var item in webvitals) webvitals[item]((metric) => sendMetrics(metric));
 
 function sendMetrics(metric) {
   let connection_type = 'connection' in navigator && navigator['connection'] && 'effectiveType' in navigator['connection'] ? navigator['connection']['effectiveType'] : '';
@@ -11,9 +13,9 @@ function sendMetrics(metric) {
     id: metric.id,
     page: location.href,
     href: location.href,
-    event_name: metric.name, // TTFB
-    value: metric.value.toString(), // 60.20000000298023
-    speed: connection_type, // 4g
+    event_name: metric.name,
+    value: metric.value.toString(),
+    speed: connection_type,
   };
 
   const blob = new Blob([new URLSearchParams(body).toString()], {
@@ -33,5 +35,3 @@ function sendMetrics(metric) {
     keepalive: true,
   });
 }
-
-[getFID, getTTFB, getLCP, getCLS, getFCP].forEach((get) => get((metric) => sendMetrics(metric)));

@@ -1,6 +1,6 @@
 import { loadInternals, loadFonts, loadImages, loadStylesheets } from './loaders';
 import print from './print';
-import render from './render';
+import render, { textMorphReady } from './render';
 
 window.addEventListener('load', async () => {
   print("🔥 Load Event");
@@ -10,6 +10,7 @@ window.addEventListener('load', async () => {
   await loadFonts;
   await loadImages;
   await loadStylesheets;
+  await textMorphReady;
 
   // we are done loading assets and are ready for render!
   print("🎨 Ready for render");

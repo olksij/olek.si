@@ -27,7 +27,7 @@ export async function loadTexts(fontsData: Record<string, TextsData>) {
     fromPath = singlePath ? fromPath[0] : fromPath;
 
     // add interpolator to record
-    interpolators[id] = interpolator(fromPath, pathData, { maxSegmentLength: 7, single: true });
+    interpolators[id] = interpolator(fromPath, pathData, { maxSegmentLength: 5, single: true });
   }
 
   // signal to main thread that interpolators are ready

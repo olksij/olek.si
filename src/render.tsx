@@ -14,9 +14,12 @@ const restoreIDs: Record<string, Array<string>> = {
 
 // order and details of animating each node
 const animatingOrder: Record<string, RenderData> = {
-  "pf": { type: 'img', delay: 50, alt: 'profilePicture' },
-  "tt": { type: 'text', delay: 100 },
+  "pf": { type: 'img', delay: 0, alt: 'profilePicture' },
+  "tt": { type: 'text', delay: 50 },
+  "d1": { type: 'text', delay: 300 },
+  "d2": { type: 'text', delay: 50 },
   "ps": { type: 'img', delay: 50, children: true },
+  "rg": { type: 'text', delay: 50, children: true },
   "cr": { type: 'img', delay: 100 },
 }
 
@@ -31,12 +34,52 @@ const textsData: Record<string, TextsData> = {
     fromSvg: `<svg width="386" height="160" viewBox="0 0 386 160" fill="none" xmlns="http://www.w3.org/2000/svg"><path id="path" fill-rule="evenodd" clip-rule="evenodd" d="M0 0V160H386V0H0Z" fill="var(--el)"/></svg>`,
   },
   "d1": {
-    text: 'Redefining the way humans interact',
+    text: 'Redefining the way humans interact', // Pereosmyslenńa sposobu vzajemodiji ĺudyny
     font: 'text',
     fontSize: 20,
     duration: 600,
-    fromPath: "M0 0V160H386V0H0Z",
-    fromSvg: `<svg width="386" height="160" viewBox="0 0 386 160" fill="none" xmlns="http://www.w3.org/2000/svg"><path id="path" fill-rule="evenodd" clip-rule="evenodd" d="M0 0V160H386V0H0Z" fill="var(--el)"/></svg>`,
+    fromPath: "M0 0V28H300V0H0Z",
+    fromSvg: `<svg width="300" height="28" viewBox="0 0 300 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path id="path" fill-rule="evenodd" clip-rule="evenodd" d="M0 0V28H300V0H0Z" fill="var(--el)"/></svg>`,
+  },
+  "d2": {
+    text: 'with computers', // z kompjuterom
+    font: 'text',
+    fontSize: 20,
+    duration: 600,
+    fromPath: "M0 0V28H128V0H0Z",
+    fromSvg: `<svg width="128" height="28" viewBox="0 0 128 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path id="path" fill-rule="evenodd" clip-rule="evenodd" d="M0 0V28H128V0H0Z" fill="var(--el)"/></svg>`,
+  },
+  "nav-home": {
+    text: 'oleksii.xyz',
+    font: 'text',
+    fontSize: 20,
+    duration: 600,
+    fromPath: "M0 0V24H128V0H0Z",
+    fromSvg: `<svg width="128" height="24" viewBox="0 0 128 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path id="path" fill-rule="evenodd" clip-rule="evenodd" d="M0 0V24H128V0H0Z" fill="var(--el)"/></svg>`,
+  },
+  "nav-about": {
+    text: 'about',
+    font: 'text',
+    fontSize: 20,
+    duration: 600,
+    fromPath: "M0 0V24H128V0H0Z",
+    fromSvg: `<svg width="128" height="24" viewBox="0 0 128 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path id="path" fill-rule="evenodd" clip-rule="evenodd" d="M0 0V24H128V0H0Z" fill="var(--el)"/></svg>`,
+  },
+  "nav-projects": {
+    text: 'projects',
+    font: 'text',
+    fontSize: 20,
+    duration: 600,
+    fromPath: "M0 0V24H128V0H0Z",
+    fromSvg: `<svg width="128" height="24" viewBox="0 0 128 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path id="path" fill-rule="evenodd" clip-rule="evenodd" d="M0 0V24H128V0H0Z" fill="var(--el)"/></svg>`,
+  },
+  "nav-work": {
+    text: 'work',
+    font: 'text',
+    fontSize: 20,
+    duration: 600,
+    fromPath: "M0 0V24H128V0H0Z",
+    fromSvg: `<svg width="128" height="24" viewBox="0 0 128 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path id="path" fill-rule="evenodd" clip-rule="evenodd" d="M0 0V24H128V0H0Z" fill="var(--el)"/></svg>`,
   }
 }
 
@@ -56,8 +99,8 @@ let resolveMorph: (value: void) => void;
 export let textMorphReady = new Promise<void>((resolve) => resolveMorph = resolve);
 
 export default async function render(): Promise<void> {
+  //await window["skeleton"];
   if (!sessionStorage.getItem('loaded')) {
-    await window["skeleton"];
     sessionStorage.setItem('loaded', 'true');
   }
 
@@ -75,38 +118,44 @@ export default async function render(): Promise<void> {
     let data: RenderData = animatingOrder[item];
     let node: HTMLElement;
 
+    let queue: Array<string> = [item];
+    // if data.children is true, retreive children
+    if (data.children) queue = [...byId(item)!.children]
+      .map(child => child.id);
+
     switch (data.type) {
       case 'img':
-        let queue: Array<string> = [item];
-        // if data.children is true, retreive children
-        if (data.children) queue = [...byId(item)!.children]
-          .map(child => child.id);
-
         for (let child of queue) {
           // generate future node;
           node = <img src={images[child]} alt={item} />;
           // insert it to appropriate skeleton element;
           byId(child)?.append(node);
           // schedule animation
+          delayCounter += data.delay;
           setTimeout((child) => byId(child)?.classList.add('rendered'), delayCounter, child);
         }
         break;
 
       case 'text':
-        byId(item)!.innerHTML += textsData[item].fromSvg;
+        for (let child of queue) {
+          delayCounter += data.delay;
+          setTimeout((item) => {
+            byId(item)!.innerHTML += textsData[item].fromSvg;
 
-        requestAnimationFrame((current) => computeWorker.postMessage({
-          deliver: 'morph',
-          data: { item, current, metadata: { start: current, duration: textsData[item].duration } }
-        }));
+            requestAnimationFrame((current) => computeWorker.postMessage({
+              deliver: 'morph',
+              data: { item, current, metadata: { start: current, duration: textsData[item].duration } }
+            }));
 
-        tagById(item, 'path')?.animate(
-          [{ fill: 'var(--el)' }, { fill: 'var(--text)' }],
-          { delay: textsData[item].duration / 2, duration: textsData[item].duration, easing: 'cubic-bezier(0.87, 0, 0.13, 1)' },
-        );
+            tagById(item, 'path')?.animate(
+              [{ fill: 'var(--el)' }, { fill: 'var(--text)' }],
+              { delay: textsData[item].duration / 2, duration: textsData[item].duration, easing: 'cubic-bezier(0.87, 0, 0.13, 1)' },
+            );
 
-        byId(item)?.classList.add('rendered');
+            byId(item)?.classList.add('rendered');
 
+          }, delayCounter, child);
+        }
         break;
 
       default:

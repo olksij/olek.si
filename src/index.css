@@ -51,7 +51,9 @@ img {
 /* --- RENDER TITLE --- */
 
 #tt.rendered,
-#d1.rendered {
+#d1.rendered,
+#d2.rendered,
+#rg>.rendered {
   overflow: hidden;
   background: #0000;
   display: block;
@@ -70,6 +72,16 @@ img {
   margin-right: 2px;
   letter-spacing: -2.56px;
   font-family: 'Display';
+}
+
+#d1>p,
+#d2>p,
+#rg>.rendered>p {
+  color: var(--secondary);
+  font-size: 20px;
+  font-family: 'Text';
+  white-space: nowrap;
+  margin: 0
 }
 
 @media (min-width: 920px) {

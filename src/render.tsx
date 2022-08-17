@@ -28,18 +28,19 @@ const textsData: Record<string, TextsData> = {
     text: 'Oleksii',
     font: 'display',
     fontSize: 128,
-    letterSpacing: -0.02,
+    y: 100,
+    letterSpacing: -0.04,
     duration: 800,
     fromPath: "M103 0H0V160H103V80V0ZM52 80H51V79H52V80ZM103 0H129V160H103V80V0ZM129 0H201V160H129V0ZM167 81V80H168V81H167ZM201 0H267V160H201V0ZM324 0H267V160H324V50.5V0ZM324 0V50.5H355V0H324ZM324 50.5V160H355V50.5H324ZM386 50.5V0H355V50.5H386ZM386 160V50.5H355V160H386Z",
-    fromSvg: `<svg width="386" height="160" viewBox="0 0 386 160" fill="none" xmlns="http://www.w3.org/2000/svg"><path id="path" fill-rule="evenodd" clip-rule="evenodd" d="M0 0V160H386V0H0Z" fill="var(--el)"/></svg>`,
+    fromSvg: `<svg viewBox="0 0 386 112" fill="none" xmlns="http://www.w3.org/2000/svg"><path id="path" fill-rule="evenodd" clip-rule="evenodd" d="M0 0V160H386V0H0Z" fill="var(--el)"/></svg>`,
   },
   "d1": {
     text: 'Redefining the way humans interact', // Pereosmyslenńa sposobu vzajemodiji ĺudyny
     font: 'text',
     fontSize: 20,
     duration: 600,
-    fromPath: "M0 0V28H300V0H0Z",
-    fromSvg: `<svg width="300" height="28" viewBox="0 0 300 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path id="path" fill-rule="evenodd" clip-rule="evenodd" d="M0 0V28H300V0H0Z" fill="var(--el)"/></svg>`,
+    fromPath: "M0 0V28H337V0H0Z",
+    fromSvg: `<svg viewBox="0 0 337 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path id="path" fill-rule="evenodd" clip-rule="evenodd" d="M0 0V28H337V0H0Z" fill="var(--el)"/></svg>`,
   },
   "d2": {
     text: 'with computers', // z kompjuterom
@@ -47,7 +48,7 @@ const textsData: Record<string, TextsData> = {
     fontSize: 20,
     duration: 600,
     fromPath: "M0 0V28H128V0H0Z",
-    fromSvg: `<svg width="128" height="28" viewBox="0 0 128 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path id="path" fill-rule="evenodd" clip-rule="evenodd" d="M0 0V28H128V0H0Z" fill="var(--el)"/></svg>`,
+    fromSvg: `<svg viewBox="0 0 128 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path id="path" fill-rule="evenodd" clip-rule="evenodd" d="M0 0V28H128V0H0Z" fill="var(--el)"/></svg>`,
   },
   "nav-home": {
     text: 'oleksii.xyz',
@@ -55,7 +56,7 @@ const textsData: Record<string, TextsData> = {
     fontSize: 20,
     duration: 600,
     fromPath: "M0 0V24H128V0H0Z",
-    fromSvg: `<svg width="128" height="24" viewBox="0 0 128 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path id="path" fill-rule="evenodd" clip-rule="evenodd" d="M0 0V24H128V0H0Z" fill="var(--el)"/></svg>`,
+    fromSvg: `<svg viewBox="0 0 128 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path id="path" fill-rule="evenodd" clip-rule="evenodd" d="M0 0V24H128V0H0Z" fill="var(--el)"/></svg>`,
   },
   "nav-about": {
     text: 'about',
@@ -63,7 +64,7 @@ const textsData: Record<string, TextsData> = {
     fontSize: 20,
     duration: 600,
     fromPath: "M0 0V24H128V0H0Z",
-    fromSvg: `<svg width="128" height="24" viewBox="0 0 128 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path id="path" fill-rule="evenodd" clip-rule="evenodd" d="M0 0V24H128V0H0Z" fill="var(--el)"/></svg>`,
+    fromSvg: `<svg viewBox="0 0 128 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path id="path" fill-rule="evenodd" clip-rule="evenodd" d="M0 0V24H128V0H0Z" fill="var(--el)"/></svg>`,
   },
   "nav-projects": {
     text: 'projects',
@@ -71,7 +72,7 @@ const textsData: Record<string, TextsData> = {
     fontSize: 20,
     duration: 600,
     fromPath: "M0 0V24H128V0H0Z",
-    fromSvg: `<svg width="128" height="24" viewBox="0 0 128 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path id="path" fill-rule="evenodd" clip-rule="evenodd" d="M0 0V24H128V0H0Z" fill="var(--el)"/></svg>`,
+    fromSvg: `<svg viewBox="0 0 128 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path id="path" fill-rule="evenodd" clip-rule="evenodd" d="M0 0V24H128V0H0Z" fill="var(--el)"/></svg>`,
   },
   "nav-work": {
     text: 'work',
@@ -79,7 +80,7 @@ const textsData: Record<string, TextsData> = {
     fontSize: 20,
     duration: 600,
     fromPath: "M0 0V24H128V0H0Z",
-    fromSvg: `<svg width="128" height="24" viewBox="0 0 128 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path id="path" fill-rule="evenodd" clip-rule="evenodd" d="M0 0V24H128V0H0Z" fill="var(--el)"/></svg>`,
+    fromSvg: `<svg viewBox="0 0 128 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path id="path" fill-rule="evenodd" clip-rule="evenodd" d="M0 0V24H128V0H0Z" fill="var(--el)"/></svg>`,
   }
 }
 
@@ -99,8 +100,8 @@ let resolveMorph: (value: void) => void;
 export let textMorphReady = new Promise<void>((resolve) => resolveMorph = resolve);
 
 export default async function render(): Promise<void> {
-  //await window["skeleton"];
   if (!sessionStorage.getItem('loaded')) {
+    await window["skeleton"];
     sessionStorage.setItem('loaded', 'true');
   }
 

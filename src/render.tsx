@@ -1,4 +1,4 @@
-import { ComputeAPI, MorphFrameData, RenderData, TextsData } from "./interfaces";
+import { ComputeAPI, MorphFrameData, RenderData, RenderTextData, TextData, TextsRecord } from "./interfaces";
 import { createElement, createFragment } from "./jsx";
 import { images } from "./sources";
 
@@ -23,64 +23,51 @@ const animatingOrder: Record<string, RenderData> = {
   "cr": { type: 'img', delay: 100 },
 }
 
-const textsData: Record<string, TextsData> = {
+const textsData: Record<string, TextData> = {
   "tt": {
     text: 'Oleksii',
     font: 'display',
     fontSize: 128,
     y: 100,
     letterSpacing: -0.04,
-    duration: 800,
+    width: 386,
     fromPath: "M103 0H0V160H103V80V0ZM52 80H51V79H52V80ZM103 0H129V160H103V80V0ZM129 0H201V160H129V0ZM167 81V80H168V81H167ZM201 0H267V160H201V0ZM324 0H267V160H324V50.5V0ZM324 0V50.5H355V0H324ZM324 50.5V160H355V50.5H324ZM386 50.5V0H355V50.5H386ZM386 160V50.5H355V160H386Z",
-    fromSvg: `<svg viewBox="0 0 386 112" fill="none" xmlns="http://www.w3.org/2000/svg"><path id="path" fill-rule="evenodd" clip-rule="evenodd" d="M0 0V160H386V0H0Z" fill="var(--el)"/></svg>`,
   },
   "d1": {
     text: 'Redefining the way humans interact', // Pereosmyslenńa sposobu vzajemodiji ĺudyny
     font: 'text',
     fontSize: 20,
-    duration: 600,
-    fromPath: "M0 0V28H337V0H0Z",
-    fromSvg: `<svg viewBox="0 0 337 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path id="path" fill-rule="evenodd" clip-rule="evenodd" d="M0 0V28H337V0H0Z" fill="var(--el)"/></svg>`,
+    width: 337,
   },
   "d2": {
     text: 'with computers', // z kompjuterom
     font: 'text',
     fontSize: 20,
-    duration: 600,
-    fromPath: "M0 0V28H128V0H0Z",
-    fromSvg: `<svg viewBox="0 0 128 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path id="path" fill-rule="evenodd" clip-rule="evenodd" d="M0 0V28H128V0H0Z" fill="var(--el)"/></svg>`,
+    width: 128,
   },
   "nav-home": {
     text: 'oleksii.xyz',
     font: 'text',
     fontSize: 20,
-    duration: 600,
-    fromPath: "M0 0V24H128V0H0Z",
-    fromSvg: `<svg viewBox="0 0 128 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path id="path" fill-rule="evenodd" clip-rule="evenodd" d="M0 0V24H128V0H0Z" fill="var(--el)"/></svg>`,
+    width: 128,
   },
   "nav-about": {
     text: 'about',
     font: 'text',
     fontSize: 20,
-    duration: 600,
-    fromPath: "M0 0V24H128V0H0Z",
-    fromSvg: `<svg viewBox="0 0 128 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path id="path" fill-rule="evenodd" clip-rule="evenodd" d="M0 0V24H128V0H0Z" fill="var(--el)"/></svg>`,
+    width: 128,
   },
   "nav-projects": {
     text: 'projects',
     font: 'text',
     fontSize: 20,
-    duration: 600,
-    fromPath: "M0 0V24H128V0H0Z",
-    fromSvg: `<svg viewBox="0 0 128 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path id="path" fill-rule="evenodd" clip-rule="evenodd" d="M0 0V24H128V0H0Z" fill="var(--el)"/></svg>`,
+    width: 128,
   },
   "nav-work": {
     text: 'work',
     font: 'text',
     fontSize: 20,
-    duration: 600,
-    fromPath: "M0 0V24H128V0H0Z",
-    fromSvg: `<svg viewBox="0 0 128 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path id="path" fill-rule="evenodd" clip-rule="evenodd" d="M0 0V24H128V0H0Z" fill="var(--el)"/></svg>`,
+    width: 128,
   }
 }
 
@@ -96,14 +83,16 @@ function tagById(id: string, tag: string): Element | undefined {
   return byId(id)?.getElementsByTagName(tag)[0];
 }
 
-let resolveMorph: (value: void) => void;
-export let textMorphReady = new Promise<void>((resolve) => resolveMorph = resolve);
+let resolveMorph: (value: TextsRecord) => void;
+export let textMorphReady = new Promise<TextsRecord>((resolve) => resolveMorph = resolve);
 
 export default async function render(): Promise<void> {
   if (!sessionStorage.getItem('loaded')) {
     await window["skeleton"];
     sessionStorage.setItem('loaded', 'true');
   }
+
+  let renderTextData = await textMorphReady;
 
   // restore id's for shortened components
   for (let id in restoreIDs) {
@@ -141,16 +130,17 @@ export default async function render(): Promise<void> {
         for (let child of queue) {
           delayCounter += data.delay;
           setTimeout((item) => {
-            byId(item)!.innerHTML += textsData[item].fromSvg;
+            var data = renderTextData[item] as RenderTextData;
+            byId(item)!.innerHTML += data.svg;
 
             requestAnimationFrame((current) => computeWorker.postMessage({
               deliver: 'morph',
-              data: { item, current, metadata: { start: current, duration: textsData[item].duration } }
+              data: { item, current, metadata: { start: current, duration: 800 } }
             }));
 
             tagById(item, 'path')?.animate(
               [{ fill: 'var(--el)' }, { fill: 'var(--text)' }],
-              { delay: textsData[item].duration / 2, duration: textsData[item].duration, easing: 'cubic-bezier(0.87, 0, 0.13, 1)' },
+              { delay: 400, duration: 800, easing: 'cubic-bezier(0.87, 0, 0.13, 1)' },
             );
 
             byId(item)?.classList.add('rendered');
@@ -166,7 +156,7 @@ export default async function render(): Promise<void> {
 }
 
 computeWorker.onmessage = (message: MessageEvent<ComputeAPI>) => {
-  if (message.data.deliver == 'texts') resolveMorph();
+  if (message.data.deliver == 'texts') resolveMorph(message.data.data as TextsRecord);
   if (message.data.deliver == 'morph') renderAnimations(message.data.data as MorphFrameData);
 }
 

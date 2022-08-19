@@ -3,7 +3,7 @@ export type DeliverType = 'fonts' | 'texts' | 'morph';
 
 // types for each `DeliveryType`
 export type FontsRecord = Record<string, ArrayBuffer>;
-export type TextsRecord = Record<string, TextsData>;
+export type TextsRecord = Record<string, TextData | RenderTextData>;
 export type MorphFrame = MorphFrameRequest | MorphFrameData;
 
 export type RenderType = 'img' | 'text';
@@ -17,16 +17,20 @@ export interface ComputeAPI {
 }
 
 // used to define text style for each node
-export interface TextsData {
+export interface TextData {
   text: string // text itself;
   font: FontType;
   fontSize: number;
-  x?: number;
   y?: number // baseline;
   letterSpacing?: number;
-  duration: number;
-  fromPath: string;
-  fromSvg: string;
+  fromPath?: string;
+  width: number;
+  wrap?: boolean;
+}
+
+export interface RenderTextData {
+  svg: string;
+  //lines: number;
 }
 
 export interface RenderData {

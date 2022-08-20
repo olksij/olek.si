@@ -133,11 +133,6 @@ export default async function render(): Promise<void> {
             var data = renderTextData[item] as RenderTextData;
             byId(item)!.innerHTML += data.svg;
 
-            requestAnimationFrame((current) => computeWorker.postMessage({
-              deliver: 'morph',
-              data: { item, current, metadata: { start: current, duration: 800 } }
-            }));
-
             tagById(item, 'path')?.animate(
               [{ fill: 'var(--el)' }, { fill: 'var(--text)' }],
               { delay: 400, duration: 800, easing: 'cubic-bezier(0.87, 0, 0.13, 1)' },
@@ -157,14 +152,4 @@ export default async function render(): Promise<void> {
 
 computeWorker.onmessage = (message) => {
   if (message.data.deliver == 'texts') resolveMorph(message.data.data as TextsRecord);
-  if (message.data.deliver == 'morph') renderAnimations(message.data.data as MorphFrameData);
-}
-
-function renderAnimations(data) {
-  tagById(data.item, 'path')?.setAttribute("d", data.path);
-  if (data.next) return requestAnimationFrame((current) => computeWorker.postMessage({
-    deliver: 'morph', data: { item: data.item, current }
-  } as ComputeAPI));
-
-  byId(data.item)?.replaceChildren(<p>{textsData[data.item].text}</p>);
 }

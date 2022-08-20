@@ -155,12 +155,12 @@ export default async function render(): Promise<void> {
   }
 }
 
-computeWorker.onmessage = (message: MessageEvent<ComputeAPI>) => {
+computeWorker.onmessage = (message) => {
   if (message.data.deliver == 'texts') resolveMorph(message.data.data as TextsRecord);
   if (message.data.deliver == 'morph') renderAnimations(message.data.data as MorphFrameData);
 }
 
-function renderAnimations(data: MorphFrameData) {
+function renderAnimations(data) {
   tagById(data.item, 'path')?.setAttribute("d", data.path);
   if (data.next) return requestAnimationFrame((current) => computeWorker.postMessage({
     deliver: 'morph', data: { item: data.item, current }

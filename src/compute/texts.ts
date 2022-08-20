@@ -3,9 +3,10 @@
 
 import { interpolateAll } from "flubber"
 import { fontsLoaded, fontDisplay, fontText } from "./fonts";
-import { TextData } from "../interfaces";
+import { RenderTextData, TextData } from "../interfaces";
 
 export let interpolators: Record<string, any> = {}
+let renderTexts: Record<string, RenderTextData> = {}
 
 export async function loadTexts(textsData: Record<string, TextData>) {
   // ensure that fonts are loaded and we can use them
@@ -13,7 +14,6 @@ export async function loadTexts(textsData: Record<string, TextData>) {
 
 
   for (let id in textsData) {
-    console.log(id, textsData);
     let data = textsData[id];
 
     // font used for vectorizing
@@ -23,16 +23,21 @@ export async function loadTexts(textsData: Record<string, TextData>) {
     let toPath = pathData.toPathData(2).replaceAll('ZM', 'Z$M')?.split('$');
 
     let fromPath: Array<string> = [];
+    let fromSvg: string = '';
+
     if (data.fromPath)
       fromPath = data.fromPath!.replaceAll('ZM', 'Z$M')?.split('$');
     else for (var i = 0; i < toPath.length; i++) {
-      fromPath.push(`M 0 0 V${pathData.getBoundingBox().y2} H${pathData.getBoundingBox().x2} Z`);
+      let box = pathData.getBoundingBox();
+      let currPath = `M ${data.width / toPath.length * i} 0 V${box.y2} H${data.width / toPath.length * (i + 1)} V0 H${data.width / toPath.length * i} Z`;
+      fromPath.push(currPath), fromSvg += currPath;
     }
 
     // add interpolator to record
-    interpolators[id] = interpolateAll(fromPath, toPath, { maxSegmentLength: 5, single: true });
+    renderTexts[id] = { svg: `<svg><path fill="var(--el)" fill-rule="evenodd" clip-rule="evenodd"/></svg>` };
+    interpolators[id] = interpolateAll(fromPath, toPath, { maxSegmentLength: 3, single: true });
   }
 
   // signal to main thread that interpolators are ready
-  postMessage({ deliver: 'texts', data: { svg: '' } });
+  postMessage({ deliver: 'texts', data: renderTexts });
 }

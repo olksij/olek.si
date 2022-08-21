@@ -2,7 +2,7 @@
   "compilerOptions": {
     "module": "ESNext",
     "moduleResolution": "Node",
-    "target": "ES2020",
+    "target": "ESNext",
     "jsx": "react",
     "strictNullChecks": true,
     "strictFunctionTypes": true,
@@ -10,14 +10,11 @@
     "jsxFragmentFactory": "createFragment",
     "lib": [
       "DOM",
-      "ES5",
-      "ES6",
+      "ESNext",
       "DOM.Iterable",
-      "ES2021.String"
     ]
   },
-  "exclude": [
-    "node_modules",
-    "**/node_modules/*"
+  "include": [
+    "src"
   ]
 }

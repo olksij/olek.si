@@ -10,26 +10,26 @@ export const dates: Record<string, Array<string>> = {
 export const head: Node[] = [
   <title>Oleksii Besida</title>,
   <meta name="description" content="Oleksii Besida  |  Ukrainian he/him UI&UX designer and Frontend developer living in Stockholm, Sweden." />,
-  <link rel="icon" type="image/x-icon" href={new URL('/assets/favicon.ico', import.meta.url)} />
+  <link rel="icon" type="image/x-icon" href={new URL('favicon.ico', import.meta.url)} />
 ];
 
 // font links to load
 export const fonts: Record<string, URL> = {
-  'Display': new URL('/assets/fonts/Display-Bold.woff', import.meta.url),
-  'Text': new URL('/assets/fonts/Text-Medium.woff', import.meta.url),
+  'Display': new URL('fonts/Display-Bold.woff', import.meta.url),
+  'Text': new URL('fonts/Text-Medium.woff', import.meta.url),
 };
 
 // image links to load
 export const images: Record<string, URL> = {
-  "pf": new URL("/assets/profilePicture.jpg?as=webp&width=512", import.meta.url),
-  "telegram": new URL("/assets/telegram.svg", import.meta.url),
-  "instagram": new URL("/assets/instagram.svg", import.meta.url),
-  "github": new URL("/assets/github.svg", import.meta.url),
-  "twitter": new URL("/assets/twitter.svg", import.meta.url),
-  "email": new URL("/assets/email.svg", import.meta.url),
-  "cr": new URL("/assets/copyright.svg", import.meta.url),
+  "pf": new URL('profilePicture.jpg?as=webp&width=512', import.meta.url),
+  "telegram": new URL('telegram.svg', import.meta.url),
+  "instagram": new URL('instagram.svg', import.meta.url),
+  "github": new URL('github.svg', import.meta.url),
+  "twitter": new URL('twitter.svg', import.meta.url),
+  "email": new URL('email.svg', import.meta.url),
+  "cr": new URL('copyright.svg', import.meta.url),
 };
 
 export const stylesheets: URL[] = [
-  new URL("./index.css", import.meta.url)
+  new URL('index.css', import.meta.url)
 ];

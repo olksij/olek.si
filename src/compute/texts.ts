@@ -3,46 +3,42 @@
 
 import { interpolateAll } from "flubber"
 import { fontsLoaded, fontDisplay, fontText } from "./fonts";
-import { RenderTextData, TextData } from "../interfaces";
+import { RenderTextData, TextData, TextsRecord } from "../interfaces";
 
-export let interpolators: Record<string, any> = {}
 let renderTexts: Record<string, RenderTextData> = {}
 
-export async function loadTexts(textsData: Record<string, TextData>) {
+export async function loadTexts(textsData: TextsRecord) {
   // ensure that fonts are loaded and we can use them
   await fontsLoaded;
 
-
   for (let id in textsData) {
-    let data = textsData[id];
+    let data = textsData[id] as TextData;
 
     // font used for vectorizing
     let font = data.font == 'display' ? fontDisplay : fontText;
-    // retrieve from-to paths
+
+    // vectorize font and convert to string[]
     let pathData = font.getPath(data.text, 0, data.y ?? data.fontSize, data.fontSize, { letterSpacing: data.letterSpacing });
     let toPath = pathData.toPathData(5).replaceAll('ZM', 'Z$M')?.split('$');
 
-    let fromPath: Array<string> = [];
-    let fromSvg: string = '';
+    // retrieve fromPath if available
+    let fromPath: Array<string> = data.fromPath?.replaceAll('ZM', 'Z$M')?.split('$') ?? [];
 
-    if (data.fromPath)
-      fromPath = data.fromPath!.replaceAll('ZM', 'Z$M')?.split('$');
-    else for (var i = 0; i < toPath.length; i++) {
-      let perLetter = Math.round(data.width / toPath.length * 100) / 100;
-      let currPath = `M ${perLetter * i} 0 V${data.height} H${perLetter * (i + 1)} V0 H${perLetter * i} Z`;
-      fromPath.push(currPath), fromSvg += currPath;
+    if (fromPath.length == 0) {
+      // letter width for placeholder
+      let lw = Math.round(data.width / toPath.length * 100) / 100;
+      // split placeholder rectangle for each letter
+      for (var ww = 0, i = 0; i < toPath.length; ww += lw, i++) {
+        let currPath = `M ${ww} 0 V${data.height} H${ww + lw} V0 H${ww} Z`;
+        fromPath.push(currPath);
+      }
     }
 
-    // add interpolator to record
-    interpolators[id] = interpolateAll(fromPath, toPath, { maxSegmentLength: 4, single: true });
-    renderTexts[id] = {
-      svg: `<svg>
-        <path fill="var(--el)" fill-rule="evenodd" clip-rule="evenodd">
-          <animate attributeName="d" dur=".8s" values="${interpolators[id](0.001)};${interpolators[id](0.999)}" onend="this.parentElement.parentElement.replaceWith('<p>hhh</p>')" calcMode="spline" keySplines="0.87 0 0.13 1"/>
-        </path>
-      </svg>` };
+    // create interpolatee paths for svg <animate>
+    let interpolator = interpolateAll(fromPath, toPath, { maxSegmentLength: 4, single: true });
+    renderTexts[id] = { from: interpolator(1 / 1000), to: interpolator(1 - 1 / 1000) };
   }
 
-  // signal to main thread that interpolators are ready
+  // send to main thread computed paths
   postMessage({ deliver: 'texts', data: renderTexts });
 }

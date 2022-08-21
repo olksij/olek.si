@@ -30,7 +30,8 @@ export interface TextData {
 }
 
 export interface RenderTextData {
-  svg: string;
+  from: string;
+  to: string;
   //lines: number;
 }
 

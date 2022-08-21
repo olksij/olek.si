@@ -141,7 +141,16 @@ export default async function render(): Promise<void> {
           delayCounter += data.delay;
           setTimeout((item) => {
             var data = renderTextData[item] as RenderTextData;
-            byId(item)!.innerHTML += data.svg;
+
+            let loadVector = (element) => { element.parentElement.parentElement.replaceWith(<p>hhh</p>); }
+
+            let vector = <svg><path fill="var(--el)" fill-rule="evenodd" clip-rule="evenodd">
+              <animate attributeName="d" dur=".8s" values={data.from + ';' + data.to}
+                calcMode="spline" keySplines="0.87 0 0.13 1"
+                onendEvent={loadVector} />
+            </path></svg>
+
+            byId(item)!.append(vector);
 
             tagById(item, 'path')?.animate(
               [{ fill: 'var(--el)' }, { fill: 'var(--text)' }],

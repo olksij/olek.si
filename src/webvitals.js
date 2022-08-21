@@ -9,7 +9,7 @@ function sendMetrics(metric) {
   let connection_type = 'connection' in navigator && navigator['connection'] && 'effectiveType' in navigator['connection'] ? navigator['connection']['effectiveType'] : '';
 
   const body = {
-    dsn: process.env.VERCEL_ANALYTICS_ID,
+    dsn: import.meta.env.VERCEL_ANALYTICS_ID,
     id: metric.id,
     page: location.href,
     href: location.href,
@@ -24,7 +24,7 @@ function sendMetrics(metric) {
 
   print('📊 ' + metric.name, metric.value.toString());
 
-  return;
+  if (import.meta.env.DEV) return
 
   if (navigator.sendBeacon) {
     navigator.sendBeacon(vitalsUrl, blob);

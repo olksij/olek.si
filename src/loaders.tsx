@@ -31,9 +31,9 @@ class PreloadAsset {
 
   render() {
     if (this.type == 'image')
-      return <link rel="preload" href={images[this.id]} onLoad={() => this.onLoad()} as="image" />;
+      return <link rel="preload" href={images[this.id]} onload={() => this.onLoad()} as="image" />;
     if (this.type == 'stylesheet')
-      return <link rel="stylesheet" href={this.url} onLoad={() => this.onLoad()} />;
+      return <link rel="stylesheet" href={this.url} onload={() => this.onLoad()} />;
   }
 }
 

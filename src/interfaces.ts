@@ -25,6 +25,7 @@ export interface TextData {
   letterSpacing?: number;
   fromPath?: string;
   width: number;
+  height: number;
   wrap?: boolean;
 }
 

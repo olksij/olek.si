@@ -11,5 +11,5 @@ npm-debug.log*
 .env*.local
 
 #local
-.parcel-cache
 .vercel
+.vscode

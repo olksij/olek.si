@@ -28,21 +28,19 @@ export async function loadTexts(textsData: Record<string, TextData>) {
     if (data.fromPath)
       fromPath = data.fromPath!.replaceAll('ZM', 'Z$M')?.split('$');
     else for (var i = 0; i < toPath.length; i++) {
-      let box = pathData.getBoundingBox();
-      let currPath = `M ${data.width / toPath.length * i} 0 V${box.y2} H${data.width / toPath.length * (i + 1)} V0 H${data.width / toPath.length * i} Z`;
+      let perLetter = Math.round(data.width / toPath.length * 100) / 100;
+      let currPath = `M ${perLetter * i} 0 V${data.height} H${perLetter * (i + 1)} V0 H${perLetter * i} Z`;
       fromPath.push(currPath), fromSvg += currPath;
     }
 
     // add interpolator to record
-    interpolators[id] = interpolateAll(fromPath, toPath, { maxSegmentLength: 5, single: true });
+    interpolators[id] = interpolateAll(fromPath, toPath, { maxSegmentLength: 4, single: true });
     renderTexts[id] = {
       svg: `<svg>
         <path fill="var(--el)" fill-rule="evenodd" clip-rule="evenodd">
           <animate attributeName="d" dur=".8s" values="${interpolators[id](0.001)};${interpolators[id](0.999)}" onend="this.parentElement.parentElement.replaceWith('<p>hhh</p>')" calcMode="spline" keySplines="0.87 0 0.13 1"/>
         </path>
       </svg>` };
-
-    console.log(interpolators[id](0.5));
   }
 
   // signal to main thread that interpolators are ready

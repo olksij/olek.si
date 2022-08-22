@@ -1,10 +1,11 @@
+import { Font } from 'opentype.js'
+
 // `DeliverType`s used for communication with WebWorker
-export type DeliverType = 'fonts' | 'texts' | 'morph';
+export type DeliverType = 'fonts' | 'texts';
 
 // types for each `DeliveryType`
-export type FontsRecord = Record<string, ArrayBuffer>;
+export type FontsRecord = { [Type in FontType]?: FontData | ArrayBuffer };
 export type TextsRecord = Record<string, TextData | RenderTextData>;
-export type MorphFrame = MorphFrameRequest | MorphFrameData;
 
 export type RenderType = 'img' | 'text';
 export type FontType = 'display' | 'text';
@@ -13,26 +14,44 @@ export type PreloadAssetType = 'stylesheet' | 'image';
 // interface used for communicating with WebWorker
 export interface ComputeAPI {
   deliver: DeliverType,
-  data: FontsRecord | TextsRecord | MorphFrame,
+  data: FontsRecord | TextsRecord,
+}
+
+export interface FontData {
+  font: Font;
+  baseline: number;
+}
+
+export interface FontStyle {
+  // display or text font, defaults to text
+  type?: FontType,
+  // yep, size of the font
+  fontSize: number;
+  // yep, height of the line
+  lineHeight: number;
+  // yep, distance between letters
+  letterSpacing?: number;
 }
 
 // used to define text style for each node
 export interface TextData {
-  text: string // text itself;
-  font: FontType;
-  fontSize: number;
-  y?: number // baseline;
-  letterSpacing?: number;
-  fromPath?: string;
+  // text itself
+  text: string
+  // used by webworker to vectorize text
+  font: FontStyle;
+  // parent's box size
   width: number;
-  height: number;
+  // predefined path
+  fromPath?: string;
+  // wrap's text by width. otherwise sends back new width
   wrap?: boolean;
 }
 
 export interface RenderTextData {
   from: string;
   to: string;
-  //lines: number;
+  // lines: number;
+  // width: number1
 }
 
 export interface RenderData {
@@ -40,24 +59,4 @@ export interface RenderData {
   alt?: string;
   delay: number;
   children?: boolean;
-}
-
-// used by main thread to request next frame in compute
-export interface MorphFrameRequest {
-  item: string // morph item id;
-  metadata?: MorphMetadata;
-  current: number;
-}
-
-// used to store metadata about morph
-export interface MorphMetadata {
-  duration: number;
-  start: number;
-}
-
-// interface for posting message to mainthread with a result of computing process
-export interface MorphFrameData {
-  item: string;
-  path: string;
-  next?: boolean;
 }

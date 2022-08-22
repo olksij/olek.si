@@ -1,4 +1,4 @@
-import { ComputeAPI, MorphFrameData, RenderData, RenderTextData, TextData, TextsRecord } from "./interfaces";
+import { ComputeAPI, RenderData, RenderTextData, TextData, TextsRecord } from "./interfaces";
 import { createElement, createFragment } from "./jsx";
 import { images } from "./sources";
 
@@ -26,59 +26,63 @@ const animatingOrder: Record<string, RenderData> = {
 const textsData: Record<string, TextData> = {
   "tt": {
     text: 'Oleksii',
-    font: 'display',
-    fontSize: 128,
-    y: 100,
-    letterSpacing: -0.04,
     width: 386,
-    height: 120,
     fromPath: "M103 0H0V160H103V80V0ZM52 80H51V79H52V80ZM103 0H129V160H103V80V0ZM129 0H201V160H129V0ZM167 81V80H168V81H167ZM201 0H267V160H201V0ZM324 0H267V160H324V50.5V0ZM324 0V50.5H355V0H324ZM324 50.5V160H355V50.5H324ZM386 50.5V0H355V50.5H386ZM386 160V50.5H355V160H386Z",
+    font: {
+      type: 'display',
+      fontSize: 128,
+      lineHeight: 112,
+      letterSpacing: -0.04,
+    },
   },
   "d1": {
     text: 'Redefining the way humans interact', // Pereosmyslenńa sposobu vzajemodiji ĺudyny
-    font: 'text',
-    fontSize: 20,
     width: 337,
-    height: 28,
+    font: {
+      fontSize: 20,
+      lineHeight: 28,
+    },
   },
   "d2": {
     text: 'with computers', // z kompjuterom
-    font: 'text',
-    fontSize: 20,
     width: 128,
-    height: 28,
-
+    font: {
+      fontSize: 20,
+      lineHeight: 28,
+    }
   },
   "nav-home": {
     text: 'oleksii.xyz',
-    font: 'text',
-    fontSize: 20,
     width: 128,
-    height: 28,
-
+    font: {
+      fontSize: 20,
+      lineHeight: 28,
+    }
   },
   "nav-about": {
     text: 'about',
-    font: 'text',
-    fontSize: 20,
     width: 128,
-    height: 28,
-
+    font: {
+      fontSize: 20,
+      lineHeight: 28,
+    }
   },
   "nav-projects": {
     text: 'projects',
-    font: 'text',
-    fontSize: 20,
     width: 128,
-    height: 28,
+    font: {
+      fontSize: 20,
+      lineHeight: 28,
+    }
   },
   "nav-work": {
     text: 'work',
-    font: 'text',
-    fontSize: 20,
     width: 128,
-    height: 28,
-  }
+    font: {
+      fontSize: 20,
+      lineHeight: 28,
+    }
+  },
 }
 
 computeWorker.postMessage({ deliver: 'texts', data: textsData });
@@ -161,9 +165,6 @@ export default async function render(): Promise<void> {
 
           }, delayCounter, child);
         }
-        break;
-
-      default:
         break;
     }
   }

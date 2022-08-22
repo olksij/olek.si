@@ -2,23 +2,25 @@
 // texts before they are rendered in a second thread so ui isn't blocked
 
 import { interpolateAll } from "flubber"
-import { fontsLoaded, fontDisplay, fontText } from "./fonts";
-import { RenderTextData, TextData, TextsRecord } from "../interfaces";
+import fonts from "./fonts";
+import { FontData, RenderTextData, TextData, TextsRecord } from "../interfaces";
 
 let renderTexts: Record<string, RenderTextData> = {}
 
 export async function loadTexts(textsData: TextsRecord) {
   // ensure that fonts are loaded and we can use them
-  await fontsLoaded;
+  let fontsData = await fonts;
 
   for (let id in textsData) {
-    let data = textsData[id] as TextData;
+    let data = textsData[id] as TextData, style = data.font;
 
     // font used for vectorizing
-    let font = data.font == 'display' ? fontDisplay : fontText;
+    let font = fontsData[style.type ?? 'text'] as FontData;
+
+    let baseline = style.lineHeight / font.baseline;
 
     // vectorize font and convert to string[]
-    let pathData = font.getPath(data.text, 0, data.y ?? data.fontSize, data.fontSize, { letterSpacing: data.letterSpacing });
+    let pathData = font.font.getPath(data.text, 0, baseline, style.fontSize, { letterSpacing: style.letterSpacing });
     let toPath = pathData.toPathData(5).replaceAll('ZM', 'Z$M')?.split('$');
 
     // retrieve fromPath if available
@@ -29,7 +31,7 @@ export async function loadTexts(textsData: TextsRecord) {
       let lw = Math.round(data.width / toPath.length * 100) / 100;
       // split placeholder rectangle for each letter
       for (var ww = 0, i = 0; i < toPath.length; ww += lw, i++) {
-        let currPath = `M ${ww} 0 V${data.height} H${ww + lw} V0 H${ww} Z`;
+        let currPath = `M ${ww} 0 V${style.lineHeight} H${ww + lw} V0 H${ww} Z`;
         fromPath.push(currPath);
       }
     }

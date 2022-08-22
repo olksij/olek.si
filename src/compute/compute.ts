@@ -1,7 +1,7 @@
 // this file is used as a web worker so things like
 // vectorizing text or morphing it won't block UI
 
-import { ComputeAPI, FontsRecord, TextsRecord, MorphFrameRequest } from '../interfaces';
+import { ComputeAPI, FontsRecord, TextsRecord } from '../interfaces';
 
 import { loadFonts } from './fonts';
 import { loadTexts } from './texts';

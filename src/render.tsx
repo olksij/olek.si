@@ -27,12 +27,13 @@ const textsData: Record<string, TextData> = {
   "tt": {
     text: 'Oleksii',
     width: 386,
-    fromPath: "M103 0H0V160H103V80V0ZM52 80H51V79H52V80ZM103 0H129V160H103V80V0ZM129 0H201V160H129V0ZM167 81V80H168V81H167ZM201 0H267V160H201V0ZM324 0H267V160H324V50.5V0ZM324 0V50.5H355V0H324ZM324 50.5V160H355V50.5H324ZM386 50.5V0H355V50.5H386ZM386 160V50.5H355V160H386Z",
+    fromPath: "M103 0H0V112H103V80V0ZM52 80H51V79H52V80ZM103 0H129V112H103V80V0ZM129 0H201V112H129V0ZM167 81V80H168V81H167ZM201 0H267V112H201V0ZM324 0H267V112H324V50.5V0ZM324 0V50.5H355V0H324ZM324 50.5V112H355V50.5H324ZM386 50.5V0H355V50.5H386ZM386 112V50.5H355V112H386Z",
     font: {
       type: 'display',
       fontSize: 128,
       lineHeight: 112,
       letterSpacing: -0.04,
+      color: 'var(--text)',
     },
   },
   "d1": {
@@ -45,7 +46,7 @@ const textsData: Record<string, TextData> = {
   },
   "d2": {
     text: 'with computers', // z kompjuterom
-    width: 128,
+    width: 148,
     font: {
       fontSize: 20,
       lineHeight: 28,
@@ -56,7 +57,7 @@ const textsData: Record<string, TextData> = {
     width: 128,
     font: {
       fontSize: 20,
-      lineHeight: 28,
+      lineHeight: 24,
     }
   },
   "nav-about": {
@@ -64,7 +65,7 @@ const textsData: Record<string, TextData> = {
     width: 128,
     font: {
       fontSize: 20,
-      lineHeight: 28,
+      lineHeight: 24,
     }
   },
   "nav-projects": {
@@ -72,7 +73,7 @@ const textsData: Record<string, TextData> = {
     width: 128,
     font: {
       fontSize: 20,
-      lineHeight: 28,
+      lineHeight: 24,
     }
   },
   "nav-work": {
@@ -80,7 +81,7 @@ const textsData: Record<string, TextData> = {
     width: 128,
     font: {
       fontSize: 20,
-      lineHeight: 28,
+      lineHeight: 24,
     }
   },
 }
@@ -101,8 +102,8 @@ let resolveMorph: (value: TextsRecord) => void;
 export let textMorphReady = new Promise<TextsRecord>((resolve) => resolveMorph = resolve);
 
 export default async function render(): Promise<void> {
+  await window["skeleton"];
   if (!sessionStorage.getItem('loaded')) {
-    await window["skeleton"];
     sessionStorage.setItem('loaded', 'true');
   }
 
@@ -146,19 +147,21 @@ export default async function render(): Promise<void> {
           setTimeout((item) => {
             var data = renderTextData[item] as RenderTextData;
 
-            let loadVector = (element) => { element.parentElement.parentElement.replaceWith(<p>hhh</p>); }
+            let loadVector = (element) => { element.parentElement.parentElement.replaceWith(<p>{textsData[item].text}</p>); }
 
-            let vector = <svg><path fill="var(--el)" fill-rule="evenodd" clip-rule="evenodd">
-              <animate attributeName="d" dur=".8s" values={data.from + ';' + data.to}
-                calcMode="spline" keySplines="0.87 0 0.13 1"
-                onendEvent={loadVector} />
-            </path></svg>
+            let vector = <svg viewBox={`0 0 ${textsData[item].width} ${textsData[item].font.lineHeight}`}>
+              <path d={data.to} fill="var(--el)" fill-rule="evenodd" clip-rule="evenodd">
+                <animate attributeName="d" dur=".8s" values={data.from + ';' + data.to}
+                  calcMode="spline" keySplines="0.87 0 0.13 1"
+                  onendEvent={loadVector} />
+              </path>
+            </svg>
 
             byId(item)!.append(vector);
 
             tagById(item, 'path')?.animate(
-              [{ fill: 'var(--el)' }, { fill: 'var(--text)' }],
-              { delay: 400, duration: 800, easing: 'cubic-bezier(0.87, 0, 0.13, 1)' },
+              [{ fill: 'var(--el)' }, { fill: textsData[item].font.color ?? 'var(--secondary)' }],
+              { delay: 400, duration: 500, easing: 'cubic-bezier(0.87, 0, 0.13, 1)' },
             );
 
             byId(item)?.classList.add('rendered');

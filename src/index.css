@@ -93,6 +93,7 @@ img {
   margin: 0;
   letter-spacing: -0.04em;
   font-family: 'Display';
+  align-self: self-start;
 }
 
 #d1>p,
@@ -100,6 +101,7 @@ img {
 #rg>.rendered>p {
   color: var(--secondary);
   font-size: 18px;
+  line-height: 20px;
   font-family: 'Text';
   white-space: nowrap;
   margin: 0
@@ -116,5 +118,10 @@ img {
   #d2>p,
   #rg>.rendered>p {
     font-size: 20px;
+    line-height: 28px;
+  }
+
+  #rg>.rendered>p {
+    line-height: 24px;
   }
 }

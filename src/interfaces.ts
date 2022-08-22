@@ -4,7 +4,7 @@ import { Font } from 'opentype.js'
 export type DeliverType = 'fonts' | 'texts';
 
 // types for each `DeliveryType`
-export type FontsRecord = { [Type in FontType]?: FontData | ArrayBuffer };
+export type FontsRecord = { [Type in FontType]?: Font | ArrayBuffer };
 export type TextsRecord = Record<string, TextData | RenderTextData>;
 
 export type RenderType = 'img' | 'text';
@@ -17,11 +17,6 @@ export interface ComputeAPI {
   data: FontsRecord | TextsRecord,
 }
 
-export interface FontData {
-  font: Font;
-  baseline: number;
-}
-
 export interface FontStyle {
   // display or text font, defaults to text
   type?: FontType,
@@ -31,6 +26,8 @@ export interface FontStyle {
   lineHeight: number;
   // yep, distance between letters
   letterSpacing?: number;
+  // and yep, text color as css value
+  color?: `var(${string})`;
 }
 
 // used to define text style for each node

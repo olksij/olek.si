@@ -3,7 +3,8 @@
 
 import { interpolateAll } from "flubber"
 import fonts from "./fonts";
-import { FontData, RenderTextData, TextData, TextsRecord } from "../interfaces";
+import { RenderTextData, TextData, TextsRecord } from "../interfaces";
+import { Font } from "opentype.js";
 
 let renderTexts: Record<string, RenderTextData> = {}
 
@@ -15,12 +16,17 @@ export async function loadTexts(textsData: TextsRecord) {
     let data = textsData[id] as TextData, style = data.font;
 
     // font used for vectorizing
-    let font = fontsData[style.type ?? 'text'] as FontData;
+    let font = fontsData[style.type ?? 'text'] as Font;
 
-    let baseline = style.lineHeight / font.baseline;
+    // calculate ascender & descender
+    let [ascender, descender] = [font.ascender, font.descender]
+      .map(value => value / font.unitsPerEm * style.fontSize);
+
+    // calculate baseline
+    let baseline = Math.ceil(ascender - (ascender - descender - style.lineHeight) / 2);
 
     // vectorize font and convert to string[]
-    let pathData = font.font.getPath(data.text, 0, baseline, style.fontSize, { letterSpacing: style.letterSpacing });
+    let pathData = font.getPath(data.text, 0, baseline, style.fontSize, { letterSpacing: style.letterSpacing });
     let toPath = pathData.toPathData(5).replaceAll('ZM', 'Z$M')?.split('$');
 
     // retrieve fromPath if available
@@ -37,7 +43,7 @@ export async function loadTexts(textsData: TextsRecord) {
     }
 
     // create interpolatee paths for svg <animate>
-    let interpolator = interpolateAll(fromPath, toPath, { maxSegmentLength: 4, single: true });
+    let interpolator = interpolateAll(fromPath, toPath, { maxSegmentLength: 3, single: true });
     renderTexts[id] = { from: interpolator(1 / 1000), to: interpolator(1 - 1 / 1000) };
   }
 

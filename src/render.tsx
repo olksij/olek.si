@@ -1,3 +1,8 @@
+/* --- --- --- --- --- --- --- --- ---
+   --- CODE IN THIS FILE REQUIRES- ---
+   --- -- [URGENT] REFACTORING --- ---
+   --- --- --- --- --- --- --- --- --- */
+
 import { ComputeAPI, RenderData, RenderTextData, TextData, TextsRecord } from "./interfaces";
 import { createElement, createFragment } from "./jsx";
 import { images } from "./sources";

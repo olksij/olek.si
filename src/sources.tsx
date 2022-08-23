@@ -3,7 +3,7 @@ import { createElement, createFragment } from "./jsx";
 // dates with custom description
 export const dates: Record<string, Array<string>> = {
   "6-12": ["🎂 It's my birthday today!", "June 12"],
-  "8-24": ["Restoration of independence of Ukraine", "🇺🇦 August 24"],
+  "8-23": ["Restoration of independence of Ukraine", "🇺🇦 August 24"],
   // more dates to come such as celebrations and holidays
 };
 

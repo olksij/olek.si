@@ -1,5 +1,9 @@
 // this file is about parsing and responding to received font objects
 
+/* --- --- --- --- --- --- --- --- --- --- --- ---
+   --- CODE IN THIS FILE REQUIRES REFACTORING- ---
+   --- --- --- --- --- --- --- --- --- --- --- --- */
+
 import { parse } from 'opentype.js';
 import { FontsRecord } from '../interfaces';
 

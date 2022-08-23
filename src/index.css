@@ -1,3 +1,8 @@
+/* --- --- --- --- --- --- --- --- ---
+   --- CODE IN THIS FILE REQUIRES- ---
+   --- -- AN URGENT REFACTORING -- ---
+   --- --- --- --- --- --- --- --- --- */
+
 :root {
   --text: #0F0D1A;
   --secondary: #858391;
@@ -13,6 +18,10 @@ body.rendered {
     radial-gradient(var(--element) 5%, transparent 0),
     var(--bg);
   background-size: 24px 24px;
+}
+
+*:not(#cnt):not(#ps):not(#ft) {
+  justify-content: center;
 }
 
 #pf,
@@ -93,6 +102,7 @@ img {
   overflow: hidden;
   background: #0000;
   align-items: flex-start;
+  text-decoration: none;
 }
 
 #tt>svg {
@@ -114,8 +124,8 @@ img {
 #d2>p,
 #rg>.rendered>p {
   color: var(--secondary);
-  font-size: 18px;
-  line-height: 20px;
+  font-size: 17.2px;
+  line-height: 24px;
   font-family: 'Text';
   white-space: nowrap;
   margin: 0
@@ -135,12 +145,23 @@ img {
 
 #cr {
   flex-direction: row;
-  transition: background 3s;
 }
 
 #cr.rendered {
   overflow: hidden;
   background: #0000;
+  width: 158px;
+  animation: 1s cubic-bezier(0.5, 0, 0.25, .75) crrender;
+}
+
+@keyframes crrender {
+  from {
+    background: var(--el);
+  }
+
+  to {
+    background: #0000;
+  }
 }
 
 #cr>p {

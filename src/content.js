@@ -24,6 +24,9 @@ var description = "Redefining the way humans interact*with computers.";
 if (new Date().getMonth() == 5 && new Date().getDate() == 12)
   description = "🎂 It's my birthday today!*June 12";
 
+if (new Date().getMonth() == 7 && new Date().getDate() == 24)
+  description = "Restoration of independence of Ukraine*🇺🇦  August 24  🎉";
+
 var source = new Map([
   ["pfi", new URL("/assets/profilePicture.jpg?as=webp&width=512", import.meta.url)],
   ["tg", new URL("/assets/telegram.svg", import.meta.url)],

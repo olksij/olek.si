@@ -1,12 +1,18 @@
-/* --- RENDER IMAGES --- */
-
 :root {
   --text: #0F0D1A;
   --secondary: #858391;
-  --border: #39364d14;
-  /*--element: #39364d3a;
-  -accent: #6549f2;
-  --border: #39364d14;*/
+  --border: #39364D14;
+  --element: #39364D20;
+  --accent: #6549f2;
+  --background-position: left 50% top calc(50%);
+}
+
+body.rendered {
+  animation: 5s linear background;
+  background:
+    radial-gradient(var(--element) 5%, transparent 0),
+    var(--bg);
+  background-size: 24px 24px;
 }
 
 #pf,
@@ -39,6 +45,10 @@ img {
   animation: .5s cubic-bezier(0.5, 0, 0.25, .75) psrender;
   box-shadow: inset 0 0 0 1px var(--border);
   background: none;
+  outline: 8px var(--bg) solid;
+  transition: outline 0s;
+  transition: background .3s;
+  background-color: var(--bg);
 }
 
 @keyframes psrender {
@@ -49,6 +59,10 @@ img {
   to {
     box-shadow: inset 0 0 0 1px var(--border);
   }
+}
+
+#ps>a:hover {
+  background: #F0F0F2;
 }
 
 .rendered>img {
@@ -107,6 +121,37 @@ img {
   margin: 0
 }
 
+#rg>.rendered>p {
+  font-size: 18px;
+  line-height: 24px;
+}
+
+#rg>:first-child.rendered>p {
+  font-size: 22px;
+  color: var(--text);
+  letter-spacing: -0.04em;
+  font-family: 'display';
+}
+
+#cr {
+  flex-direction: row;
+  transition: background 3s;
+}
+
+#cr.rendered {
+  overflow: hidden;
+  background: #0000;
+}
+
+#cr>p {
+  font-size: 12px;
+  line-height: 16px;
+  font-family: 'text';
+  margin: 0;
+  color: var(--secondary);
+}
+
+
 @media (min-width: 920px) {
   #tt>p {
     font-size: 128px;
@@ -122,6 +167,14 @@ img {
   }
 
   #rg>.rendered>p {
+    font-size: 18px;
     line-height: 24px;
+  }
+
+  #rg>:first-child.rendered>p {
+    font-size: 20px;
+    color: var(--text);
+    letter-spacing: -0.04em;
+    font-family: 'Display';
   }
 }

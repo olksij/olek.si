@@ -7,7 +7,7 @@ export type DeliverType = 'fonts' | 'texts';
 export type FontsRecord = { [Type in FontType]?: Font | ArrayBuffer };
 export type TextsRecord = Record<string, TextData | RenderTextData>;
 
-export type RenderType = 'img' | 'text';
+export type RenderType = 'img' | 'text' | 'both';
 export type FontType = 'display' | 'text';
 export type PreloadAssetType = 'stylesheet' | 'image';
 
@@ -52,7 +52,7 @@ export interface RenderTextData {
 }
 
 export interface RenderData {
-  type: RenderType;
+  type?: RenderType;
   alt?: string;
   delay: number;
   children?: boolean;

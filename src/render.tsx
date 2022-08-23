@@ -20,7 +20,7 @@ const animatingOrder: Record<string, RenderData> = {
   "d2": { type: 'text', delay: 50 },
   "ps": { type: 'img', delay: 50, children: true },
   "rg": { type: 'text', delay: 50, children: true },
-  "cr": { type: 'img', delay: 100 },
+  "cr": { type: 'both', delay: 0 },
 }
 
 const textsData: Record<string, TextData> = {
@@ -56,15 +56,18 @@ const textsData: Record<string, TextData> = {
     text: 'oleksii.xyz',
     width: 128,
     font: {
+      type: 'display',
       fontSize: 20,
+      letterSpacing: -0.04,
       lineHeight: 24,
+      color: 'var(--text)',
     }
   },
   "nav-about": {
     text: 'about',
     width: 128,
     font: {
-      fontSize: 20,
+      fontSize: 18,
       lineHeight: 24,
     }
   },
@@ -72,7 +75,7 @@ const textsData: Record<string, TextData> = {
     text: 'projects',
     width: 128,
     font: {
-      fontSize: 20,
+      fontSize: 18,
       lineHeight: 24,
     }
   },
@@ -80,8 +83,16 @@ const textsData: Record<string, TextData> = {
     text: 'work',
     width: 128,
     font: {
-      fontSize: 20,
+      fontSize: 18,
       lineHeight: 24,
+    }
+  },
+  "cr": {
+    text: '2018-2022 Oleksii Besida',
+    width: 142,
+    font: {
+      fontSize: 12,
+      lineHeight: 16,
     }
   },
 }
@@ -102,10 +113,12 @@ let resolveMorph: (value: TextsRecord) => void;
 export let textMorphReady = new Promise<TextsRecord>((resolve) => resolveMorph = resolve);
 
 export default async function render(): Promise<void> {
-  await window["skeleton"];
   if (!sessionStorage.getItem('loaded')) {
+    await window["skeleton"];
     sessionStorage.setItem('loaded', 'true');
   }
+
+  document.body.classList.add('rendered');
 
   let renderTextData = await textMorphReady;
 
@@ -128,47 +141,45 @@ export default async function render(): Promise<void> {
     if (data.children) queue = [...byId(item)!.children]
       .map(child => child.id);
 
-    switch (data.type) {
-      case 'img':
-        for (let child of queue) {
-          // generate future node;
-          node = <img src={images[child]} alt={item} />;
-          // insert it to appropriate skeleton element;
-          byId(child)?.append(node);
-          // schedule animation
-          delayCounter += data.delay;
-          setTimeout((child) => byId(child)?.classList.add('rendered'), delayCounter, child);
-        }
-        break;
+    if (data.type == 'img' || data.type == 'both') {
+      for (let child of queue) {
+        // generate future node;
+        node = <img src={images[child]} alt={item} />;
+        // insert it to appropriate skeleton element;
+        byId(child)?.append(node);
+        // schedule animation
+        delayCounter += data.delay;
+        setTimeout((child) => byId(child)?.classList.add('rendered'), delayCounter, child);
+      }
+    }
 
-      case 'text':
-        for (let child of queue) {
-          delayCounter += data.delay;
-          setTimeout((item) => {
-            var data = renderTextData[item] as RenderTextData;
+    if (data.type == 'text' || data.type == 'both') {
+      for (let child of queue) {
+        delayCounter += data.delay;
+        setTimeout((item) => {
+          var data = renderTextData[item] as RenderTextData;
 
-            let loadVector = (element) => { element.parentElement.parentElement.replaceWith(<p>{textsData[item].text}</p>); }
+          let loadVector = (element) => { element.parentElement.parentElement.replaceWith(<p>{textsData[item].text}</p>); }
 
-            let vector = <svg viewBox={`0 0 ${textsData[item].width} ${textsData[item].font.lineHeight}`}>
-              <path d={data.to} fill="var(--el)" fill-rule="evenodd" clip-rule="evenodd">
-                <animate attributeName="d" dur=".8s" values={data.from + ';' + data.to}
-                  calcMode="spline" keySplines="0.87 0 0.13 1"
-                  onendEvent={loadVector} />
-              </path>
-            </svg>
+          let vector = <svg viewBox={`0 0 ${textsData[item].width} ${textsData[item].font.lineHeight}`}>
+            <path d={data.to} fill="var(--el)" fill-rule="evenodd" clip-rule="evenodd">
+              <animate attributeName="d" dur="0.8s" values={data.from + ';' + data.to}
+                calcMode="spline" keySplines="0.87 0 0.13 1"
+                onendEvent={loadVector} />
+            </path>
+          </svg>
 
-            byId(item)!.append(vector);
+          byId(item)!.append(vector);
 
-            tagById(item, 'path')?.animate(
-              [{ fill: 'var(--el)' }, { fill: textsData[item].font.color ?? 'var(--secondary)' }],
-              { delay: 400, duration: 500, easing: 'cubic-bezier(0.87, 0, 0.13, 1)' },
-            );
+          tagById(item, 'path')?.animate(
+            [{ fill: 'var(--el)' }, { fill: textsData[item].font.color ?? 'var(--secondary)' }],
+            { delay: 400, duration: 500, easing: 'cubic-bezier(0.87, 0, 0.13, 1)' },
+          );
 
-            byId(item)?.classList.add('rendered');
+          byId(item)?.classList.add('rendered');
 
-          }, delayCounter, child);
-        }
-        break;
+        }, delayCounter, child);
+      }
     }
   }
 }

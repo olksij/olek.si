@@ -21,7 +21,7 @@ export const fonts: Record<string, URL> = {
 
 // image links to load
 export const images: Record<string, URL> = {
-  "pf": new URL('profilePicture.jpg?as=webp&width=512', import.meta.url),
+  "pf": new URL('profilePicture.webp', import.meta.url),
   "telegram": new URL('telegram.svg', import.meta.url),
   "instagram": new URL('instagram.svg', import.meta.url),
   "github": new URL('github.svg', import.meta.url),

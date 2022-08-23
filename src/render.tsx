@@ -12,6 +12,11 @@ const restoreIDs: Record<string, Array<string>> = {
   "ft": ["cr", "lg"],
 }
 
+const restoreLinks: Record<string, Array<string>> = {
+  "ps": ["https://t.me/oleksiibesida", "https://instagram.com/oleksiibesidaa", "https://github.com/oleksiibesida", "https://t.co/oleksiibesida", "mailto:besida@oleksii.xyz"],
+  "rg": ["https://oleksii.xyz", "https://oleksii.xyz", "https://oleksii.xyz", "https://oleksii.xyz"],
+}
+
 // order and details of animating each node
 const animatingOrder: Record<string, RenderData> = {
   "pf": { type: 'img', delay: 0, alt: 'profilePicture' },
@@ -127,6 +132,12 @@ export default async function render(): Promise<void> {
     let children = byId(id)!.children;
     for (var i = 0; i < children.length; i++)
       children[i].id = restoreIDs[id][i];
+  }
+
+  for (let id in restoreLinks) {
+    let children = byId(id)!.children;
+    for (var i = 0; i < children.length; i++)
+      children[i].setAttribute('href', restoreLinks[id][i]);
   }
 
   let delayCounter: number = 0;

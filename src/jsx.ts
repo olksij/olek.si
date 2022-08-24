@@ -2,7 +2,7 @@
 // this file is based on code by [https://github.com/kartiknair]
 
 // elements that require SVG namespace
-let vectorElements = ["svg", "path", "animate"];
+let vectorElements = ["svg", "path", "animate", "text"];
 
 export const createElement = (tag: string | Function, props: Object, ...children: any): Element => {
   if (typeof tag === "function") return tag(props, ...children);

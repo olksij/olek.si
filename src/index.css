@@ -110,8 +110,8 @@ img {
   aspect-ratio: 3.4464285714;
 }
 
-#tt>p {
-  color: var(--text);
+#tt>p,
+#tt>svg>text {
   font-size: 74px;
   line-height: 64px;
   margin: 0;
@@ -174,7 +174,9 @@ img {
 
 
 @media (min-width: 920px) {
-  #tt>p {
+
+  #tt>p,
+  #tt>svg>text {
     font-size: 128px;
     line-height: 112px;
     letter-spacing: -0.04em;

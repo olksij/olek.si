@@ -183,6 +183,7 @@ export default async function render(): Promise<void> {
                 calcMode="spline" keySplines="0.87 0 0.13 1"
                 onendEvent={loadVector} />
             </path>
+            <text fill="#0000" y="99">{textsData[item].text}</text>
           </svg>
 
           byId(item)!.append(vector);
@@ -190,6 +191,16 @@ export default async function render(): Promise<void> {
           tagById(item, 'path')?.animate(
             [{ fill: 'var(--el)' }, { fill: textsData[item].font.color ?? 'var(--secondary)' }],
             { delay: 400, duration: 500, easing: 'cubic-bezier(0.87, 0, 0.13, 1)' },
+          );
+
+          tagById(item, 'path')?.animate(
+            [{ opacity: 1 }, { opacity: 0 }],
+            { delay: 600, duration: 200, easing: 'cubic-bezier(0.87, 0, 0.13, 1)' },
+          );
+
+          tagById(item, 'text')?.animate(
+            [{ fill: '#0000' }, { fill: textsData[item].font.color ?? 'var(--secondary)' }],
+            { delay: 600, duration: 200, easing: 'cubic-bezier(0.87, 0, 0.13, 1)' },
           );
 
           byId(item)?.classList.add('rendered');

@@ -47,6 +47,7 @@ export interface TextData {
 export interface RenderTextData {
   from: string;
   to: string;
+  baseline: number;
   // lines: number;
   // width: number1
 }

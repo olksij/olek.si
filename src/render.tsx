@@ -37,7 +37,7 @@ const textsData: Record<string, TextData> = {
   "tt": {
     text: 'Oleksii',
     width: 386,
-    fromPath: "M103 0H0V112H103V80V0ZM52 80H51V79H52V80ZM103 0H129V112H103V80V0ZM129 0H201V112H129V0ZM167 81V80H168V81H167ZM201 0H267V112H201V0ZM324 0H267V112H324V50.5V0ZM324 0V50.5H355V0H324ZM324 50.5V112H355V50.5H324ZM386 50.5V0H355V50.5H386ZM386 112V50.5H355V112H386Z",
+    fromPath: "M103 0H0V112H103V80V0ZM52 80H51V79H52V80ZM103 0H129V112H103V80V0ZM129 0H201V112H129V0ZM167 51V50H168V51H167ZM201 0H267V112H201V0ZM324 0H267V112H324V50.5V0ZM324 0V50.5H355V0H324ZM324 50.5V112H355V50.5H324ZM386 50.5V0H355V50.5H386ZM386 112V50.5H355V112H386Z",
     font: {
       type: 'display',
       fontSize: 128,
@@ -130,7 +130,7 @@ export default async function render(): Promise<void> {
 
   document.body.classList.add('rendered');
 
-  let renderTextData = await textMorphReady;
+  let renderTextData = await textMorphReady as Record<string, RenderTextData>;
 
   // restore id's for shortened components
   for (let id in restoreIDs) {
@@ -175,32 +175,39 @@ export default async function render(): Promise<void> {
         setTimeout((item) => {
           var data = renderTextData[item] as RenderTextData;
 
-          let loadVector = (element) => { element.parentElement.parentElement.replaceWith(<p>{textsData[item].text}</p>); }
+          let loadVector = (element) => {
+            element.parentElement.parentElement.replaceWith(<p>{textsData[item].text}</p>);
+            tagById(item, 'p')?.setAttribute("style", `font-family:${font.type ?? 'text'}; letter-spacing:${font.letterSpacing ?? 0}em; color:${font.color ?? 'var(--secondary)'}`);
+          }
 
           let vector = <svg viewBox={`0 0 ${textsData[item].width} ${textsData[item].font.lineHeight}`}>
-            <path d={data.to} fill="var(--el)" fill-rule="evenodd" clip-rule="evenodd">
+            <path fill="var(--el)" fill-rule="evenodd" clip-rule="evenodd">
               <animate attributeName="d" dur="0.8s" values={data.from + ';' + data.to}
                 calcMode="spline" keySplines="0.87 0 0.13 1"
                 onendEvent={loadVector} />
             </path>
-            <text fill="#0000" y="99">{textsData[item].text}</text>
+            <text fill="#0000" y={renderTextData[item].baseline - .25}>{textsData[item].text}</text>
           </svg>
+          console.log(renderTextData[item].baseline);
 
           byId(item)!.append(vector);
 
-          tagById(item, 'path')?.animate(
+          [tagById(item, 'path'), tagById(item, 'text')].forEach(el => el!.animate(
             [{ fill: 'var(--el)' }, { fill: textsData[item].font.color ?? 'var(--secondary)' }],
             { delay: 400, duration: 500, easing: 'cubic-bezier(0.87, 0, 0.13, 1)' },
-          );
+          ));
 
           tagById(item, 'path')?.animate(
             [{ opacity: 1 }, { opacity: 0 }],
-            { delay: 600, duration: 200, easing: 'cubic-bezier(0.87, 0, 0.13, 1)' },
+            { delay: 600, duration: 200, easing: 'cubic-bezier(0.5, 0, 0.13, 1)' },
           );
 
+          let font = textsData[item].font;
+          tagById(item, 'text')?.setAttribute("style", `opacity: 0; font-family:${font.type ?? 'text'}; letter-spacing:${font.letterSpacing ?? 0}em;`);
+
           tagById(item, 'text')?.animate(
-            [{ fill: '#0000' }, { fill: textsData[item].font.color ?? 'var(--secondary)' }],
-            { delay: 600, duration: 200, easing: 'cubic-bezier(0.87, 0, 0.13, 1)' },
+            [{ opacity: 0 }, { opacity: 1 }],
+            { delay: 600, duration: 200, easing: 'cubic-bezier(0.5, 0, 0.13, 1)' },
           );
 
           byId(item)?.classList.add('rendered');

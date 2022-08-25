@@ -44,17 +44,7 @@ export async function loadTexts(textsData: TextsRecord) {
 
     // create interpolatee paths for svg <animate>
     let interpolator = interpolateAll(fromPath, toPath, { maxSegmentLength: 4, single: true });
-    renderTexts[id] = { from: interpolator(1 / 1000), to: interpolator(1 - 1 / 1000) };
-
-    if (id == 'd1') {
-      console.log(performance.now());
-      interpolator(1 / 1000);
-      console.log(performance.now());
-      interpolator(1 / 1000);
-      console.log(performance.now());
-      interpolator(1 / 1000);
-      console.log(performance.now());
-    }
+    renderTexts[id] = { from: interpolator(1 / 1000), to: interpolator(1 - 1 / 1000), baseline };
   }
 
   // send to main thread computed paths

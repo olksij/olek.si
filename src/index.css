@@ -12,6 +12,11 @@
   --background-position: left 50% top calc(50%);
 }
 
+svg {
+  height: 100%;
+  width: fit-content;
+}
+
 body.rendered {
   animation: 5s linear background;
   background:
@@ -115,18 +120,15 @@ img {
   font-size: 74px;
   line-height: 64px;
   margin: 0;
-  letter-spacing: -0.04em;
-  font-family: 'Display';
   align-self: self-start;
 }
 
-#d1>p,
-#d2>p,
-#rg>.rendered>p {
-  color: var(--secondary);
+#dd>*>p,
+#dd>*>svg>text,
+#rg>.rendered>p,
+#rg>*>svg>text {
   font-size: 17.2px;
   line-height: 24px;
-  font-family: 'Text';
   white-space: nowrap;
   margin: 0
 }
@@ -138,9 +140,6 @@ img {
 
 #rg>:first-child.rendered>p {
   font-size: 22px;
-  color: var(--text);
-  letter-spacing: -0.04em;
-  font-family: 'display';
 }
 
 #cr {
@@ -151,7 +150,7 @@ img {
   overflow: hidden;
   background: #0000;
   width: 158px;
-  animation: 1s cubic-bezier(0.5, 0, 0.25, .75) crrender;
+  animation: .5s cubic-bezier(0.5, 0, 0.25, .75) crrender;
 }
 
 @keyframes crrender {
@@ -164,12 +163,11 @@ img {
   }
 }
 
-#cr>p {
+#cr>p,
+#cr>svg>text {
   font-size: 12px;
   line-height: 16px;
-  font-family: 'text';
   margin: 0;
-  color: var(--secondary);
 }
 
 
@@ -182,22 +180,21 @@ img {
     letter-spacing: -0.04em;
   }
 
-  #d1>p,
-  #d2>p,
+  #dd>*>p,
+  #dd>*>svg>text,
   #rg>.rendered>p {
     font-size: 20px;
     line-height: 28px;
   }
 
-  #rg>.rendered>p {
+  #rg>.rendered>p,
+  #rg>.rendered>svg>text {
     font-size: 18px;
     line-height: 24px;
   }
 
-  #rg>:first-child.rendered>p {
+  #rg>:first-child.rendered>p,
+  #rg>:first-child.rendered>svg>text {
     font-size: 20px;
-    color: var(--text);
-    letter-spacing: -0.04em;
-    font-family: 'Display';
   }
 }

@@ -123,8 +123,8 @@ let resolveMorph: (value: TextsRecord) => void;
 export let textMorphReady = new Promise<TextsRecord>((resolve) => resolveMorph = resolve);
 
 export default async function render(): Promise<void> {
+  await window["skeleton"];
   if (!sessionStorage.getItem('loaded')) {
-    await window["skeleton"];
     sessionStorage.setItem('loaded', 'true');
   }
 
@@ -176,8 +176,8 @@ export default async function render(): Promise<void> {
           var data = renderTextData[item] as RenderTextData;
 
           let loadVector = (element) => {
-            element.parentElement.parentElement.replaceWith(<p>{textsData[item].text}</p>);
-            tagById(item, 'p')?.setAttribute("style", `font-family:${font.type ?? 'text'}; letter-spacing:${font.letterSpacing ?? 0}em; color:${font.color ?? 'var(--secondary)'}`);
+            //element.parentElement.parentElement.replaceWith(<p>{textsData[item].text}</p>);
+            //tagById(item, 'p')?.setAttribute("style", `font-family:${font.type ?? 'text'}; letter-spacing:${font.letterSpacing ?? 0}em; color:${font.color ?? 'var(--secondary)'}`);
           }
 
           let vector = <svg viewBox={`0 0 ${textsData[item].width} ${textsData[item].font.lineHeight}`}>
@@ -186,15 +186,17 @@ export default async function render(): Promise<void> {
                 calcMode="spline" keySplines="0.87 0 0.13 1"
                 onendEvent={loadVector} />
             </path>
-            <text fill="#0000" y={renderTextData[item].baseline - .25}>{textsData[item].text}</text>
+            <text y={renderTextData[item].baseline - .25}>{textsData[item].text}</text>
           </svg>
           console.log(renderTextData[item].baseline);
 
           byId(item)!.append(vector);
 
+          let font = textsData[item].font;
+
           [tagById(item, 'path'), tagById(item, 'text')].forEach(el => el!.animate(
-            [{ fill: 'var(--el)' }, { fill: textsData[item].font.color ?? 'var(--secondary)' }],
-            { delay: 400, duration: 500, easing: 'cubic-bezier(0.87, 0, 0.13, 1)' },
+            [{ fill: 'var(--el)' }, { fill: font.color ?? 'var(--secondary)' }],
+            { delay: 400, duration: 400, easing: 'cubic-bezier(0.87, 0, 0.13, 1)' },
           ));
 
           tagById(item, 'path')?.animate(
@@ -202,13 +204,16 @@ export default async function render(): Promise<void> {
             { delay: 600, duration: 200, easing: 'cubic-bezier(0.5, 0, 0.13, 1)' },
           );
 
-          let font = textsData[item].font;
           tagById(item, 'text')?.setAttribute("style", `opacity: 0; font-family:${font.type ?? 'text'}; letter-spacing:${font.letterSpacing ?? 0}em;`);
 
           tagById(item, 'text')?.animate(
             [{ opacity: 0 }, { opacity: 1 }],
             { delay: 600, duration: 200, easing: 'cubic-bezier(0.5, 0, 0.13, 1)' },
           );
+
+          setTimeout(() => {
+            tagById(item, 'text')?.setAttribute("style", tagById(item, 'text')?.getAttribute("style") + '; fill: ' + (font.color ?? 'var(--secondary)') + '; opacity:1');
+          }, 600);
 
           byId(item)?.classList.add('rendered');
 

@@ -149,7 +149,7 @@ img {
 #cr.rendered {
   overflow: hidden;
   background: #0000;
-  width: 158px;
+  width: 160px;
   animation: .5s cubic-bezier(0.5, 0, 0.25, .75) crrender;
 }
 
@@ -170,31 +170,49 @@ img {
   margin: 0;
 }
 
+/* TEMP */
+
+#rg>.rendered>svg>text {
+  font-size: 18px;
+  line-height: 24px;
+}
+
+#rg>:first-child.rendered>svg>text {
+  font-size: 20px;
+}
+
+#dd>*>svg>text {
+  font-size: 20px;
+  line-height: 28px;
+}
+
+#tt>svg>text {
+  font-size: 128px;
+  line-height: 112px;
+  letter-spacing: -0.04em;
+}
+
 
 @media (min-width: 920px) {
 
-  #tt>p,
-  #tt>svg>text {
+  #tt>p {
     font-size: 128px;
     line-height: 112px;
     letter-spacing: -0.04em;
   }
 
   #dd>*>p,
-  #dd>*>svg>text,
   #rg>.rendered>p {
     font-size: 20px;
     line-height: 28px;
   }
 
-  #rg>.rendered>p,
-  #rg>.rendered>svg>text {
+  #rg>.rendered>p {
     font-size: 18px;
     line-height: 24px;
   }
 
-  #rg>:first-child.rendered>p,
-  #rg>:first-child.rendered>svg>text {
+  #rg>:first-child.rendered>p {
     font-size: 20px;
   }
 }

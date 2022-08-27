@@ -110,6 +110,12 @@ img {
   box-shadow: 0 0 0 1px var(--border), 0 0 0 8px var(--background);
 }
 
+@-moz-document url-prefix() {
+  #profiles>a>img {
+    box-shadow: 0 0 0 1.01px var(--border), 0 0 0 8px var(--background);
+  }
+}
+
 #profiles>a:hover>img {
   background: #F0EFF3;
   transition: background .3s;

@@ -106,9 +106,8 @@ img {
 #profiles>a>img {
   height: 48px;
   border-radius: 24px;
-  outline: #2E284D14 1px solid;
   background: var(--background);
-  box-shadow: 0 0 2px 8px var(--background);
+  box-shadow: 0 0 0 1px var(--border), 0 0 0 8px var(--background);
 }
 
 #profiles>a:hover>img {

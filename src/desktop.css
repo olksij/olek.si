@@ -21,7 +21,7 @@
 #pf {
   width: 192px;
   height: 192px;
-  outline: solid 24px var(--background);
+  box-shadow: 0 0 0 24px var(--background);
 }
 
 #pf img {

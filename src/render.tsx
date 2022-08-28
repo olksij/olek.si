@@ -7,7 +7,7 @@ import { ComputeAPI, RenderData, RenderTextData, TextData, TextsRecord } from ".
 import { createElement, createFragment } from "./jsx";
 import { images } from "./sources";
 
-export const computeWorker = new Worker(new URL('compute/compute.ts', import.meta.url), { type: 'module' });
+export const computeWorker = window["computeWorker"];
 
 // for restoring shortened ids in order to get 
 // relation between records and dom
@@ -175,21 +175,13 @@ export default async function render(): Promise<void> {
         setTimeout((item) => {
           var data = renderTextData[item] as RenderTextData;
 
-          let loadVector = (element) => {
-            //element.parentElement.parentElement.replaceWith(<p>{textsData[item].text}</p>);
-            //tagById(item, 'p')?.setAttribute("style", `font-family:${font.type ?? 'text'}; letter-spacing:${font.letterSpacing ?? 0}em; color:${font.color ?? 'var(--secondary)'}`);
-          }
-
           let vector = <svg viewBox={`0 0 ${textsData[item].width} ${textsData[item].font.lineHeight}`}>
             <path fill="var(--el)" fill-rule="evenodd" clip-rule="evenodd">
               <animate attributeName="d" dur="0.8s" values={data.from + ';' + data.to}
-                calcMode="spline" keySplines="0.87 0 0.13 1"
-                onendEvent={loadVector} />
+                calcMode="spline" keySplines="0.87 0 0.13 1" />
             </path>
             <text y={renderTextData[item].baseline - .25}>{textsData[item].text}</text>
           </svg>
-          console.log(renderTextData[item].baseline);
-
           byId(item)!.append(vector);
 
           let font = textsData[item].font;
@@ -201,7 +193,7 @@ export default async function render(): Promise<void> {
 
           tagById(item, 'path')?.animate(
             [{ opacity: 1 }, { opacity: 0 }],
-            { delay: 600, duration: 200, easing: 'cubic-bezier(0.5, 0, 0.13, 1)' },
+            { delay: 600, duration: 200 },
           );
 
           tagById(item, 'text')?.setAttribute("style", `opacity: 0; font-family:${font.type ?? 'text'}; letter-spacing:${font.letterSpacing ?? 0}em;`);

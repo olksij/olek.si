@@ -25,7 +25,7 @@ body {
   width: 160px;
   height: 160px;
   z-index: 1;
-  box-shadow: var(--bg) 24px solid;
+  box-shadow: 0 0 0 24px var(--bg);
 }
 
 #tt {

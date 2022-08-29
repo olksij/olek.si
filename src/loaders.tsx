@@ -92,8 +92,10 @@ export const loadFonts = new Promise<void>((resolve) => {
   }
 });
 
-export const loadStylesheets = new Promise<void>((resolve) => {
-  let list = new Set<URL>();
+export const loadStylesheets = new Promise<void>(async (resolve) => {
+  await loadFonts;
+
+  let list = new Set<string>();
   for (let style of stylesheets) {
     const link = new PreloadAsset('stylesheet', style, list, resolve);
     list.add(style), document.head.append(link.render());

@@ -1,4 +1,10 @@
 import { createElement, createFragment } from "./jsx";
+import { FontType } from "./interfaces";
+
+/* --- --- --- --- --- --- --- --- ---
+   --- CODE IN THIS FILE REQUIRES- ---
+   --- --- URGENT REFACTORING- --- ---
+   --- --- --- --- --- --- --- --- --- */
 
 // dates with custom description
 export const dates: Record<string, Array<string>> = {
@@ -13,23 +19,29 @@ export const head: Node[] = [
   <link rel="icon" type="image/x-icon" href={new URL('favicon.ico', import.meta.url)} />
 ];
 
-// font links to load
-export const fonts: Record<string, URL> = {
-  'display': new URL('fonts/Display-Bold.woff', import.meta.url),
-  'text': new URL('fonts/Text-Medium.woff', import.meta.url),
-};
+// inline fonts
+import displayFont from '/fonts/displayBold.woff?raw';
+import textFont from '/fonts/textMedium.woff?raw';
+
+export const fonts: { [Type in FontType]?: string } = { display: displayFont, text: textFont };
+
+// inline pictures
+import profilePicture from '/images/profilePicture.webp?raw';
+import telegram from '/images/telegram.svg?raw';
+import instagram from '/images/instagram.svg?raw';
+import github from '/images/github.svg?raw';
+import twitter from '/images/twitter.svg?raw';
+import email from '/images/email.svg?raw';
+import copyright from '/images/copyright.svg?raw';
 
 // image links to load
-export const images: Record<string, URL> = {
-  "pf": new URL('profilePicture.webp', import.meta.url),
-  "telegram": new URL('telegram.svg', import.meta.url),
-  "instagram": new URL('instagram.svg', import.meta.url),
-  "github": new URL('github.svg', import.meta.url),
-  "twitter": new URL('twitter.svg', import.meta.url),
-  "email": new URL('email.svg', import.meta.url),
-  "cr": new URL('copyright.svg', import.meta.url),
+export const images: Record<string, string> = {
+  pf: profilePicture, telegram,
+  instagram, github, twitter, email, cr: copyright
 };
 
-export const stylesheets: URL[] = [
-  new URL('index.css', import.meta.url)
+import indexStylesheet from '/index.css';
+
+export const stylesheets: string[] = [
+  indexStylesheet
 ];

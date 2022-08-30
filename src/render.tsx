@@ -7,9 +7,7 @@ import { ComputeAPI, RenderData, RenderTextData, TextData, TextsRecord } from ".
 import { createElement, createFragment } from "./jsx";
 import { images } from "./sources";
 
-import ComputeWorker from './compute/compute.ts?worker&inline';
-
-export const computeWorker = new ComputeWorker();
+export const computeWorker = window['worker'];
 
 // for restoring shortened ids in order to get 
 // relation between records and dom

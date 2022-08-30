@@ -3,7 +3,9 @@
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script>
+  <script type="module">
+    window['worker'] = new Worker(new URL('./compute/compute.ts', import.meta.url), { type: 'module' });
+
     var skeletonResolve, skeleton = new Promise((resolve) => skeletonResolve = resolve);
 
     var anim = [[{ backgroundPosition: '75vw 0, 0 0' }], { duration: 1500, iterations: Infinity }];
@@ -31,6 +33,30 @@
       });
       setTimeout(skeletonResolve, cnt);
     });
+
+    let fonts = {
+      display: new URL('/assets/fonts/displayBold.woff', import.meta.url),
+      text: new URL('/assets/fonts/textMedium.woff', import.meta.url)
+    };
+
+    let list = new Set();
+    let fontResult = {};
+
+    for (let font in fonts) {
+      var request = new XMLHttpRequest();
+      request.open('get', fonts[font], true);
+      request.responseType = 'arraybuffer';
+      request.onload = function (response) {
+        let fontFace = new FontFace(font, response.response);
+        document.fonts.add(fontFace), list.delete(font);
+        fontResult[font] = response.response;
+        if (!list.size) {
+          window['worker'].postMessage({ deliver: 'fonts', data: fontResult }, fontResult);
+        }
+      }
+      request.send(), list.add(font);
+    }
+
   </script>
   <style>
     :root {
@@ -177,6 +203,7 @@
     <div></div>
   </div>
   <script src="index.ts" async type="module"></script>
+  </link>
 </body>
 
 </html>

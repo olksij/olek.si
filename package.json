@@ -12,10 +12,13 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
+    "@parcel/optimizer-data-url": "^2.7.0",
+    "@parcel/transformer-inline-string": "^2.7.0",
     "@types/node": "^18.6.4",
     "@types/opentype.js": "^1.3.4",
+    "buffer": "^6.0.3",
+    "parcel": "^2.7.0",
     "typescript": "^4.6.4",
-    "vite": "^3.0.7",
-    "vite-plugin-html": "^3.2.0"
+    "vite": "^3.0.9"
   }
 }

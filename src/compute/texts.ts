@@ -6,6 +6,8 @@ import fonts from "./fonts";
 import { RenderTextData, TextData, TextsRecord } from "../interfaces";
 import { Font } from "opentype.js";
 
+import print from '../print';
+
 let renderTexts: Record<string, RenderTextData> = {}
 
 export async function loadTexts(textsData: TextsRecord) {
@@ -49,4 +51,5 @@ export async function loadTexts(textsData: TextsRecord) {
 
   // send to main thread computed paths
   postMessage({ deliver: 'texts', data: renderTexts });
+  print('💿 Computed')
 }

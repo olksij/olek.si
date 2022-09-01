@@ -1,6 +1,6 @@
-import { images, loadInternals, stylesheets } from './sources';
+import { loadInternals } from './sources';
 import print from './print';
-import render, { textMorphReady } from './render';
+import render from './render';
 
 window.addEventListener('load', async () => {
   print("🔥 Load Event");
@@ -8,7 +8,6 @@ window.addEventListener('load', async () => {
   await loadInternals;
 
   // we are done loading assets and are ready for render!
-  print("🎨 Ready for render");
   render();
 
   // webvitals file is loaded after load event and render call,

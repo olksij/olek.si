@@ -1,7 +1,4 @@
 import { createElement, createFragment } from "./jsx";
-import { FontType } from "./interfaces";
-import { computeWorker } from "./render";
-import { Buffer } from "buffer";
 
 /* --- --- --- --- --- --- --- --- ---
    --- CODE IN THIS FILE REQUIRES- ---
@@ -60,8 +57,6 @@ import twitter from 'data-url:/assets/images/twitter.svg?raw';
 import email from 'data-url:/assets/images/email.svg?raw';
 import copyright from 'data-url:/assets/images/copyright.svg?raw';
 
-console.log(profilePicture);
-
 // image links to load
 export let images: Record<string, string> = {};
 
@@ -77,6 +72,10 @@ for (var image in importedImages) {
   images[image] = data;
 }
 
-import indexStylesheet from './index.css';
+import indexStylesheet from 'data-url:./index.css';
 
-export const stylesheets: string[] = [indexStylesheet];
+const stylesheets: string[] = [indexStylesheet];
+
+for (var style of stylesheets) {
+  document.head.append(<link rel="stylesheet" href={style} />)
+}

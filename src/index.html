@@ -47,9 +47,9 @@
       request.open('get', fonts[font], true);
       request.responseType = 'arraybuffer';
       request.onload = function (response) {
-        let fontFace = new FontFace(font, response.response);
+        let fontFace = new FontFace(font, response.srcElement.response);
         document.fonts.add(fontFace), list.delete(font);
-        fontResult[font] = response.response;
+        fontResult[font] = response.srcElement.response;
         if (!list.size) {
           window['worker'].postMessage({ deliver: 'fonts', data: fontResult }, fontResult);
         }

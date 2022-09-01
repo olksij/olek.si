@@ -6,6 +6,7 @@
 import { ComputeAPI, RenderData, RenderTextData, TextData, TextsRecord } from "./interfaces";
 import { createElement, createFragment } from "./jsx";
 import { images } from "./sources";
+import print from './print';
 
 export const computeWorker = window['worker'];
 
@@ -123,14 +124,16 @@ let resolveMorph: (value: TextsRecord) => void;
 export let textMorphReady = new Promise<TextsRecord>((resolve) => resolveMorph = resolve);
 
 export default async function render(): Promise<void> {
-  await window["skeleton"];
   if (!sessionStorage.getItem('loaded')) {
+    await window["skeleton"];
     sessionStorage.setItem('loaded', 'true');
   }
 
   document.body.classList.add('rendered');
 
   let renderTextData = await textMorphReady as Record<string, RenderTextData>;
+
+  print("🎨 Render");
 
   // restore id's for shortened components
   for (let id in restoreIDs) {
@@ -188,7 +191,6 @@ export default async function render(): Promise<void> {
             </path>
             <text y={renderTextData[item].baseline - .25}>{textsData[item].text}</text>
           </svg>
-          console.log(renderTextData[item].baseline);
 
           byId(item)!.append(vector);
 

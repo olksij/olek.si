@@ -7,6 +7,8 @@
 import { parse } from 'opentype.js';
 import { FontsRecord } from '../interfaces';
 
+import print from '../print';
+
 // promise so we can ensure fonts are loaded 
 // before we try to vectorize text
 let fontsResolve: (value: FontsRecord | PromiseLike<FontsRecord>) => void;
@@ -22,4 +24,5 @@ export async function loadFonts(data: FontsRecord) {
 
   // resolve to notify texts section about successful font load
   fontsResolve(fonts);
+  print('⌨️ Fonts')
 }

@@ -1,35 +1,81 @@
 import { createElement, createFragment } from "./jsx";
 
-// dates with custom description
-export const dates: Record<string, Array<string>> = {
-  "6-12": ["🎂 It's my birthday today!", "June 12"],
-  "8-23": ["Restoration of independence of Ukraine", "🇺🇦 August 24"],
-  // more dates to come such as celebrations and holidays
-};
+/* --- --- --- --- --- --- --- --- ---
+   --- CODE IN THIS FILE REQUIRES- ---
+   --- --- URGENT REFACTORING- --- ---
+   --- --- --- --- --- --- --- --- --- */
 
-export const head: Node[] = [
-  <title>Oleksii Besida</title>,
-  <meta name="description" content="Oleksii Besida  |  Ukrainian he/him UI&UX designer and Frontend developer living in Stockholm, Sweden." />,
-  <link rel="icon" type="image/x-icon" href={new URL('../assets/favicon.ico', import.meta.url)} />
-];
+/// promise mission of which is to insert missing information to document and
+/// provide text information to display in preffered language
+/// and for preffered date
+export const loadInternals = new Promise<Object>((resolve) => {
+  let data = {};
 
-// font links to load
-export const fonts: Record<string, URL> = {
-  'display': new URL('../assets/fonts/Display-Bold.woff', import.meta.url),
-  'text': new URL('../assets/fonts/Text-Medium.woff', import.meta.url),
-};
+  // specific dates with custom description
+  let dates: Record<string, Array<string>> = {
+    "6-12": ["🎂 It's my birthday today!", "June 12"],
+    "8-23": ["Restoration of independence of Ukraine", "🇺🇦 August 24"],
+    // more dates to come such as celebrations and holidays
+  };
+
+  // insert required tags back
+  document.head.append(...[
+    <title>Oleksii Besida</title>,
+    <meta name="description" content="Oleksii Besida  |  Ukrainian he/him UI&UX designer and Frontend developer living in Stockholm, Sweden." />,
+    <link rel="icon" type="image/x-icon" href={new URL('/assets/favicon.ico', import.meta.url)} />
+  ]);
+
+  // load date
+  const date = new Date();
+  data['description'] = dates[date.getMonth() + '-' + date.getDate()] ??
+    ["Redefining the way humans interact", "with computers."];
+  // more things to come soon;
+  resolve(data);
+});
+
+/*// inline fonts
+import display from 'data-url:/assets/fonts/displayBold.woff';
+import text from 'data-url:/assets/fonts/textMedium.woff';
+
+type FontsBase64 = { [Type in FontType]?: string };
+
+let fonts: FontsBase64 = { display, text };
+
+for (let font in fonts) {
+  document.fonts.add(new FontFace(font, fonts[font]));
+
+  let fontResult = Uint8Array.from(Buffer.from(fonts[font], 'base64')).buffer;
+  computeWorker.postMessage({ deliver: 'fonts', data: fontResult }, [fontResult]);
+}*/
+
+// inline pictures
+import profilePicture from 'data-url:/assets/images/profilePicture.webp';
+import telegram from 'data-url:/assets/images/telegram.svg?raw';
+import instagram from 'data-url:/assets/images/instagram.svg?raw';
+import github from 'data-url:/assets/images/github.svg?raw';
+import twitter from 'data-url:/assets/images/twitter.svg?raw';
+import email from 'data-url:/assets/images/email.svg?raw';
+import copyright from 'data-url:/assets/images/copyright.svg?raw';
 
 // image links to load
-export const images: Record<string, URL> = {
-  "pf": new URL(`../assets/profilePicture.webp`, import.meta.url),
-  "telegram": new URL('../assets/telegram.svg', import.meta.url),
-  "instagram": new URL('../assets/instagram.svg', import.meta.url),
-  "github": new URL('../assets/github.svg', import.meta.url),
-  "twitter": new URL('../assets/twitter.svg', import.meta.url),
-  "email": new URL('../assets/email.svg', import.meta.url),
-  "cr": new URL('../assets/copyright.svg', import.meta.url),
-};
+export let images: Record<string, string> = {};
 
-export const stylesheets: URL[] = [
-  new URL('./index.css', import.meta.url)
-];
+let importedImages: Record<string, string> = {
+  pf: profilePicture, telegram,
+  instagram, github, twitter, email, cr: copyright
+}
+
+for (var image in importedImages) {
+  var data = importedImages[image];
+  if (!data.startsWith('data:'))
+    data = "data:image/svg+xml;utf8," + data;
+  images[image] = data;
+}
+
+import indexStylesheet from 'data-url:./index.css';
+
+const stylesheets: string[] = [indexStylesheet];
+
+for (var style of stylesheets) {
+  document.head.append(<link rel="stylesheet" href={style} />)
+}

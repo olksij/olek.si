@@ -185,8 +185,6 @@ export default async function render(): Promise<void> {
             </path>
             <text y={renderTextData[item].baseline - .25}>{textsData[item].text}</text>
           </svg>
-          console.log(renderTextData[item].baseline);
-
           byId(item)!.append(vector);
 
           let font = textsData[item].font;

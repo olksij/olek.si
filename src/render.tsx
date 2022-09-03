@@ -221,3 +221,6 @@ export default async function render(): Promise<void> {
 computeWorker.onmessage = (message) => {
   if (message.data.deliver == 'texts') resolveMorph(message.data.data as TextsRecord);
 }
+
+byId('rg')!.onmouseenter = function () { byId('lf')!.setAttribute('style', 'transform: translateX(-96px); opacity: 0.25;'); }
+byId('rg')!.onmouseleave = function () { byId('lf')!.setAttribute('style', 'transform: translateX(0px); opacity: 1') }

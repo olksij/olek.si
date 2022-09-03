@@ -8,13 +8,13 @@ body {
 }
 
 #cnt {
-  margin: 128px;
+  margin: auto 0;
   margin-bottom: auto;
   flex-direction: row;
 }
 
 #lf {
-  margin-right: 128px;
+  margin: 0 128px;
 }
 
 #title {
@@ -53,8 +53,9 @@ body {
 }
 
 #rg {
-  margin: auto;
+  align-items: center;
   gap: 24px;
+  width: 100%;
 }
 
 #rg>a {

@@ -10,6 +10,8 @@
   --element: #39364D20;
   --accent: #6549f2;
   --background-position: left 50% top calc(50%);
+
+  --menu-offset: 0px;
 }
 
 svg {
@@ -219,4 +221,20 @@ img {
   #rg>:first-child.rendered>p {
     font-size: 20px;
   }
+}
+
+#lf {
+  transform: translateX(var(--menu-offset));
+}
+
+#cnt>#rg:hover {
+  gap: 26px;
+}
+
+#rg:hover>a {
+  margin-right: 192px;
+}
+
+#rg:hover>.rendered>svg>text {
+  font-size: 22px;
 }

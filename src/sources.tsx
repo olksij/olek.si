@@ -50,19 +50,19 @@ for (let font in fonts) {
 
 // inline pictures
 import profilePicture from 'data-url:/assets/images/profilePicture.webp';
-import telegram from 'data-url:/assets/images/telegram.svg?raw';
-import instagram from 'data-url:/assets/images/instagram.svg?raw';
-import github from 'data-url:/assets/images/github.svg?raw';
-import twitter from 'data-url:/assets/images/twitter.svg?raw';
-import email from 'data-url:/assets/images/email.svg?raw';
-import copyright from 'data-url:/assets/images/copyright.svg?raw';
+import telegram from 'data-url:/assets/images/telegram.svg';
+import instagram from 'data-url:/assets/images/instagram.svg';
+import github from 'data-url:/assets/images/github.svg';
+import linkedin from 'data-url:/assets/images/linkedin.svg';
+import email from 'data-url:/assets/images/email.svg';
+import copyright from 'data-url:/assets/images/copyright.svg';
 
 // image links to load
 export let images: Record<string, string> = {};
 
 let importedImages: Record<string, string> = {
   pf: profilePicture, telegram,
-  instagram, github, twitter, email, cr: copyright
+  instagram, github, linkedin, email, cr: copyright
 }
 
 for (var image in importedImages) {

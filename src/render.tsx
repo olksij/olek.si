@@ -13,13 +13,13 @@ export const computeWorker = window['worker'];
 // for restoring shortened ids in order to get 
 // relation between records and dom
 const restoreIDs: Record<string, Array<string>> = {
-  "ps": ["telegram", "instagram", "github", "twitter", "email"],
+  "ps": ["telegram", "instagram", "github", "linkedin", "email"],
   "rg": ["nav-home", "nav-about", "nav-projects", "nav-work"],
   "ft": ["cr", "lg"],
 }
 
 const restoreLinks: Record<string, Array<string>> = {
-  "ps": ["https://t.me/oleksiibesida", "https://instagram.com/oleksiibesidaa", "https://github.com/oleksiibesida", "https://t.co/oleksiibesida", "mailto:besida@oleksii.xyz"],
+  "ps": ["https://t.me/oleksiibesida", "https://instagram.com/oleksiibesidaa", "https://github.com/oleksiibesida", "https://linkedin.com/in/oleksiibesida/", "mailto:besida@oleksii.xyz"],
   "rg": ["https://oleksii.xyz", "https://oleksii.xyz", "https://oleksii.xyz", "https://oleksii.xyz"],
 }
 

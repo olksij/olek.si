@@ -47,7 +47,8 @@ body.rendered {
   height: 100%;
 }
 
-#cr>img {
+#cr>img,
+#nav>img {
   height: 100%;
   aspect-ratio: 1;
 }
@@ -148,15 +149,21 @@ img {
   font-size: 22px;
 }
 
-#cr {
+#cr,
+#nav {
   flex-direction: row;
 }
 
-#cr.rendered {
+#cr.rendered,
+#nav.rendered {
   overflow: hidden;
   background: #0000;
   width: 160px;
   animation: .5s cubic-bezier(0.5, 0, 0.25, .75) crrender;
+}
+
+#nav.rendered {
+  width: 116px;
 }
 
 @keyframes crrender {
@@ -169,11 +176,20 @@ img {
   }
 }
 
-#cr>p,
-#cr>svg>text {
+#cr>svg>text,
+#nav>svg>text {
   font-size: 12px;
   line-height: 16px;
   margin: 0;
+}
+
+
+#nav {
+  gap: 12px
+}
+
+#nav>svg>text {
+  font-size: 16px;
 }
 
 /* TEMP */
@@ -227,14 +243,32 @@ img {
   transform: translateX(var(--menu-offset));
 }
 
-#cnt>#rg:hover {
-  gap: 26px;
+#rg {
+  gap: 0px;
 }
 
-#rg:hover>a {
+#rg>.rendered {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+#rg:hover>.rendered {
   margin-right: 192px;
+  padding-top: 16px;
+  padding-bottom: 16px;
 }
 
 #rg:hover>.rendered>svg>text {
   font-size: 22px;
+  fill: var(--secondary) !important;
+  font-family: text !important;
+}
+
+#rg>.rendered:hover {
+  padding-left: 16px;
+}
+
+#rg>.rendered:hover>svg>text {
+  fill: var(--accent) !important;
+  font-family: display !important;
 }

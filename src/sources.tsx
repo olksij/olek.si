@@ -55,6 +55,7 @@ import instagram from 'data-url:/assets/images/instagram.svg';
 import github from 'data-url:/assets/images/github.svg';
 import linkedin from 'data-url:/assets/images/linkedin.svg';
 import email from 'data-url:/assets/images/email.svg';
+import nav from 'data-url:/assets/images/nav.svg';
 import copyright from 'data-url:/assets/images/copyright.svg';
 
 // image links to load
@@ -62,7 +63,7 @@ export let images: Record<string, string> = {};
 
 let importedImages: Record<string, string> = {
   pf: profilePicture, telegram,
-  instagram, github, linkedin, email, cr: copyright
+  instagram, github, linkedin, email, cr: copyright, nav
 }
 
 for (var image in importedImages) {

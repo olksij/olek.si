@@ -31,6 +31,7 @@ const animatingOrder: Record<string, RenderData> = {
   "d2": { type: 'text', delay: 50 },
   "ps": { type: 'img', delay: 50, children: true },
   "rg": { type: 'text', delay: 50, children: true },
+  "nav": { type: 'both', delay: 0 },
   "cr": { type: 'both', delay: 0 },
 }
 
@@ -96,6 +97,16 @@ const textsData: Record<string, TextData> = {
     font: {
       fontSize: 18,
       lineHeight: 24,
+    }
+  },
+  "nav": {
+    text: 'Navigation',
+    width: 88,
+    font: {
+      fontSize: 16,
+      lineHeight: 16,
+      type: "display",
+      color: 'var(--text)'
     }
   },
   "cr": {

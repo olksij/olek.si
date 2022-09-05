@@ -7,10 +7,10 @@ var content = `
   </div>
   <p delay="800" id="description" class="torender"></p>
   <div delay="2700" id="profiles" class="torender">
-    <a href="http://t.me/oleksiibesida" target="_blank"><img delay="2700" class="torender" id="tg" alt="Telegram" width="48px" height="48px" /></a>
-    <a href="http://instagram.com/oleksiibesidaa" target="_blank"><img delay="2750" class="torender" id="ig" alt="Instagram" width="48px" height="48px" /></a>
-    <a href="http://github.com/oleksiibesida" target="_blank"><img delay="2800" class="torender" id="gh" alt="GitHub" width="48px" height="48px" /></a>
-    <a href="http://twitter.com/oleksiibesida" target="_blank"><img delay="2850" class="torender" id="tw" alt="Twitter" width="48px" height="48px" /></a>
+    <a href="https://t.me/oleksiibesida" target="_blank"><img delay="2700" class="torender" id="tg" alt="Telegram" width="48px" height="48px" /></a>
+    <a href="https://instagram.com/oleksiibesidaa" target="_blank"><img delay="2750" class="torender" id="ig" alt="Instagram" width="48px" height="48px" /></a>
+    <a href="https://github.com/oleksiibesida" target="_blank"><img delay="2800" class="torender" id="gh" alt="GitHub" width="48px" height="48px" /></a>
+    <a href="https://linkedin.com/in/oleksiibesida" target="_blank"><img delay="2850" class="torender" id="in" alt="LinkedIn" width="48px" height="48px" /></a>
     <a href="mailto:besida@oleksii.xyz" id="mta"><img delay="2900" class="torender" id="mt" alt="Email" width="48px" height="48px" /></a>
   </div>
 </div>
@@ -32,7 +32,7 @@ var source = new Map([
   ["tg", new URL("/assets/telegram.svg", import.meta.url)],
   ["ig", new URL("/assets/instagram.svg", import.meta.url)],
   ["gh", new URL("/assets/github.svg", import.meta.url)],
-  ["tw", new URL("/assets/twitter.svg", import.meta.url)],
+  ["in", new URL("/assets/linkedin.svg", import.meta.url)],
   ["mt", new URL("/assets/email.svg", import.meta.url)],
   ["cr", new URL("/assets/copyright.svg", import.meta.url)],
 ]);

@@ -6,7 +6,7 @@ import fonts from "./fonts";
 import { RenderTextData, TextData, TextsRecord } from "../interfaces";
 import { Font } from "opentype.js";
 
-import print from '../print';
+import print from '../modules/print';
 
 let renderTexts: Record<string, RenderTextData> = {}
 

@@ -13,6 +13,8 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
+    "@parcel/compressor-brotli": "^2.7.0",
+    "@parcel/compressor-gzip": "^2.7.0",
     "@parcel/optimizer-data-url": "^2.7.0",
     "@parcel/transformer-inline-string": "^2.7.0",
     "@types/node": "^18.6.4",

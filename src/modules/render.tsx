@@ -3,9 +3,8 @@
    --- -- [URGENT] REFACTORING --- ---
    --- --- --- --- --- --- --- --- --- */
 
-import { ComputeAPI, RenderData, RenderTextData, TextData, TextsRecord } from "./interfaces";
+import { ComputeAPI, RenderData, RenderTextData, TextData, TextsRecord } from "../interfaces";
 import { createElement, createFragment } from "./jsx";
-import { images } from "./sources";
 import print from './print';
 
 export const computeWorker = window['worker'];
@@ -134,10 +133,17 @@ function tagById(id: string, tag: string): Element | undefined {
 let resolveMorph: (value: TextsRecord) => void;
 export let textMorphReady = new Promise<TextsRecord>((resolve) => resolveMorph = resolve);
 
-export default async function render(): Promise<void> {
+export default async function render(content): Promise<void> {
   if (!sessionStorage.getItem('loaded')) {
     await window["skeleton"];
     sessionStorage.setItem('loaded', 'true');
+  }
+
+  let images;
+  Object.assign(images, content.images, content.vectors);
+
+  for (var style of content.stylesheets) {
+    document.head.append(<link rel="stylesheet" href={style} />)
   }
 
   document.body.classList.add('rendered');

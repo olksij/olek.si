@@ -1,31 +1,10 @@
+@import './general.css';
+@import './menu.css';
+
 /* --- --- --- --- --- --- --- --- ---
    --- CODE IN THIS FILE REQUIRES- ---
    --- -- AN URGENT REFACTORING -- ---
    --- --- --- --- --- --- --- --- --- */
-
-:root {
-  --text: #0F0D1A;
-  --secondary: #858391;
-  --border: #39364D14;
-  --element: #39364D20;
-  --accent: #6549f2;
-  --background-position: left 50% top calc(50%);
-
-  --menu-offset: 0px;
-}
-
-svg {
-  height: 100%;
-  width: fit-content;
-}
-
-body.rendered {
-  animation: 5s linear background;
-  background:
-    radial-gradient(var(--element) 5%, transparent 0),
-    var(--bg);
-  background-size: 24px 24px;
-}
 
 *:not(#cnt):not(#ps):not(#ft) {
   justify-content: center;

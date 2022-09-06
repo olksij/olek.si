@@ -1,3 +1,5 @@
+/* an incremental CSS file providing skeleton layout for desktop viewports. */
+
 *:not(style):not(script):not(title) {
   align-items: stretch;
   flex-direction: column;

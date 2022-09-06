@@ -1,17 +1,14 @@
-import { loadInternals } from './sources';
-import print from './print';
-import render from './render';
+import print from '../modules/print';
+import render from '../modules/render';
 
-window.addEventListener('load', async () => {
+export async function onload(content: Object) {
   print("🔥 Load Event");
 
-  await loadInternals;
-
   // we are done loading assets and are ready for render!
-  render();
+  render(content);
 
   // webvitals file is loaded after load event and render call,
   // and meant to help measure this webpage quality
   print("😏 Loading web vitals");
-  import('./webvitals');
-});
+  import('../modules/webvitals');
+}

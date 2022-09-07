@@ -11,4 +11,6 @@ export async function onload(content: Object) {
   // and meant to help measure this webpage quality
   print("😏 Loading web vitals");
   import('../modules/webvitals');
+
+  // to contain navigator, theme specs, and other dynamic things
 }

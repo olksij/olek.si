@@ -34,113 +34,25 @@ const animatingOrder: Record<string, RenderData> = {
   "cr": { type: 'both', delay: 0 },
 }
 
-const textsData: Record<string, TextData> = {
-  "tt": {
-    text: 'Oleksii',
-    width: 386,
-    fromPath: "M103 0H0V112H103V80V0ZM52 80H51V79H52V80ZM103 0H129V112H103V80V0ZM129 0H201V112H129V0ZM167 51V50H168V51H167ZM201 0H267V112H201V0ZM324 0H267V112H324V50.5V0ZM324 0V50.5H355V0H324ZM324 50.5V112H355V50.5H324ZM386 50.5V0H355V50.5H386ZM386 112V50.5H355V112H386Z",
-    font: {
-      type: 'display',
-      fontSize: 128,
-      lineHeight: 112,
-      letterSpacing: -0.04,
-      color: 'var(--text)',
-    },
-  },
-  "d1": {
-    text: 'Redefining the way humans interact', // Pereosmyslenńa sposobu vzajemodiji ĺudyny
-    width: 337,
-    font: {
-      fontSize: 20,
-      lineHeight: 28,
-    },
-  },
-  "d2": {
-    text: 'with computers', // z kompjuterom
-    width: 148,
-    font: {
-      fontSize: 20,
-      lineHeight: 28,
-    }
-  },
-  "nav-home": {
-    text: 'oleksii.xyz',
-    width: 128,
-    font: {
-      type: 'display',
-      fontSize: 20,
-      letterSpacing: -0.04,
-      lineHeight: 24,
-      color: 'var(--text)',
-    }
-  },
-  "nav-about": {
-    text: 'about',
-    width: 128,
-    font: {
-      fontSize: 18,
-      lineHeight: 24,
-    }
-  },
-  "nav-projects": {
-    text: 'projects',
-    width: 128,
-    font: {
-      fontSize: 18,
-      lineHeight: 24,
-    }
-  },
-  "nav-work": {
-    text: 'work',
-    width: 128,
-    font: {
-      fontSize: 18,
-      lineHeight: 24,
-    }
-  },
-  "nav": {
-    text: 'Navigation',
-    width: 88,
-    font: {
-      fontSize: 16,
-      lineHeight: 16,
-      type: "display",
-      color: 'var(--text)'
-    }
-  },
-  "cr": {
-    text: '2018-2022 Oleksii Besida',
-    width: 142,
-    font: {
-      fontSize: 12,
-      lineHeight: 16,
-    }
-  },
-}
-
-computeWorker.postMessage({ deliver: 'texts', data: textsData });
-
-/** Shorthand for getting an `HTMLElement` */
-function byId(id: string): HTMLElement | null {
-  return document.getElementById(id);
-}
-
-/** Retreive child by tag */
-function tagById(id: string, tag: string): Element | undefined {
-  return byId(id)?.getElementsByTagName(tag)[0];
-}
-
 let resolveMorph: (value: TextsRecord) => void;
 export let textMorphReady = new Promise<TextsRecord>((resolve) => resolveMorph = resolve);
 
 export default async function render(content): Promise<void> {
+  computeWorker.postMessage({ deliver: 'texts', data: content.texts });
+
   if (!sessionStorage.getItem('loaded')) {
     await window["skeleton"];
     sessionStorage.setItem('loaded', 'true');
   }
 
+  /* --- FROM OLD SOURCES.TSX --- */
+
   let images;
   Object.assign(images, content.images, content.vectors);
+
+  document.head.append(...content.head);
+
+  /* --- --- --- --- --- --- --- */
 
   for (var style of content.stylesheets) {
     document.head.append(<link rel="stylesheet" href={style} />)
@@ -195,16 +107,16 @@ export default async function render(content): Promise<void> {
         setTimeout((item) => {
           var data = renderTextData[item] as RenderTextData;
 
-          let vector = <svg viewBox={`0 0 ${textsData[item].width} ${textsData[item].font.lineHeight}`}>
+          let vector = <svg viewBox={`0 0 ${content.texts[item].width} ${content.texts[item].font.lineHeight}`}>
             <path fill="var(--el)" fill-rule="evenodd" clip-rule="evenodd">
               <animate attributeName="d" dur="0.8s" values={data.from + ';' + data.to}
                 calcMode="spline" keySplines="0.87 0 0.13 1" />
             </path>
-            <text y={renderTextData[item].baseline - .25}>{textsData[item].text}</text>
+            <text y={renderTextData[item].baseline - .25}>{content.texts[item].text}</text>
           </svg>
           byId(item)!.append(vector);
 
-          let font = textsData[item].font;
+          let font = content.texts[item].font;
 
           [tagById(item, 'path'), tagById(item, 'text')].forEach(el => el!.animate(
             [{ fill: 'var(--el)' }, { fill: font.color ?? 'var(--secondary)' }],
@@ -241,3 +153,13 @@ computeWorker.onmessage = (message) => {
 
 byId('rg')!.onmouseenter = function () { byId('lf')!.setAttribute('style', 'transform: translateX(-96px); opacity: 0.25;'); }
 byId('rg')!.onmouseleave = function () { byId('lf')!.setAttribute('style', 'transform: translateX(0px); opacity: 1') }
+
+/** Shorthand for getting an `HTMLElement` */
+function byId(id: string): HTMLElement | null {
+  return document.getElementById(id);
+}
+
+/** Retreive child by tag */
+function tagById(id: string, tag: string): Element | undefined {
+  return byId(id)?.getElementsByTagName(tag)[0];
+}

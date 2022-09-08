@@ -1,4 +1,4 @@
-window['worker'] = new Worker(new URL('./compute/compute.ts', import.meta.url), { type: 'module' });
+window['worker'] = new Worker(new URL('../compute/compute.ts', import.meta.url), { type: 'module' });
 
 export var skeletonResolve, skeleton = new Promise((resolve) => skeletonResolve = resolve);
 
@@ -43,7 +43,7 @@ for (let font in fonts) {
   request.open('get', fonts[font], true);
   request.responseType = 'arraybuffer';
   // when font is loaded, pass it to document and service worker
-  request.onload = function (this) {
+  request.onload = function () {
     let res = this.response;
     document.fonts.add(new FontFace(font, res));
     fontResult[font] = res;

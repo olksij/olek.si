@@ -88,8 +88,7 @@ img {
 
 #tt.rendered,
 #d1.rendered,
-#d2.rendered,
-#rg>.rendered {
+#d2.rendered {
   overflow: hidden;
   background: #0000;
   align-items: flex-start;
@@ -99,33 +98,6 @@ img {
 #tt>svg {
   height: 100%;
   aspect-ratio: 3.4464285714;
-}
-
-#tt>p,
-#tt>svg>text {
-  font-size: 74px;
-  line-height: 64px;
-  margin: 0;
-  align-self: self-start;
-}
-
-#dd>*>p,
-#dd>*>svg>text,
-#rg>.rendered>p,
-#rg>*>svg>text {
-  font-size: 17.2px;
-  line-height: 24px;
-  white-space: nowrap;
-  margin: 0
-}
-
-#rg>.rendered>p {
-  font-size: 18px;
-  line-height: 24px;
-}
-
-#rg>:first-child.rendered>p {
-  font-size: 22px;
 }
 
 #cr,
@@ -141,10 +113,6 @@ img {
   animation: .5s cubic-bezier(0.5, 0, 0.25, .75) crrender;
 }
 
-#nav.rendered {
-  width: 116px;
-}
-
 @keyframes crrender {
   from {
     background: var(--el);
@@ -155,99 +123,11 @@ img {
   }
 }
 
-#cr>svg>text,
-#nav>svg>text {
-  font-size: 12px;
-  line-height: 16px;
-  margin: 0;
-}
-
 
 #nav {
   gap: 12px
 }
 
-#nav>svg>text {
-  font-size: 16px;
-}
-
-/* TEMP */
-
-#rg>.rendered>svg>text {
-  font-size: 18px;
-  line-height: 24px;
-}
-
-#rg>:first-child.rendered>svg>text {
-  font-size: 20px;
-}
-
-#dd>*>svg>text {
-  font-size: 20px;
-  line-height: 28px;
-}
-
-#tt>svg>text {
-  font-size: 128px;
-  line-height: 112px;
-  letter-spacing: -0.04em;
-}
-
-
-@media (min-width: 920px) {
-
-  #tt>p {
-    font-size: 128px;
-    line-height: 112px;
-    letter-spacing: -0.04em;
-  }
-
-  #dd>*>p,
-  #rg>.rendered>p {
-    font-size: 20px;
-    line-height: 28px;
-  }
-
-  #rg>.rendered>p {
-    font-size: 18px;
-    line-height: 24px;
-  }
-
-  #rg>:first-child.rendered>p {
-    font-size: 20px;
-  }
-}
-
 #lf {
   transform: translateX(var(--menu-offset));
-}
-
-#rg {
-  gap: 0px;
-}
-
-#rg>.rendered {
-  padding-top: 12px;
-  padding-bottom: 12px;
-}
-
-#rg:hover>.rendered {
-  margin-right: 192px;
-  padding-top: 16px;
-  padding-bottom: 16px;
-}
-
-#rg:hover>.rendered>svg>text {
-  font-size: 22px;
-  fill: var(--secondary) !important;
-  font-family: text !important;
-}
-
-#rg>.rendered:hover {
-  padding-left: 16px;
-}
-
-#rg>.rendered:hover>svg>text {
-  fill: var(--accent) !important;
-  font-family: display !important;
 }

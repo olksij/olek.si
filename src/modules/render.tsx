@@ -3,7 +3,7 @@
    --- -- [URGENT] REFACTORING --- ---
    --- --- --- --- --- --- --- --- --- */
 
-import { ComputeAPI, RenderData, RenderTextData, TextData, TextsRecord } from "../interfaces";
+import { ComputeAPI, FontStyle, RenderData, RenderTextData, TextData, TextsRecord } from "../interfaces";
 import { createElement, createFragment } from "./jsx";
 import print from './print';
 
@@ -47,7 +47,7 @@ export default async function render(content): Promise<void> {
 
   /* --- FROM OLD SOURCES.TSX --- */
 
-  let images;
+  let images = {};
   Object.assign(images, content.images, content.vectors);
 
   document.head.append(...content.head);
@@ -116,7 +116,7 @@ export default async function render(content): Promise<void> {
           </svg>
           byId(item)!.append(vector);
 
-          let font = content.texts[item].font;
+          let font = content.texts[item].font as FontStyle;
 
           [tagById(item, 'path'), tagById(item, 'text')].forEach(el => el!.animate(
             [{ fill: 'var(--el)' }, { fill: font.color ?? 'var(--secondary)' }],
@@ -128,7 +128,7 @@ export default async function render(content): Promise<void> {
             { delay: 600, duration: 200 },
           );
 
-          tagById(item, 'text')?.setAttribute("style", `opacity: 0; font-family:${font.type ?? 'text'}; letter-spacing:${font.letterSpacing ?? 0}em;`);
+          tagById(item, 'text')?.setAttribute("style", `opacity: 0; font-family:${font.type ?? 'text'}; letter-spacing:${font.letterSpacing ?? 0}em; font-size:${font.fontSize}`);
 
           tagById(item, 'text')?.animate(
             [{ opacity: 0 }, { opacity: 1 }],

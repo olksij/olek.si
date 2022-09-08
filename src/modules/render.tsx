@@ -9,6 +9,8 @@ import print from './print';
 
 export const computeWorker = window['worker'];
 
+// TODO: related to individual page
+
 // for restoring shortened ids in order to get 
 // relation between records and dom
 const restoreIDs: Record<string, Array<string>> = {
@@ -17,10 +19,14 @@ const restoreIDs: Record<string, Array<string>> = {
   "ft": ["cr", "lg"],
 }
 
+// TODO: related to individual page
+
 const restoreLinks: Record<string, Array<string>> = {
   "ps": ["https://t.me/oleksiibesida", "https://instagram.com/oleksiibesidaa", "https://github.com/oleksiibesida", "https://linkedin.com/in/oleksiibesida/", "mailto:besida@oleksii.xyz"],
   "rg": ["https://oleksii.xyz", "https://oleksii.xyz", "https://oleksii.xyz", "https://oleksii.xyz"],
 }
+
+// TODO: related to individual page
 
 // order and details of animating each node
 const animatingOrder: Record<string, RenderData> = {
@@ -34,16 +40,21 @@ const animatingOrder: Record<string, RenderData> = {
   "cr": { type: 'both', delay: 0 },
 }
 
+// TODO: merge into one value
+
 let resolveMorph: (value: TextsRecord) => void;
 export let textMorphReady = new Promise<TextsRecord>((resolve) => resolveMorph = resolve);
 
 export default async function render(content): Promise<void> {
+  // TODO: it's possible to send text data earlier
   computeWorker.postMessage({ deliver: 'texts', data: content.texts });
 
   if (!sessionStorage.getItem('loaded')) {
     await window["skeleton"];
     sessionStorage.setItem('loaded', 'true');
   }
+
+  // TODO: organize things here
 
   /* --- FROM OLD SOURCES.TSX --- */
 
@@ -52,11 +63,11 @@ export default async function render(content): Promise<void> {
 
   document.head.append(...content.head);
 
-  /* --- --- --- --- --- --- --- */
-
   for (var style of content.stylesheets) {
     document.head.append(<link rel="stylesheet" href={style} />)
   }
+
+  /* --- --- --- --- --- --- --- */
 
   document.body.classList.add('rendered');
 
@@ -78,6 +89,8 @@ export default async function render(content): Promise<void> {
   }
 
   let delayCounter: number = 0;
+
+  // TODO: merge all cases into one
 
   // restore everything;
   for (let item in animatingOrder) {
@@ -103,6 +116,7 @@ export default async function render(content): Promise<void> {
 
     if (data.type == 'text' || data.type == 'both') {
       for (let child of queue) {
+        // TODO: ahhrr clean up code 
         delayCounter += data.delay;
         setTimeout((item) => {
           var data = renderTextData[item] as RenderTextData;
@@ -151,6 +165,7 @@ computeWorker.onmessage = (message) => {
   if (message.data.deliver == 'texts') resolveMorph(message.data.data as TextsRecord);
 }
 
+// TODO: it's heavely related to pages
 byId('rg')!.onmouseenter = function () { byId('lf')!.setAttribute('style', 'transform: translateX(-96px); opacity: 0.25;'); }
 byId('rg')!.onmouseleave = function () { byId('lf')!.setAttribute('style', 'transform: translateX(0px); opacity: 1') }
 

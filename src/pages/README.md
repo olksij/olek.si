@@ -1,4 +1,4 @@
-## oleksii.xyz > src > 🖼️ **content**
+## oleksii.xyz > src > 📄 **pages**
 
 files in this folder are intended to inline all required for page assets.
 

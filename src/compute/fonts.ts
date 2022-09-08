@@ -9,6 +9,8 @@ import { FontsRecord } from '../interfaces';
 
 import print from '../modules/print';
 
+// TODO: convert to a class
+
 // promise so we can ensure fonts are loaded 
 // before we try to vectorize text
 let fontsResolve: (value: FontsRecord | PromiseLike<FontsRecord>) => void;

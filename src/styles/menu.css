@@ -2,8 +2,8 @@
   width: 116px;
 }
 
-#rg {
-  gap: 0px;
+#rg:hover {
+  gap: 32px
 }
 
 #rg>.rendered {
@@ -11,46 +11,27 @@
   background: #0000;
   align-items: flex-start;
   text-decoration: none;
-}
-
-#rg>.rendered {
-  padding-top: 12px;
-  padding-bottom: 12px;
+  padding: 12px 0;
+  margin: -12px 0;
 }
 
 #rg:hover>.rendered {
+  padding: 32px;
+  margin: -32px;
   margin-right: 192px;
-  padding-top: 16px;
-  padding-bottom: 16px;
 }
 
 #rg:hover>.rendered>svg>text {
-  font-size: 22px;
+  font-size: 20px !important;
   fill: var(--secondary) !important;
   font-family: text !important;
 }
 
 #rg>.rendered:hover {
-  padding-left: 16px;
+  padding-left: 48px;
 }
 
 #rg>.rendered:hover>svg>text {
   fill: var(--accent) !important;
   font-family: display !important;
-}
-
-#rg>*>svg>text {
-  font-size: 17.2px;
-  line-height: 24px;
-  white-space: nowrap;
-  margin: 0
-}
-
-#rg>.rendered>svg>text {
-  font-size: 18px;
-  line-height: 24px;
-}
-
-#rg>:first-child.rendered>svg>text {
-  font-size: 20px;
 }

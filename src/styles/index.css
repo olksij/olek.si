@@ -127,7 +127,3 @@ img {
 #nav {
   gap: 12px
 }
-
-#lf {
-  transform: translateX(var(--menu-offset));
-}

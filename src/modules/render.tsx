@@ -166,17 +166,15 @@ computeWorker.onmessage = (message) => {
 }
 
 // TODO: it's heavely related to pages
-byId('rg')!.onmouseenter = function () { byId('lf')!.classList.add('navOpened'); }
-byId('rg')!.onmouseleave = function () { byId('lf')!.classList.remove('navOpened'); }
+byId('rg')!.onmouseenter = function () { byId('cnt')!.classList.add('navOpened'); }
+byId('rg')!.onmouseleave = function () { byId('cnt')!.classList.remove('navOpened'); }
 
 byId('nav')!.onclick = function () {
   if (!byId('lf')?.classList.contains('navTapped')) {
-    byId('lf')!.classList.add('navTapped');
-    byId('rg')!.classList.add('navTapped');
+    byId('cnt')!.classList.add('navTapped');
   }
   else {
-    byId('lf')!.classList.remove('navTapped');
-    byId('rg')!.classList.remove('navTapped');
+    byId('cnt')!.classList.remove('navTapped');
   }
 }
 

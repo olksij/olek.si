@@ -1,22 +1,4 @@
-:root {
-  --el: #EDEBF0;
-  --bg: #FAFAFC;
-}
-
-*:not(style):not(script):not(title) {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  transition: .6s cubic-bezier(0, 0.5, 0, 1);
-}
-
-html,
-body {
-  height: 100%;
-  width: 100%;
-  background: var(--bg);
-  margin: 0;
-}
+@import './general.skeleton.css';
 
 #cnt {
   flex-direction: row;

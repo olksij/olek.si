@@ -8,7 +8,7 @@
   background: #0000;
 }
 
-#rg.navTapped {
+.navTapped>#rg {
   display: flex;
   position: absolute;
   animation: rgTapped 0.4s cubic-bezier(0, 0, 0, 1);
@@ -24,18 +24,66 @@
   }
 }
 
-#lf.navOpened {
-  transform: translateX(-96px);
+.navOpened {
+  animation: lfMotion .6s cubic-bezier(0, 0.5, 0, 1);
+}
+
+.navOpened>#lf {
   opacity: 0.25;
 }
 
-#lf.navTapped {
-  transition: .4s cubic-bezier(0, 0, 0, 1);
+.navOpened>* {
+  animation: lfChildMotion .6s cubic-bezier(0, 0.5, 0, 1);
+}
+
+.navTapped {
+  animation: lfMotion .6s cubic-bezier(0, 0.5, 0, 1);
+}
+
+.navTapped>#lf {
+  transition: .6s cubic-bezier(0, 0, 0, 1);
   transform: translateX(-50vw);
   opacity: 0.05;
 }
 
-#rg:hover:not(.navTapped) {
+.navTapped>* {
+  animation: lfChildMotion .6s cubic-bezier(0, 0.5, 0, 1);
+}
+
+@keyframes lfMotion {
+
+  0% {
+    filter: blur(0px);
+    transform: scaleY(0.001);
+  }
+
+  2% {
+    filter: blur(6px);
+    transform: scaleY(0.001);
+  }
+
+  10% {
+    filter: blur(6px);
+    transform: scaleY(0.001);
+  }
+
+  100% {
+    filter: blur(0);
+    transform: scaleY(0.001);
+  }
+}
+
+@keyframes lfChildMotion {
+  0% {
+    transform: scaleY(1000);
+  }
+
+  100% {
+    transform: scaleY(1000);
+  }
+}
+
+:not(.navTapped)>#rg:hover {
   gap: 32px
 }
 
@@ -48,23 +96,23 @@
   margin: -12px 0;
 }
 
-#rg:hover:not(.navTapped)>.rendered {
+:not(.navTapped)>#rg:hover>.rendered {
   padding: 32px;
   margin: -32px;
   margin-right: 192px;
 }
 
-#rg:hover:not(.navTapped)>.rendered>svg>text {
+:not(.navTapped)>#rg:hover>.rendered>svg>text {
   font-size: 20px !important;
   fill: var(--secondary) !important;
   font-family: text !important;
 }
 
-#rg:not(.navTapped)>.rendered:hover {
+:not(.navTapped)>#rg.rendered:hover {
   padding-left: 48px;
 }
 
-#rg:not(.navTapped)>.rendered:hover>svg>text {
+:not(.navTapped)>#rg>.rendered:hover>svg>text {
   fill: var(--accent) !important;
   font-family: display !important;
 }

@@ -10,26 +10,17 @@
   justify-content: center;
 }
 
+#cnt {
+  justify-content: center;
+}
+
 #pf,
 #ps>a {
   overflow: hidden;
 }
 
 #pf>img {
-  height: 100%;
   border-radius: 100%;
-  aspect-ratio: 1;
-}
-
-#ps>a>img {
-  aspect-ratio: 1;
-  height: 100%;
-}
-
-#cr>img,
-#nav>img {
-  height: 100%;
-  aspect-ratio: 1;
 }
 
 img {
@@ -100,13 +91,11 @@ img {
   aspect-ratio: 3.4464285714;
 }
 
-#cr,
-#nav {
+#cr {
   flex-direction: row;
 }
 
-#cr.rendered,
-#nav.rendered {
+#cr.rendered {
   overflow: hidden;
   background: #0000;
   width: 160px;
@@ -124,6 +113,7 @@ img {
 }
 
 
-#nav {
-  gap: 12px
+#nav.rendered {
+  gap: 4px;
+  width: 116px;
 }

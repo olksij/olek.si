@@ -1,8 +1,41 @@
+@import './menu.skeleton.css';
+
 #nav.rendered {
-  width: 116px;
+  padding: 16px;
+  margin: 16px;
+  flex-direction: row;
+  overflow: hidden;
+  background: #0000;
 }
 
-#rg:hover {
+#rg.navTapped {
+  display: flex;
+  position: absolute;
+  animation: rgTapped 0.4s cubic-bezier(0, 0, 0, 1);
+}
+
+@keyframes rgTapped {
+  from {
+    margin-left: 50vw;
+  }
+
+  to {
+    margin-left: 0vw;
+  }
+}
+
+#lf.navOpened {
+  transform: translateX(-96px);
+  opacity: 0.25;
+}
+
+#lf.navTapped {
+  transition: .4s cubic-bezier(0, 0, 0, 1);
+  transform: translateX(-50vw);
+  opacity: 0.05;
+}
+
+#rg:hover:not(.navTapped) {
   gap: 32px
 }
 
@@ -15,23 +48,23 @@
   margin: -12px 0;
 }
 
-#rg:hover>.rendered {
+#rg:hover:not(.navTapped)>.rendered {
   padding: 32px;
   margin: -32px;
   margin-right: 192px;
 }
 
-#rg:hover>.rendered>svg>text {
+#rg:hover:not(.navTapped)>.rendered>svg>text {
   font-size: 20px !important;
   fill: var(--secondary) !important;
   font-family: text !important;
 }
 
-#rg>.rendered:hover {
+#rg:not(.navTapped)>.rendered:hover {
   padding-left: 48px;
 }
 
-#rg>.rendered:hover>svg>text {
+#rg:not(.navTapped)>.rendered:hover>svg>text {
   fill: var(--accent) !important;
   font-family: display !important;
 }

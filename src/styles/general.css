@@ -7,6 +7,11 @@
   --background-position: left 50% top calc(50%);
 }
 
+img {
+  height: 100%;
+  aspect-ratio: 1;
+}
+
 svg {
   height: 100%;
   width: fit-content;
@@ -18,4 +23,15 @@ body.rendered {
     radial-gradient(var(--element) 5%, transparent 0),
     var(--bg);
   background-size: 24px 24px;
+  overflow: hidden;
+}
+
+.tr {
+  width: 0 !important;
+  opacity: 0%;
+}
+
+.sl {
+  background: -50vw 0/75% 100% fixed no-repeat linear-gradient(0.25turn, transparent, #FAFAFC88, transparent),
+    linear-gradient(var(--el), var(--el));
 }

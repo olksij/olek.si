@@ -166,8 +166,19 @@ computeWorker.onmessage = (message) => {
 }
 
 // TODO: it's heavely related to pages
-byId('rg')!.onmouseenter = function () { byId('lf')!.setAttribute('style', 'transform: translateX(-96px); opacity: 0.25;'); }
-byId('rg')!.onmouseleave = function () { byId('lf')!.setAttribute('style', 'transform: translateX(0px); opacity: 1') }
+byId('rg')!.onmouseenter = function () { byId('lf')!.classList.add('navOpened'); }
+byId('rg')!.onmouseleave = function () { byId('lf')!.classList.remove('navOpened'); }
+
+byId('nav')!.onclick = function () {
+  if (!byId('lf')?.classList.contains('navTapped')) {
+    byId('lf')!.classList.add('navTapped');
+    byId('rg')!.classList.add('navTapped');
+  }
+  else {
+    byId('lf')!.classList.remove('navTapped');
+    byId('rg')!.classList.remove('navTapped');
+  }
+}
 
 /** Shorthand for getting an `HTMLElement` */
 function byId(id: string): HTMLElement | null {

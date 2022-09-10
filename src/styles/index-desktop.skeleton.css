@@ -1,5 +1,7 @@
 /* an incremental CSS file providing skeleton layout for desktop viewports. */
 
+@import './menu.skeleton.css';
+
 *:not(style):not(script):not(title) {
   align-items: stretch;
   flex-direction: column;
@@ -54,18 +56,6 @@ body {
   display: flex;
 }
 
-#rg {
-  align-items: center;
-  gap: 24px;
-  width: 100%;
-}
-
-#rg>a {
-  height: 24px;
-  border-radius: 6px;
-  width: 128px;
-}
-
 #nav {
   display: none;
 }
@@ -77,14 +67,4 @@ body {
 
 #ft>div {
   width: 162px;
-}
-
-.tr {
-  width: 0 !important;
-  opacity: 0;
-}
-
-.sl {
-  background: -100vw 0/75% 100% fixed no-repeat linear-gradient(0.25turn, transparent, #FAFAFC88, transparent),
-    linear-gradient(var(--el), var(--el));
 }

@@ -19,7 +19,7 @@ body {
 }
 
 #cnt {
-  flex-direction: column-reverse;
+  flex-direction: row;
   margin: auto;
 }
 
@@ -81,19 +81,15 @@ body {
   gap: 24px;
 }
 
-#ft>div,
-#nav {
+#ft>div {
   height: 16px;
   width: 96px;
   border-radius: 8px;
 }
 
-.tr {
-  width: 0 !important;
-  opacity: 50%;
-}
-
-.sl {
-  background: -50vw 0/75% 100% fixed no-repeat linear-gradient(0.25turn, transparent, #FAFAFC88, transparent),
-    linear-gradient(var(--el), var(--el));
+#nav {
+  height: 24px;
+  width: 116px;
+  border-radius: 8px;
+  margin: 32px;
 }

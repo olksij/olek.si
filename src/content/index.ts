@@ -61,7 +61,7 @@ export const texts: Record<string, TextData> = {
     width: 88,
     font: {
       fontSize: 16,
-      lineHeight: 16,
+      lineHeight: 24,
       type: "display",
       color: 'var(--text)'
     }

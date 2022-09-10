@@ -1,0 +1,11 @@
+#rg {
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+}
+
+#rg>a {
+  height: 24px;
+  border-radius: 6px;
+  width: 128px;
+}

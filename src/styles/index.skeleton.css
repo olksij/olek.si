@@ -5,7 +5,7 @@
   margin: auto;
 }
 
-#lf {
+#lf>div {
   gap: 48px;
 }
 

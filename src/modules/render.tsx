@@ -69,8 +69,6 @@ export default async function render(content): Promise<void> {
 
   /* --- --- --- --- --- --- --- */
 
-  document.body.classList.add('rendered');
-
   let renderTextData = await textMorphReady as Record<string, RenderTextData>;
 
   print("🎨 Render");
@@ -159,6 +157,7 @@ export default async function render(content): Promise<void> {
       }
     }
   }
+  document.body.classList.add('rendered'), delayCounter;
 }
 
 computeWorker.onmessage = (message) => {
@@ -166,16 +165,44 @@ computeWorker.onmessage = (message) => {
 }
 
 // TODO: it's heavely related to pages
-byId('rg')!.onmouseenter = function () { byId('cnt')!.classList.add('navOpened'); }
+byId('rg')!.onmouseover = function () { byId('cnt')!.classList.add('navOpened', 'navTransformed'); }
 byId('rg')!.onmouseleave = function () { byId('cnt')!.classList.remove('navOpened'); }
 
 byId('nav')!.onclick = function () {
-  if (!byId('lf')?.classList.contains('navTapped')) {
+  if (!byId('cnt')?.classList.contains('navTapped'))
     byId('cnt')!.classList.add('navTapped');
-  }
-  else {
+  else
     byId('cnt')!.classList.remove('navTapped');
-  }
+}
+
+var rgAnimate: Set<EventTarget> = new Set();
+
+byId('rg')!.ontransitionrun = function (event) {
+  if (event.propertyName != 'margin-right') return;
+
+  rgAnimate.add(event.target!);
+
+  if (rgAnimate.size == 1)
+    requestAnimationFrame(() => motionBlur('rg', byId('nav-work')!.getBoundingClientRect()));
+}
+
+byId('rg')!.ontransitionend = function (event) {
+  if (event.propertyName == 'margin-right')
+    rgAnimate.delete(event.target!);
+
+  if (!rgAnimate.size) byId('cnt')!.setAttribute('style', '');
+}
+
+function motionBlur(id: string, previous: DOMRect) {
+  if (!rgAnimate.size) return;
+
+  let current = byId('nav-work')!.getBoundingClientRect();
+
+  let diff = Math.round(Math.abs(current.left - previous.left) / 2 * 5) / 5;
+
+  byId('cnt')!.setAttribute('style', `filter: blur(${diff}px)`);
+
+  requestAnimationFrame(() => motionBlur(id, current));
 }
 
 /** Shorthand for getting an `HTMLElement` */

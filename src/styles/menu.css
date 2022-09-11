@@ -24,64 +24,24 @@
   }
 }
 
-.navOpened {
-  animation: lfMotion .6s cubic-bezier(0, 0.5, 0, 1);
+.navTransformed {
+  transition: all var(--out), transform 0s, filter 0s;
+  transform: scaleY(0.001);
+}
+
+.navTransformed>* {
+  transition: all var(--out), transform 0s;
+  transform: scaleY(1000);
 }
 
 .navOpened>#lf {
   opacity: 0.25;
 }
 
-.navOpened>* {
-  animation: lfChildMotion .6s cubic-bezier(0, 0.5, 0, 1);
-}
-
-.navTapped {
-  animation: lfMotion .6s cubic-bezier(0, 0.5, 0, 1);
-}
-
 .navTapped>#lf {
-  transition: .6s cubic-bezier(0, 0, 0, 1);
-  transform: translateX(-50vw);
   opacity: 0.05;
 }
 
-.navTapped>* {
-  animation: lfChildMotion .6s cubic-bezier(0, 0.5, 0, 1);
-}
-
-@keyframes lfMotion {
-
-  0% {
-    filter: blur(0px);
-    transform: scaleY(0.001);
-  }
-
-  2% {
-    filter: blur(6px);
-    transform: scaleY(0.001);
-  }
-
-  10% {
-    filter: blur(6px);
-    transform: scaleY(0.001);
-  }
-
-  100% {
-    filter: blur(0);
-    transform: scaleY(0.001);
-  }
-}
-
-@keyframes lfChildMotion {
-  0% {
-    transform: scaleY(1000);
-  }
-
-  100% {
-    transform: scaleY(1000);
-  }
-}
 
 :not(.navTapped)>#rg:hover {
   gap: 32px
@@ -97,8 +57,8 @@
 }
 
 :not(.navTapped)>#rg:hover>.rendered {
-  padding: 32px;
-  margin: -32px;
+  padding: 16px 32px;
+  margin: -16px -32px;
   margin-right: 192px;
 }
 
@@ -108,7 +68,7 @@
   font-family: text !important;
 }
 
-:not(.navTapped)>#rg.rendered:hover {
+:not(.navTapped)>#rg>.rendered:hover {
   padding-left: 48px;
 }
 

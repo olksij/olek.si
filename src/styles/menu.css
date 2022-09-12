@@ -25,21 +25,27 @@
 }
 
 .navTransformed {
-  transition: all var(--out), transform 0s, filter 0s;
+  transition: all var(--outSmooth), transform 0s, filter 0s;
   transform: scaleY(0.001);
 }
 
 .navTransformed>* {
-  transition: all var(--out), transform 0s;
+  transition: all var(--outSmooth), transform 0s;
   transform: scaleY(1000);
 }
 
-.navOpened>#lf {
-  opacity: 0.25;
+.navTransformed>*>* {
+  transition: all var(--outSmooth);
 }
 
-.navTapped>#lf {
+.navOpened>#lf>div {
+  opacity: 0.25;
+  transform: translate(-96px);
+}
+
+.navTapped>#lf>div {
   opacity: 0.05;
+  transform: translate(-50vw);
 }
 
 

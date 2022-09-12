@@ -7,6 +7,7 @@
   --background-position: left 50% top calc(50%);
 
   --out: .6s cubic-bezier(0, 0.5, 0, 1);
+  --outSmooth: .6s cubic-bezier(0.25, 0.25, 0, 1);
 }
 
 img {

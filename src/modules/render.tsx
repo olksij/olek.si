@@ -88,6 +88,9 @@ export default async function render(content): Promise<void> {
 
   let delayCounter: number = 0;
 
+  menuObserver.observe(byId('nav-work')!);
+
+
   // TODO: merge all cases into one
 
   // restore everything;
@@ -177,21 +180,12 @@ byId('nav')!.onclick = function () {
 
 var rgAnimate: Set<EventTarget> = new Set();
 
-byId('rg')!.ontransitionrun = function (event) {
-  if (event.propertyName != 'margin-right') return;
-
-  rgAnimate.add(event.target!);
+let menuObserver = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => rgAnimate.add(entry.target));
 
   if (rgAnimate.size == 1)
     requestAnimationFrame(() => motionBlur('rg', byId('nav-work')!.getBoundingClientRect()));
-}
-
-byId('rg')!.ontransitionend = function (event) {
-  if (event.propertyName == 'margin-right')
-    rgAnimate.delete(event.target!);
-
-  if (!rgAnimate.size) byId('cnt')!.setAttribute('style', '');
-}
+});
 
 function motionBlur(id: string, previous: DOMRect) {
   if (!rgAnimate.size) return;
@@ -200,7 +194,7 @@ function motionBlur(id: string, previous: DOMRect) {
 
   let diff = Math.round(Math.abs(current.left - previous.left) / 2 * 5) / 5;
 
-  byId('cnt')!.setAttribute('style', `filter: blur(${diff}px)`);
+  byId('cnt')!.setAttribute('style', diff ? `filter: blur(${diff}px)` : '');
 
   requestAnimationFrame(() => motionBlur(id, current));
 }

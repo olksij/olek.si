@@ -88,9 +88,6 @@ export default async function render(content): Promise<void> {
 
   let delayCounter: number = 0;
 
-  menuObserver.observe(byId('nav-work')!);
-
-
   // TODO: merge all cases into one
 
   // restore everything;
@@ -178,23 +175,36 @@ byId('nav')!.onclick = function () {
     byId('cnt')!.classList.remove('navTapped');
 }
 
-var rgAnimate: Set<EventTarget> = new Set();
+var blurInvoked = false;
 
-let menuObserver = new IntersectionObserver((entries, observer) => {
-  entries.forEach(entry => rgAnimate.add(entry.target));
+let motionStart = function (event) {
+  console.log(event)
+  if (!blurInvoked) {
+    blurInvoked = true;
+    let rect = byId('nav-work')!.getBoundingClientRect();
+    requestAnimationFrame(() => motionBlur('rg', rect));
+  }
+}
 
-  if (rgAnimate.size == 1)
-    requestAnimationFrame(() => motionBlur('rg', byId('nav-work')!.getBoundingClientRect()));
-});
+let motionEnd = function (event) {
+  blurInvoked = false;
+  byId('cnt')!.setAttribute('style', '');
+};
+
+byId('rg')!.ontransitionrun = motionStart;
+byId('rg')!.onanimationstart = motionStart;
+
+byId('rg')!.ontransitionend = motionEnd;
+byId('rg')!.onanimationend = motionEnd;
 
 function motionBlur(id: string, previous: DOMRect) {
-  if (!rgAnimate.size) return;
+  if (!blurInvoked) return;
 
   let current = byId('nav-work')!.getBoundingClientRect();
 
   let diff = Math.round(Math.abs(current.left - previous.left) / 2 * 5) / 5;
 
-  byId('cnt')!.setAttribute('style', diff ? `filter: blur(${diff}px)` : '');
+  byId('cnt')!.setAttribute('style', `filter: blur(${diff}px)`);
 
   requestAnimationFrame(() => motionBlur(id, current));
 }

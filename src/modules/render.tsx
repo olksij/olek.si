@@ -170,7 +170,7 @@ byId('rg')!.onmouseleave = function () { byId('cnt')!.classList.remove('navOpene
 
 byId('nav')!.onclick = function () {
   if (!byId('cnt')?.classList.contains('navTapped'))
-    byId('cnt')!.classList.add('navTapped');
+    byId('cnt')!.classList.add('navTapped', 'navTransformed');
   else
     byId('cnt')!.classList.remove('navTapped');
 }
@@ -178,7 +178,8 @@ byId('nav')!.onclick = function () {
 var blurInvoked = false;
 
 let motionStart = function (event) {
-  console.log(event)
+  if (!byId('cnt')?.classList.contains('navTapped')) return;
+
   if (!blurInvoked) {
     blurInvoked = true;
     let rect = byId('nav-work')!.getBoundingClientRect();

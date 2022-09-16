@@ -7,19 +7,42 @@
   background: #0000;
 }
 
-.navTapped>#rg {
-  display: flex;
-  position: absolute;
-  animation: rgTapped 0.4s cubic-bezier(0, 0, 0, 1);
+@media (max-width:920px) {
+  #rg {
+    display: flex;
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .navTransformed:not(.navTapped)>#rg {
+    animation: rgClosed var(--outSmooth);
+  }
+
+  .navTapped>#rg {
+    animation: rgTapped var(--outSmooth);
+    pointer-events: unset;
+    opacity: 1;
+  }
 }
 
 @keyframes rgTapped {
   from {
-    margin-left: 50vw;
+    margin-left: 100vw;
   }
 
   to {
     margin-left: 0vw;
+  }
+}
+
+@keyframes rgClosed {
+  from {
+    margin-left: 0vw;
+  }
+
+  to {
+    margin-left: 100vw;
   }
 }
 

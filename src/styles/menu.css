@@ -5,6 +5,7 @@
   margin: 16px;
   flex-direction: row;
   background: #0000;
+  cursor: pointer;
 }
 
 @media (max-width:920px) {

@@ -168,11 +168,28 @@ computeWorker.onmessage = (message) => {
 byId('rg')!.onmouseover = function () { byId('cnt')!.classList.add('navOpened', 'navTransformed'); }
 byId('rg')!.onmouseleave = function () { byId('cnt')!.classList.remove('navOpened'); }
 
+let isNavHovered = false;
+
 byId('nav')!.onclick = function () {
-  if (!byId('cnt')?.classList.contains('navTapped'))
+  if (!byId('cnt')!.classList.contains('navTapped')) {
     byId('cnt')!.classList.add('navTapped', 'navTransformed');
-  else
+    tagById('nav', 'text')!.innerHTML = 'Close';
+  }
+  else {
     byId('cnt')!.classList.remove('navTapped');
+    tagById('nav', 'text')!.innerHTML = 'Navigation';
+  }
+}
+
+byId('nav')!.onmouseover = () => isNavHovered = true;
+byId('nav')!.onmouseleave = () => isNavHovered = false;
+
+document.body.onclick = function () {
+  if (!isNavHovered) {
+    byId('cnt')!.classList.remove('navTapped');
+    tagById('nav', 'text')!.innerHTML = 'Navigation';
+
+  }
 }
 
 var blurInvoked = false;

@@ -30,20 +30,24 @@
 @keyframes rgTapped {
   from {
     margin-left: 150vw;
+    filter: blur(16px);
   }
 
   to {
     margin-left: 0vw;
+    filter: blur(0px);
   }
 }
 
 @keyframes rgClosed {
   from {
     margin-left: 0vw;
+    filter: blur(0px);
   }
 
   to {
     margin-left: 150vw;
+    filter: blur(16px);
   }
 }
 
@@ -62,9 +66,9 @@
 }
 
 .navOpened>#lf>div {
-  opacity: 0.3;
-  transform: translate(-96px);
-  filter: blur(24px);
+  opacity: 0.2;
+  transform: translate(-192px);
+  filter: blur(16px);
 }
 
 .navTapped>#lf>div {

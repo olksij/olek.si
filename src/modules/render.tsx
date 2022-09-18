@@ -250,7 +250,9 @@ function motionBlur(id: string, previous: DOMRect) {
 
   let current = byId('nav-work')!.getBoundingClientRect();
 
-  let diff = Math.round(Math.abs(current.left - previous.left) / 2 * 5) / 5;
+  let diff = Math.round(Math.abs(current.left - previous.left) * 5) / 5;
+
+  if (byId('cnt')?.classList.contains('navOpened')) diff /= 2;
 
   byId('cnt')!.setAttribute('style', `filter: blur(${diff}px)`);
 

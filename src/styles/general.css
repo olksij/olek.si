@@ -12,6 +12,10 @@
   --outSmooth: .6s cubic-bezier(0.25, 0.25, 0, 1);
 }
 
+html {
+  overflow: hidden;
+}
+
 img {
   height: 100%;
   aspect-ratio: 1;

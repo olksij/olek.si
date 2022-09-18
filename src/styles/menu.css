@@ -29,7 +29,7 @@
 
 @keyframes rgTapped {
   from {
-    margin-left: 100vw;
+    margin-left: 150vw;
   }
 
   to {
@@ -43,7 +43,7 @@
   }
 
   to {
-    margin-left: 100vw;
+    margin-left: 150vw;
   }
 }
 
@@ -62,13 +62,15 @@
 }
 
 .navOpened>#lf>div {
-  opacity: 0.25;
+  opacity: 0.3;
   transform: translate(-96px);
+  filter: blur(24px);
 }
 
 .navTapped>#lf>div {
-  opacity: 0.05;
+  opacity: 0.2;
   transform: translate(-50vw);
+  filter: blur(16px);
 }
 
 

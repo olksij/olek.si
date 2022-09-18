@@ -6,7 +6,9 @@
   --accent: #6549f2;
   --background-position: left 50% top calc(50%);
 
+  /* used when skeleton loads up */
   --out: .6s cubic-bezier(0, 0.5, 0, 1);
+  /* used for menu transitions */
   --outSmooth: .6s cubic-bezier(0.25, 0.25, 0, 1);
 }
 

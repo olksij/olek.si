@@ -58,3 +58,5 @@ export interface RenderData {
   delay: number;
   children?: boolean;
 }
+
+export type FontStyleTypes = 'title' | 'description' | 'menuSelected' | 'menu' | 'navButton' | 'copyright'

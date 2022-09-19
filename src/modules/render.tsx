@@ -6,42 +6,12 @@
 import { ComputeAPI, FontStyle, RenderData, RenderTextData, TextData, TextsRecord } from "../interfaces";
 import { createElement, createFragment } from "./jsx";
 import print from './print';
+import './menu.ts';
+import { byId, tagById } from "./shorthands";
 
 export const computeWorker = window['worker'];
 
-// TODO: related to individual page
-
-// for restoring shortened ids in order to get 
-// relation between records and dom
-const restoreIDs: Record<string, Array<string>> = {
-  "ps": ["telegram", "instagram", "github", "linkedin", "email"],
-  "rg": ["nav-home", "nav-about", "nav-projects", "nav-work"],
-  "ft": ["cr", "lg"],
-}
-
-// TODO: related to individual page
-
-const restoreLinks: Record<string, Array<string>> = {
-  "ps": ["https://t.me/oleksiibesida", "https://instagram.com/oleksiibesidaa", "https://github.com/oleksiibesida", "https://linkedin.com/in/oleksiibesida/", "mailto:besida@oleksii.xyz"],
-  "rg": ["https://oleksii.xyz", "https://oleksii.xyz", "https://oleksii.xyz", "https://oleksii.xyz"],
-}
-
-// TODO: related to individual page
-
-// order and details of animating each node
-const animatingOrder: Record<string, RenderData> = {
-  "pf": { type: 'img', delay: 0, alt: 'profilePicture' },
-  "tt": { type: 'text', delay: 50 },
-  "d1": { type: 'text', delay: 300 },
-  "d2": { type: 'text', delay: 50 },
-  "ps": { type: 'img', delay: 50, children: true },
-  "rg": { type: 'text', delay: 50, children: true },
-  "nav": { type: 'both', delay: 0 },
-  "cr": { type: 'both', delay: 0 },
-}
-
 // TODO: merge into one value
-
 let resolveMorph: (value: TextsRecord) => void;
 export let textMorphReady = new Promise<TextsRecord>((resolve) => resolveMorph = resolve);
 
@@ -74,16 +44,16 @@ export default async function render(content): Promise<void> {
   print("🎨 Render");
 
   // restore id's for shortened components
-  for (let id in restoreIDs) {
+  for (let id in content.restoreIDs) {
     let children = byId(id)!.children;
     for (var i = 0; i < children.length; i++)
-      children[i].id = restoreIDs[id][i];
+      children[i].id = content.restoreIDs[id][i];
   }
 
-  for (let id in restoreLinks) {
+  for (let id in content.restoreLinks) {
     let children = byId(id)!.children;
     for (var i = 0; i < children.length; i++)
-      children[i].setAttribute('href', restoreLinks[id][i]);
+      children[i].setAttribute('href', content.restoreLinks[id][i]);
   }
 
   let delayCounter: number = 0;
@@ -91,8 +61,8 @@ export default async function render(content): Promise<void> {
   // TODO: merge all cases into one
 
   // restore everything;
-  for (let item in animatingOrder) {
-    let data: RenderData = animatingOrder[item];
+  for (let item in content.animatingOrder) {
+    let data: RenderData = content.animatingOrder[item];
     let node: HTMLElement;
 
     let queue: Array<string> = [item];
@@ -162,109 +132,4 @@ export default async function render(content): Promise<void> {
 
 computeWorker.onmessage = (message) => {
   if (message.data.deliver == 'texts') resolveMorph(message.data.data as TextsRecord);
-}
-
-let menuOpenBgKeyframes: Keyframe[] = [
-  {
-    backgroundPosition: '0px 0px',
-    boxShadow: 'inset 0px 0px 0px 50vh #FFF0',
-  },
-  {
-    backgroundPosition: '-32px 0px',
-    boxShadow: 'inset 0px 0px 0px 50vh var(--bg)',
-  }
-]
-
-let menuCloseBgKeyframes: Keyframe[] = [
-  menuOpenBgKeyframes[1],
-  menuOpenBgKeyframes[0]
-]
-
-function menuOpenBg() {
-  document.body.animate(menuOpenBgKeyframes, { duration: 600, easing: 'cubic-bezier(0.25, 0.25, 0, 1)' });
-  document.body.setAttribute('style', 'background-position: -32px 0px; background: box-shadow: inset 0px 0px 0px 50vh var(--bg)');
-}
-
-function menuCloseBg() {
-  document.body.animate(menuCloseBgKeyframes, { duration: 600, easing: 'cubic-bezier(0.25, 0.25, 0, 1)' });
-  document.body.setAttribute('style', '');
-}
-
-// TODO: it's heavely related to pages
-byId('rg')!.onmouseover = function () {
-  byId('cnt')!.classList.add('navOpened', 'navTransformed');
-  menuOpenBg();
-}
-byId('rg')!.onmouseleave = function () { byId('cnt')!.classList.remove('navOpened'); menuCloseBg() }
-
-let isNavHovered = false;
-
-byId('nav')!.onclick = function () {
-  if (!byId('cnt')!.classList.contains('navTapped')) {
-    byId('cnt')!.classList.add('navTapped', 'navTransformed');
-    tagById('nav', 'text')!.innerHTML = 'Close';
-    menuOpenBg()
-  }
-  else {
-    byId('cnt')!.classList.remove('navTapped');
-    tagById('nav', 'text')!.innerHTML = 'Navigation';
-    menuCloseBg();
-  }
-}
-
-byId('nav')!.onmouseover = () => isNavHovered = true;
-byId('nav')!.onmouseleave = () => isNavHovered = false;
-
-document.body.onclick = function () {
-  if (!isNavHovered) {
-    byId('cnt')!.classList.remove('navTapped');
-    tagById('nav', 'text')!.innerHTML = 'Navigation';
-  }
-}
-
-var blurInvoked = false;
-
-let motionStart = function (event) {
-  if (!byId('cnt')?.classList.contains('navTransformed')) return;
-
-  if (!blurInvoked) {
-    blurInvoked = true;
-    let rect = byId('nav-work')!.getBoundingClientRect();
-    requestAnimationFrame(() => motionBlur('rg', rect));
-  }
-}
-
-let motionEnd = function (event) {
-  blurInvoked = false;
-  byId('cnt')!.setAttribute('style', '');
-};
-
-byId('rg')!.ontransitionrun = motionStart;
-byId('rg')!.onanimationstart = motionStart;
-
-byId('rg')!.ontransitionend = motionEnd;
-byId('rg')!.onanimationend = motionEnd;
-
-function motionBlur(id: string, previous: DOMRect) {
-  if (!blurInvoked) return;
-
-  let current = byId('nav-work')!.getBoundingClientRect();
-
-  let diff = Math.round(Math.abs(current.left - previous.left) * 5) / 5;
-
-  if (byId('cnt')?.classList.contains('navOpened')) diff /= 2;
-
-  byId('cnt')!.setAttribute('style', `filter: blur(${diff}px)`);
-
-  requestAnimationFrame(() => motionBlur(id, current));
-}
-
-/** Shorthand for getting an `HTMLElement` */
-function byId(id: string): HTMLElement | null {
-  return document.getElementById(id);
-}
-
-/** Retreive child by tag */
-function tagById(id: string, tag: string): Element | undefined {
-  return byId(id)?.getElementsByTagName(tag)[0];
 }

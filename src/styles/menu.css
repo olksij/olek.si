@@ -1,5 +1,10 @@
 @import './menu.skeleton.css';
 
+/* --- --- --- --- --- --- --- --- ---
+   --- CODE IN THIS FILE REQUIRES- ---
+   --- -- AN URGENT REFACTORING -- ---
+   --- --- --- --- --- --- --- --- --- */
+
 #nav.rendered {
   padding: 16px;
   margin: 16px;

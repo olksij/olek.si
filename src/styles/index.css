@@ -92,15 +92,47 @@ img {
   aspect-ratio: 3.4464285714;
 }
 
-#cr {
+#ft {
+  align-items: flex-end;
+  height: 16px;
+}
+
+#cr,
+#lg {
   flex-direction: row;
 }
 
-#cr.rendered {
+#cr.rendered,
+#lg.rendered {
   overflow: hidden;
   background: #0000;
-  width: 160px;
   animation: .5s cubic-bezier(0.5, 0, 0.25, .75) crrender;
+}
+
+#cr.rendered {
+  width: 160px;
+}
+
+#lg.rendered {
+  gap: 4px;
+}
+
+#lg {
+  z-index: 1;
+  border-radius: 4px;
+}
+
+#lg:hover {
+  flex-direction: column;
+  height: 200px;
+  background: var(--overlay);
+  box-shadow: 0px 0px 0px 1px #0000000A,
+    0px 2px 8px 0px #0000000A;
+}
+
+#lg:hover>svg,
+#lg:hover>img {
+  display: none;
 }
 
 @keyframes crrender {

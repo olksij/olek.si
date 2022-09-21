@@ -33,6 +33,7 @@ export const texts: Record<string, TextData> = {
   "nav-work": { text: 'work', width: 128, font: fontStyles.menu },
   "nav": { text: 'Navigation', width: 88, font: fontStyles.navButton, },
   "cr": { text: '2018-2022 Oleksii Besida', width: 142, font: fontStyles.copyright, },
+  "lg": { text: 'English', width: 76, font: fontStyles.copyright, },
 }
 
 // more things to come soon;
@@ -46,11 +47,12 @@ import linkedin from 'data-url:/assets/vectors/linkedin.svg';
 import email from 'data-url:/assets/vectors/email.svg';
 import nav from 'data-url:/assets/vectors/nav.svg';
 import cr from 'data-url:/assets/vectors/copyright.svg';
+import lg from 'data-url:/assets/vectors/language.svg';
 
 export const images: Record<string, string> = { pf }
 
 export const vectors: Record<string, string> = {
-  telegram, instagram, github, linkedin, email, cr, nav
+  telegram, instagram, github, linkedin, email, cr, nav, lg
 }
 
 import indexStylesheet from 'data-url:../styles/index.css';
@@ -81,4 +83,5 @@ export const animatingOrder: Record<string, RenderData> = {
   "rg": { type: 'text', delay: 50, children: true },
   "nav": { type: 'both', delay: 0 },
   "cr": { type: 'both', delay: 0 },
+  "lg": { type: 'both', delay: 0 },
 }

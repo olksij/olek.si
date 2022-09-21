@@ -56,6 +56,18 @@ export default async function render(content): Promise<void> {
       children[i].setAttribute('href', content.restoreLinks[id][i]);
   }
 
+
+  byId('lg')!.onmouseenter = function () {
+    byId('lg')!.append(<div class="hhh">English</div>);
+    byId('lg')!.append(<div class="hhh">Svenska</div>);
+    byId('lg')!.append(<div class="hhh">Ukrajinśka</div>);
+    byId('lg')!.append(<div class="hhh">Українська</div>);
+  }
+
+  byId('lg')!.onmouseleave = function () {
+    Array.from(byId('lg')!.getElementsByClassName('hhh')).forEach(e => e.remove())
+  }
+
   let delayCounter: number = 0;
 
   // TODO: merge all cases into one

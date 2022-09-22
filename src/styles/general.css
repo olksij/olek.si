@@ -13,6 +13,12 @@
   --outSmooth: .6s cubic-bezier(0.25, 0.25, 0, 1);
 }
 
+*:not(#ps):not(#ft) {
+  justify-content: center;
+  font-family: 'text';
+  color: var(--secondary)
+}
+
 html {
   overflow: hidden;
 }

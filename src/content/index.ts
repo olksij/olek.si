@@ -1,4 +1,4 @@
-export { head } from './general';
+export { head, languages } from './general';
 
 import { FontStyle, RenderData, TextData } from '../interfaces';
 import { fontStyles } from './general';
@@ -12,7 +12,7 @@ import { fontStyles } from './general';
 // specific dates with custom description
 const dates: Record<string, Array<string>> = {
   "6-12": ["🎂 It's my birthday today!", "June 12"],
-  "8-23": ["Restoration of independence of Ukraine", "🇺🇦 August 24"],
+  "8-24": ["Restoration of independence of Ukraine", "🇺🇦 August 24"],
   // more dates to come such as celebrations and holidays
   default: ["Redefining the way humans interact", "with computers."],
 };
@@ -21,7 +21,7 @@ const titleFromPath = "M103 0H0V112H103V80V0ZM52 80H51V79H52V80ZM103 0H129V112H1
 
 
 let date = new Date();
-let description = dates[date.getMonth() + '-' + date.getDate()] ?? dates.default;
+let description = dates[date.getMonth() + '-' + (date.getDate() + 1)] ?? dates.default;
 
 export const texts: Record<string, TextData> = {
   "tt": { text: 'Oleksii', width: 386, fromPath: titleFromPath, font: fontStyles.title, },

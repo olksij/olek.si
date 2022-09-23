@@ -41,3 +41,9 @@ export const fontStyles: Record<FontStyleTypes, FontStyle> = {
     lineHeight: 16,
   },
 };
+
+export const languages: Record<string, string> = {
+  en: 'English',
+  sv: 'Svenska',
+  uk: 'Ukrajinśka',
+}

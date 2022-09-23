@@ -56,16 +56,14 @@ export default async function render(content): Promise<void> {
       children[i].setAttribute('href', content.restoreLinks[id][i]);
   }
 
-
   byId('lg')!.onmouseenter = function () {
-    byId('lg')!.append(<div class="hhh">English</div>);
-    byId('lg')!.append(<div class="hhh">Svenska</div>);
-    byId('lg')!.append(<div class="hhh">Ukrajinśka</div>);
-    byId('lg')!.append(<div class="hhh">Українська</div>);
+    for (let lg in content.languages) {
+      byId('lg')!.append(<div onclick={() => window.history.pushState({}, '', `?${lg}`)} class="lgItem">{content.languages[lg]}</div>);
+    }
   }
 
   byId('lg')!.onmouseleave = function () {
-    Array.from(byId('lg')!.getElementsByClassName('hhh')).forEach(e => e.remove())
+    Array.from(byId('lg')!.getElementsByClassName('lgItem')).forEach(e => e.remove())
   }
 
   let delayCounter: number = 0;

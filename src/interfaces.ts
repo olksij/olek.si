@@ -5,7 +5,7 @@ export type DeliverType = 'fonts' | 'texts';
 
 // types for each `DeliveryType`
 export type FontsRecord = { [Type in FontType]?: Font | ArrayBuffer };
-export type TextsRecord = Record<string, TextData | RenderTextData>;
+export type TextsRecord = Record<string, TextStyleData | RenderTextData>;
 
 export type RenderType = 'img' | 'text' | 'both';
 export type FontType = 'display' | 'text';
@@ -31,9 +31,7 @@ export interface FontStyle {
 }
 
 // used to define text style for each node
-export interface TextData {
-  // text itself
-  text: string
+export interface TextStyleData {
   // used by webworker to vectorize text
   font: FontStyle;
   // parent's box size
@@ -60,3 +58,8 @@ export interface RenderData {
 }
 
 export type FontStyleTypes = 'title' | 'description' | 'menuSelected' | 'menu' | 'navButton' | 'copyright'
+
+export type Languages = 'en' | 'sv' | 'uk'
+
+
+export type TextLangData = { [Type in Languages]: Record<string, string> };

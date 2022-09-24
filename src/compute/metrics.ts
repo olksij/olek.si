@@ -1,7 +1,7 @@
 import { Font } from "opentype.js";
-import { FontStyle, TextData } from "../interfaces";
+import { FontStyle, TextStyleData } from "../interfaces";
 
-export default function textMetrics(font: Font, data: TextData) {
+export default function textMetrics(font: Font, data: TextStyleData) {
   let style = data.font;
 
   // calculate ascender & descender

@@ -1,6 +1,6 @@
 export { head, languages } from './general';
 
-import { FontStyle, RenderData, TextData } from '../interfaces';
+import { FontStyle, RenderData, TextLangData, TextStyleData } from '../interfaces';
 import { fontStyles } from './general';
 
 
@@ -23,17 +23,56 @@ const titleFromPath = "M103 0H0V112H103V80V0ZM52 80H51V79H52V80ZM103 0H129V112H1
 let date = new Date();
 let description = dates[date.getMonth() + '-' + (date.getDate() + 1)] ?? dates.default;
 
-export const texts: Record<string, TextData> = {
-  "tt": { text: 'Oleksii', width: 386, fromPath: titleFromPath, font: fontStyles.title, },
-  "d1": { text: description[0], width: 337, font: fontStyles.description, },
-  "d2": { text: description[1], width: 148, font: fontStyles.description, },
-  "nav-home": { text: 'oleksii.xyz', width: 128, font: fontStyles.menuSelected },
-  "nav-about": { text: 'about', width: 128, font: fontStyles.menu },
-  "nav-projects": { text: 'projects', width: 128, font: fontStyles.menu },
-  "nav-work": { text: 'work', width: 128, font: fontStyles.menu },
-  "nav": { text: 'Navigation', width: 88, font: fontStyles.navButton, },
-  "cr": { text: '2018-2022 Oleksii Besida', width: 142, font: fontStyles.copyright, },
-  "lg": { text: 'English', width: 76, font: fontStyles.copyright, },
+export const textStyleData: Record<string, TextStyleData> = {
+  "tt": { width: 386, fromPath: titleFromPath, font: fontStyles.title, },
+  "d1": { width: 337, font: fontStyles.description, },
+  "d2": { width: 148, font: fontStyles.description, },
+  "nav-home": { width: 128, font: fontStyles.menuSelected },
+  "nav-about": { width: 128, font: fontStyles.menu },
+  "nav-projects": { width: 128, font: fontStyles.menu },
+  "nav-work": { width: 128, font: fontStyles.menu },
+  "nav": { width: 88, font: fontStyles.navButton, },
+  "cr": { width: 142, font: fontStyles.copyright, },
+  "lg": { width: 76, font: fontStyles.copyright, },
+}
+
+export const texts: TextLangData = {
+  en: {
+    'tt': 'Oleksii',
+    'd1': description[0],
+    'd2': description[1],
+    'nav-home': 'oleksii.xyz',
+    'nav-about': 'about',
+    'nav-projects': 'projects',
+    'nav-work': 'work',
+    'nav': 'Navigation',
+    'cr': '2018-2022 Oleksii Besida',
+    'lg': 'English',
+  },
+  sv: {
+    'tt': 'Oleksiy',
+    'd1': description[0],
+    'd2': description[1],
+    'nav-home': 'oleksii.xyz',
+    'nav-about': 'om mig',
+    'nav-projects': 'projekts',
+    'nav-work': 'alster',
+    'nav': 'Navigering',
+    'cr': '2018-2022 Oleksiy Besida',
+    'lg': 'Svenska',
+  },
+  uk: {
+    'tt': 'Oleksij',
+    'd1': description[0],
+    'd2': description[1],
+    'nav-home': 'oleksii.xyz',
+    'nav-about': 'pro mene',
+    'nav-projects': 'projekty',
+    'nav-work': 'roboty',
+    'nav': 'Naviǧacija',
+    'cr': '2018-2022 Oleksij Besida',
+    'lg': 'Ukrajinśka',
+  }
 }
 
 // more things to come soon;

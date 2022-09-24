@@ -3,7 +3,7 @@
    --- -- [URGENT] REFACTORING --- ---
    --- --- --- --- --- --- --- --- --- */
 
-import { ComputeAPI, FontStyle, RenderData, RenderTextData, TextData, TextsRecord } from "../interfaces";
+import { ComputeAPI, FontStyle, RenderData, RenderTextData, TextStyleData, TextsRecord } from "../interfaces";
 import { createElement, createFragment } from "./jsx";
 import print from './print';
 import './menu.ts';
@@ -99,16 +99,16 @@ export default async function render(content): Promise<void> {
         setTimeout((item) => {
           var data = renderTextData[item] as RenderTextData;
 
-          let vector = <svg viewBox={`0 0 ${content.texts[item].width} ${content.texts[item].font.lineHeight}`}>
+          let vector = <svg viewBox={`0 0 ${content.textStyleData[item].width} ${content.textStyleData[item].font.lineHeight}`}>
             <path fill="var(--el)" fill-rule="evenodd" clip-rule="evenodd">
               <animate attributeName="d" dur="0.8s" values={data.from + ';' + data.to}
                 calcMode="spline" keySplines="0.87 0 0.13 1" />
             </path>
-            <text y={renderTextData[item].baseline - .25}>{content.texts[item].text}</text>
+            <text y={renderTextData[item].baseline - .25}>{content.texts['en'][item]}</text>
           </svg>
           byId(item)!.append(vector);
 
-          let font = content.texts[item].font as FontStyle;
+          let font = content.textStyleData[item].font as FontStyle;
 
           [tagById(item, 'path'), tagById(item, 'text')].forEach(el => el!.animate(
             [{ fill: 'var(--el)' }, { fill: font.color ?? 'var(--secondary)' }],

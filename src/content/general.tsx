@@ -1,4 +1,4 @@
-import { FontStyle, FontStyleTypes } from "../interfaces";
+import { FontStyle, FontStyleTypes, Languages } from "../interfaces";
 import { createElement, createFragment } from "../modules/jsx";
 
 export const head = [
@@ -42,7 +42,7 @@ export const fontStyles: Record<FontStyleTypes, FontStyle> = {
   },
 };
 
-export const languages: Record<string, string> = {
+export const languages: Record<Languages, string> = {
   en: 'English',
   sv: 'Svenska',
   uk: 'Ukrajinśka',

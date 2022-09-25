@@ -3,7 +3,7 @@
    --- -- [URGENT] REFACTORING --- ---
    --- --- --- --- --- --- --- --- --- */
 
-import { ComputeAPI, FontStyle, RenderData, RenderTextData, TextStyleData, TextsRecord } from "../interfaces";
+import { ComputeAPI, FontStyle, RenderConfig, ComputedTextData, TextStyleData, TextsRecord } from "../interfaces";
 import { createElement, createFragment } from "./jsx";
 import print from './print';
 import './menu.ts';
@@ -16,8 +16,11 @@ let resolveMorph: (value: TextsRecord) => void;
 export let textMorphReady = new Promise<TextsRecord>((resolve) => resolveMorph = resolve);
 
 export default async function render(content): Promise<void> {
+  let textsData = {};
+  Object.assign(textsData, content.texts['en'], content.textStyleData);
+
   // TODO: it's possible to send text data earlier
-  computeWorker.postMessage({ deliver: 'texts', data: content.texts });
+  computeWorker.postMessage({ deliver: 'texts', data: textsData });
 
   if (!sessionStorage.getItem('loaded')) {
     await window["skeleton"];
@@ -39,7 +42,7 @@ export default async function render(content): Promise<void> {
 
   /* --- --- --- --- --- --- --- */
 
-  let renderTextData = await textMorphReady as Record<string, RenderTextData>;
+  let renderTextData = await textMorphReady as Record<string, ComputedTextData>;
 
   print("🎨 Render");
 
@@ -72,7 +75,7 @@ export default async function render(content): Promise<void> {
 
   // restore everything;
   for (let item in content.animatingOrder) {
-    let data: RenderData = content.animatingOrder[item];
+    let data: RenderConfig = content.animatingOrder[item];
     let node: HTMLElement;
 
     let queue: Array<string> = [item];
@@ -97,7 +100,7 @@ export default async function render(content): Promise<void> {
         // TODO: ahhrr clean up code 
         delayCounter += data.delay;
         setTimeout((item) => {
-          var data = renderTextData[item] as RenderTextData;
+          var data = renderTextData[item] as ComputedTextData;
 
           let vector = <svg viewBox={`0 0 ${content.textStyleData[item].width} ${content.textStyleData[item].font.lineHeight}`}>
             <path fill="var(--el)" fill-rule="evenodd" clip-rule="evenodd">

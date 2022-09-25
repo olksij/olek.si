@@ -3,13 +3,28 @@ import { Font } from 'opentype.js'
 // `DeliverType`s used for communication with WebWorker
 export type DeliverType = 'fonts' | 'texts';
 
-// types for each `DeliveryType`
-export type FontsRecord = { [Type in FontType]?: Font | ArrayBuffer };
-export type TextsRecord = Record<string, TextStyleData | RenderTextData>;
+// ----------------------------------------------------------------------------
+//
+//                                         📩 Input data   📤 Output data
+//                                               |                |
+// types for each DeliveryType             -------------   ----------------
+export type TextsRecord = Record<string,   InputTextData | ComputedTextData >;
+export type FontsRecord = Record<FontType, ArrayBuffer   | Font >;
 
 export type RenderType = 'img' | 'text' | 'both';
 export type FontType = 'display' | 'text';
 export type PreloadAssetType = 'stylesheet' | 'image';
+
+export type Languages = 'en' | 'sv' | 'uk'
+export type SourceTextData = Record<Languages, Record<string, string>>;
+
+export type FontStyleType =
+  'title' |
+  'subtitle' |
+  'menuSelected' |
+  'menu' |
+  'action' |
+  'footer';
 
 // interface used for communicating with WebWorker
 export interface ComputeAPI {
@@ -31,7 +46,7 @@ export interface FontStyle {
 }
 
 // used to define text style for each node
-export interface TextStyleData {
+export interface TextStyle {
   // used by webworker to vectorize text
   font: FontStyle;
   // parent's box size
@@ -42,24 +57,20 @@ export interface TextStyleData {
   wrap?: boolean;
 }
 
-export interface RenderTextData {
+export interface ComputedTextData {
   from: string;
   to: string;
   baseline: number;
-  // lines: number;
-  // width: number1
 }
 
-export interface RenderData {
+export interface InputTextData {
+  source: Record<string, string>;
+  style: TextStyle;
+}
+
+export interface RenderConfig {
   type?: RenderType;
   alt?: string;
   delay: number;
   children?: boolean;
 }
-
-export type FontStyleTypes = 'title' | 'description' | 'menuSelected' | 'menu' | 'navButton' | 'copyright'
-
-export type Languages = 'en' | 'sv' | 'uk'
-
-
-export type TextLangData = { [Type in Languages]: Record<string, string> };

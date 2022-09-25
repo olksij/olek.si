@@ -3,13 +3,13 @@
 
 import { interpolateAll } from "flubber"
 import fonts from "./fonts";
-import { RenderTextData, TextStyleData, TextsRecord } from "../interfaces";
+import { ComputedTextData, TextStyleData, TextsRecord } from "../interfaces";
 import { Font } from "opentype.js";
 
 import print from '../modules/print';
 import textMetrics from "./metrics";
 
-let renderTexts: Record<string, RenderTextData> = {}
+let renderTexts: Record<string, ComputedTextData> = {}
 
 export async function loadTexts(textsData: TextsRecord) {
   // ensure that fonts are loaded and we can use them

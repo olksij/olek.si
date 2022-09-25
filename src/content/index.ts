@@ -1,6 +1,6 @@
 export { head, languages } from './general';
 
-import { FontStyle, RenderData, TextLangData, TextStyleData } from '../interfaces';
+import { FontStyle, RenderConfig, TextLangData, TextStyleData } from '../interfaces';
 import { fontStyles } from './general';
 
 
@@ -113,7 +113,7 @@ export const restoreLinks: Record<string, Array<string>> = {
 
 // order and details of animating each node
 
-export const animatingOrder: Record<string, RenderData> = {
+export const animatingOrder: Record<string, RenderConfig> = {
   "pf": { type: 'img', delay: 0, alt: 'profilePicture' },
   "tt": { type: 'text', delay: 50 },
   "d1": { type: 'text', delay: 300 },

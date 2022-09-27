@@ -3,7 +3,7 @@
 
 import { interpolateAll } from "flubber"
 import fonts from "./fonts";
-import { ComputedTextData, TextStyleData, TextsRecord } from "../interfaces";
+import { ComputedTextData, InputTextData, TextsRecord } from "../interfaces";
 import { Font } from "opentype.js";
 
 import print from '../modules/print';
@@ -16,8 +16,8 @@ export async function loadTexts(textsData: TextsRecord) {
   let fontsData = await fonts;
 
   for (let id in textsData) {
-    let data = textsData[id] as TextStyleData,
-      font = fontsData[data.font.type ?? 'text'] as Font;
+    let data = textsData[id] as InputTextData,
+      font = fontsData[data.style.font.type ?? 'text'] as Font;
 
     let { fromPath, toPath, baseline } = textMetrics(font, data);
 

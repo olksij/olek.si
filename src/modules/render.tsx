@@ -3,7 +3,7 @@
    --- -- [URGENT] REFACTORING --- ---
    --- --- --- --- --- --- --- --- --- */
 
-import { ComputeAPI, FontStyle, RenderConfig, ComputedTextData, TextStyleData, TextsRecord } from "../interfaces";
+import { ComputeAPI, FontStyle, RenderConfig, ComputedTextData, TextsRecord, InputTextData } from "../interfaces";
 import { createElement, createFragment } from "./jsx";
 import print from './print';
 import './menu.ts';
@@ -16,8 +16,14 @@ let resolveMorph: (value: TextsRecord) => void;
 export let textMorphReady = new Promise<TextsRecord>((resolve) => resolveMorph = resolve);
 
 export default async function render(content): Promise<void> {
-  let textsData = {};
-  Object.assign(textsData, content.texts['en'], content.textStyleData);
+  let textsData: TextsRecord = {};
+
+  for (let id of Object.keys(content.texts['en'])) {
+    textsData[id] = {
+      source: content.texts['en'][id],
+      style: content.textStyleData[id],
+    } as InputTextData;
+  }
 
   // TODO: it's possible to send text data earlier
   computeWorker.postMessage({ deliver: 'texts', data: textsData });

@@ -64,7 +64,7 @@ export interface ComputedTextData {
 }
 
 export interface InputTextData {
-  source: Record<string, string>;
+  source: string;
   style: TextStyle;
 }
 

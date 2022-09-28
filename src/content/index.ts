@@ -1,6 +1,6 @@
 export { head, languages } from './general';
 
-import { FontStyle, RenderConfig, TextLangData, TextStyleData } from '../interfaces';
+import { FontStyle, RenderConfig, SourceTextData, TextStyle } from '../interfaces';
 import { fontStyles } from './general';
 
 
@@ -23,20 +23,26 @@ const titleFromPath = "M103 0H0V112H103V80V0ZM52 80H51V79H52V80ZM103 0H129V112H1
 let date = new Date();
 let description = dates[date.getMonth() + '-' + (date.getDate() + 1)] ?? dates.default;
 
-export const textStyleData: Record<string, TextStyleData> = {
-  "tt": { width: 386, fromPath: titleFromPath, font: fontStyles.title, },
-  "d1": { width: 337, font: fontStyles.description, },
-  "d2": { width: 148, font: fontStyles.description, },
-  "nav-home": { width: 128, font: fontStyles.menuSelected },
-  "nav-about": { width: 128, font: fontStyles.menu },
+export const textStyleData: Record<string, TextStyle> = {
+
+/*                   Placeholder 
+  🏷️ Element ID        width              ✨ FontStyle              ⚙️ Custom placeholder
+         |               |                      |                              |
+  --------------   ------------       -----------------------           --------------   */
+
+  "tt":           { width: 386, font: fontStyles.title,       fromPath: titleFromPath, },
+  "d1":           { width: 337, font: fontStyles.description, },
+  "d2":           { width: 148, font: fontStyles.description, },
+  "nav-home":     { width: 128, font: fontStyles.menuSelected },
+  "nav-about":    { width: 128, font: fontStyles.menu },
   "nav-projects": { width: 128, font: fontStyles.menu },
-  "nav-work": { width: 128, font: fontStyles.menu },
-  "nav": { width: 88, font: fontStyles.navButton, },
-  "cr": { width: 142, font: fontStyles.copyright, },
-  "lg": { width: 76, font: fontStyles.copyright, },
+  "nav-work":     { width: 128, font: fontStyles.menu },
+  "nav":          { width: 88,  font: fontStyles.navButton, },
+  "cr":           { width: 142, font: fontStyles.copyright, },
+  "lg":           { width: 76,  font: fontStyles.copyright, },
 }
 
-export const texts: TextLangData = {
+export const texts: SourceTextData = {
   en: {
     'tt': 'Oleksii',
     'd1': description[0],
@@ -114,13 +120,13 @@ export const restoreLinks: Record<string, Array<string>> = {
 // order and details of animating each node
 
 export const animatingOrder: Record<string, RenderConfig> = {
-  "pf": { type: 'img', delay: 0, alt: 'profilePicture' },
-  "tt": { type: 'text', delay: 50 },
-  "d1": { type: 'text', delay: 300 },
-  "d2": { type: 'text', delay: 50 },
-  "ps": { type: 'img', delay: 50, children: true },
-  "rg": { type: 'text', delay: 50, children: true },
+  "pf":  { type: 'img',  delay: 0, alt: 'profilePicture' },
+  "tt":  { type: 'text', delay: 50 },
+  "d1":  { type: 'text', delay: 300 },
+  "d2":  { type: 'text', delay: 50 },
+  "ps":  { type: 'img',  delay: 50, children: true },
+  "rg":  { type: 'text', delay: 50, children: true },
   "nav": { type: 'both', delay: 0 },
-  "cr": { type: 'both', delay: 0 },
-  "lg": { type: 'both', delay: 0 },
+  "cr":  { type: 'both', delay: 0 },
+  "lg":  { type: 'both', delay: 0 },
 }

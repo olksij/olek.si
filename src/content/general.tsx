@@ -1,4 +1,4 @@
-import { FontStyle, FontStyleTypes, Languages } from "../interfaces";
+import { FontStyle, FontStyleType, Languages } from "../interfaces";
 import { createElement, createFragment } from "../modules/jsx";
 
 export const head = [
@@ -7,7 +7,7 @@ export const head = [
   <link rel="icon" type="image/x-icon" href={new URL('/assets/favicon.ico', import.meta.url)} />
 ];
 
-export const fontStyles: Record<FontStyleTypes, FontStyle> = {
+export const fontStyles: Record<FontStyleType, FontStyle> = {
   title: {
     type: 'display',
     fontSize: 128,
@@ -15,7 +15,7 @@ export const fontStyles: Record<FontStyleTypes, FontStyle> = {
     letterSpacing: -0.04,
     color: 'var(--text)',
   },
-  description: {
+  subtitle: {
     fontSize: 20,
     lineHeight: 28,
   },
@@ -30,13 +30,13 @@ export const fontStyles: Record<FontStyleTypes, FontStyle> = {
     fontSize: 18,
     lineHeight: 24,
   },
-  navButton: {
+  action: {
     fontSize: 16,
     lineHeight: 24,
     type: "display",
     color: 'var(--text)'
   },
-  copyright: {
+  footer: {
     fontSize: 12,
     lineHeight: 16,
   },

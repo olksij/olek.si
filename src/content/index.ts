@@ -31,15 +31,15 @@ export const textStyleData: Record<string, TextStyle> = {
   --------------   ------------       -----------------------           --------------   */
 
   "tt":           { width: 386, font: fontStyles.title,       fromPath: titleFromPath, },
-  "d1":           { width: 337, font: fontStyles.description, },
-  "d2":           { width: 148, font: fontStyles.description, },
+  "d1":           { width: 337, font: fontStyles.subtitle, },
+  "d2":           { width: 148, font: fontStyles.subtitle, },
   "nav-home":     { width: 128, font: fontStyles.menuSelected },
   "nav-about":    { width: 128, font: fontStyles.menu },
   "nav-projects": { width: 128, font: fontStyles.menu },
   "nav-work":     { width: 128, font: fontStyles.menu },
-  "nav":          { width: 88,  font: fontStyles.navButton, },
-  "cr":           { width: 142, font: fontStyles.copyright, },
-  "lg":           { width: 76,  font: fontStyles.copyright, },
+  "nav":          { width: 88,  font: fontStyles.action, },
+  "cr":           { width: 142, font: fontStyles.footer, },
+  "lg":           { width: 76,  font: fontStyles.footer, },
 }
 
 export const texts: SourceTextData = {

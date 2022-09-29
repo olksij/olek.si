@@ -5,3 +5,7 @@ declare module 'data-url:*' {
   const src: string
   export default src
 }
+declare module 'bundle-text:*' {
+  const src: string
+  export default src
+}

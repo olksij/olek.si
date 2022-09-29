@@ -17,8 +17,7 @@ const dates: Record<string, Array<string>> = {
   default: ["Redefining the way humans interact", "with computers."],
 };
 
-const titleFromPath = "M103 0H0V112H103V80V0ZM52 80H51V79H52V80ZM103 0H129V112H103V80V0ZM129 0H201V112H129V0ZM167 51V50H168V51H167ZM201 0H267V112H201V0ZM324 0H267V112H324V50.5V0ZM324 0V50.5H355V0H324ZM324 50.5V112H355V50.5H324ZM386 50.5V0H355V50.5H386ZM386 112V50.5H355V112H386Z";
-
+import titleFromPath from 'bundle-text:/assets/raw/titleFromPath.txt';
 
 let date = new Date();
 let description = dates[date.getMonth() + '-' + (date.getDate() + 1)] ?? dates.default;

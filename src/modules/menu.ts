@@ -1,5 +1,10 @@
 import { byId, tagById } from "./shorthands";
 
+/* --- --- --- --- --- --- --- --- ---
+   --- CODE IN THIS FILE REQUIRES- ---
+   --- -- [URGENT] REFACTORING --- ---
+   --- --- --- --- --- --- --- --- --- */
+
 let menuOpenBgKeyframes: Keyframe[] = [
   {
     backgroundPosition: '0px 0px',
@@ -16,34 +21,53 @@ let menuCloseBgKeyframes: Keyframe[] = [
   menuOpenBgKeyframes[0]
 ]
 
-function menuOpenBg() {
-  document.body.animate(menuOpenBgKeyframes, { duration: 600, easing: 'cubic-bezier(0.25, 0.25, 0, 1)' });
-  document.body.setAttribute('style', 'background-position: -32px 0px; background: box-shadow: inset 0px 0px 0px 50vh var(--bg)');
+var i = 0;
+for(let child of byId('rg')!.children) {
+  let curr = ++i;
+  child.addEventListener('mouseover', () => {
+    for(let subling of byId('rg')!.children)
+      subling.classList.remove('hover');
+
+    child.classList.add('hover')
+  });
 }
 
-function menuCloseBg() {
+function menuOpenBg(mouse: boolean) {
+  document.body.animate(menuOpenBgKeyframes, { duration: 600, easing: 'cubic-bezier(0.25, 0.25, 0, 1)' });
+  document.body.setAttribute('style', 'background-position: -32px 0px; background: box-shadow: inset 0px 0px 0px 50vh var(--bg)');
+
+  if (mouse) {
+    
+  }
+}
+
+function menuCloseBg(mouse: boolean) {
   document.body.animate(menuCloseBgKeyframes, { duration: 600, easing: 'cubic-bezier(0.25, 0.25, 0, 1)' });
   document.body.setAttribute('style', '');
+
+  for(let child of byId('rg')!.children)
+    child.classList.remove('hover');
+
 }
 
 byId('rg')!.onmouseover = function () {
   byId('cnt')!.classList.add('navOpened', 'navTransformed');
-  menuOpenBg();
+  menuOpenBg(true);
 }
-byId('rg')!.onmouseleave = function () { byId('cnt')!.classList.remove('navOpened'); menuCloseBg() }
+byId('rg')!.onmouseleave = function () { byId('cnt')!.classList.remove('navOpened'); menuCloseBg(true) }
 
 let isNavHovered = false;
 
-byId('nav')!.onclick = function () {
+byId('nav')!.onclick = function (event) {
   if (!byId('cnt')!.classList.contains('navTapped')) {
     byId('cnt')!.classList.add('navTapped', 'navTransformed');
     tagById('nav', 'text')!.innerHTML = 'Close';
-    menuOpenBg()
+    menuOpenBg(false)
   }
   else {
     byId('cnt')!.classList.remove('navTapped');
     tagById('nav', 'text')!.innerHTML = 'Navigation';
-    menuCloseBg();
+    menuCloseBg(false);
   }
 }
 

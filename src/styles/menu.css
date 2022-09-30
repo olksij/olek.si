@@ -91,6 +91,10 @@
   border-radius: 8px;
 }
 
+#rg {
+  cursor: pointer;
+}
+
 #rg>.rendered {
   overflow: hidden;
   background: #0000;
@@ -112,11 +116,11 @@
   font-family: text !important;
 }
 
-:not(.navTapped)>#rg>.rendered:hover {
+:not(.navTapped)>#rg>.rendered.hover {
   padding-left: 48px;
 }
 
-:not(.navTapped)>#rg>.rendered:hover>svg>text {
+:not(.navTapped)>#rg>.rendered.hover>svg>text {
   fill: var(--accent) !important;
   font-family: display !important;
 }

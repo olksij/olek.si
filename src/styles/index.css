@@ -110,18 +110,15 @@ img {
 
 #lg.rendered {
   gap: 4px;
-}
-
-#lg.rendered {
   z-index: 1;
   border-radius: 8px;
-  margin: -8px;
+  margin: -12px;
   padding: 12px 16px;
 }
 
 #lg:hover {
   flex-direction: column;
-  height: 112px;
+  height: 90px;
   background: var(--overlay);
   box-shadow: 0px 0px 0px 1px #0000000A,
     0px 2px 8px 0px #0000000A;

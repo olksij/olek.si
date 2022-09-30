@@ -26,7 +26,6 @@ function menuCloseBg() {
   document.body.setAttribute('style', '');
 }
 
-// TODO: it's heavely related to pages
 byId('rg')!.onmouseover = function () {
   byId('cnt')!.classList.add('navOpened', 'navTransformed');
   menuOpenBg();

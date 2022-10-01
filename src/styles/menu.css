@@ -82,17 +82,16 @@
   filter: blur(16px);
 }
 
+#rg {
+  cursor: pointer;
+}
 
-:not(.navTapped)>#rg:hover {
+#rg.hover {
   gap: 32px
 }
 
 #rg>.rendered>svg {
   border-radius: 8px;
-}
-
-#rg {
-  cursor: pointer;
 }
 
 #rg>.rendered {
@@ -105,31 +104,31 @@
   -webkit-user-drag: none;
 }
 
-:not(.navTapped)>#rg:hover>.rendered {
+#rg.hover>.rendered {
   padding: 16px 32px;
   margin: -16px -32px;
   margin-right: 192px;
 }
 
-:not(.navTapped)>#rg:hover>.rendered>svg>text {
+#rg.hover>.rendered>svg>text {
   font-size: 20px !important;
   fill: var(--secondary) !important;
   font-family: text !important;
 }
 
-:not(.navTapped)>#rg>.rendered.hover {
+#rg.hover>.rendered.hover {
   padding-left: 48px;
 }
 
-:not(.navTapped)>#rg>.rendered.hover>svg>text {
+#rg.hover>.rendered.hover>svg>text {
   fill: var(--accent) !important;
   font-family: display !important;
 }
 
-:not(.navTapped)>#rg>.rendered.hover:active {
+#rg.hover>.rendered.hover:active {
   padding-left: 0px;
 }
 
-:not(.navTapped)>#rg>.rendered.hover:active>svg>text {
+#rg.hover>.rendered.hover:active>svg>text {
   fill: var(--text) !important;
 }

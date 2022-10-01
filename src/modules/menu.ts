@@ -1,3 +1,4 @@
+import MotionBlur from "./motionBlur";
 import { byId, tagById } from "./shorthands";
 
 /* --- --- --- --- --- --- --- --- ---
@@ -35,10 +36,6 @@ for(let child of byId('rg')!.children) {
 function menuOpenBg(mouse: boolean) {
   document.body.animate(menuOpenBgKeyframes, { duration: 600, easing: 'cubic-bezier(0.25, 0.25, 0, 1)' });
   document.body.setAttribute('style', 'background-position: -32px 0px; background: box-shadow: inset 0px 0px 0px 50vh var(--bg)');
-
-  if (mouse) {
-    
-  }
 }
 
 function menuCloseBg(mouse: boolean) {
@@ -47,14 +44,29 @@ function menuCloseBg(mouse: boolean) {
 
   for(let child of byId('rg')!.children)
     child.classList.remove('hover');
-
 }
 
-byId('rg')!.onmouseover = function () {
-  byId('cnt')!.classList.add('navOpened', 'navTransformed');
-  menuOpenBg(true);
+byId('rg')!.onmouseover = function (event) {
+  if (!byId('cnt')!.classList.contains('navTapped')) {
+    byId('cnt')!.classList.add('navOpened', 'navTransformed');
+    byId('rg')!.classList.add('hover');
+    menuOpenBg(true);
+
+    let hovered = false;
+    for(let child of byId('rg')!.children) {
+      hovered = child.classList.contains('hover') || hovered;
+    
+    if (!hovered) {
+      if (event.clientY < window.innerHeight/2) byId('rg')!.firstElementChild?.classList.add('hover')
+      else byId('rg')!.lastElementChild?.classList.add('hover')
+    }
+  }
 }
-byId('rg')!.onmouseleave = function () { byId('cnt')!.classList.remove('navOpened'); menuCloseBg(true) }
+byId('rg')!.onmouseleave = function () { 
+  byId('cnt')!.classList.remove('navOpened'); 
+  byId('rg')!.classList.remove('hover');
+  menuCloseBg(true);
+}
 
 let isNavHovered = false;
 
@@ -81,39 +93,15 @@ document.body.onclick = function () {
   }
 }
 
-var blurInvoked = false;
+let navBlur = new MotionBlur({ blurID: 'cnt', watchID:'nav-work', mult: 1 })
 
-let motionStart = function (event) {
+let motionStart = function () {
   if (!byId('cnt')?.classList.contains('navTransformed')) return;
-
-  if (!blurInvoked) {
-    blurInvoked = true;
-    let rect = byId('nav-work')!.getBoundingClientRect();
-    requestAnimationFrame(() => motionBlur('rg', rect));
-  }
+  navBlur.invoke();
 }
-
-let motionEnd = function (event) {
-  blurInvoked = false;
-  byId('cnt')!.setAttribute('style', '');
-};
 
 byId('rg')!.ontransitionrun = motionStart;
 byId('rg')!.onanimationstart = motionStart;
 
-byId('rg')!.ontransitionend = motionEnd;
-byId('rg')!.onanimationend = motionEnd;
-
-function motionBlur(id: string, previous: DOMRect) {
-  if (!blurInvoked) return;
-
-  let current = byId('nav-work')!.getBoundingClientRect();
-
-  let diff = Math.round(Math.abs(current.left - previous.left) * 5) / 5;
-
-  if (byId('cnt')?.classList.contains('navOpened')) diff /= 2;
-
-  byId('cnt')!.setAttribute('style', `filter: blur(${diff}px)`);
-
-  requestAnimationFrame(() => motionBlur(id, current));
-}
+byId('rg')!.ontransitionend = navBlur.drop;
+byId('rg')!.onanimationend = navBlur.drop;

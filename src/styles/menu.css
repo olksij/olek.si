@@ -102,6 +102,7 @@
   text-decoration: none;
   padding: 12px 0;
   margin: -12px 0;
+  -webkit-user-drag: none;
 }
 
 :not(.navTapped)>#rg:hover>.rendered {
@@ -123,4 +124,12 @@
 :not(.navTapped)>#rg>.rendered.hover>svg>text {
   fill: var(--accent) !important;
   font-family: display !important;
+}
+
+:not(.navTapped)>#rg>.rendered.hover:active {
+  padding-left: 0px;
+}
+
+:not(.navTapped)>#rg>.rendered.hover:active>svg>text {
+  fill: var(--text) !important;
 }

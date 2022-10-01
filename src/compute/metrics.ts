@@ -1,5 +1,5 @@
 import { Font } from "opentype.js";
-import { FontStyle, InputTextData } from "../interfaces";
+import { InputTextData } from "../interfaces";
 
 export default function textMetrics(font: Font, data: InputTextData) {
   let style = data.style.font;

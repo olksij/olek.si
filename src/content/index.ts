@@ -1,6 +1,6 @@
 export { head, languages } from './general';
 
-import { FontStyle, RenderConfig, SourceTextData, TextStyle } from '../interfaces';
+import { RenderConfig, SourceTextData, TextStyle } from '../interfaces';
 import { fontStyles } from './general';
 
 
@@ -10,9 +10,9 @@ import { fontStyles } from './general';
    --- --- --- --- --- --- --- --- --- */
 
 // specific dates with custom description
-const dates: Record<string, Array<string>> = {
-  "6-12": ["🎂 It's my birthday today!", "June 12"],
-  "8-24": ["Restoration of independence of Ukraine", "🇺🇦 August 24"],
+const dates: Record<string, Array<string>> = {  
+  "6-12":  ["🎂 It's my birthday today!", "June 12"],
+  "8-24":  ["Restoration of independence of Ukraine", "🇺🇦 August 24"],
   // more dates to come such as celebrations and holidays
   default: ["Redefining the way humans interact", "with computers."],
 };
@@ -24,7 +24,7 @@ let description = dates[date.getMonth() + '-' + (date.getDate() + 1)] ?? dates.d
 
 export const textStyleData: Record<string, TextStyle> = {
 
-/*                   Placeholder 
+/*                 📦 Placeholder 
   🏷️ Element ID        width              ✨ FontStyle              ⚙️ Custom placeholder
          |               |                      |                              |
   --------------   ------------       -----------------------           --------------   */
@@ -121,9 +121,9 @@ export const restoreLinks: Record<string, Array<string>> = {
 export const animatingOrder: Record<string, RenderConfig> = {
   "pf":  { type: 'img',  delay: 0, alt: 'profilePicture' },
   "tt":  { type: 'text', delay: 50 },
-  "d1":  { type: 'text', delay: 300 },
+  "d1":  { type: 'text', delay: 500 },
   "d2":  { type: 'text', delay: 50 },
-  "ps":  { type: 'img',  delay: 50, children: true },
+  "ps":  { type: 'img',  delay: 100, children: true },
   "rg":  { type: 'text', delay: 50, children: true },
   "nav": { type: 'both', delay: 0 },
   "cr":  { type: 'both', delay: 0 },

@@ -1,4 +1,5 @@
-import { FontStyle, FontStyleType, Languages } from "../interfaces";
+import { FontStyle } from "../classes";
+import { FontStyleType, Languages } from "../interfaces";
 import { createElement, createFragment } from "../modules/jsx";
 
 export const head = [
@@ -8,38 +9,38 @@ export const head = [
 ];
 
 export const fontStyles: Record<FontStyleType, FontStyle> = {
-  title: {
+  title: new FontStyle({
     type: 'display',
     fontSize: 128,
     lineHeight: 112,
     letterSpacing: -0.04,
     color: 'var(--text)',
-  },
-  subtitle: {
+  }),
+  subtitle: new FontStyle({
     fontSize: 20,
     lineHeight: 28,
-  },
-  menuSelected: {
+  }),
+  menuSelected: new FontStyle({
     type: 'display',
     fontSize: 20,
     letterSpacing: -0.04,
     lineHeight: 24,
     color: 'var(--text)',
-  },
-  menu: {
+  }),
+  menu: new FontStyle({
     fontSize: 18,
     lineHeight: 24,
-  },
-  action: {
+  }),
+  action: new FontStyle({
     fontSize: 16,
     lineHeight: 24,
     type: "display",
     color: 'var(--text)'
-  },
-  footer: {
+  }),
+  footer: new FontStyle({
     fontSize: 12,
     lineHeight: 16,
-  },
+  }),
 };
 
 export const languages: Record<Languages, string> = {

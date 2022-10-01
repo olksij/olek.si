@@ -9,22 +9,37 @@ import { FontsRecord } from '../interfaces';
 
 import print from '../modules/print';
 
-// TODO: convert to a class
+// the class extends promise so we can ensure the 
+// fonts are loaded before we try to vectorize text
+class FontsArrayBuffer extends Promise<FontsRecord> {
+  resolve: (value: FontsRecord | PromiseLike<FontsRecord>) => void;
 
-// promise so we can ensure fonts are loaded 
-// before we try to vectorize text
-let fontsResolve: (value: FontsRecord | PromiseLike<FontsRecord>) => void;
-const fonts = new Promise<FontsRecord>((resolve) => fontsResolve = resolve);
-export default fonts;
+  constructor() {
+    let promiseResolve;
+    super((resolve) => promiseResolve = resolve);
+    this.resolve = promiseResolve;
+  }
 
-// when script gor ArrayBuffer's of fonts, we can parse them and resolve promise
-export async function loadFonts(data: FontsRecord) {
-  let fonts: FontsRecord = {};
+  // the method is called usually by compute.ts
+  load(data: FontsRecord) {
+    let parsed: FontsRecord = {
+      display: parse(data.display),
+      text: parse(data.text)
+    };
 
-  for (let fontType in data)
-    fonts[fontType] = parse(data[fontType])
+    // resolve to notify texts section about successful font load
+    this.resolve(parsed);
+    print('⌨️ Fonts')
+  }
 
-  // resolve to notify texts section about successful font load
-  fontsResolve(fonts);
-  print('⌨️ Fonts')
+    static get [Symbol.species]() {
+        return Promise;
+    }
+
+    get [Symbol.toStringTag]() {
+        return 'FontsArrayBuffer';
+    }
 }
+
+const fonts = new FontsArrayBuffer();
+export default fonts;

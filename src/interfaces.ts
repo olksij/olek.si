@@ -1,10 +1,9 @@
 import { Font } from 'opentype.js'
+import { FontStyle } from './classes';
 
 // `DeliverType`s used for communication with WebWorker
 export type DeliverType = 'fonts' | 'texts';
 
-// ----------------------------------------------------------------------------
-//
 //                                         📩 Input data   📤 Output data
 //                                               |                |
 // types for each DeliveryType             -------------   ----------------
@@ -32,7 +31,7 @@ export interface ComputeAPI {
   data: FontsRecord | TextsRecord,
 }
 
-export interface FontStyle {
+export interface FontStyleConfig {
   // display or text font, defaults to text
   type?: FontType,
   // yep, size of the font

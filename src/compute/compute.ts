@@ -3,13 +3,13 @@
 
 import { ComputeAPI, FontsRecord, TextsRecord } from '../interfaces';
 
-import { loadFonts } from './fonts';
-import { loadTexts } from './texts';
+import fonts from './fonts';
+import loadTexts from './texts';
 
 // when message is received from main thread
 onmessage = (message: MessageEvent<ComputeAPI>) => {
   let data = message.data.data;
 
-  if (message.data.deliver == 'fonts') loadFonts(data as FontsRecord);
+  if (message.data.deliver == 'fonts') fonts.load(data as FontsRecord);
   if (message.data.deliver == 'texts') loadTexts(data as TextsRecord);
 }

@@ -3,31 +3,15 @@
    --- -- [URGENT] REFACTORING --- ---
    --- --- --- --- --- --- --- --- --- */
 
-import { ComputeAPI, FontStyle, RenderConfig, ComputedTextData, TextsRecord, InputTextData } from "../interfaces";
+import { ComputeAPI, RenderConfig, ComputedTextData, TextsRecord, InputTextData } from "../interfaces";
 import { createElement, createFragment } from "./jsx";
 import print from './print';
 import './menu.ts';
 import { byId, tagById } from "./shorthands";
+import { FontStyle } from "../classes";
+import { worker } from "../pages/entry";
 
-export const computeWorker = window['worker'];
-
-// TODO: merge into one value
-let resolveMorph: (value: TextsRecord) => void;
-export let textMorphReady = new Promise<TextsRecord>((resolve) => resolveMorph = resolve);
-
-export default async function render(content): Promise<void> {
-  let textsData: TextsRecord = {};
-
-  for (let id of Object.keys(content.texts['en'])) {
-    textsData[id] = {
-      source: content.texts['en'][id],
-      style: content.textStyleData[id],
-    } as InputTextData;
-  }
-
-  // TODO: it's possible to send text data earlier
-  computeWorker.postMessage({ deliver: 'texts', data: textsData });
-
+export default async function render(content, renderTextData): Promise<void> {
   if (!sessionStorage.getItem('loaded')) {
     await window["skeleton"];
     sessionStorage.setItem('loaded', 'true');
@@ -47,8 +31,6 @@ export default async function render(content): Promise<void> {
   }
 
   /* --- --- --- --- --- --- --- */
-
-  let renderTextData = await textMorphReady as Record<string, ComputedTextData>;
 
   print("🎨 Render");
 
@@ -120,7 +102,7 @@ export default async function render(content): Promise<void> {
           let font = content.textStyleData[item].font as FontStyle;
 
           [tagById(item, 'path'), tagById(item, 'text')].forEach(el => el!.animate(
-            [{ fill: 'var(--el)' }, { fill: font.color ?? 'var(--secondary)' }],
+            [{ fill: 'var(--el)' }, { fill: font.color }],
             { delay: 400, duration: 400, easing: 'cubic-bezier(0.87, 0, 0.13, 1)' },
           ));
 
@@ -129,7 +111,7 @@ export default async function render(content): Promise<void> {
             { delay: 600, duration: 200 },
           );
 
-          tagById(item, 'text')?.setAttribute("style", `opacity: 0; font-family:${font.type ?? 'text'}; letter-spacing:${font.letterSpacing ?? 0}em; font-size:${font.fontSize}`);
+          tagById(item, 'text')?.setAttribute("style", `opacity: 0; font-family:${font.type}; letter-spacing:${font.letterSpacing}em; font-size:${font.fontSize}`);
 
           tagById(item, 'text')?.animate(
             [{ opacity: 0 }, { opacity: 1 }],
@@ -137,7 +119,7 @@ export default async function render(content): Promise<void> {
           );
 
           setTimeout(() => {
-            tagById(item, 'text')?.setAttribute("style", tagById(item, 'text')?.getAttribute("style") + '; fill: ' + (font.color ?? 'var(--secondary)') + '; opacity:1');
+            tagById(item, 'text')?.setAttribute("style", tagById(item, 'text')?.getAttribute("style") + '; fill: ' + (font.color) + '; opacity:1');
           }, 600);
 
           byId(item)?.classList.add('rendered');
@@ -147,8 +129,4 @@ export default async function render(content): Promise<void> {
     }
   }
   document.body.classList.add('rendered'), delayCounter;
-}
-
-computeWorker.onmessage = (message) => {
-  if (message.data.deliver == 'texts') resolveMorph(message.data.data as TextsRecord);
 }

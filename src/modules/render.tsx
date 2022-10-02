@@ -3,7 +3,7 @@
    --- -- [URGENT] REFACTORING --- ---
    --- --- --- --- --- --- --- --- --- */
 
-import { ComputeAPI, RenderConfig, ComputedTextData, TextsRecord, InputTextData } from "../interfaces";
+import { ComputeAPI, RenderConfig, ComputedTextData, TextsRecord, InputTextData, PageContent } from "../interfaces";
 import { createElement, createFragment } from "./jsx";
 import print from './print';
 import './menu.ts';
@@ -11,7 +11,7 @@ import { byId, tagById } from "./shorthands";
 import { FontStyle } from "../classes";
 import { worker } from "../pages/entry";
 
-export default async function render(content, renderTextData): Promise<void> {
+export default async function render(content: PageContent, renderTextData: ComputedTextData): Promise<void> {
   if (!sessionStorage.getItem('loaded')) {
     await window["skeleton"];
     sessionStorage.setItem('loaded', 'true');
@@ -45,6 +45,13 @@ export default async function render(content, renderTextData): Promise<void> {
     let children = byId(id)!.children;
     for (var i = 0; i < children.length; i++)
       children[i].setAttribute('href', content.restoreLinks[id][i]);
+  }
+
+  for (let id in content.restoreClicks) {
+    let children = byId(id)!.children;
+    for (var i = 0; i < children.length; i++)
+      children[i].addEventListener("click", content.restoreClicks[id][i]()),
+        children[i].setAttribute("onclick", "return false");
   }
 
   byId('lg')!.onmouseenter = function () {

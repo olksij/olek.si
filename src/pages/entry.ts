@@ -1,4 +1,4 @@
-import { InputTextData, TextsRecord } from '../interfaces';
+import { ComputedTextData, InputTextData, PageContent, TextsRecord } from '../interfaces';
 
 import print from '../modules/print';
 import render from '../modules/render';
@@ -22,7 +22,7 @@ export async function onload(content: Object) {
 
 // the function is used in order to prepeare content 
 // for sending to compute worker
-export function computeTexts(content) {
+export function computeTexts(content: PageContent) {
   let textsData: TextsRecord = {};
 
   for (let id of Object.keys(content.texts['en'])) {
@@ -40,6 +40,6 @@ export function computeTexts(content) {
   worker.postMessage({ deliver: 'texts', data: textsData });
 
   worker.onmessage = message => {
-    message.data.deliver == 'texts' ? render(content, message.data.data as TextsRecord) : 0;
+    message.data.deliver == 'texts' ? render(content, message.data.data as ComputedTextData) : 0;
   }
 }

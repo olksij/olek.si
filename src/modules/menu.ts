@@ -6,6 +6,12 @@ import { byId, tagById } from "./shorthands";
    --- -- [URGENT] REFACTORING --- ---
    --- --- --- --- --- --- --- --- --- */
 
+let rg = byId("rg")!;
+let cnt = byId("cnt")!;
+let nav = byId("nav")!;
+
+export var ignoreMouse = false;
+
 let menuOpenBgKeyframes: Keyframe[] = [
   {
     backgroundPosition: "0px 0px",
@@ -23,10 +29,10 @@ let menuCloseBgKeyframes: Keyframe[] = [
 ];
 
 var i = 0;
-for (let child of byId("rg")!.children) {
+for (let child of rg.children) {
   let curr = ++i;
   child.addEventListener("mouseover", () => {
-    for (let subling of byId("rg")!.children) subling.classList.remove("hover");
+    for (let subling of rg.children) subling.classList.remove("hover");
 
     child.classList.add("hover");
   });
@@ -50,53 +56,53 @@ function menuCloseBg(mouse: boolean) {
   });
   document.body.setAttribute("style", "");
 
-  for (let child of byId("rg")!.children) child.classList.remove("hover");
+  for (let child of rg.children) child.classList.remove("hover");
 }
 
-byId("rg")!.onmouseenter = function (event) {
-  if (!byId("cnt")!.classList.contains("navTapped")) {
-    byId("cnt")!.classList.add("navOpened", "navTransformed");
-    byId("rg")!.classList.add("hover");
+rg.onmouseenter = function (event) {
+  if (!cnt.classList.contains("navTapped")) {
+    cnt.classList.add("navOpened", "navTransformed");
+    rg.classList.add("hover");
     menuOpenBg(true);
 
     var hovered = false;
-    for (let child of byId("rg")!.children) {
+    for (let child of rg.children) {
       hovered = child.classList.contains("hover") || hovered;
     }
 
     if (!hovered) {
       if (event.clientY < window.innerHeight / 2)
-        byId("rg")!.firstElementChild?.classList.add("hover");
-      else byId("rg")!.lastElementChild?.classList.add("hover");
+        rg.firstElementChild?.classList.add("hover");
+      else rg.lastElementChild?.classList.add("hover");
     }
   }
 };
-byId("rg")!.onmouseleave = function () {
-  byId("cnt")!.classList.remove("navOpened");
-  byId("rg")!.classList.remove("hover");
+rg.onmouseleave = function () {
+  cnt.classList.remove("navOpened");
+  rg.classList.remove("hover");
   menuCloseBg(true);
 };
 
 let isNavHovered = false;
 
-byId("nav")!.onclick = function (event) {
-  if (!byId("cnt")!.classList.contains("navTapped")) {
-    byId("cnt")!.classList.add("navTapped", "navTransformed");
+nav.onclick = function (event) {
+  if (!cnt.classList.contains("navTapped")) {
+    cnt.classList.add("navTapped", "navTransformed");
     tagById("nav", "text")!.innerHTML = "Close";
     menuOpenBg(false);
   } else {
-    byId("cnt")!.classList.remove("navTapped");
+    cnt.classList.remove("navTapped");
     tagById("nav", "text")!.innerHTML = "Navigation";
     menuCloseBg(false);
   }
 };
 
-byId("nav")!.onmouseover = () => (isNavHovered = true);
-byId("nav")!.onmouseleave = () => (isNavHovered = false);
+nav.onmouseover = () => (isNavHovered = true);
+nav.onmouseleave = () => (isNavHovered = false);
 
 document.body.onclick = function () {
   if (!isNavHovered) {
-    byId("cnt")!.classList.remove("navTapped");
+    cnt.classList.remove("navTapped");
     tagById("nav", "text")!.innerHTML = "Navigation";
   }
 };
@@ -109,8 +115,8 @@ let motionStart = function () {
   navBlur.invoke();
 };
 
-byId("rg")!.ontransitionrun = motionStart;
-byId("rg")!.onanimationstart = motionStart;
+rg.ontransitionrun = motionStart;
+rg.onanimationstart = motionStart;
 
-byId("rg")!.ontransitionend = () => navBlur.drop();
-byId("rg")!.onanimationend = () => navBlur.drop();
+rg.ontransitionend = () => navBlur.drop();
+rg.onanimationend = () => navBlur.drop();

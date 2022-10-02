@@ -73,3 +73,17 @@ export interface RenderConfig {
   delay: number;
   children?: boolean;
 }
+
+export interface PageContent {
+  head: HTMLElement[],
+  languages: Record<Languages, string>,
+  textStyleData: Record<string, TextStyle>;
+  texts: SourceTextData;
+  images: Record<string, string>;
+  vectors: Record<string, string>;
+  stylesheets: string[];  
+  restoreIDs: Record<string, Array<string>>;  
+  restoreLinks: Record<string, Array<string>>;  
+  restoreClicks: Record<string, Array<Function>>;  
+  animatingOrder: Record<string, RenderConfig>;  
+}

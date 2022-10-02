@@ -116,6 +116,23 @@ export const restoreLinks: Record<string, Array<string>> = {
   "rg": ["https://oleksii.xyz", "https://oleksii.xyz", "https://oleksii.xyz", "https://oleksii.xyz"],
 }
 
+export const restoreClicks: Record<string, Array<Function>> = {
+  rg: [
+    () => {
+      console.log("f");
+    },
+    () => {
+      console.log("f");
+    },
+    () => {
+      console.log("f");
+    },
+    () => {
+      console.log("f");
+    },
+  ],
+};
+
 // order and details of animating each node
 
 export const animatingOrder: Record<string, RenderConfig> = {

@@ -42,6 +42,11 @@ body.rendered {
   overflow-x: hidden;
 }
 
+button {
+  box-sizing: content-box;
+  border: 0px;
+}
+
 .tr {
   width: 0 !important;
   opacity: 0%;

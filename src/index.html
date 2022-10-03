@@ -8,63 +8,31 @@
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <script type="module">
-    import { skeleton } from './modules/skeleton-loader'
-    if (!skeleton) 0;
-  </script>
-
-  <style>
-    @import './styles/index.skeleton.css';
-  </style>
+  <style> @import './styles/index.skeleton.css'; </style>
 
   <link rel="stylesheet" media="(min-width: 920px)" href="./styles/index-desktop.skeleton.css">
 </head>
 
 <body>
   <noscript>the page is powered by js :(</noscript>
-  <!-- ... YET -->
 
-  <button id="nav"></button>
-  <!--container-->
-  <div id="cnt">
-    <!--left side-->
-    <div id="lf">
-      <div>
-        <div id="title">
-          <!--profile picture-->
-          <div id="pf"></div>
-          <!--title-->
-          <div id="tt"></div>
-        </div>
-        <div id="dd">
-          <!--description 1-->
-          <div id="d1"></div>
-          <!--description 2-->
-          <div id="d2"></div>
-        </div>
-        <!--profiles-->
-        <div id="ps">
-          <a />
-          <a />
-          <a />
-          <a />
-          <a />
-        </div>
-      </div>
-    </div>
-    <!--right side-->
-    <div id="rg">
-      <a />
-      <a />
-      <a />
-      <a />
-    </div>
-  </div>
-  <div id="ft">
-    <div></div>
-    <div></div>
-  </div>
+  <script type="module">
+    import { buildTree } from './modules/skeleton-loader';
+
+    buildTree({
+      nav: {},
+      cnt: {
+        lf: {
+          title: { pf: {}, tt: {} },
+          dd: { d1: {}, d2: {} },
+          ps: { tg: {}, ig: {}, in: {}, gh: {}, mt: {} }
+        },
+        rg: {}
+      },
+      ft: { cr: {}, lg: {} }
+    });
+  </script>
+
   <script src="./pages/index.ts" async type="module"></script>
 </body>
 

@@ -17,3 +17,13 @@ body {
   background: var(--bg);
   margin: 0;
 }
+
+.tr {
+  width: 0 !important;
+  opacity: 0%;
+}
+
+.sl {
+  background: -50vw 0/75% 100% fixed no-repeat linear-gradient(0.25turn, transparent, #FAFAFC88, transparent),
+    linear-gradient(var(--el), var(--el));
+}

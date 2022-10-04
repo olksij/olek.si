@@ -9,13 +9,10 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style> @import './styles/index.skeleton.css'; </style>
-
   <link rel="stylesheet" media="(min-width: 920px)" href="./styles/index-desktop.skeleton.css">
 </head>
 
 <body>
-  <noscript>the page is powered by js :(</noscript>
-
   <script type="module">
     import { buildTree } from './modules/skeleton-loader';
 
@@ -25,7 +22,7 @@
         lf: {
           title: { pf: {}, tt: {} },
           dd: { d1: {}, d2: {} },
-          ps: { tg: {}, ig: {}, in: {}, gh: {}, mt: {} }
+          ps: { tg: {}, ig: {}, li: {}, gh: {}, mt: {} }
         },
         rg: {}
       },
@@ -33,6 +30,7 @@
     });
   </script>
 
+  <noscript>the page is powered by js :(</noscript>
   <script src="./pages/index.ts" async type="module"></script>
 </body>
 

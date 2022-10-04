@@ -41,12 +41,6 @@ export default async function render(content: PageContent, renderTextData: Compu
       children[i].id = content.restoreIDs[id][i];
   }
 
-  for (let id in content.restoreLinks) {
-    let children = byId(id)!.children;
-    for (var i = 0; i < children.length; i++)
-      children[i].setAttribute('href', content.restoreLinks[id][i]);
-  }
-
   for (let id in content.restoreClicks) {
     let children = byId(id)!.children;
     for (var i = 0; i < children.length; i++)

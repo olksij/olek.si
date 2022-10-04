@@ -57,12 +57,13 @@ for (let font in fonts) {
 const rg = { home: {}, about: {}, projects: {}, work: {} }
 
 export function buildTree(dom: any, parent: HTMLElement = document.body) {
-  console.log(dom, parent)
+  let tagName = ['ps', 'rg'].includes(parent.id) ? 'a' : 'div';
+
   for (let elementID of Object.keys(dom)) {
-    var child = document.createElement('div');
+    var child = document.createElement(tagName);
     child.id = elementID, parent.append(child);
     
-    if (elementID == 'rg') return buildTree(rg, parent);
+    if (elementID == 'rg') return buildTree(rg, child);
     buildTree(dom[elementID], child);
   }
 }

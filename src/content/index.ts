@@ -108,18 +108,10 @@ export const restoreLinks: Record<string, Array<string>> = {
 
 export const restoreClicks: Record<string, Array<Function>> = {
   rg: [
-    () => {
-      console.log("f");
-    },
-    () => {
-      console.log("f");
-    },
-    () => {
-      console.log("f");
-    },
-    () => {
-      console.log("f");
-    },
+    () => {},
+    () => {},
+    () => {},
+    () => {},
   ],
 };
 

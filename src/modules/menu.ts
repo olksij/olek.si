@@ -107,7 +107,7 @@ document.body.onclick = function () {
   }
 };
 
-let navBlur = new MotionBlur({ blurID: "cnt", watchID: "nav-work", mult: 1 });
+let navBlur = new MotionBlur({ blurID: "cnt", watchID: "work", mult: 1 });
 
 let motionStart = function () {
   if (!byId("cnt")?.classList.contains("navTransformed")) return;

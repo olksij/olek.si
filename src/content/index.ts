@@ -98,6 +98,7 @@ export const images: Record<string, string> = { pf }
 export const vectors: Record<string, string> = { tg, ig, gh, li, mt, cr, nav, lg }
 
 import indexStylesheet from 'data-url:../styles/index.css';
+import { onMenuClick } from '../modules/menu';
 
 export const stylesheets: string[] = [indexStylesheet];
 
@@ -108,10 +109,10 @@ export const restoreLinks: Record<string, Array<string>> = {
 
 export const restoreClicks: Record<string, Array<Function>> = {
   rg: [
-    () => {},
-    () => {},
-    () => {},
-    () => {},
+    () => onMenuClick(),
+    () => onMenuClick(),
+    () => onMenuClick(),
+    () => onMenuClick(),
   ],
 };
 

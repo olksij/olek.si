@@ -3,7 +3,7 @@ window['worker'] = new Worker(new URL('../compute/compute.ts', import.meta.url),
 var skeletonResolve, skeleton = new Promise((resolve) => skeletonResolve = resolve);
 
 var skeletonKeyframes: [Keyframe[], Object] = [
-  [{ backgroundPosition: '75vw 0, 0 0' }], 
+  [{ backgroundPositionX: '75vw, 0' }], 
   { duration: 1500, iterations: Infinity }
 ];
 

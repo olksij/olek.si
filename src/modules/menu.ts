@@ -10,7 +10,7 @@ let rg = byId("rg")!;
 let cnt = byId("cnt")!;
 let nav = byId("nav")!;
 
-export var ignoreMouse = false;
+var ignoreMouse = false;
 
 let menuOpenBgKeyframes: Keyframe[] = [
   {
@@ -59,7 +59,9 @@ function menuCloseBg(mouse: boolean) {
   for (let child of rg.children) child.classList.remove("hover");
 }
 
-rg.onmouseenter = function (event) {
+rg.onmouseenter = (event) => { if (!ignoreMouse) openMenu(event); }
+
+function openMenu(event: MouseEvent) {
   if (!cnt.classList.contains("navTapped")) {
     cnt.classList.add("navOpened", "navTransformed");
     rg.classList.add("hover");
@@ -76,8 +78,17 @@ rg.onmouseenter = function (event) {
       else rg.lastElementChild?.classList.add("hover");
     }
   }
-};
-rg.onmouseleave = function () {
+
+}
+
+rg.onmouseleave = closeMenu;
+
+export function onMenuClick() {
+  closeMenu(), ignoreMouse = true;
+}
+
+
+function closeMenu () {
   cnt.classList.remove("navOpened");
   rg.classList.remove("hover");
   menuCloseBg(true);
@@ -120,3 +131,7 @@ rg.onanimationstart = motionStart;
 
 rg.ontransitionend = () => navBlur.drop();
 rg.onanimationend = () => navBlur.drop();
+
+rg.onmousemove = (event) => {
+  if (ignoreMouse && event.movementX>0) openMenu(event), ignoreMouse = false;
+}

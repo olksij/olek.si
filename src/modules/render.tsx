@@ -10,6 +10,7 @@ import './menu.ts';
 import { byId, tagById } from "./shorthands";
 import { FontStyle } from "../classes";
 import { worker } from "../pages/entry";
+import { onMenuClick } from "./menu";
 
 export default async function render(content: PageContent, renderTextData: ComputedTextData): Promise<void> {
   if (!sessionStorage.getItem('loaded')) {
@@ -43,9 +44,11 @@ export default async function render(content: PageContent, renderTextData: Compu
 
   for (let id in content.restoreClicks) {
     let children = byId(id)!.children;
-    for (var i = 0; i < children.length; i++)
-      children[i].addEventListener("click", content.restoreClicks[id][i]()),
+    for (var i = 0; i < children.length; i++) {
+      let childIndex = i;
+      children[i].addEventListener("click", () => content.restoreClicks[id][childIndex]()),
         children[i].setAttribute("onclick", "return false");
+    }
   }
 
   byId('lg')!.onmouseenter = function () {
@@ -55,6 +58,7 @@ export default async function render(content: PageContent, renderTextData: Compu
   }
 
   byId('lg')!.onmouseleave = function () {
+    onMenuClick();
     Array.from(byId('lg')!.getElementsByClassName('lgItem')).forEach(e => e.remove())
   }
 

@@ -1,6 +1,7 @@
 window['worker'] = new Worker(new URL('../compute/compute.ts', import.meta.url), { type: 'module' });
 
-var skeletonResolve, skeleton = new Promise((resolve) => skeletonResolve = resolve);
+var skeletonResolve;
+window['skeleton'] = new Promise((resolve) => skeletonResolve = resolve);
 
 var skeletonKeyframes: [Keyframe[], Object] = [
   [{ backgroundPositionX: '75vw, 0' }], 

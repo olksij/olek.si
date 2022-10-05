@@ -116,7 +116,7 @@ export default async function render(content: PageContent, renderTextData: Compu
             { delay: 600, duration: 200 },
           );
 
-          tagById(item, 'text')?.setAttribute("style", `opacity: 0; font-family:${font.type}; letter-spacing:${font.letterSpacing}em; font-size:${font.fontSize}`);
+          tagById(item, 'text')?.setAttribute("style", `opacity: 0; font-family:${font.type}; letter-spacing:${font.letterSpacing}em; font-size:${font.fontSize}px`);
 
           tagById(item, 'text')?.animate(
             [{ opacity: 0 }, { opacity: 1 }],

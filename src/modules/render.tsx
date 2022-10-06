@@ -35,13 +35,6 @@ export default async function render(content: PageContent, renderTextData: Compu
 
   print("🎨 Render");
 
-  // restore id's for shortened components
-  for (let id in content.restoreIDs) {
-    let children = byId(id)!.children;
-    for (var i = 0; i < children.length; i++)
-      children[i].id = content.restoreIDs[id][i];
-  }
-
   for (let id in content.restoreClicks) {
     let children = byId(id)!.children;
     for (var i = 0; i < children.length; i++) {

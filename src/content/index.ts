@@ -18,25 +18,26 @@ const dates: Record<string, Array<string>> = {
 };
 
 import titleFromPath from 'bundle-text:/assets/raw/titleFromPath.txt';
+import nav from 'bundle-text:/assets/raw/nav.txt';
 
 let date = new Date();
 let description = dates[date.getMonth() + '-' + (date.getDate() + 1)] ?? dates.default;
 
 export const textStyleData: Record<string, TextStyle> = {
 
-/*                 📦 Placeholder 
-  🏷️ Element ID        width              ✨ FontStyle              ⚙️ Custom placeholder
+/*                 📦 Placeholder                                   ⚙️ Custom placeholder
+  🏷️ Element ID        width              ✨ FontStyle                     or icon
          |               |                      |                              |
   --------------   ------------       -----------------------           --------------   */
 
   "tt":           { width: 386, font: fontStyles.title,       fromPath: titleFromPath, },
   "d1":           { width: 337, font: fontStyles.subtitle, },
   "d2":           { width: 148, font: fontStyles.subtitle, },
-  "home":     { width: 128, font: fontStyles.menuSelected },
-  "about":    { width: 128, font: fontStyles.menu },
-  "projects": { width: 128, font: fontStyles.menu },
-  "work":     { width: 128, font: fontStyles.menu },
-  "nav":          { width: 88,  font: fontStyles.action, },
+  "home":         { width: 128, font: fontStyles.menuSelected },
+  "about":        { width: 128, font: fontStyles.menu },
+  "projects":     { width: 128, font: fontStyles.menu },
+  "work":         { width: 128, font: fontStyles.menu },
+  "nav":          { width: 112,  font: fontStyles.action,      icon: nav, iconWidth: 24 },
   "cr":           { width: 142, font: fontStyles.footer, },
   "lg":           { width: 76,  font: fontStyles.footer, },
 }
@@ -89,13 +90,12 @@ import ig from 'data-url:/assets/vectors/instagram.svg';
 import gh from 'data-url:/assets/vectors/github.svg';
 import li from 'data-url:/assets/vectors/linkedin.svg';
 import mt from 'data-url:/assets/vectors/email.svg';
-import nav from 'data-url:/assets/vectors/nav.svg';
 import cr from 'data-url:/assets/vectors/copyright.svg';
 import lg from 'data-url:/assets/vectors/language.svg';
 
 export const images: Record<string, string> = { pf }
 
-export const vectors: Record<string, string> = { tg, ig, gh, li, mt, cr, nav, lg }
+export const vectors: Record<string, string> = { tg, ig, gh, li, mt, cr, lg }
 
 import indexStylesheet from 'data-url:../styles/index.css';
 import { onMenuClick } from '../modules/menu';

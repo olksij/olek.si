@@ -12,8 +12,8 @@ export default function textMetrics(font: Font, data: InputTextData) {
   let baseline = Math.ceil(ascender - (ascender - descender - style.lineHeight) / 2);
 
   // vectorize font and convert to string[]
-  let pathData = font.getPath(data.source, 0, baseline, style.fontSize, { letterSpacing: style.letterSpacing });
-  let toPath = pathData.toPathData(5).replaceAll('ZM', 'Z$M')?.split('$');
+  let pathData = font.getPath(data.source, data.style.iconWidth ?? 0, baseline, style.fontSize, { letterSpacing: style.letterSpacing });
+  let toPath = (pathData.toPathData(5)+(data.style.icon ?? '')).replaceAll('ZM', 'Z$M')?.split('$');
 
   // retrieve fromPath if available
   let fromPath: Array<string> = data.style.fromPath?.replaceAll('ZM', 'Z$M')?.split('$') ?? [];

@@ -52,6 +52,8 @@ export interface TextStyle {
   width: number;
   // predefined path
   fromPath?: string;
+  icon?: string;
+  iconWidth?: number;
   // wrap's text by width. otherwise sends back new width
   wrap?: boolean;
 }
@@ -82,7 +84,6 @@ export interface PageContent {
   images: Record<string, string>;
   vectors: Record<string, string>;
   stylesheets: string[];  
-  restoreIDs: Record<string, Array<string>>;  
   restoreLinks: Record<string, Array<string>>;  
   restoreClicks: Record<string, Array<Function>>;  
   animatingOrder: Record<string, RenderConfig>;  

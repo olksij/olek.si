@@ -6,11 +6,7 @@
    --- -- AN URGENT REFACTORING -- ---
    --- --- --- --- --- --- --- --- --- */
 
-#cnt {
-  height: 100%;
-}
-
-#ps>a {
+.rendered {
   overflow: hidden;
 }
 
@@ -155,10 +151,4 @@ img {
   to {
     background: #0000;
   }
-}
-
-
-#nav.rendered {
-  gap: 4px;
-  width: 116px;
 }

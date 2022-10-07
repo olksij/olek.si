@@ -3,13 +3,12 @@
    --- -- [URGENT] REFACTORING --- ---
    --- --- --- --- --- --- --- --- --- */
 
-import { ComputeAPI, RenderConfig, ComputedTextData, TextsRecord, InputTextData, PageContent } from "../interfaces";
+import { RenderConfig, ComputedTextData, TextsRecord, InputTextData, PageContent } from "../interfaces";
 import { createElement, createFragment } from "./jsx";
 import print from './print';
 import './menu.ts';
 import { byId, tagById } from "./shorthands";
 import { FontStyle } from "../classes";
-import { worker } from "../pages/entry";
 import { onMenuClick } from "./menu";
 
 export default async function render(content: PageContent, renderTextData: ComputedTextData): Promise<void> {
@@ -93,13 +92,16 @@ export default async function render(content: PageContent, renderTextData: Compu
               <animate attributeName="d" dur="0.8s" values={data.from + ';' + data.to}
                 calcMode="spline" keySplines="0.87 0 0.13 1" />
             </path>
-            <text y={renderTextData[item].baseline - .25}>{content.texts['en'][item]}</text>
+            <text x={content.textStyleData[item].iconWidth??0} y={renderTextData[item].baseline - .25}>{content.texts['en'][item]}</text>
+            <path class="final" d={content.textStyleData[item].icon??''}/>
           </svg>
           byId(item)!.append(vector);
 
           let font = content.textStyleData[item].font as FontStyle;
 
-          [tagById(item, 'path'), tagById(item, 'text')].forEach(el => el!.animate(
+          let icon = content.textStyleData[item].icon ? document.getElementsByClassName('final')[0] : document.createElement('div');
+
+          [tagById(item, 'path'), tagById(item, 'text'), icon].forEach(el => el!.animate(
             [{ fill: 'var(--el)' }, { fill: font.color }],
             { delay: 400, duration: 400, easing: 'cubic-bezier(0.87, 0, 0.13, 1)' },
           ));
@@ -110,14 +112,20 @@ export default async function render(content: PageContent, renderTextData: Compu
           );
 
           tagById(item, 'text')?.setAttribute("style", `opacity: 0; font-family:${font.type}; letter-spacing:${font.letterSpacing}em; font-size:${font.fontSize}px`);
+          icon.setAttribute("style", `opacity: 0;`)
 
           tagById(item, 'text')?.animate(
+            [{ opacity: 0 }, { opacity: 1 }],
+            { delay: 600, duration: 200, easing: 'cubic-bezier(0.5, 0, 0.13, 1)' },
+          );          
+          icon.animate(
             [{ opacity: 0 }, { opacity: 1 }],
             { delay: 600, duration: 200, easing: 'cubic-bezier(0.5, 0, 0.13, 1)' },
           );
 
           setTimeout(() => {
             tagById(item, 'text')?.setAttribute("style", tagById(item, 'text')?.getAttribute("style") + '; fill: ' + (font.color) + '; opacity:1');
+            icon.setAttribute("style", icon.getAttribute("style") + '; fill: ' + (font.color) + '; opacity:1');
           }, 600);
 
           byId(item)?.classList.add('rendered');

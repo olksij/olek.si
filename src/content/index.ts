@@ -37,7 +37,7 @@ export const textStyleData: Record<string, TextStyle> = {
   "about":        { width: 128, font: fontStyles.menu },
   "projects":     { width: 128, font: fontStyles.menu },
   "work":         { width: 128, font: fontStyles.menu },
-  "nav":          { width: 112,  font: fontStyles.action,      icon: nav, iconWidth: 24 },
+  "nav":          { width: 112,  font: fontStyles.action,      icon: nav, iconWidth: 28 },
   "cr":           { width: 142, font: fontStyles.footer, },
   "lg":           { width: 76,  font: fontStyles.footer, },
 }
@@ -125,7 +125,7 @@ export const animatingOrder: Record<string, RenderConfig> = {
   "d2":  { type: 'text', delay: 50 },
   "ps":  { type: 'img',  delay: 100, children: true },
   "rg":  { type: 'text', delay: 50, children: true },
-  "nav": { type: 'both', delay: 0 },
+  "nav": { type: 'text', delay: 0 },
   "cr":  { type: 'both', delay: 0 },
   "lg":  { type: 'both', delay: 0 },
 }

@@ -13,6 +13,10 @@
   cursor: pointer;
 }
 
+#nav>svg {
+  border-radius: 8px;
+}
+
 @media (max-width:920px) {
   #rg {
     display: flex;
@@ -91,7 +95,7 @@
 }
 
 #rg>.rendered>svg {
-  border-radius: 8px;
+  border-radius: 6px;
 }
 
 #rg>.rendered {

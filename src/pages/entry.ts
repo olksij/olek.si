@@ -29,7 +29,8 @@ export function computeTexts(content: PageContent) {
     // map each text id to inputtextdata cell
     let idData: InputTextData = {
       source: content.texts['en'][id],
-      style: content.textStyleData[id],
+      textStyle: content.textStyleData[id],
+      fontStyle: content.fontStyles,
     };
 
     // and add to record

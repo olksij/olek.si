@@ -47,7 +47,7 @@ export interface FontStyleConfig {
 // used to define text style for each node
 export interface TextStyle {
   // used by webworker to vectorize text
-  font: FontStyle;
+  style: FontStyleType;
   // parent's box size
   width: number;
   // predefined path
@@ -66,7 +66,8 @@ export interface ComputedTextData {
 
 export interface InputTextData {
   source: string;
-  style: TextStyle;
+  textStyle: TextStyle;
+  fontStyle: Record<FontStyleType, FontStyle>;
 }
 
 export interface RenderConfig {
@@ -87,4 +88,5 @@ export interface PageContent {
   restoreLinks: Record<string, Array<string>>;  
   restoreClicks: Record<string, Array<Function>>;  
   animatingOrder: Record<string, RenderConfig>;  
+  fontStyles: Record<FontStyleType, FontStyle>;
 }

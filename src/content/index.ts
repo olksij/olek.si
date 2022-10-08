@@ -1,7 +1,6 @@
-export { head, languages } from './general';
+export { head, languages, fontStyles } from './general';
 
 import { RenderConfig, SourceTextData, TextStyle } from '../interfaces';
-import { fontStyles } from './general';
 
 
 /* --- --- --- --- --- --- --- --- ---
@@ -32,16 +31,16 @@ export const textStyleData: Record<string, TextStyle> = {
          |               |                      |                              |
   --------------   ------------       -----------------------           --------------   */
 
-  "tt":           { width: 386, font: fontStyles.title,       fromPath: titleFromPath, },
-  "d1":           { width: 337, font: fontStyles.subtitle, },
-  "d2":           { width: 148, font: fontStyles.subtitle, },
-  "home":         { width: 128, font: fontStyles.menuSelected },
-  "about":        { width: 128, font: fontStyles.menu },
-  "projects":     { width: 128, font: fontStyles.menu },
-  "work":         { width: 128, font: fontStyles.menu },
-  "nav":          { width: 112,  font: fontStyles.action,      icon: nav, iconWidth: 28 },
-  "cr":           { width: 158, font: fontStyles.footer,       icon: cr, iconWidth: 16 },
-  "lg":           { width: 96,  font: fontStyles.footer,       icon: lg, iconWidth: 20 },
+  "tt":           { width: 386, style: 'title',       fromPath: titleFromPath, },
+  "d1":           { width: 337, style: 'subtitle', },
+  "d2":           { width: 148, style: 'subtitle', },
+  "home":         { width: 128, style: 'menuSelected' },
+  "about":        { width: 128, style: 'menu' },
+  "projects":     { width: 128, style: 'menu' },
+  "work":         { width: 128, style: 'menu' },
+  "nav":          { width: 112, style: 'action',      icon: nav, iconWidth: 28 },
+  "cr":           { width: 158, style: 'footer',      icon: cr, iconWidth: 16 },
+  "lg":           { width: 96,  style: 'footer',      icon: lg, iconWidth: 20 },
 }
 
 export const texts: SourceTextData = {

@@ -18,7 +18,7 @@ export default async function loadTexts(textsData: TextsRecord) {
   
   for (let id in textsData) {
     let data = textsData[id] as InputTextData,
-      font = fontsData[data.style.font.type] as Font;
+      font = fontsData[data.fontStyle[data.textStyle.style].type] as Font;
     
     let { fromPath, toPath, baseline } = textMetrics(font, data);
 

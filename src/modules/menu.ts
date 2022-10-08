@@ -36,6 +36,10 @@ for (let child of rg.children) {
 
     child.classList.add("hover");
   });
+
+  child.addEventListener("click", () => {
+    window.history.pushState({}, '', `/${child.id}`)
+  });
 }
 
 function menuOpenBg(mouse: boolean) {

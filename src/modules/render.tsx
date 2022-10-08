@@ -86,8 +86,9 @@ export default async function render(content: PageContent, renderTextData: Compu
         delayCounter += data.delay;
         setTimeout((item) => {
           var data = renderTextData[item] as ComputedTextData;
+          let font = content.fontStyles[content.textStyleData[item].style] as FontStyle;
 
-          let vector: SVGElement = <svg viewBox={`0 0 ${content.textStyleData[item].width} ${content.textStyleData[item].font.lineHeight}`}>
+          let vector: SVGElement = <svg viewBox={`0 0 ${content.textStyleData[item].width} ${font.lineHeight}`}>
             <path fill="var(--el)" fill-rule="evenodd" clip-rule="evenodd">
               <animate attributeName="d" dur="0.8s" values={data.from + ';' + data.to}
                 calcMode="spline" keySplines="0.87 0 0.13 1" />
@@ -97,7 +98,6 @@ export default async function render(content: PageContent, renderTextData: Compu
           </svg>
           byId(item)!.append(vector);
 
-          let font = content.textStyleData[item].font as FontStyle;
 
           let icon = vector.children[2];
 

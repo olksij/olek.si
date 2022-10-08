@@ -6,6 +6,12 @@
    --- -- AN URGENT REFACTORING -- ---
    --- --- --- --- --- --- --- --- --- */
 
+@media (min-width: 920px) {
+  #cnt {
+    height: 100%;
+  }
+}
+
 .rendered {
   overflow: hidden;
 }

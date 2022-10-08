@@ -25,8 +25,6 @@ export async function onload(content: Object) {
 export function computeTexts(content: PageContent) {
   let textsData: TextsRecord = {};
 
-  console.log(content);
-
   for (let id of Object.keys(content.texts['en'])) {
     // map each text id to inputtextdata cell
     let idData: InputTextData = {

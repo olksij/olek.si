@@ -87,7 +87,7 @@ export default async function render(content: PageContent, renderTextData: Compu
         setTimeout((item) => {
           var data = renderTextData[item] as ComputedTextData;
 
-          let vector = <svg viewBox={`0 0 ${content.textStyleData[item].width} ${content.textStyleData[item].font.lineHeight}`}>
+          let vector: SVGElement = <svg viewBox={`0 0 ${content.textStyleData[item].width} ${content.textStyleData[item].font.lineHeight}`}>
             <path fill="var(--el)" fill-rule="evenodd" clip-rule="evenodd">
               <animate attributeName="d" dur="0.8s" values={data.from + ';' + data.to}
                 calcMode="spline" keySplines="0.87 0 0.13 1" />
@@ -99,7 +99,7 @@ export default async function render(content: PageContent, renderTextData: Compu
 
           let font = content.textStyleData[item].font as FontStyle;
 
-          let icon = content.textStyleData[item].icon ? document.getElementsByClassName('final')[0] : document.createElement('div');
+          let icon = vector.children[2];
 
           [tagById(item, 'path'), tagById(item, 'text'), icon].forEach(el => el!.animate(
             [{ fill: 'var(--el)' }, { fill: font.color }],
@@ -123,10 +123,10 @@ export default async function render(content: PageContent, renderTextData: Compu
             { delay: 600, duration: 200, easing: 'cubic-bezier(0.5, 0, 0.13, 1)' },
           );
 
-          setTimeout(() => {
+          setTimeout((icon) => {
             tagById(item, 'text')?.setAttribute("style", tagById(item, 'text')?.getAttribute("style") + '; fill: ' + (font.color) + '; opacity:1');
             icon.setAttribute("style", icon.getAttribute("style") + '; fill: ' + (font.color) + '; opacity:1');
-          }, 600);
+          }, 600, icon);
 
           byId(item)?.classList.add('rendered');
 

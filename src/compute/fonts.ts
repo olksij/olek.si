@@ -1,9 +1,5 @@
 // this file is about parsing and responding to received font objects
 
-/* --- --- --- --- --- --- --- --- --- --- --- ---
-   --- CODE IN THIS FILE REQUIRES REFACTORING- ---
-   --- --- --- --- --- --- --- --- --- --- --- --- */
-
 import { parse } from 'opentype.js';
 import { FontsRecord } from '../interfaces';
 
@@ -11,8 +7,8 @@ import print from '../modules/print';
 
 // the class extends promise so we can ensure the 
 // fonts are loaded before we try to vectorize text
-class FontsArrayBuffer extends Promise<FontsRecord> {
-  resolve: (value: FontsRecord | PromiseLike<FontsRecord>) => void;
+class FontsArrayBuffer extends Promise<FontsRecord<'result'>> {
+  resolve: (value: FontsRecord<'result'> | PromiseLike<FontsRecord<'result'>>) => void;
 
   constructor() {
     let promiseResolve;
@@ -21,8 +17,8 @@ class FontsArrayBuffer extends Promise<FontsRecord> {
   }
 
   // the method is called usually by compute.ts
-  load(data: FontsRecord) {
-    let parsed: FontsRecord = {
+  load(data: FontsRecord<'input'>) {
+    let parsed: FontsRecord<'result'> = {
       display: parse(data.display),
       text: parse(data.text)
     };
@@ -32,13 +28,13 @@ class FontsArrayBuffer extends Promise<FontsRecord> {
     print('⌨️ Fonts')
   }
 
-    static get [Symbol.species]() {
-        return Promise;
-    }
+  static get [Symbol.species]() {
+    return Promise;
+  }
 
-    get [Symbol.toStringTag]() {
-        return 'FontsArrayBuffer';
-    }
+  get [Symbol.toStringTag]() {
+    return 'FontsArrayBuffer';
+  }
 }
 
 const fonts = new FontsArrayBuffer();

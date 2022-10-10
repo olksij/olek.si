@@ -10,15 +10,20 @@ import { ComputedTextData, InputTextData, TextsRecord } from "../interfaces";
 import print from '../modules/print';
 import textMetrics from "./metrics";
 
+import { fontStyles } from '../modules/fontStyles';
+
 let renderTexts: Record<string, ComputedTextData> = {}
 
-export default async function loadTexts(textsData: TextsRecord) {
+export default async function loadTexts(textsData: TextsRecord<'input'>) {
   // ensure that fonts are loaded and we can use them
   let fontsData = await fonts;
   
   for (let id in textsData) {
     let data = textsData[id] as InputTextData,
-      font = fontsData[data.fontStyle[data.textStyle.style].type] as Font;
+        font = fontsData[fontStyles[data.style].type] as Font;
+    //  data.style - contains the predefined style for text
+    //  fontStyles[].type - retrieve the style and get font type
+    //  fontsData[] as Font - the Font object required for opentype.js 
     
     let { fromPath, toPath, baseline } = textMetrics(font, data);
 

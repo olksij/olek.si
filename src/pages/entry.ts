@@ -23,14 +23,14 @@ export async function onload(content: Object) {
 // the function is used in order to prepeare content 
 // for sending to compute worker
 export function computeTexts(content: PageContent) {
-  let textsData: TextsRecord = {};
+  let textsData: TextsRecord<'input'> = {};
 
   for (let id of Object.keys(content.texts['en'])) {
     // map each text id to inputtextdata cell
     let idData: InputTextData = {
-      source: content.texts['en'][id],
-      textStyle: content.textStyleData[id],
-      fontStyle: content.fontStyles,
+      style: content.textStyleData[id].style,
+      from: { path: content.textStyleData[id].fromPath!, width: content.textStyleData[id].width },
+      to: { text: content.texts['en'][id], gap: content.textStyleData[id].iconWidth, icon: content.textStyleData[id].icon }
     };
 
     // and add to record

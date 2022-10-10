@@ -1,4 +1,4 @@
-export { head, languages, fontStyles } from './general';
+export { head, languages } from './general';
 
 import { RenderConfig, SourceTextData, TextStyle } from '../interfaces';
 

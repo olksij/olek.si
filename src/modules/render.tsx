@@ -10,6 +10,7 @@ import './menu.ts';
 import { byId, tagById } from "./shorthands";
 import { FontStyle } from "../classes";
 import { onMenuClick } from "./menu";
+import { fontStyles } from "./fontStyles";
 
 export default async function render(content: PageContent, renderTextData: ComputedTextData): Promise<void> {
   if (!sessionStorage.getItem('loaded')) {
@@ -86,7 +87,7 @@ export default async function render(content: PageContent, renderTextData: Compu
         delayCounter += data.delay;
         setTimeout((item) => {
           var data = renderTextData[item] as ComputedTextData;
-          let font = content.fontStyles[content.textStyleData[item].style] as FontStyle;
+          let font = fontStyles[content.textStyleData[item].style] as FontStyle;
 
           let vector: SVGElement = <svg viewBox={`0 0 ${content.textStyleData[item].width} ${font.lineHeight}`}>
             <path fill="var(--el)" fill-rule="evenodd" clip-rule="evenodd">

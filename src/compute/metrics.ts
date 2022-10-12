@@ -41,6 +41,12 @@ export default function textMetrics(font: Font, data: InputTextData) {
       fromPath.push(currPath);
     }
   }
+  
+  while (fromPath.length < toPath.length)
+    fromPath.push('')
+
+  while (toPath.length < fromPath.length)
+    toPath.push('')
 
   return { fromPath, toPath, baseline };
 }

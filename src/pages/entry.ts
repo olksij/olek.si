@@ -25,12 +25,15 @@ export async function onload(content: Object) {
 export function computeTexts(content: PageContent) {
   let textsData: TextsRecord<'input'> = {};
 
-  for (let id of Object.keys(content.texts['en'])) {
+  const urlSearchParams = new URLSearchParams(window.location.search);
+  const lang = Object.keys(Object.fromEntries(urlSearchParams.entries()))[0];
+
+  for (let id of Object.keys(content.texts[lang])) {
     // map each text id to inputtextdata cell
     let idData: InputTextData = {
       style: content.textStyleData[id].style,
       from: { path: content.textStyleData[id].fromPath!, width: content.textStyleData[id].width },
-      to: { text: content.texts['en'][id], gap: content.textStyleData[id].iconWidth, icon: content.textStyleData[id].icon }
+      to: { text: content.texts[lang][id], gap: content.textStyleData[id].iconWidth, icon: content.textStyleData[id].icon }
     };
 
     // and add to record

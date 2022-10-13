@@ -81,6 +81,10 @@ export default async function render(content: PageContent, renderTextData: Compu
       }
     }
 
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const lang = Object.keys(Object.fromEntries(urlSearchParams.entries()))[0];
+  
+
     if (data.type == 'text' || data.type == 'both') {
       for (let child of queue) {
         // TODO: ahhrr clean up code 
@@ -94,7 +98,7 @@ export default async function render(content: PageContent, renderTextData: Compu
               <animate attributeName="d" dur="0.8s" values={data.from + ';' + data.to}
                 calcMode="spline" keySplines="0.87 0 0.13 1" />
             </path>
-            <text x={content.textStyleData[item].iconWidth??0} y={renderTextData[item].baseline - .25}>{content.texts['en'][item]}</text>
+            <text x={content.textStyleData[item].iconWidth??0} y={renderTextData[item].baseline - .25}>{content.texts[lang][item]}</text>
             <path class="final" d={content.textStyleData[item].icon??''}/>
           </svg>
           byId(item)!.append(vector);

@@ -1,6 +1,6 @@
 export { head, languages } from './general';
 
-import { RenderConfig, SourceTextData, TextStyle } from '../interfaces';
+import { Languages, RenderConfig, SourceTextData, TextStyle } from '../interfaces';
 
 
 /* --- --- --- --- --- --- --- --- ---
@@ -9,11 +9,23 @@ import { RenderConfig, SourceTextData, TextStyle } from '../interfaces';
    --- --- --- --- --- --- --- --- --- */
 
 // specific dates with custom description
-const dates: Record<string, Array<string>> = {  
-  "6-12":  ["🎂 It's my birthday today!", "June 12"],
-  "8-24":  ["Restoration of independence of Ukraine", "🇺🇦 August 24"],
+const dates: Record<string, Record<Languages, [string, string]>> = {  
+  "6-12":  {
+    en: ["🎂 It's my birthday today!", "June 12"],
+    sv: ["🎂 Jag fyller år idag!", "Juni 12"],
+    uk: ["🎂 Ce moje deń narodžnńa!", "Červeń 12"],
+  },
+  "8-24": {
+    en: ["Restoration of independence of Ukraine", "🇺🇦 August 24"],
+    sv: ["Återställande av Ukrainas självständighet", "🇺🇦 Augusti 24"],
+    uk: ["Vidnovlenńa nezaležnosti Ukrajiny", "🇺🇦 Serpeń 24"],
+  },
   // more dates to come such as celebrations and holidays
-  default: ["Redefining the way humans interact", "with computers."],
+  default: {
+    en: ["Redefining the way humans interact", "with computers."],
+    sv: ["Omdefinierar hur människor interagerar", "med datorer."],
+    uk: ["Pereosmysĺuju sposib vzajemodiji", "z compjuteramy."],
+  }
 };
 
 import titleFromPath from 'bundle-text:/assets/raw/titleFromPath.txt';
@@ -46,8 +58,8 @@ export const textStyleData: Record<string, TextStyle> = {
 export const texts: SourceTextData = {
   en: {
     'tt': 'Oleksii',
-    'd1': description[0],
-    'd2': description[1],
+    'd1': description['en'][0],
+    'd2': description['en'][1],
     'home': 'oleksii.xyz',
     'about': 'about',
     'projects': 'projects',
@@ -58,8 +70,8 @@ export const texts: SourceTextData = {
   },
   sv: {
     'tt': 'Oleksiy',
-    'd1': description[0],
-    'd2': description[1],
+    'd1': description['sv'][0],
+    'd2': description['sv'][1],
     'home': 'oleksii.xyz',
     'about': 'om mig',
     'projects': 'projekts',
@@ -70,8 +82,8 @@ export const texts: SourceTextData = {
   },
   uk: {
     'tt': 'Oleksij',
-    'd1': description[0],
-    'd2': description[1],
+    'd1': description['uk'][0],
+    'd2': description['uk'][1],
     'home': 'oleksii.xyz',
     'about': 'pro mene',
     'projects': 'projekty',

@@ -1,4 +1,4 @@
-import { ComputedTextData, InputTextData, PageContent, TextsRecord } from '../interfaces';
+import { ComputedTextData, InputTextData, Languages, PageContent, TextsRecord } from '../interfaces';
 
 import print from '../modules/print';
 import render from '../modules/render';
@@ -26,7 +26,10 @@ export function computeTexts(content: PageContent) {
   let textsData: TextsRecord<'input'> = {};
 
   const urlSearchParams = new URLSearchParams(window.location.search);
-  const lang = Object.keys(Object.fromEntries(urlSearchParams.entries()))[0];
+  let lang = Object.keys(Object.fromEntries(urlSearchParams.entries()))[0] as Languages | null;
+
+  if (lang == null) 
+    window.history.pushState({}, '', `?en`), lang = 'en';
 
   for (let id of Object.keys(content.texts[lang])) {
     // map each text id to inputtextdata cell

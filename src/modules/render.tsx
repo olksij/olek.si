@@ -12,7 +12,7 @@ import { FontStyle } from "../classes";
 import { onMenuClick } from "./menu";
 import { fontStyles } from "./fontStyles";
 
-export default async function render(content: PageContent, renderTextData: ComputedTextData): Promise<void> {
+export default async function render(content: PageContent, renderTextData: TextsRecord<'result'>): Promise<void> {
   if (!sessionStorage.getItem('loaded')) {
     await window["skeleton"];
     sessionStorage.setItem('loaded', 'true');

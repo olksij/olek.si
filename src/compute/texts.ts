@@ -5,16 +5,16 @@ import { interpolateAll } from "flubber"
 import { Font } from "opentype.js";
 
 import fonts from "./fonts";
-import { ComputedTextData, InputTextData, TextsRecord } from "../interfaces";
+import { ComputeAPI, ComputedTextData, InputTextData, TextsRecord } from "../interfaces";
 
 import print from '../modules/print';
 import textMetrics from "./metrics";
 
 import { fontStyles } from '../modules/fontStyles';
 
-let renderTexts: Record<string, ComputedTextData> = {}
+let computed: Record<string, ComputedTextData> = {}
 
-export default async function loadTexts(textsData: TextsRecord<'input'>) {
+export default async function loadTexts(request: string, textsData: TextsRecord<'input'>) {
   // ensure that fonts are loaded and we can use them
   let fontsData = await fonts;
   
@@ -29,10 +29,10 @@ export default async function loadTexts(textsData: TextsRecord<'input'>) {
 
     // create interpolatee paths for svg <animate>
     let interpolator = interpolateAll(fromPath, toPath, { maxSegmentLength: 4, single: true });
-    renderTexts[id] = { from: interpolator(1 / 1000), to: interpolator(1 - 1 / 1000), baseline };
+    computed[id] = { from: interpolator(1 / 1000), to: interpolator(1 - 1 / 1000), baseline };
   }
 
   // send to main thread computed paths
-  postMessage({ deliver: 'texts', data: renderTexts });
+  postMessage({ request, data: computed } as ComputeAPI<'result'>);
   print('💿 Computed')
 }

@@ -17,7 +17,7 @@ class FontsArrayBuffer extends Promise<FontsRecord<'result'>> {
   }
 
   // the method is called usually by compute.ts
-  load(data: FontsRecord<'input'>) {
+  load(request: string, data: FontsRecord<'input'>) {
     let parsed: FontsRecord<'result'> = {
       display: parse(data.display),
       text: parse(data.text)

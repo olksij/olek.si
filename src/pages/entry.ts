@@ -1,4 +1,4 @@
-import { ComputedTextData, InputTextData, Languages, PageContent, TextsRecord } from '../interfaces';
+import { ComputeAPI, ComputedTextData, InputTextData, Languages, PageContent, TextsRecord } from '../interfaces';
 
 import print from '../modules/print';
 import render from '../modules/render';
@@ -7,7 +7,7 @@ export const worker: Worker = window['worker'];
 
 // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
 
-export async function onload(content: Object) {
+export async function onload() {
   print("🔥 Load Event");
 
   // webvitals file is loaded after load event and render call,
@@ -44,9 +44,12 @@ export function computeTexts(content: PageContent) {
   }
 
   // when done, post message
-  worker.postMessage({ deliver: 'texts', data: textsData });
+  worker.postMessage({ deliver: 'texts', request: 'entryRender', data: textsData } as ComputeAPI<'input'>);
 
-  worker.onmessage = message => {
-    message.data.deliver == 'texts' ? render(content, message.data.data as ComputedTextData) : 0;
-  }
+  worker.addEventListener('message', message => {
+    let data = message.data as ComputeAPI<'result'>;
+
+    if (data.request == 'entryRender')
+      render(content, data.data as TextsRecord<'result'>);
+  });
 }

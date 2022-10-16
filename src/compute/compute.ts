@@ -7,9 +7,10 @@ import fonts from './fonts';
 import loadTexts from './texts';
 
 // when message is received from main thread
-onmessage = (message: MessageEvent<ComputeAPI>) => {
-  let data = message.data.data;
+onmessage = (message: MessageEvent<ComputeAPI<'input'>>) => {
+  let input = message.data;
+  let request = input.request, deliver = input.deliver, data = input.data;
 
-  if (message.data.deliver == 'fonts') fonts.load(data as FontsRecord);
-  if (message.data.deliver == 'texts') loadTexts(data as TextsRecord);
+  if (deliver == 'fonts') fonts.load(request, data as FontsRecord<'input'>);
+  if (deliver == 'texts') loadTexts(request, data as TextsRecord<'input'>);
 }

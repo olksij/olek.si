@@ -29,7 +29,8 @@ export type FontStyleType =
 
 // interface used for communicating with WebWorker
 export interface ComputeAPI<D extends Dir> {
-  deliver: DeliverType,
+  deliver?: DeliverType,
+  request: string, // request ID
   data: FontsRecord<D> | TextsRecord<D>,
 }
 

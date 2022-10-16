@@ -50,9 +50,9 @@ export const textStyleData: Record<string, TextStyle> = {
   "about":        { width: 128, style: 'menu' },
   "projects":     { width: 128, style: 'menu' },
   "work":         { width: 128, style: 'menu' },
-  "nav":          { width: 112, style: 'action',      icon: nav, iconWidth: 28 },
-  "cr":           { width: 158, style: 'footer',      icon: cr, iconWidth: 16 },
-  "lg":           { width: 96,  style: 'footer',      icon: lg, iconWidth: 20 },
+  "nav":          { width: 112, style: 'action',      icon: nav, gap: 4 },
+  "cr":           { width: 158, style: 'footer',      icon: cr, },
+  "lg":           { width: 96,  style: 'footer',      icon: lg,  gap: 2 },
 }
 
 export const texts: SourceTextData = {

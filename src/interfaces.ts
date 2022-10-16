@@ -59,7 +59,7 @@ export interface TextStyle {
   // predefined path
   fromPath?: string;
   icon?: string;
-  iconWidth?: number;
+  gap?: number;
   // wrap's text by width. otherwise sends back new width
   wrap?: boolean;
 }

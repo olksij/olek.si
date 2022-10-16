@@ -36,7 +36,7 @@ export function computeTexts(content: PageContent) {
     let idData: InputTextData = {
       style: content.textStyleData[id].style,
       from: { path: content.textStyleData[id].fromPath!, width: content.textStyleData[id].width },
-      to: { text: content.texts[lang][id], gap: content.textStyleData[id].iconWidth, icon: content.textStyleData[id].icon }
+      to: { text: content.texts[lang][id], gap: content.textStyleData[id].gap, icon: content.textStyleData[id].icon }
     };
 
     // and add to record

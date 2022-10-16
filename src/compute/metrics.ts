@@ -20,7 +20,7 @@ export default function textMetrics(font: Font, data: InputTextData) {
 
   /* --- --- TO --- --- */
 
-  let textLeft = to.gap ? to.gap + style.lineHeight : 0;
+  let textLeft = to.icon ? (to.gap ?? 0) + style.lineHeight : 0;
   let icon = to.icon ?? '';
 
   // vectorize font and convert to string[]

@@ -1,3 +1,5 @@
+import { ComputeAPI, TextsRecord } from "../interfaces";
+import { worker } from "../pages/entry";
 import MotionBlur from "./motionBlur";
 import { byId, tagById } from "./shorthands";
 
@@ -102,10 +104,22 @@ let isNavHovered = false;
 
 nav.onclick = function (event) {
   if (!cnt.classList.contains("navTapped")) {
+    // open menu
+    worker.postMessage({ deliver: 'texts', request: 'menuRender', data: {'nav': {
+      from: {width: 200},
+      to: {
+        icon: '',
+        gap: 0,
+        text: 'Close'
+      },
+      style: 'action'
+    }} } as ComputeAPI<'input'>);
+
     cnt.classList.add("navTapped", "navTransformed");
     tagById("nav", "text")!.innerHTML = "Close";
     menuOpenBg(false);
   } else {
+    //close menu
     cnt.classList.remove("navTapped");
     tagById("nav", "text")!.innerHTML = "Navigation";
     menuCloseBg(false);
@@ -139,3 +153,12 @@ rg.onanimationend = () => navBlur.drop();
 rg.onmousemove = (event) => {
   if (ignoreMouse && event.movementX>0) openMenu(event), ignoreMouse = false;
 }
+
+function renderMenu(message, unsubscribe) {
+  let data = message.data as ComputeAPI<'result'>;
+
+  if (data.request == 'menuRender')
+    console.log(data.data as TextsRecord<'result'>);
+};
+
+window["skeleton"].then(() => worker.addEventListener('message', (e) => renderMenu(e,renderMenu)));

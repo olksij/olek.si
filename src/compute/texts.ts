@@ -12,9 +12,9 @@ import textMetrics from "./metrics";
 
 import { fontStyles } from '../modules/fontStyles';
 
-let computed: Record<string, ComputedTextData> = {}
-
 export default async function loadTexts(request: string, textsData: TextsRecord<'input'>) {
+  let computed: Record<string, ComputedTextData> = {}
+
   // ensure that fonts are loaded and we can use them
   let fontsData = await fonts;
   

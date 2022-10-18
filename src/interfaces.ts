@@ -69,6 +69,21 @@ export interface ComputedTextData {
   from: string;
   to: string;
   baseline: number;
+  // TODO: WIDTH FROM COMPUTE WORKER
+}
+
+export interface RenderElementConfig {
+  id: string;
+  morph: ComputedTextData;
+  icon?: IconConfig;
+  text: string;
+  style: FontStyleType;
+  width: number;
+}
+
+export interface IconConfig {
+  path: string;
+  gap: number;
 }
 
 export interface InputTextData {

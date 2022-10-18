@@ -154,11 +154,11 @@ rg.onmousemove = (event) => {
   if (ignoreMouse && event.movementX>0) openMenu(event), ignoreMouse = false;
 }
 
-function renderMenu(message, unsubscribe) {
+function renderMenu(message) {
   let data = message.data as ComputeAPI<'result'>;
 
   if (data.request == 'menuRender')
     console.log(data.data as TextsRecord<'result'>);
 };
 
-window["skeleton"].then(() => worker.addEventListener('message', (e) => renderMenu(e,renderMenu)));
+window["skeleton"].then(() => worker.addEventListener('message', renderMenu));

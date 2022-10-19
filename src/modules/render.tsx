@@ -3,7 +3,7 @@
    --- -- [URGENT] REFACTORING --- ---
    --- --- --- --- --- --- --- --- --- */
 
-import { RenderConfig, ComputedTextData, TextsRecord, InputTextData, PageContent, RenderElementConfig } from "../interfaces";
+import { RenderConfig, ComputedTextData, TextsRecord, InputTextData, PageContent, RenderElementConfig, CSSColors, AnimationConfig } from "../interfaces";
 import { createElement, createFragment } from "./jsx";
 import print from './print';
 import './menu.ts';
@@ -79,46 +79,80 @@ export default async function render(content: PageContent, renderTextData: Texts
   document.body.classList.add('rendered');
 }
 
-function renderElement(element: RenderElementConfig) {
-  let computed = element.morph, font = fontStyles[element.style] as FontStyle;
+function animate(element: SVGPathElement | SVGTextElement, config: AnimationConfig) {
+  element.animate(...config);
+  return element;
+}
 
-  // position of text depends if there is an icon
-  let textLeft = element.icon ? element.icon.gap + font.lineHeight : 0;
+function toColor(element: SVGPathElement | SVGTextElement, color: CSSColors) {
+  let config = [
+    [{ fill: 'var(--el)' }, { fill: color }],
+    { delay: 400, duration: 400, easing: 'cubic-bezier(0.87, 0, 0.13, 1)' }
+  ] as AnimationConfig;
 
-  let svgElement: SVGElement = <svg viewBox={`0 0 ${element.width} ${font.lineHeight}`}></svg>
+  return animate(element, config);
+}
 
-  let morph: SVGPathElement = <path fill="var(--el)" fill-rule="evenodd" clip-rule="evenodd">
-    <animate attributeName="d" dur="0.8s" values={computed.from + ';' + computed.to} calcMode="spline" keySplines="0.87 0 0.13 1" />
-  </path>
 
-  let text: SVGTextElement = <text x={textLeft} y={computed.baseline - .25}>{element.text}</text>;
-  let icon: SVGPathElement = <path d={element.icon?.path ?? ''}/>
-
-  svgElement.append(morph, text, icon);
-  byId(element.id)!.append(svgElement);
-
-  [morph, text, icon].forEach(element => element.animate(
-    [{ fill: 'var(--el)' }, { fill: font.color }],
-    { delay: 400, duration: 400, easing: 'cubic-bezier(0.87, 0, 0.13, 1)' },
-  ));
-
-  morph.animate(
+function morphOpacity(element: SVGPathElement | SVGTextElement) {
+  let config =[
     [{ opacity: 1 }, { opacity: 0 }],
     { delay: 600, duration: 200 },
-  );
+  ] as AnimationConfig;
 
-  text.setAttribute("style", `opacity: 0; font-family:${font.type}; letter-spacing:${font.letterSpacing}em; font-size:${font.fontSize}px`);
-  icon.setAttribute("style", `opacity: 0;`);
+  return animate(element, config);
+}
 
-  [text, icon].forEach(element => element.animate(
+function elementOpacity(element: SVGPathElement | SVGTextElement) {
+  let config =[
     [{ opacity: 0 }, { opacity: 1 }],
     { delay: 600, duration: 200, easing: 'cubic-bezier(0.5, 0, 0.13, 1)' },
-  )); 
+  ] as AnimationConfig;
 
-  setTimeout((icon, text) => {
-    text.setAttribute("style", text.getAttribute("style") + '; fill: ' + (font.color) + '; opacity:1');
-    icon.setAttribute("style", icon.getAttribute("style") + '; fill: ' + (font.color) + '; opacity:1');
-  }, 600, icon, text);
+  return animate(element, config);
+}
 
+
+function renderElement(element: RenderElementConfig) {
+  let morph: SVGPathElement, text: SVGTextElement, icon: SVGPathElement;
+  let computed = element.morph, width = byId(element.id)!.clientWidth;;
+
+  let root: SVGElement = <svg viewBox={`0 0 ${width} ${element.height}`}></svg>
+
+  if (element.morph) {
+    morph = <path fill="var(--el)" fill-rule="evenodd" clip-rule="evenodd">
+      <animate attributeName="d" dur="0.8s" values={computed!.from + ';' + computed!.to} calcMode="spline" keySplines="0.87 0 0.13 1" />
+    </path>
+
+    root.append(toColor(morphOpacity(morph), element.color));
+  }
+
+  if (element.text) {
+    let font = fontStyles[element.text.style] as FontStyle;
+    let textLeft = element.icon ? element.icon.gap + font.lineHeight : 0;
+
+    let style = `font-family:${font.type}; letter-spacing:${font.letterSpacing}em; font-size:${font.fontSize}px`;
+    text = <text opacity="0" style={style} x={textLeft} y={computed!.baseline - .25}>{element.text}</text>;
+
+    setTimeout(() => {
+      text.setAttribute("opacity", "1");
+      text.setAttribute("fill", element.color);
+    }, 600);
+
+    root.append(toColor(elementOpacity(text), element.color));
+  }
+
+  if (element.icon) {
+    icon = <path opacity="1" d={element.icon?.path ?? ''}/>
+    root.append(toColor(elementOpacity(icon), element.color));
+
+    setTimeout(() => {
+      text.setAttribute("opacity", "1");
+      text.setAttribute("fill", element.color);
+    }, 600);
+  }
+
+  byId(element.id)!.append(root);
+  
   byId(element.id)?.classList.add('rendered');
 }

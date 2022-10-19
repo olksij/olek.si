@@ -38,6 +38,8 @@ type CSSColorTypes = 'text' | 'secondary' | 'accent';
 
 export type CSSColors = `var(--${CSSColorTypes})`;
 
+export type AnimationConfig = [Keyframe[], KeyframeAnimationOptions];
+
 export interface FontStyleConfig {
   // display or text font, defaults to text
   type?: FontType,
@@ -74,11 +76,16 @@ export interface ComputedTextData {
 
 export interface RenderElementConfig {
   id: string;
-  morph: ComputedTextData;
+  morph?: ComputedTextData;
   icon?: IconConfig;
+  text?: TextConfig;
+  height: number;
+  color: CSSColors;
+}
+
+export interface TextConfig {
   text: string;
   style: FontStyleType;
-  width: number;
 }
 
 export interface IconConfig {

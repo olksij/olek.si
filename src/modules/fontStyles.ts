@@ -1,37 +1,36 @@
-import { FontStyle } from "../classes";
-import { FontStyleType } from "../interfaces";
+import { FontStyle, FontStyleType } from "../interfaces";
 
 export const fontStyles: Record<FontStyleType, FontStyle> = {
-  title: new FontStyle({
+  title: {
     type: 'display',
     fontSize: 128,
     lineHeight: 112,
     letterSpacing: -.04,
     color: 'var(--text)',
-  }),
-  subtitle: new FontStyle({
+  },
+  subtitle: {
     fontSize: 20,
     lineHeight: 28,
-  }),
-  menuSelected: new FontStyle({
+  },
+  menuSelected: {
     type: 'display',
     fontSize: 20,
     letterSpacing: -0.04,
     lineHeight: 24,
     color: 'var(--text)',
-  }),
-  menu: new FontStyle({
+  },
+  menu: {
     fontSize: 18,
     lineHeight: 24,
-  }),
-  action: new FontStyle({
+  },
+  action: {
     fontSize: 16,
     lineHeight: 24,
     type: "display",
     color: 'var(--text)'
-  }),
-  footer: new FontStyle({
+  },
+  footer: {
     fontSize: 12,
     lineHeight: 16,
-  }),
+  },
 };

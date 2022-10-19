@@ -1,4 +1,4 @@
-import { ComputeAPI, ComputedTextData, InputTextData, Languages, PageContent, TextsRecord } from '../interfaces';
+import { ComputeAPI, ComputedTextData, InputTextData, Languages, PageContent, ComputeRecord } from '../interfaces';
 
 import print from '../modules/print';
 import render from '../modules/render';
@@ -23,7 +23,7 @@ export async function onload() {
 // the function is used in order to prepeare content 
 // for sending to compute worker
 export function computeTexts(content: PageContent) {
-  let textsData: TextsRecord<'input'> = {};
+  let textsData: ComputeRecord<'input'> = {};
 
   const urlSearchParams = new URLSearchParams(window.location.search);
   let lang = Object.keys(Object.fromEntries(urlSearchParams.entries()))[0] as Languages | null;
@@ -50,6 +50,6 @@ export function computeTexts(content: PageContent) {
     let data = message.data as ComputeAPI<'result'>;
 
     if (data.request == 'entryRender')
-      render(content, data.data as TextsRecord<'result'>);
+      render(content, data.data as ComputeRecord<'result'>);
   });
 }

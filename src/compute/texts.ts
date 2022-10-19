@@ -5,14 +5,14 @@ import { interpolateAll } from "flubber"
 import { Font } from "opentype.js";
 
 import fonts from "./fonts";
-import { ComputeAPI, ComputedTextData, InputTextData, TextsRecord } from "../interfaces";
+import { ComputeAPI, ComputedTextData, InputTextData, ComputeRecord } from "../interfaces";
 
 import print from '../modules/print';
 import textMetrics from "./metrics";
 
 import { fontStyles } from '../modules/fontStyles';
 
-export default async function loadTexts(request: string, textsData: TextsRecord<'input'>) {
+export default async function loadTexts(request: string, textsData: ComputeRecord<'input'>) {
   let computed: Record<string, ComputedTextData> = {}
 
   // ensure that fonts are loaded and we can use them

@@ -1,4 +1,4 @@
-import { ComputeAPI, TextsRecord } from "../interfaces";
+import { ComputeAPI, ComputeRecord } from "../interfaces";
 import { worker } from "../pages/entry";
 import MotionBlur from "./motionBlur";
 import { byId, tagById } from "./shorthands";
@@ -158,7 +158,7 @@ function renderMenu(message) {
   let data = message.data as ComputeAPI<'result'>;
 
   if (data.request == 'menuRender')
-    console.log(data.data as TextsRecord<'result'>);
+    console.log(data.data as ComputeRecord<'result'>);
 };
 
 window["skeleton"].then(() => worker.addEventListener('message', renderMenu));

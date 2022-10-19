@@ -3,16 +3,15 @@
    --- -- [URGENT] REFACTORING --- ---
    --- --- --- --- --- --- --- --- --- */
 
-import { RenderConfig, ComputedTextData, TextsRecord, InputTextData, PageContent, RenderElementConfig, CSSColors, AnimationConfig } from "../interfaces";
+import { RenderConfig, ComputedTextData, ComputeRecord, InputTextData, PageContent, RenderElementConfig, CSSColor, AnimationConfig, IconConfig, FontStyle } from "../interfaces";
 import { createElement, createFragment } from "./jsx";
 import print from './print';
 import './menu.ts';
 import { byId, tagById } from "./shorthands";
-import { FontStyle } from "../classes";
 import { onMenuClick } from "./menu";
 import { fontStyles } from "./fontStyles";
 
-export default async function render(content: PageContent, renderTextData: TextsRecord<'result'>): Promise<void> {
+export default async function render(content: PageContent, renderTextData: ComputeRecord<'result'>): Promise<void> {
   if (!sessionStorage.getItem('loaded')) {
     await window["skeleton"];
     sessionStorage.setItem('loaded', 'true');
@@ -44,16 +43,16 @@ export default async function render(content: PageContent, renderTextData: Texts
     }
   }
 
-  byId('lg')!.onmouseenter = function () {
+  byId('lg')!.addEventListener("mouseenter", function () {
     for (let lg in content.languages) {
       byId('lg')!.append(<div onclick={() => window.history.pushState({}, '', `?${lg}`)} class="lgItem">{content.languages[lg]}</div>);
     }
-  }
+  });
 
-  byId('lg')!.onmouseleave = function () {
+  byId('lg')!.addEventListener("mouseleave", function () {
     onMenuClick();
     Array.from(byId('lg')!.getElementsByClassName('lgItem')).forEach(e => e.remove())
-  }
+  });
 
   let delay: number = 0;
 
@@ -72,7 +71,17 @@ export default async function render(content: PageContent, renderTextData: Texts
     // iterate over queue
     for (let child of queue) {
       delay += data.delay;
-      setTimeout(renderElement, delay, child);
+      setTimeout(renderElement, delay, {
+        height: fontStyles[content.textStyleData[child]?.style]?.lineHeight,
+        id: child,
+        morph: renderTextData[child],
+        icon: {
+          path: content.textStyleData[child]?.icon,
+          gap: content.textStyleData[child]?.gap,
+        } as IconConfig,
+        text: content.texts[lang],
+        color: fontStyles[content.textStyleData[child]?.style]?.color,
+      });
     }
   }
 
@@ -84,7 +93,7 @@ function animate(element: SVGPathElement | SVGTextElement, config: AnimationConf
   return element;
 }
 
-function toColor(element: SVGPathElement | SVGTextElement, color: CSSColors) {
+function toColor(element: SVGPathElement | SVGTextElement, color: CSSColor) {
   let config = [
     [{ fill: 'var(--el)' }, { fill: color }],
     { delay: 400, duration: 400, easing: 'cubic-bezier(0.87, 0, 0.13, 1)' }
@@ -111,7 +120,6 @@ function elementOpacity(element: SVGPathElement | SVGTextElement) {
 
   return animate(element, config);
 }
-
 
 function renderElement(element: RenderElementConfig) {
   let morph: SVGPathElement, text: SVGTextElement, icon: SVGPathElement;
@@ -153,6 +161,6 @@ function renderElement(element: RenderElementConfig) {
   }
 
   byId(element.id)!.append(root);
-  
+
   byId(element.id)?.classList.add('rendered');
 }

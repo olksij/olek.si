@@ -3,7 +3,7 @@
    --- -- [URGENT] REFACTORING --- ---
    --- --- --- --- --- --- --- --- --- */
 
-import { RenderConfig, ComputedTextData, ComputeRecord, InputTextData, PageContent, RenderElementConfig, CSSColor, AnimationConfig, IconConfig, FontStyle } from "../interfaces";
+import { AnimatingOrder, ComputedTextData, ComputeRecord, InputTextData, PageContent, RenderElementConfig, CSSColor, AnimationConfig, IconConfig, FontStyle, TextConfig } from "../interfaces";
 import { createElement, createFragment } from "./jsx";
 import print from './print';
 import './menu.ts';
@@ -11,7 +11,7 @@ import { byId, tagById } from "./shorthands";
 import { onMenuClick } from "./menu";
 import { fontStyles } from "./fontStyles";
 
-export default async function render(content: PageContent, renderTextData: ComputeRecord<'result'>): Promise<void> {
+export default async function render(content: PageContent, computed: ComputeRecord<'result'>): Promise<void> {
   if (!sessionStorage.getItem('loaded')) {
     await window["skeleton"];
     sessionStorage.setItem('loaded', 'true');
@@ -61,31 +61,92 @@ export default async function render(content: PageContent, renderTextData: Compu
 
   // restore everything;
   for (let item in content.animatingOrder) {
-    let data: RenderConfig = content.animatingOrder[item];
+    let data: AnimatingOrder = content.animatingOrder[item];
     let queue: Array<string> = [item];
 
     // if it's about animation children, put children into a queue
     if (data.children) queue = [...byId(item)!.children]
-      .map(child => child.id);  
+      .map(child => child.id); 
+      
+    if (data.image) {
+      for (let child of queue) {
+        // insert node to an appropriate skeleton element;
+        let node = <img src={images[child]} alt={item} />;
+        byId(child)?.append(node);
+        // schedule the animation
+        let render = child => byId(child)?.classList.add('rendered');
+        setTimeout(render, delay += data.delay, child);
+      } 
+      // skip morphing as we have inserted the image element
+      continue;
+    }
 
     // iterate over queue
     for (let child of queue) {
-      delay += data.delay;
-      setTimeout(renderElement, delay, {
-        height: fontStyles[content.textStyleData[child]?.style]?.lineHeight,
+      let current = content.elementConfig[child];
+
+      let config = {
         id: child,
-        morph: renderTextData[child],
-        icon: {
-          path: content.textStyleData[child]?.icon,
-          gap: content.textStyleData[child]?.gap,
-        } as IconConfig,
-        text: content.texts[lang],
-        color: fontStyles[content.textStyleData[child]?.style]?.color,
-      });
+        color: current.color,
+        height: current.height,
+        morph: computed[child],
+        icon: current.element.icon,
+        text: {
+          style: current.element.text?.style,
+          text: content.texts[lang][child]
+        } as TextConfig,
+      } as RenderElementConfig;
+
+      setTimeout(renderElement, delay += data.delay, config);
     }
   }
 
   document.body.classList.add('rendered');
+}
+
+function renderElement(element: RenderElementConfig) {
+  let parent = byId(element.id)!;
+
+  let morph: SVGPathElement, text: SVGTextElement, icon: SVGPathElement;
+  let computed = element.morph, width = parent.clientWidth;
+
+  let root: SVGElement = <svg viewBox={`0 0 ${width} ${element.height}`}></svg>
+
+  if (element.morph) {
+    morph = <path fill="var(--el)" fill-rule="evenodd" clip-rule="evenodd">
+      <animate attributeName="d" dur="0.8s" values={computed!.from + ';' + computed!.to} calcMode="spline" keySplines="0.87 0 0.13 1" />
+    </path>
+
+    root.append(toColor(morphOpacity(morph), element.color));
+  }
+
+  if (element.text) {
+    let font = fontStyles[element.text.style] as FontStyle;
+    let textLeft = element.icon ? element.icon.gap + element.height : 0;
+
+    let style = `font-family:${font.type}; letter-spacing:${font.letterSpacing}em; font-size:${font.fontSize}px`;
+    text = <text opacity="0" style={style} x={textLeft} y={computed!.baseline! - .25}>{element.text}</text>;
+
+    setTimeout(() => {
+      text.setAttribute("opacity", "1");
+      text.setAttribute("fill", element.color);
+    }, 600);
+
+    root.append(toColor(elementOpacity(text), element.color));
+  }
+
+  if (element.icon) {
+    icon = <path opacity="1" d={element.icon?.path ?? ''}/>
+    root.append(toColor(elementOpacity(icon), element.color));
+
+    setTimeout(() => {
+      text.setAttribute("opacity", "1");
+      text.setAttribute("fill", element.color);
+    }, 600);
+  }
+
+  parent.classList.add('rendered');
+  parent.append(root);
 }
 
 function animate(element: SVGPathElement | SVGTextElement, config: AnimationConfig) {
@@ -119,48 +180,4 @@ function elementOpacity(element: SVGPathElement | SVGTextElement) {
   ] as AnimationConfig;
 
   return animate(element, config);
-}
-
-function renderElement(element: RenderElementConfig) {
-  let morph: SVGPathElement, text: SVGTextElement, icon: SVGPathElement;
-  let computed = element.morph, width = byId(element.id)!.clientWidth;;
-
-  let root: SVGElement = <svg viewBox={`0 0 ${width} ${element.height}`}></svg>
-
-  if (element.morph) {
-    morph = <path fill="var(--el)" fill-rule="evenodd" clip-rule="evenodd">
-      <animate attributeName="d" dur="0.8s" values={computed!.from + ';' + computed!.to} calcMode="spline" keySplines="0.87 0 0.13 1" />
-    </path>
-
-    root.append(toColor(morphOpacity(morph), element.color));
-  }
-
-  if (element.text) {
-    let font = fontStyles[element.text.style] as FontStyle;
-    let textLeft = element.icon ? element.icon.gap + font.lineHeight : 0;
-
-    let style = `font-family:${font.type}; letter-spacing:${font.letterSpacing}em; font-size:${font.fontSize}px`;
-    text = <text opacity="0" style={style} x={textLeft} y={computed!.baseline - .25}>{element.text}</text>;
-
-    setTimeout(() => {
-      text.setAttribute("opacity", "1");
-      text.setAttribute("fill", element.color);
-    }, 600);
-
-    root.append(toColor(elementOpacity(text), element.color));
-  }
-
-  if (element.icon) {
-    icon = <path opacity="1" d={element.icon?.path ?? ''}/>
-    root.append(toColor(elementOpacity(icon), element.color));
-
-    setTimeout(() => {
-      text.setAttribute("opacity", "1");
-      text.setAttribute("fill", element.color);
-    }, 600);
-  }
-
-  byId(element.id)!.append(root);
-
-  byId(element.id)?.classList.add('rendered');
 }

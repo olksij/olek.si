@@ -1,6 +1,6 @@
 export { head, languages } from './general';
 
-import { Languages, RenderConfig, SourceTextData, TextStyle } from '../interfaces';
+import { ElementConfig, Languages, AnimatingOrder, SourceTextData } from '../interfaces';
 
 
 /* --- --- --- --- --- --- --- --- ---
@@ -36,13 +36,11 @@ import lg from 'bundle-text:/assets/raw/language.txt';
 let date = new Date();
 let description = dates[date.getMonth() + '-' + (date.getDate() + 1)] ?? dates.default;
 
-export const textStyleData: Record<string, TextStyle> = {
+export const elementConfig: Record<string, ElementConfig> = {
 
-/*                 📦 Placeholder                                   ⚙️ Custom placeholder
-  🏷️ Element ID        width              ✨ FontStyle                     or icon
-         |               |                      |                              |
-  --------------   ------------       -----------------------           --------------   */
-
+/*                 📦 Placeholder                                 ⚙️ Custom placeholder
+  🏷️ Element ID        width      ✨ FontStyle                     or icon
+  ______ ↓ ______  ____ ↓ ____  _______ ↓ _________           --------------   */
   "tt":           { width: 386, style: 'title',       fromPath: titleFromPath, },
   "d1":           { width: 337, style: 'subtitle', },
   "d2":           { width: 148, style: 'subtitle', },
@@ -51,7 +49,7 @@ export const textStyleData: Record<string, TextStyle> = {
   "projects":     { width: 128, style: 'menu' },
   "work":         { width: 128, style: 'menu' },
   "nav":          { width: 112, style: 'action',      icon: nav, gap: 4 },
-  "cr":           { width: 158, style: 'footer',      icon: cr, },
+  "cr":           { width: 158, style: 'footer',      icon: cr,         },
   "lg":           { width: 96,  style: 'footer',      icon: lg,  gap: 2 },
 }
 
@@ -129,14 +127,14 @@ export const restoreClicks: Record<string, Array<Function>> = {
 
 // order and details of animating each node
 
-export const animatingOrder: Record<string, RenderConfig> = {
-  "pf":  { type: 'img',  delay: 0, alt: 'profilePicture' },
-  "tt":  { type: 'text', delay: 50 },
-  "d1":  { type: 'text', delay: 500 },
-  "d2":  { type: 'text', delay: 50 },
-  "ps":  { type: 'img',  delay: 100, children: true },
-  "rg":  { type: 'text', delay: 50, children: true },
-  "nav": { type: 'text', delay: 0 },
-  "cr":  { type: 'text', delay: 0 },
-  "lg":  { type: 'text', delay: 0 },
+export const animatingOrder: Record<string, AnimatingOrder> = {
+  "pf":  { image: true,  delay: 0, alt: 'Profile Picture' },
+  "tt":  { delay: 50 },
+  "d1":  { delay: 500 },
+  "d2":  { delay: 50 },
+  "ps":  { image: true, delay: 100, children: true },
+  "rg":  { delay: 50, children: true },
+  "nav": { delay: 0 },
+  "cr":  { delay: 0 },
+  "lg":  { delay: 0 },
 }

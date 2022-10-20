@@ -10,7 +10,7 @@ export type Dir = 'input' | 'result';
 export type ComputeRecord<D extends Dir> = Record<string,   D extends 'input' ? InputTextData : ComputedTextData>;
 export type FontsRecord  <D extends Dir> = Record<FontType, D extends 'input' ? ArrayBuffer   : Font>;
 
-export type RenderType = 'img' | 'text' | 'both';
+export type RenderType = 'img' | 'morph';
 export type FontType = 'display' | 'text';
 export type PreloadAssetType = 'stylesheet' | 'image';
 
@@ -18,6 +18,8 @@ export type Languages = 'en' | 'sv' | 'uk'
 export type SourceTextData = Record<Languages, Record<string, string>>;
 
 export type CSSColor = `var(--${'text' | 'secondary' | 'accent'})`;
+
+export type AnimationConfig = [Keyframe[], KeyframeAnimationOptions];
 
 export type FontStyleType =
   'title'        |
@@ -67,7 +69,7 @@ export interface ComputedTextData {
   width: number;
   baseline?: number;
 }
-
+ 
 export interface MorphElement {
   text?: TextConfig;
   icon?: IconConfig;
@@ -89,8 +91,8 @@ export interface FromMorphElement {
   path?: string;
 }
 
-export interface RenderConfig {
-  type?: RenderType;
+export interface AnimatingOrder {
+  image?: boolean;
   alt?: string;
   delay: number;
   children?: boolean;
@@ -113,8 +115,9 @@ export interface PageContent {
   elementConfig: Record<string, ElementConfig>;
   texts: SourceTextData;
   images: Record<string, string>;
+  vectors: Record<string, string>;
   stylesheets: string[];  
   restoreLinks: Record<string, Array<string>>;  
   restoreClicks: Record<string, Array<Function>>;  
-  animatingOrder: Record<string, RenderConfig>;  
+  animatingOrder: Record<string, AnimatingOrder>;  
 }

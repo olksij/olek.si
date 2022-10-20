@@ -23,7 +23,7 @@ export async function onload() {
 // the function is used in order to prepeare content 
 // for sending to compute worker
 export function computeTexts(content: PageContent) {
-  let textsData: ComputeRecord<'input'> = {};
+  let inputData: ComputeRecord<'input'> = {};
 
   const urlSearchParams = new URLSearchParams(window.location.search);
   let lang = Object.keys(Object.fromEntries(urlSearchParams.entries()))[0] as Languages | null;
@@ -32,19 +32,19 @@ export function computeTexts(content: PageContent) {
     window.history.pushState({}, '', `?en`), lang = 'en';
 
   for (let id of Object.keys(content.texts[lang])) {
+    if (content.elementConfig[id].from == null) continue;
     // map each text id to inputtextdata cell
     let idData: InputTextData = {
-      style: content.textStyleData[id].style,
-      from: { path: content.textStyleData[id].fromPath!, width: content.textStyleData[id].width },
-      to: { text: content.texts[lang][id], gap: content.textStyleData[id].gap, icon: content.textStyleData[id].icon }
+      from: content.elementConfig[id].from!,
+      to: content.elementConfig[id].element
     };
 
     // and add to record
-    textsData[id] = idData;
+    inputData[id] = idData;
   }
 
   // when done, post message
-  worker.postMessage({ deliver: 'texts', request: 'entryRender', data: textsData } as ComputeAPI<'input'>);
+  worker.postMessage({ deliver: 'texts', request: 'entryRender', data: inputData } as ComputeAPI<'input'>);
 
   worker.addEventListener('message', message => {
     let data = message.data as ComputeAPI<'result'>;

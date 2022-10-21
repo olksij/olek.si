@@ -4,33 +4,36 @@ export const fontStyles: Record<FontStyleType, FontStyle> = {
   title: {
     type: 'display',
     fontSize: 128,
-    lineHeight: 112,
+    height: 112,
     letterSpacing: -.04,
     color: 'var(--text)',
   },
   subtitle: {
     fontSize: 20,
-    lineHeight: 28,
+    height: 28,
+    color: 'var(--secondary)',
   },
   menuSelected: {
     type: 'display',
     fontSize: 20,
     letterSpacing: -0.04,
-    lineHeight: 24,
+    height: 24,
     color: 'var(--text)',
   },
   menu: {
     fontSize: 18,
-    lineHeight: 24,
+    height: 24,
+    color: 'var(--secondary)',
   },
   action: {
     fontSize: 16,
-    lineHeight: 24,
+    height: 24,
     type: "display",
     color: 'var(--text)'
   },
   footer: {
     fontSize: 12,
-    lineHeight: 16,
+    height: 16,
+    color: 'var(--secondary)',
   },
 };

@@ -12,7 +12,7 @@ import textMetrics from "./metrics";
 
 import { fontStyles } from '../modules/fontStyles';
 
-export default async function loadTexts(request: string, textsData: ComputeRecord<'input'>) {
+export default async function loadTexts(request: string, textsData: ComputeRecord<'initial'>) {
   let computed: Record<string, ComputedTextData> = {}
 
   // ensure that fonts are loaded and we can use them
@@ -33,6 +33,6 @@ export default async function loadTexts(request: string, textsData: ComputeRecor
   }
 
   // send to main thread computed paths
-  postMessage({ request, data: computed } as ComputeAPI<'result'>);
+  postMessage({ request, data: computed } as ComputeAPI<'computed'>);
   print('💿 Computed')
 }

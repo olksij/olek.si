@@ -38,59 +38,58 @@ let description = dates[date.getMonth() + '-' + (date.getDate() + 1)] ?? dates.d
 
 export const elementConfig: Record<string, ElementConfig> = {
 
-/*                 📦 Placeholder                                 ⚙️ Custom placeholder
-  🏷️ Element ID        width      ✨ FontStyle                     or icon
-  ______ ↓ ______  ____ ↓ ____  _______ ↓ _________           --------------   */
-  "tt":           { width: 386, style: 'title',       fromPath: titleFromPath, },
-  "d1":           { width: 337, style: 'subtitle', },
-  "d2":           { width: 148, style: 'subtitle', },
-  "home":         { width: 128, style: 'menuSelected' },
-  "about":        { width: 128, style: 'menu' },
-  "projects":     { width: 128, style: 'menu' },
-  "work":         { width: 128, style: 'menu' },
-  "nav":          { width: 112, style: 'action',      icon: nav, gap: 4 },
-  "cr":           { width: 158, style: 'footer',      icon: cr,         },
-  "lg":           { width: 96,  style: 'footer',      icon: lg,  gap: 2 },
-}
+/* 🏷️ Element ID       ✨ FontStyle        ⚙️ Custom placeholder
+  _______|_______   _________|_______  ______________|______________ */
+  tt:             { text: "title",     from: { path: titleFromPath } },
+  d1:             { text: "subtitle", },
+  d2:             { text: "subtitle", },
+  home:           { text: "menuSelected" },
+  about:          { text: "menu" },
+  projects:       { text: "menu" }, //          🖼️ Icon
+  work:           { text: "menu" }, // _____________|_____________
+  nav:            { text: "action",    icon: { path: nav, gap: 4 } },
+  cr:             { text: "footer",    icon: { path: cr,  gap: 0 } },
+  lg:             { text: "footer",    icon: { path: lg,  gap: 2 } },
+};
 
 export const texts: SourceTextData = {
   en: {
-    'tt': 'Oleksii',
-    'd1': description['en'][0],
-    'd2': description['en'][1],
-    'home': 'oleksii.xyz',
-    'about': 'about',
-    'projects': 'projects',
-    'work': 'work',
-    'nav': 'Navigation',
-    'cr': '2018-2022 Oleksii Besida',
-    'lg': 'English',
+    tt: "Oleksii",
+    d1: description["en"][0],
+    d2: description["en"][1],
+    home: "oleksii.xyz",
+    about: "about",
+    projects: "projects",
+    work: "work",
+    nav: "Navigation",
+    cr: "2018-2022 Oleksii Besida",
+    lg: "English",
   },
   sv: {
-    'tt': 'Oleksiy',
-    'd1': description['sv'][0],
-    'd2': description['sv'][1],
-    'home': 'oleksii.xyz',
-    'about': 'om mig',
-    'projects': 'projekts',
-    'work': 'alster',
-    'nav': 'Navigering',
-    'cr': '2018-2022 Oleksiy Besida',
-    'lg': 'Svenska',
+    tt: "Oleksiy",
+    d1: description["sv"][0],
+    d2: description["sv"][1],
+    home: "oleksii.xyz",
+    about: "om mig",
+    projects: "projekts",
+    work: "alster",
+    nav: "Navigering",
+    cr: "2018-2022 Oleksiy Besida",
+    lg: "Svenska",
   },
   uk: {
-    'tt': 'Oleksij',
-    'd1': description['uk'][0],
-    'd2': description['uk'][1],
-    'home': 'oleksii.xyz',
-    'about': 'pro mene',
-    'projects': 'projekty',
-    'work': 'roboty',
-    'nav': 'Naviǧacija',
-    'cr': '2018-2022 Oleksij Besida',
-    'lg': 'Ukrajinśka',
-  }
-}
+    tt: "Oleksij",
+    d1: description["uk"][0],
+    d2: description["uk"][1],
+    home: "oleksii.xyz",
+    about: "pro mene",
+    projects: "projekty",
+    work: "roboty",
+    nav: "Naviǧacija",
+    cr: "2018-2022 Oleksij Besida",
+    lg: "Ukrajinśka",
+  },
+};
 
 // more things to come soon;
 

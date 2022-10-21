@@ -113,7 +113,7 @@ nav.onclick = function (event) {
         text: 'Close'
       },
       style: 'action'
-    }} } as ComputeAPI<'input'>);
+    }} } as ComputeAPI<'initial'>);
 
     cnt.classList.add("navTapped", "navTransformed");
     tagById("nav", "text")!.innerHTML = "Close";
@@ -155,10 +155,10 @@ rg.onmousemove = (event) => {
 }
 
 function renderMenu(message) {
-  let data = message.data as ComputeAPI<'result'>;
+  let data = message.data as ComputeAPI<'computed'>;
 
   if (data.request == 'menuRender')
-    console.log(data.data as ComputeRecord<'result'>);
+    console.log(data.data as ComputeRecord<'computed'>);
 };
 
 window["skeleton"].then(() => worker.addEventListener('message', renderMenu));

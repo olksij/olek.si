@@ -3,7 +3,7 @@ import { Font } from 'opentype.js'
 // `DeliverType`s used for communication with WebWorker
 export type DeliverType = 'fonts' | 'texts';
 
-export type Dir = 'input' | 'result';
+export type Dir = 'initial' | 'computed';
 
 // types for each         🔛 Direction                                         📩 Input data   📤 Output data
 // DeliveryType          ______ ↓ ______                                        _____ ↓ _____   ______ ↓ _______
@@ -39,11 +39,9 @@ export interface ComputeAPI<D extends Dir> {
 // used to define each element to be rendered
 export interface ElementConfig {
   from?: FromMorphElement;
-  element: MorphElement;
-
-  height: number;
-  color: CSSColor;
-}
+  text?: FontStyleType; // <- text property here uses [FontStyleType] instead of [TextConfig]
+  icon?: IconConfig;    //   because texts are stored separately becouse of possibility 
+}                       //   of dynamic change of webpage language
 
 // interface used to communicate with the render module
 export interface RenderElementConfig {
@@ -52,7 +50,6 @@ export interface RenderElementConfig {
   icon?: IconConfig;
   text?: TextConfig;
   height: number;
-  color: CSSColor;
 }
 
 // input used by compute worker
@@ -83,14 +80,19 @@ export interface TextConfig {
 export interface IconConfig {
   path: string;
   gap: number;
+  height?: number;
 }
 
-export interface FromMorphElement {
+export interface FromElement {
   element?: MorphElement;
-  width?: number;
   path?: string;
 }
 
+export interface FromMorphElement extends FromElement {
+  size?: Size;
+}
+
+export type Size = [number, number];
 export interface AnimatingOrder {
   image?: boolean;
   alt?: string;
@@ -105,6 +107,9 @@ export interface FontStyle {
   fontSize: number;
   // yep, distance between letters
   letterSpacing?: number;
+
+  height: number;
+  color: CSSColor;
 }
 
 export interface PageContent {

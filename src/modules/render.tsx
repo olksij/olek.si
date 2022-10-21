@@ -11,7 +11,7 @@ import { byId, tagById } from "./shorthands";
 import { onMenuClick } from "./menu";
 import { fontStyles } from "./fontStyles";
 
-export default async function render(content: PageContent, computed: ComputeRecord<'result'>): Promise<void> {
+export default async function render(content: PageContent, computed: ComputeRecord<'computed'>): Promise<void> {
   if (!sessionStorage.getItem('loaded')) {
     await window["skeleton"];
     sessionStorage.setItem('loaded', 'true');

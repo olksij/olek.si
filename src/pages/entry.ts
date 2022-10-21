@@ -23,7 +23,7 @@ export async function onload() {
 // the function is used in order to prepeare content 
 // for sending to compute worker
 export function computeTexts(content: PageContent) {
-  let inputData: ComputeRecord<'input'> = {};
+  let inputData: ComputeRecord<'computed'> = {};
 
   const urlSearchParams = new URLSearchParams(window.location.search);
   let lang = Object.keys(Object.fromEntries(urlSearchParams.entries()))[0] as Languages | null;
@@ -44,12 +44,12 @@ export function computeTexts(content: PageContent) {
   }
 
   // when done, post message
-  worker.postMessage({ deliver: 'texts', request: 'entryRender', data: inputData } as ComputeAPI<'input'>);
+  worker.postMessage({ deliver: 'texts', request: 'entryRender', data: inputData } as ComputeAPI<'computed'>);
 
   worker.addEventListener('message', message => {
-    let data = message.data as ComputeAPI<'result'>;
+    let data = message.data as ComputeAPI<'computed'>;
 
     if (data.request == 'entryRender')
-      render(content, data.data as ComputeRecord<'result'>);
+      render(content, data.data as ComputeRecord<'computed'>);
   });
 }

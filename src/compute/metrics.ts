@@ -1,5 +1,5 @@
 import { Font } from "opentype.js";
-import { InputTextData } from "../interfaces";
+import { FontsRecord, InputMorphData } from "../interfaces";
 
 import { fontStyles } from '../modules/fontStyles';
 
@@ -7,25 +7,27 @@ import { fontStyles } from '../modules/fontStyles';
    --- CODE IN THIS FILE REQUIRES REFACTORING- ---
    --- --- --- --- --- --- --- --- --- --- --- --- */
 
-export default function textMetrics(font: Font, data: InputTextData) {
+export default function textMetrics(font: FontsRecord<'computed'>, data: InputMorphData) {
   let from = data.from, to = data.to;
-  let style = fontStyles[data.style];
+  let style = fontStyles[data.to.text.style];
 
   // calculate ascender & descender
   let [ascender, descender] = [font.ascender, font.descender]
     .map(value => value / font.unitsPerEm * style.fontSize);
 
   // calculate baseline
-  let baseline = Math.ceil(ascender - (ascender - descender - style.lineHeight) / 2);
+  let baseline = Math.ceil(ascender - (ascender - descender - style.height) / 2);
 
   /* --- --- TO --- --- */
 
-  let textLeft = to.icon ? (to.gap ?? 0) + style.lineHeight : 0;
+  let textLeft = to.icon ? (to.icon.gap ?? 0) + style.height : 0;
   let icon = to.icon ?? '';
 
   // vectorize font and convert to string[]
-  let pathData = font.getPath(to.text, textLeft, baseline, style.fontSize, { letterSpacing: style.letterSpacing });
+  let pathData = font.getPath(to.text?.text, textLeft, baseline, style.fontSize, { letterSpacing: style.letterSpacing });
   let toPath = splitPath(icon+pathData.toPathData(2));
+
+  let width = pathData.getBoundingBox().x2;
 
   /* --- --- FROM --- --- */
 
@@ -48,7 +50,7 @@ export default function textMetrics(font: Font, data: InputTextData) {
   while (toPath.length < fromPath.length)
     toPath.push('M0 0');
 
-  return { fromPath, toPath, baseline };
+  return { fromPath, toPath, baseline, width };
 }
 
 function splitPath(path?: string) {

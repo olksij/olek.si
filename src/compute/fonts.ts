@@ -7,8 +7,8 @@ import print from '../modules/print';
 
 // the class extends promise so we can ensure the 
 // fonts are loaded before we try to vectorize text
-class FontsArrayBuffer extends Promise<FontsRecord<'result'>> {
-  resolve: (value: FontsRecord<'result'> | PromiseLike<FontsRecord<'result'>>) => void;
+class FontsArrayBuffer extends Promise<FontsRecord<'computed'>> {
+  resolve: (value: FontsRecord<'computed'> | PromiseLike<FontsRecord<'computed'>>) => void;
 
   constructor() {
     let promiseResolve;
@@ -17,8 +17,8 @@ class FontsArrayBuffer extends Promise<FontsRecord<'result'>> {
   }
 
   // the method is called usually by compute.ts
-  load(request: string, data: FontsRecord<'input'>) {
-    let parsed: FontsRecord<'result'> = {
+  load(request: string, data: FontsRecord<'initial'>) {
+    let parsed: FontsRecord<'computed'> = {
       display: parse(data.display),
       text: parse(data.text)
     };

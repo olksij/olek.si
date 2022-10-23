@@ -3,7 +3,7 @@
    --- -- [URGENT] REFACTORING --- ---
    --- --- --- --- --- --- --- --- --- */
 
-import { AnimatingOrder, ComputedTextData, ComputeRecord, InputTextData, PageContent, RenderElementConfig, CSSColor, AnimationConfig, IconConfig, FontStyle, TextConfig } from "../interfaces";
+import { AnimatingOrder, ComputedTextData, ComputeRecord, InputMorphData, PageContent, RenderElementConfig, CSSColor, AnimationConfig, IconConfig, FontStyle, TextConfig } from "../interfaces";
 import { createElement, createFragment } from "./jsx";
 import print from './print';
 import './menu.ts';

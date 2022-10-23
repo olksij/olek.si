@@ -7,7 +7,7 @@ export type Dir = 'initial' | 'computed';
 
 // types for each         🔛 Direction                                         📩 Input data   📤 Output data
 // DeliveryType          ______ ↓ ______                                        _____ ↓ _____   ______ ↓ _______
-export type ComputeRecord<D extends Dir> = Record<string,   D extends 'input' ? InputTextData : ComputedTextData>;
+export type ComputeRecord<D extends Dir> = Record<string,   D extends 'input' ? InputMorphData : ComputedTextData>;
 export type FontsRecord  <D extends Dir> = Record<FontType, D extends 'input' ? ArrayBuffer   : Font>;
 
 export type RenderType = 'img' | 'morph';
@@ -53,7 +53,7 @@ export interface RenderElementConfig {
 }
 
 // input used by compute worker
-export interface InputTextData {
+export interface InputMorphData {
   from: FromMorphElement;
   to: MorphElement;
 }

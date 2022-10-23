@@ -1,4 +1,4 @@
-import { ComputeAPI, ComputedTextData, InputTextData, Languages, PageContent, ComputeRecord } from '../interfaces';
+import { ComputeAPI, ComputedTextData, InputMorphData, Languages, PageContent, ComputeRecord } from '../interfaces';
 
 import print from '../modules/print';
 import render from '../modules/render';
@@ -34,7 +34,7 @@ export function computeTexts(content: PageContent) {
   for (let id of Object.keys(content.texts[lang])) {
     if (content.elementConfig[id].from == null) continue;
     // map each text id to inputtextdata cell
-    let idData: InputTextData = {
+    let idData: InputMorphData = {
       from: content.elementConfig[id].from!,
       to: content.elementConfig[id].element
     };

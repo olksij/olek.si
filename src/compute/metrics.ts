@@ -1,5 +1,5 @@
-import { Font } from "opentype.js";
-import { FontsRecord, InputMorphData } from "../interfaces";
+import { Font, Path } from "opentype.js";
+import { FontsRecord, FontStyle, IconConfig, InputMorphData } from "../interfaces";
 
 import { fontStyles } from '../modules/fontStyles';
 
@@ -7,32 +7,33 @@ import { fontStyles } from '../modules/fontStyles';
    --- CODE IN THIS FILE REQUIRES REFACTORING- ---
    --- --- --- --- --- --- --- --- --- --- --- --- */
 
-export default function textMetrics(font: FontsRecord<'computed'>, data: InputMorphData) {
+export default function textMetrics(fonts: FontsRecord<'computed'>, data: InputMorphData) {
   let from = data.from, to = data.to;
-  let style = fontStyles[data.to.text.style];
 
-  // calculate ascender & descender
-  let [ascender, descender] = [font.ascender, font.descender]
-    .map(value => value / font.unitsPerEm * style.fontSize);
+  let toPath: string[] = [], pathData: Path, baseline: number, width: number;
 
-  // calculate baseline
-  let baseline = Math.ceil(ascender - (ascender - descender - style.height) / 2);
+  if (to.icon) {
+    toPath.push(...splitPath(to.icon?.path ?? ''));
+    width = to.icon.height ?? 0;
+  }
 
-  /* --- --- TO --- --- */
+  if (to.text) {
+    let style = fontStyles[to.text.style];
+    let font = fonts[style.type ?? 'text'];
 
-  let textLeft = to.icon ? (to.icon.gap ?? 0) + style.height : 0;
-  let icon = to.icon ?? '';
+    let textLeft = to.icon ? to.icon.gap + (to.icon.height ?? style.height) : 0;
 
-  // vectorize font and convert to string[]
-  let pathData = font.getPath(to.text?.text, textLeft, baseline, style.fontSize, { letterSpacing: style.letterSpacing });
-  let toPath = splitPath(icon+pathData.toPathData(2));
+    baseline = calculate(font, style);
+    pathData = font.getPath(to.text?.text, textLeft, baseline, style.fontSize, { letterSpacing: style.letterSpacing });
+    toPath.push(...splitPath(pathData.toPathData(2)));
 
-  let width = pathData.getBoundingBox().x2;
+    width = pathData.getBoundingBox().x2;
+  }
 
   /* --- --- FROM --- --- */
 
   // retrieve fromPath if available
-  let fromPath: Array<string> = splitPath(from.path);
+  fromPath = splitPath(from.path);
 
   if (fromPath.length == 0) {
     // letter width for placeholder
@@ -55,4 +56,15 @@ export default function textMetrics(font: FontsRecord<'computed'>, data: InputMo
 
 function splitPath(path?: string) {
   return path?.replaceAll('ZM', 'Z$M')?.split('$') ?? [];
+}
+
+function calculate(font: Font, style: FontStyle) {
+  // calculate ascender & descender
+  let [ascender, descender] = [font.ascender, font.descender]
+    .map(value => value / font.unitsPerEm * style.fontSize);
+
+  // calculate baseline
+  let baseline = Math.ceil(ascender - (ascender - descender - style.height) / 2);
+
+  return baseline;
 }

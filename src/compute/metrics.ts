@@ -1,5 +1,5 @@
 import { Font, Path } from "opentype.js";
-import { FontsRecord, FontStyle, IconConfig, InputMorphData } from "../interfaces";
+import { FontsRecord, FontStyle, IconConfig, InputMorphData, MorphElement } from "../interfaces";
 
 import { fontStyles } from '../modules/fontStyles';
 
@@ -8,29 +8,9 @@ import { fontStyles } from '../modules/fontStyles';
    --- --- --- --- --- --- --- --- --- --- --- --- */
 
 export default function textMetrics(fonts: FontsRecord<'computed'>, data: InputMorphData) {
-  let from = data.from, to = data.to;
+  let from = data.from;
 
-  let toPath: string[] = [], pathData: Path, baseline: number, width: number;
-
-  if (to.icon) {
-    toPath.push(...splitPath(to.icon?.path ?? ''));
-    width = to.icon.height ?? 0;
-  }
-
-  if (to.text) {
-    let style = fontStyles[to.text.style];
-    let font = fonts[style.type ?? 'text'];
-
-    let textLeft = to.icon ? to.icon.gap + (to.icon.height ?? style.height) : 0;
-
-    baseline = calculate(font, style);
-    pathData = font.getPath(to.text?.text, textLeft, baseline, style.fontSize, { letterSpacing: style.letterSpacing });
-    toPath.push(...splitPath(pathData.toPathData(2)));
-
-    width = pathData.getBoundingBox().x2;
-  }
-
-  /* --- --- FROM --- --- */
+  let toMorph = elementToPath(data.to, fonts)
 
   // retrieve fromPath if available
   fromPath = splitPath(from.path);
@@ -67,4 +47,32 @@ function calculate(font: Font, style: FontStyle) {
   let baseline = Math.ceil(ascender - (ascender - descender - style.height) / 2);
 
   return baseline;
+}
+
+function elementToPath(element: MorphElement, fonts: FontsRecord<'computed'>) {
+  let icon = element.icon, text = element.text;
+
+  let path = new Array<string>();
+  let width = 0, baseline = 0;
+
+  if (icon) {
+    path.push(...splitPath(icon.path));
+    width = icon.height ?? 0;
+  }
+
+  if (text) {
+    let style = fontStyles[text.style];
+    let font = fonts[style.type ?? 'text'];
+
+    let textLeft = icon ? icon.gap + (icon.height ?? style.height) : 0;
+
+    baseline = calculate(font, style);
+    let pathData = font.getPath(text?.text, textLeft, baseline, style.fontSize, { letterSpacing: style.letterSpacing });
+    width = pathData.getBoundingBox().x2;
+
+    path.push(...splitPath(pathData.toPathData(2)));
+
+  }
+
+  return { path, baseline, width };
 }

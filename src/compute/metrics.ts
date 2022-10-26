@@ -8,30 +8,31 @@ import { fontStyles } from '../modules/fontStyles';
    --- --- --- --- --- --- --- --- --- --- --- --- */
 
 export default function textMetrics(fonts: FontsRecord<'computed'>, data: InputMorphData) {
-  let from = data.from;
+  let from = data.from, fromPath = new Array<string>();
 
   let toMorph = elementToPath(data.to, fonts)
 
-  // retrieve fromPath if available
-  fromPath = splitPath(from.path);
-
-  if (fromPath.length == 0) {
+  if (from.element)
+    fromPath = elementToPath(data.to, fonts).path;
+  else if(from.path)
+    fromPath = splitPath(from.path);
+  else if (from.size) {
     // letter width for placeholder
-    let lw = Math.round(from.width / toPath.length * 100) / 100;
+    let lw = Math.round(from.size[0] / toMorph.path.length * 100) / 100;
     // split placeholder rectangle for each letter
-    for (var ww = 0, i = 0; i < toPath.length; ww += lw, i++) {
-      let currPath = `M ${ww} 0 V${style.lineHeight} H${ww + lw} V0 H${ww} Z`;
+    for (var ww = 0, i = 0; i < toMorph.path.length; ww += lw, i++) {
+      let currPath = `M ${ww} 0 V${from.size[1]} H${ww + lw} V0 H${ww} Z`;
       fromPath.push(currPath);
     }
   }
 
-  while (fromPath.length < toPath.length)
+  while (fromPath.length < toMorph.path.length)
     fromPath.push('M0 0')
 
-  while (toPath.length < fromPath.length)
-    toPath.push('M0 0');
+  while (toMorph.path.length < fromPath.length)
+    toMorph.path.push('M0 0');
 
-  return { fromPath, toPath, baseline, width };
+  return { fromPath, toPath: toMorph.path, baseline: toMorph.baseline, width: toMorph.width };
 }
 
 function splitPath(path?: string) {
@@ -71,7 +72,6 @@ function elementToPath(element: MorphElement, fonts: FontsRecord<'computed'>) {
     width = pathData.getBoundingBox().x2;
 
     path.push(...splitPath(pathData.toPathData(2)));
-
   }
 
   return { path, baseline, width };

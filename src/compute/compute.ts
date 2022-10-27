@@ -4,13 +4,13 @@
 import { ComputeAPI, FontsRecord, ComputeRecord } from '../interfaces';
 
 import fonts from './fonts';
-import loadTexts from './texts';
+import interpolate from './interpolate';
 
 // when message is received from main thread
-onmessage = (message: MessageEvent<ComputeAPI<'input'>>) => {
+onmessage = (message: MessageEvent<ComputeAPI<'initial'>>) => {
   let input = message.data;
   let request = input.request, deliver = input.deliver, data = input.data;
 
-  if (deliver == 'fonts') fonts.load(request, data as FontsRecord<'input'>);
-  if (deliver == 'texts') loadTexts(request, data as ComputeRecord<'input'>);
+  if (deliver == 'fonts') fonts.load(request, data as FontsRecord<'initial'>);
+  if (deliver == 'texts') interpolate(request, data as ComputeRecord<'initial'>);
 }

@@ -2,15 +2,14 @@
 // texts before they are rendered in a second thread so ui isn't blocked
 
 import { interpolateAll } from "flubber"
-import { Font } from "opentype.js";
 
 import fonts from "./fonts";
 import { ComputeAPI, ComputedTextData, InputMorphData, ComputeRecord } from "../interfaces";
 
 import print from '../modules/print';
-import textMetrics from "./metrics";
+import matrics from "./metrics";
 
-export default async function loadTexts(request: string, textsData: ComputeRecord<'initial'>) {
+export default async function interpolate(request: string, textsData: ComputeRecord<'initial'>) {
   let computed: Record<string, ComputedTextData> = {}
 
   // ensure that fonts are loaded and we can use them
@@ -19,7 +18,7 @@ export default async function loadTexts(request: string, textsData: ComputeRecor
   for (let id in textsData) {
     let data = textsData[id] as InputMorphData;
     
-    let { fromPath, toPath, baseline, width } = textMetrics(fontsData, data);
+    let { fromPath, toPath, baseline, width } = matrics(fontsData, data);
 
     // create interpolatee paths for svg <animate>
     let interpolator = interpolateAll(fromPath, toPath, { maxSegmentLength: 4, single: true });

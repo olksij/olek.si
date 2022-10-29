@@ -96,14 +96,14 @@ export const texts: SourceTextData = {
 // inline pictures
 import pf from 'data-url:/assets/images/profilePicture.webp';
 import tg from 'data-url:/assets/vectors/telegram.svg';
-import ig from 'data-url:/assets/vectors/instagram.svg';
+import mx from 'data-url:/assets/vectors/matrix.svg';
 import gh from 'data-url:/assets/vectors/github.svg';
 import li from 'data-url:/assets/vectors/linkedin.svg';
 import mt from 'data-url:/assets/vectors/email.svg';
 
 export const images: Record<string, string> = { pf }
 
-export const vectors: Record<string, string> = { tg, ig, gh, li, mt, cr, lg }
+export const vectors: Record<string, string> = { tg, mx, gh, li, mt, cr, lg }
 
 import indexStylesheet from 'data-url:../styles/index.css';
 import { onMenuClick } from '../modules/menu';
@@ -111,7 +111,7 @@ import { onMenuClick } from '../modules/menu';
 export const stylesheets: string[] = [indexStylesheet];
 
 export const restoreLinks: Record<string, Array<string>> = {
-  "ps": ["https://t.me/oleksiibesida", "https://ig.me/oleksiibesidaa", "https://github.com/oleksiibesida", "https://linkedin.com/in/oleksiibesida/", "mailto:besida@oleksii.xyz"],
+  "ps": ["https://t.me/oleksiibesida", "https://matrix.to/#/@human:oleksii.xyz", "https://github.com/oleksiibesida", "https://linkedin.com/in/oleksiibesida/", "mailto:besida@oleksii.xyz"],
   "rg": ["https://oleksii.xyz", "https://oleksii.xyz", "https://oleksii.xyz", "https://oleksii.xyz"],
 }
 

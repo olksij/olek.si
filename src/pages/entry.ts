@@ -31,8 +31,8 @@ export function computeTexts(content: PageContent) {
   if (lang == null) 
     window.history.pushState({}, '', `?en`), lang = 'en';
 
-  for (let id of Object.keys(content.texts[lang])) {
-    if (content.elementConfig[id].from == null) continue;
+  for (let id in content.elementConfig) {
+    //if (content.elementConfig[id].from == null) continue;
 
     let config = content.elementConfig[id];
 

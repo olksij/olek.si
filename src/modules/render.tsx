@@ -87,7 +87,7 @@ export default async function render(content: PageContent, computed: ComputeReco
 
       let config = {
         id: child,
-        height: 72,
+        height: element.text?.height ?? element.icon?.height!,
         morph: computed[child],
         icon: element.icon,
         text: {
@@ -124,7 +124,7 @@ function renderElement(element: RenderElementConfig) {
     let font = element.text.style;
     let textLeft = element.icon ? element.icon.gap + element.height : 0;
 
-    let style = `font-family:${font.type}; letter-spacing:${font.letterSpacing}em; font-size:${font.fontSize}px`;
+    let style = `font-family:${font.type ?? 'text'}; letter-spacing:${font.letterSpacing}em; font-size:${font.fontSize}px`;
     text = <text opacity="0" style={style} x={textLeft} y={computed!.baseline! - .25}>{element.text.text}</text>;
 
     setTimeout((color) => {

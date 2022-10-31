@@ -7,8 +7,8 @@ export type Dir = 'initial' | 'computed';
 
 // types for each         🔛 Direction                                         📩 Input data   📤 Output data
 // DeliveryType          ______ ↓ ______                                        _____ ↓ _____   ______ ↓ _______
-export type ComputeRecord<D extends Dir> = Record<string,   D extends 'input' ? InputMorphData : ComputedTextData>;
-export type FontsRecord  <D extends Dir> = Record<FontType, D extends 'input' ? ArrayBuffer   : Font>;
+export type ComputeRecord<D extends Dir> = Record<string,   D extends 'initial' ? InputMorphData : ComputedTextData>;
+export type FontsRecord  <D extends Dir> = Record<FontType, D extends 'initial' ? ArrayBuffer   : Font>;
 
 export type RenderType = 'img' | 'morph';
 export type FontType = 'display' | 'text';
@@ -21,14 +21,6 @@ export type CSSColor = `var(--${'text' | 'secondary' | 'accent'})`;
 
 export type AnimationConfig = [Keyframe[], KeyframeAnimationOptions];
 
-export type FontStyleType =
-  'title'        |
-  'subtitle'     |
-  'menuSelected' |
-  'menu'         |
-  'action'       |
-  'footer';
-
 // interface used for communicating with WebWorker
 export interface ComputeAPI<D extends Dir> {
   deliver?: DeliverType,
@@ -38,10 +30,10 @@ export interface ComputeAPI<D extends Dir> {
 
 // used to define each element to be rendered
 export interface ElementConfig {
-  from?: FromMorphElement;
-  text?: FontStyleType; // <- text property here uses [FontStyleType] instead of [TextConfig]
-  icon?: IconConfig;    //   because texts are stored separately becouse of possibility 
-}                       //   of dynamic change of webpage language
+  from?: FromElement;
+  text?: FontStyle;  // <- text property here uses [FontStyle] instead of [TextConfig]
+  icon?: IconConfig; //    because texts are stored separately becouse of possibility 
+}                    //    of dynamic change of webpage language
 
 // interface used to communicate with the render module
 export interface RenderElementConfig {
@@ -74,13 +66,14 @@ export interface MorphElement {
 
 export interface TextConfig {
   text: string;
-  style: FontStyleType;
+  style: FontStyle;
 }
 
 export interface IconConfig {
   path: string;
   gap: number;
   height?: number;
+  color?: CSSColor;
 }
 
 export interface FromElement {

@@ -1,4 +1,4 @@
-import { ComputeAPI, ComputedTextData, InputMorphData, Languages, PageContent, ComputeRecord } from '../interfaces';
+import { ComputeAPI, ComputedTextData, InputMorphData, Languages, PageContent, ComputeRecord, TextConfig, Size, FromMorphElement } from '../interfaces';
 
 import print from '../modules/print';
 import render from '../modules/render';
@@ -23,7 +23,7 @@ export async function onload() {
 // the function is used in order to prepeare content 
 // for sending to compute worker
 export function computeTexts(content: PageContent) {
-  let inputData: ComputeRecord<'computed'> = {};
+  let inputData: ComputeRecord<'initial'> = {};
 
   const urlSearchParams = new URLSearchParams(window.location.search);
   let lang = Object.keys(Object.fromEntries(urlSearchParams.entries()))[0] as Languages | null;
@@ -33,10 +33,21 @@ export function computeTexts(content: PageContent) {
 
   for (let id of Object.keys(content.texts[lang])) {
     if (content.elementConfig[id].from == null) continue;
+
+    let config = content.elementConfig[id];
+
+    let text = config.text ? {
+      text: content.texts[lang][id],
+      style: config.text,
+    } as TextConfig : undefined;
+
     // map each text id to inputtextdata cell
     let idData: InputMorphData = {
-      from: content.elementConfig[id].from!,
-      to: content.elementConfig[id].element
+      from: config.from ?? { size: [
+        document.getElementById(id)?.clientWidth,
+        document.getElementById(id)?.clientHeight,
+      ]} as FromMorphElement,
+      to: { text, icon: config.icon },
     };
 
     // and add to record
@@ -44,7 +55,11 @@ export function computeTexts(content: PageContent) {
   }
 
   // when done, post message
-  worker.postMessage({ deliver: 'texts', request: 'entryRender', data: inputData } as ComputeAPI<'computed'>);
+  worker.postMessage({ 
+    deliver: 'texts', 
+    request: 'entryRender', 
+    data: inputData 
+  } as ComputeAPI<'initial'>);
 
   worker.addEventListener('message', message => {
     let data = message.data as ComputeAPI<'computed'>;

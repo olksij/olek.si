@@ -14,7 +14,7 @@ export function elementToPath(element: MorphElement, fonts: FontsRecord<'compute
   }
 
   if (text) {
-    let style = fontStyles[text.style];
+    let style = text.style;
     let font = fonts[style.type ?? 'text'];
 
     let textLeft = icon ? icon.gap + (icon.height ?? style.height) : 0;

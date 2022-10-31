@@ -2,12 +2,6 @@ export { head, languages } from './general';
 
 import { ElementConfig, Languages, AnimatingOrder, SourceTextData } from '../interfaces';
 
-
-/* --- --- --- --- --- --- --- --- ---
-   --- CODE IN THIS FILE REQUIRES- ---
-   --- --- URGENT REFACTORING- --- ---
-   --- --- --- --- --- --- --- --- --- */
-
 // specific dates with custom description
 const dates: Record<string, Record<Languages, [string, string]>> = {  
   "6-12":  {
@@ -36,20 +30,22 @@ import lg from 'bundle-text:/assets/raw/language.txt';
 let date = new Date();
 let description = dates[date.getMonth() + '-' + (date.getDate() + 1)] ?? dates.default;
 
-export const elementConfig: Record<string, ElementConfig> = {
+let font = fontStyles;
 
-/* 🏷️ Element ID       ✨ FontStyle        ⚙️ Custom placeholder
-  _______|_______   _________|_______  ______________|______________ */
-  tt:             { text: "title",     from: { path: titleFromPath } },
-  d1:             { text: "subtitle", },
-  d2:             { text: "subtitle", },
-  home:           { text: "menuSelected" },
-  about:          { text: "menu" },
-  projects:       { text: "menu" }, //          🖼️ Icon
-  work:           { text: "menu" }, // _____________|_____________
-  nav:            { text: "action",    icon: { path: nav, gap: 4 } },
-  cr:             { text: "footer",    icon: { path: cr,  gap: 0 } },
-  lg:             { text: "footer",    icon: { path: lg,  gap: 2 } },
+export const elementConfig: Record<string, ElementConfig> = {
+/*
+  🏷️ Element ID     ✨ FontStyle           ⚙️ Custom placeholder
+  ______|______   ________|________     _____________|_____________ */
+  tt:           { text: font.title,     from: { path: titleFromPath } },
+  d1:           { text: font.subtitle, },
+  d2:           { text: font.subtitle, },
+  home:         { text: font.menuSelected },
+  about:        { text: font.menu },
+  projects:     { text: font.menu }, //          🖼️ Icon
+  work:         { text: font.menu }, // _____________|_____________
+  nav:          { text: font.action,    icon: { path: nav, gap: 4 } },
+  cr:           { text: font.footer,    icon: { path: cr,  gap: 0 } },
+  lg:           { text: font.footer,    icon: { path: lg,  gap: 2 } },
 };
 
 export const texts: SourceTextData = {
@@ -107,6 +103,7 @@ export const vectors: Record<string, string> = { tg, mx, gh, li, mt, cr, lg }
 
 import indexStylesheet from 'data-url:../styles/index.css';
 import { onMenuClick } from '../modules/menu';
+import { fontStyles } from '../modules/fontStyles';
 
 export const stylesheets: string[] = [indexStylesheet];
 

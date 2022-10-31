@@ -83,16 +83,15 @@ export default async function render(content: PageContent, computed: ComputeReco
 
     // iterate over queue
     for (let child of queue) {
-      let current = content.elementConfig[child];
+      let element = content.elementConfig[child];
 
       let config = {
         id: child,
-        color: current.color,
-        height: current.height,
+        height: 72,
         morph: computed[child],
-        icon: current.element.icon,
+        icon: element.icon,
         text: {
-          style: current.element.text?.style,
+          style: element.text,
           text: content.texts[lang][child]
         } as TextConfig,
       } as RenderElementConfig;
@@ -108,7 +107,8 @@ function renderElement(element: RenderElementConfig) {
   let parent = byId(element.id)!;
 
   let morph: SVGPathElement, text: SVGTextElement, icon: SVGPathElement;
-  let computed = element.morph, width = parent.clientWidth;
+  let computed = element.morph, width = element.morph?.width;
+  let color = element.text?.style.color ?? element.icon?.color!;
 
   let root: SVGElement = <svg viewBox={`0 0 ${width} ${element.height}`}></svg>
 
@@ -117,32 +117,32 @@ function renderElement(element: RenderElementConfig) {
       <animate attributeName="d" dur="0.8s" values={computed!.from + ';' + computed!.to} calcMode="spline" keySplines="0.87 0 0.13 1" />
     </path>
 
-    root.append(toColor(morphOpacity(morph), element.color));
+    root.append(toColor(morphOpacity(morph), element.text?.style.color ?? element.icon?.color!));
   }
 
   if (element.text) {
-    let font = fontStyles[element.text.style] as FontStyle;
+    let font = element.text.style;
     let textLeft = element.icon ? element.icon.gap + element.height : 0;
 
     let style = `font-family:${font.type}; letter-spacing:${font.letterSpacing}em; font-size:${font.fontSize}px`;
-    text = <text opacity="0" style={style} x={textLeft} y={computed!.baseline! - .25}>{element.text}</text>;
+    text = <text opacity="0" style={style} x={textLeft} y={computed!.baseline! - .25}>{element.text.text}</text>;
 
-    setTimeout(() => {
+    setTimeout((color) => {
       text.setAttribute("opacity", "1");
-      text.setAttribute("fill", element.color);
-    }, 600);
+      text.setAttribute("fill", color);
+    }, 600, element.text.style.color);
 
-    root.append(toColor(elementOpacity(text), element.color));
+    root.append(toColor(elementOpacity(text), element.text.style.color));
   }
 
   if (element.icon) {
     icon = <path opacity="1" d={element.icon?.path ?? ''}/>
-    root.append(toColor(elementOpacity(icon), element.color));
+    root.append(toColor(elementOpacity(icon), color));
 
-    setTimeout(() => {
+    setTimeout((color) => {
       text.setAttribute("opacity", "1");
-      text.setAttribute("fill", element.color);
-    }, 600);
+      text.setAttribute("fill", color);
+    }, 600, color);
   }
 
   parent.classList.add('rendered');

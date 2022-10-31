@@ -126,11 +126,11 @@ export const restoreClicks: Record<string, Array<Function>> = {
 export const animatingOrder: Record<string, AnimatingOrder> = {
   "pf":  { image: true,  delay: 0, alt: 'Profile Picture' },
   "tt":  { delay: 50 },
-  "d1":  { delay: 500 },
-  "d2":  { delay: 50 },
+  "d1":  { delay: 800 },
+  "d2":  { delay: 0 },
   "ps":  { image: true, delay: 100, children: true },
   "rg":  { delay: 50, children: true },
-  "nav": { delay: 0 },
-  "cr":  { delay: 0 },
-  "lg":  { delay: 0 },
+  "nav": { delay: 100 },
+  "cr":  { delay: 100 },
+  "lg":  { delay: 100 },
 }

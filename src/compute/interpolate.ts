@@ -12,10 +12,13 @@ import matrics from "./metrics";
 export default async function interpolate(request: string, textsData: ComputeRecord<'initial'>) {
   let computed: Record<string, ComputedTextData> = {}
 
+
   // ensure that fonts are loaded and we can use them
   let fontsData = await fonts;
   
   for (let id in textsData) {
+    let start = Date.now();
+
     let data = textsData[id] as InputMorphData;
     
     let { fromPath, toPath, baseline, width } = matrics(fontsData, data);
@@ -23,7 +26,9 @@ export default async function interpolate(request: string, textsData: ComputeRec
     // create interpolatee paths for svg <animate>
     let interpolator = interpolateAll(fromPath, toPath, { maxSegmentLength: 4, single: true });
     computed[id] = { from: interpolator(1 / 1000), to: interpolator(1 - 1 / 1000), baseline, width };
+    console.log(Date.now() - start)
   }
+
 
   // send to main thread computed paths
   postMessage({ request, data: computed } as ComputeAPI<'computed'>);

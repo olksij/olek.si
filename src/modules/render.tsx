@@ -136,12 +136,12 @@ function renderElement(element: RenderElementConfig) {
   }
 
   if (element.icon) {
-    icon = <path opacity="1" d={element.icon?.path ?? ''}/>
+    icon = <path opacity="0" d={element.icon?.path ?? ''}/>
     root.append(toColor(elementOpacity(icon), color));
 
     setTimeout((color) => {
-      text.setAttribute("opacity", "1");
-      text.setAttribute("fill", color);
+      icon.setAttribute("opacity", "1");
+      icon.setAttribute("fill", color);
     }, 600, color);
   }
 

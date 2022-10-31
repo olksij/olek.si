@@ -2,6 +2,7 @@ import { ComputeAPI, ComputedTextData, InputMorphData, Languages, PageContent, C
 
 import print from '../modules/print';
 import render from '../modules/render';
+import { byId } from '../modules/shorthands';
 
 export const worker: Worker = window['worker'];
 
@@ -22,7 +23,7 @@ export async function onload() {
 
 // the function is used in order to prepeare content 
 // for sending to compute worker
-export function computeTexts(content: PageContent) {
+export async function computeTexts(content: PageContent) {
   let inputData: ComputeRecord<'initial'> = {};
 
   const urlSearchParams = new URLSearchParams(window.location.search);
@@ -30,6 +31,10 @@ export function computeTexts(content: PageContent) {
 
   if (lang == null) 
     window.history.pushState({}, '', `?en`), lang = 'en';
+
+  await window['skeleton']
+
+  await new Promise((resolve) => setTimeout(resolve, 600))
 
   for (let id in content.elementConfig) {
     //if (content.elementConfig[id].from == null) continue;
@@ -41,11 +46,13 @@ export function computeTexts(content: PageContent) {
       style: config.text,
     } as TextConfig : undefined;
 
+    console.log(byId(id)!.getClientRects())
+
     // map each text id to inputtextdata cell
     let idData: InputMorphData = {
       from: config.from ?? { size: [
-        document.getElementById(id)?.clientWidth,
-        document.getElementById(id)?.clientHeight,
+        byId(id)?.clientWidth,
+        byId(id)?.clientHeight,
       ]} as FromMorphElement,
       to: { text, icon: config.icon },
     };

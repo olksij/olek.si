@@ -99,7 +99,6 @@
 }
 
 #rg>.rendered {
-  overflow: hidden;
   background: #0000;
   align-items: flex-start;
   text-decoration: none;

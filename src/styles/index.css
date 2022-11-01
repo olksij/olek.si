@@ -78,10 +78,6 @@ img {
   text-decoration: none;
 }
 
-#tt>svg {
-  aspect-ratio: 3.4464285714;
-}
-
 #ft {
   align-items: flex-end;
   height: 16px;

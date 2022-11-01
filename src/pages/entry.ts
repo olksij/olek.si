@@ -46,17 +46,15 @@ export async function computeTexts(content: PageContent) {
       style: config.text,
     } as TextConfig : undefined;
 
-    console.log(byId(id)!.getClientRects())
-
     // map each text id to inputtextdata cell
     let idData: InputMorphData = {
       from: config.from ?? { size: [
         byId(id)?.clientWidth,
         byId(id)?.clientHeight,
-      ]} as FromMorphElement,
+      ], radius: byId(id)?.style.borderRadius} as FromMorphElement,
       to: { text, icon: config.icon },
     };
-
+    
     // and add to record
     inputData[id] = idData;
   }

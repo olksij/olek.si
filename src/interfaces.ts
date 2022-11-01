@@ -83,6 +83,7 @@ export interface FromElement {
 
 export interface FromMorphElement extends FromElement {
   size?: Size;
+  radius?: number;
 }
 
 export type Size = [number, number];

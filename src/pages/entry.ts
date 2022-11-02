@@ -54,7 +54,7 @@ export async function computeTexts(content: PageContent) {
       ], radius: byId(id)?.style.borderRadius} as FromMorphElement,
       to: { text, icon: config.icon },
     };
-    
+
     // and add to record
     inputData[id] = idData;
   }

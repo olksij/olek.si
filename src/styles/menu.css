@@ -25,6 +25,10 @@
     pointer-events: none;
   }
 
+  #rg>a.rendered{
+    align-items: center;
+  }
+
   .navTransformed:not(.navTapped)>#rg {
     animation: rgClosed var(--outSmooth);
   }

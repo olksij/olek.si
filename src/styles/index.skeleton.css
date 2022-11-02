@@ -69,6 +69,10 @@
   border-radius: 8px;
 }
 
+#ft>#cr {
+  width: 160px
+}
+
 #nav {
   border: 0px;
   height: 24px;

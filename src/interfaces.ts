@@ -1,4 +1,5 @@
 import { Font } from 'opentype.js'
+import { type } from 'os';
 
 // `DeliverType`s used for communication with WebWorker
 export type DeliverType = 'fonts' | 'texts';
@@ -120,3 +121,11 @@ export interface PageContent {
   restoreClicks: Record<string, Array<Function>>;  
   animatingOrder: Record<string, AnimatingOrder>;  
 }
+
+export interface SkeletonTree { [id: string]: SkeletonConfig | SkeletonTree; }
+
+//                           [width, height, borderRadius]
+export type _SkeletonBaseConfig = [...Size, BorderRadius?]
+export type SkeletonConfig = [_SkeletonBaseConfig, _SkeletonBaseConfig?]
+
+export type BorderRadius = number;

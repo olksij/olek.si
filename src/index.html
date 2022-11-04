@@ -10,19 +10,9 @@
 <body>
   <script type="module">
     import buildTree from './skeleton/buildTree';
+    import indexDom from './dom/index';
 
-    buildTree({
-      nav: {},
-      cnt: {
-        lf: {
-          title: { pf: {}, tt: {} },
-          dd: { d1: {}, d2: {} },
-          ps: { tg: {}, mx: {}, li: {}, gh: {}, mt: {} }
-        },
-        rg: {}
-      },
-      ft: { cr: {}, lg: {} }
-    });
+    buildTree(indexDom);
   </script>
 
   <noscript>the page is powered by js :(</noscript>

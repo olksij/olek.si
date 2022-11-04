@@ -1,8 +1,10 @@
-import { ComputeAPI, ComputedTextData, InputMorphData, Languages, PageContent, ComputeRecord, TextConfig, Size, FromMorphElement } from '../interfaces';
+import indexDom from '../dom';
+import { ComputeAPI, ComputedTextData, InputMorphData, Languages, PageContent, ComputeRecord, TextConfig, Size, FromMorphElement, SkeletonTree, SkeletonConfig } from '../interfaces';
 
 import print from '../modules/print';
 import render from '../modules/render';
 import { byId } from '../modules/shorthands';
+import { rg } from '../skeleton/buildTree';
 
 export const worker: Worker = window['worker'];
 
@@ -32,13 +34,7 @@ export async function computeTexts(content: PageContent) {
   if (lang == null) 
     window.history.pushState({}, '', `?en`), lang = 'en';
 
-  await window['skeleton']
-
-  await new Promise((resolve) => setTimeout(resolve, 600))
-
   for (let id in content.elementConfig) {
-    //if (content.elementConfig[id].from == null) continue;
-
     let config = content.elementConfig[id];
 
     let text = config.text ? {
@@ -46,11 +42,13 @@ export async function computeTexts(content: PageContent) {
       style: config.text,
     } as TextConfig : undefined;
 
+    let skeletonConfig = window['current'][id];
+
     // map each text id to inputtextdata cell
     let idData: InputMorphData = {
       from: config.from ?? { size: [
-        byId(id)?.clientWidth,
-        byId(id)?.clientHeight,
+        skeletonConfig![0][0],
+        skeletonConfig![0][1],
       ], radius: byId(id)?.style.borderRadius} as FromMorphElement,
       to: { text, icon: config.icon },
     };
@@ -72,4 +70,15 @@ export async function computeTexts(content: PageContent) {
     if (data.request == 'entryRender')
       render(content, data.data as ComputeRecord<'computed'>);
   });
+}
+
+function get(id: string, tree: SkeletonTree): SkeletonConfig | undefined {
+  for (let element in tree) {
+    if (element == id) return tree[element] as SkeletonConfig;
+    else {
+      if (tree[element][0]) continue;
+      let res = get(id, tree[element] as SkeletonTree);
+      if (res) return res;
+    }
+  }
 }

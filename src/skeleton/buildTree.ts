@@ -5,7 +5,7 @@ import fontLoader from './fontLoader';
 import skeletonLoader from './skeletonLoader';
 
 // default DOM structure for menu
-const rg: SkeletonTree = { config: [[128, 24, 6]], home: {}, about: {}, projects: {}, work: {} }
+export const rg: SkeletonTree = { config: [[128, 24, 6]], home: {}, about: {}, projects: {}, work: {} }
 
 export default function buildTree(skeleton: SkeletonTree | SkeletonConfig, parent: HTMLElement = document.body) {
 
@@ -18,7 +18,7 @@ export default function buildTree(skeleton: SkeletonTree | SkeletonConfig, paren
 
   for (let elementID of Object.keys(tree)) {
     if (elementID == 'config') continue;
-    
+
     var child = document.createElement(tagName);
     child.id = elementID, parent.append(child);
     applyConfig(child, tree.config as SkeletonConfig);
@@ -32,6 +32,9 @@ export default function buildTree(skeleton: SkeletonTree | SkeletonConfig, paren
 
 function applyConfig(element: HTMLElement, config: SkeletonConfig) {
   if (!config) return;
+
+  window['current'] ??= [];
+  window['current'][element.id] = config;
 
   let style = element.style;
   let mobile: 0 | 1 = window.innerWidth < 920 ? 0 : (config[1] ? 1 : 0)

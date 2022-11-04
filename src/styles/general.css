@@ -16,7 +16,7 @@
 *:not(#ps):not(#ft) {
   justify-content: center;
   font-family: 'text';
-  color: var(--secondary)
+  color: var(--secondary);
 }
 
 html {

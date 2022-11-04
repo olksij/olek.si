@@ -26,7 +26,6 @@ export default async function interpolate(request: string, textsData: ComputeRec
     // create interpolatee paths for svg <animate>
     let interpolator = interpolateAll(fromPath, toPath, { maxSegmentLength: 4, single: true });
     computed[id] = { from: interpolator(1 / 1000), to: interpolator(1 - 1 / 1000), baseline, width };
-    console.log(Date.now() - start)
   }
 
 

@@ -1,3 +1,8 @@
+#nav {
+  position: fixed;
+  top:0px;
+}
+
 #rg {
   align-items: center;
   justify-content: center;

@@ -1,3 +1,5 @@
+@import './menu.skeleton.css';
+
 :root {
   --el: #EDEBF0;
   --bg: #FAFAFC;
@@ -8,6 +10,7 @@
   align-items: center;
   flex-direction: column;
   transition: .6s cubic-bezier(0, 0.5, 0, 1);
+  -webkit-tap-highlight-color: transparent;
 }
 
 html,
@@ -16,6 +19,10 @@ body {
   width: 100%;
   background: var(--bg);
   margin: 0;
+}
+
+body {
+  padding-top: 64px;
 }
 
 .tr {

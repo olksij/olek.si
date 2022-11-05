@@ -43,7 +43,7 @@ export const elementConfig: Record<string, ElementConfig> = {
   about:        { text: font.menu },
   projects:     { text: font.menu }, //          🖼️ Icon
   work:         { text: font.menu }, // _____________|_____________
-  nav:          { text: font.action,    icon: { path: nav, gap: 4 } },
+  nav:          { text: font.action,    icon: { path: nav, gap: 8 } },
   cr:           { text: font.footer,    icon: { path: cr,  gap: 0 } },
   lg:           { text: font.footer,    icon: { path: lg,  gap: 2 } },
 };

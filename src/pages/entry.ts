@@ -71,14 +71,3 @@ export async function computeTexts(content: PageContent) {
       render(content, data.data as ComputeRecord<'computed'>);
   });
 }
-
-function get(id: string, tree: SkeletonTree): SkeletonConfig | undefined {
-  for (let element in tree) {
-    if (element == id) return tree[element] as SkeletonConfig;
-    else {
-      if (tree[element][0]) continue;
-      let res = get(id, tree[element] as SkeletonTree);
-      if (res) return res;
-    }
-  }
-}

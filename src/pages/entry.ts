@@ -4,9 +4,7 @@ import { ComputeAPI, ComputedTextData, InputMorphData, Languages, PageContent, C
 import print from '../modules/print';
 import render from '../modules/render';
 import { byId } from '../modules/shorthands';
-import { rg } from '../skeleton/buildTree';
-
-export const worker: Worker = window['worker'];
+import { worker } from '../skeleton/resolve';
 
 // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
 

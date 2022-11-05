@@ -9,11 +9,11 @@ import print from './print';
 import './menu.ts';
 import { byId, tagById } from "./shorthands";
 import { onMenuClick } from "./menu";
-import { fontStyles } from "./fontStyles";
+import { skeleton } from "../skeleton/resolve";
 
 export default async function render(content: PageContent, computed: ComputeRecord<'computed'>): Promise<void> {
   if (!sessionStorage.getItem('loaded')) {
-    await window["skeleton"];
+    await skeleton;
     sessionStorage.setItem('loaded', 'true');
   }
 

@@ -1,5 +1,5 @@
 import { ComputeAPI, ComputeRecord } from "../interfaces";
-import { worker } from "../pages/entry";
+import { skeleton, worker } from "../skeleton/resolve";
 import MotionBlur from "./motionBlur";
 import { byId, tagById } from "./shorthands";
 
@@ -161,4 +161,4 @@ function renderMenu(message) {
     console.log(data.data as ComputeRecord<'computed'>);
 };
 
-window["skeleton"].then(() => worker.addEventListener('message', renderMenu));
+skeleton.then(() => worker.addEventListener('message', renderMenu));

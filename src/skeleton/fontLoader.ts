@@ -1,3 +1,5 @@
+import { worker } from "./resolve";
+
 // list of fonts to download
 let fonts = {
   display: new URL('/assets/fonts/displayBold.ttf', import.meta.url),
@@ -20,7 +22,7 @@ export default function fontLoader() {
       fontResult[font] = res;
       // if all fonts are there, postMessage
       if (fontResult.display && fontResult.text)
-      window['worker'].postMessage({ deliver: 'fonts', data: fontResult }, fontResult);
+      worker.postMessage({ deliver: 'fonts', data: fontResult }, fontResult);
     }
     request.send();
   }

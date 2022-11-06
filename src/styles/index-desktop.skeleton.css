@@ -31,10 +31,10 @@ body {
   height: 160px;
   z-index: 1;
   box-shadow: 0 0 0 24px var(--bg);
+  margin-right: -32px;
 }
 
 #tt {
-  margin-left: -32px;
   width: 386px;
   height: 112px;
   border-radius: 24px;

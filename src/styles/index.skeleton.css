@@ -19,12 +19,12 @@
   width: 96px;
   height: 96px;
   border-radius: 100%;
+  margin-right: -54px;
   z-index: 1;
   box-shadow: 0 0 0 12px var(--bg);
 }
 
 #tt {
-  margin-left: -54px;
   width: 220px;
   height: 64px;
   border-radius: 18px;

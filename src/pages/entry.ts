@@ -1,4 +1,3 @@
-import indexDom from '../dom';
 import { ComputeAPI, ComputedTextData, InputMorphData, Languages, PageContent, ComputeRecord, TextConfig, Size, FromMorphElement, SkeletonTree, SkeletonConfig } from '../interfaces';
 
 import print from '../modules/print';

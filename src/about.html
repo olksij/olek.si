@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style> @import './styles/index.skeleton.css'; </style>
+  <link rel="stylesheet" media="(min-width: 920px)" href="./styles/index-desktop.skeleton.css">
+</head>
+
+<body>
+  <script type="module">
+    import buildTree from './skeleton/buildTree';
+    import aboutDom from './dom/about';
+
+    buildTree(aboutDom);
+  </script>
+
+  <noscript>the page is powered by js :(</noscript>
+  <script src="./pages/about.ts" async type="module"></script>
+</body>
+
+</html>

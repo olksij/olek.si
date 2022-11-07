@@ -1,6 +1,6 @@
 /* an incremental CSS file providing skeleton layout for desktop viewports. */
 
-@import './menu.skeleton.css';
+@import '../general/general.skeleton.css';
 
 *:not(style):not(script):not(title) {
   align-items: stretch;

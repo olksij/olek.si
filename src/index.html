@@ -3,20 +3,20 @@
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style> @import './styles/index.skeleton.css'; </style>
-  <link rel="stylesheet" media="(min-width: 920px)" href="./styles/index-desktop.skeleton.css">
+  <style> @import './index/skeleton.css'; </style>
+  <link rel="stylesheet" media="(min-width: 920px)" href="./index/desktop.skeleton.css">
 </head>
 
 <body>
   <script type="module">
     import buildTree from './skeleton/buildTree';
-    import indexDom from './dom/index';
+    import indexDom from './index/dom';
 
     buildTree(indexDom);
   </script>
 
   <noscript>the page is powered by js :(</noscript>
-  <script src="./pages/index.ts" async type="module"></script>
+  <script src="./index/page.ts" async type="module"></script>
 </body>
 
 </html>

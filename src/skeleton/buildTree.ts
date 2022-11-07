@@ -3,7 +3,7 @@
 import { SkeletonConfig, SkeletonTree } from '../interfaces';
 import fontLoader from './fontLoader';
 import composite from './composite';
-import rg from '../dom/menu';
+import rg from '../general/menu';
 
 // default DOM structure for menu
 

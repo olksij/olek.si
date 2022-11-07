@@ -1,4 +1,4 @@
-export { head, languages } from './general';
+export { head, languages } from '../general/general';
 
 import { ElementConfig, Languages, AnimatingOrder, SourceTextData } from '../interfaces';
 
@@ -73,7 +73,7 @@ export const images: Record<string, string> = { pf }
 
 export const vectors: Record<string, string> = { tg, mx, gh, li, mt, cr, lg }
 
-import indexStylesheet from 'data-url:../styles/index.css';
+import indexStylesheet from 'data-url:../index/styles.css';
 import { onMenuClick } from '../modules/menu';
 import { fontStyles } from '../modules/fontStyles';
 

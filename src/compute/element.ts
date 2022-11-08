@@ -1,6 +1,6 @@
 import { Font } from "opentype.js";
 import { FontsRecord, FontStyle, MorphElement } from "../interfaces";
-import { fontStyles } from "../modules/fontStyles";
+import { fontStyles } from "../scripts/fontStyles";
 
 export function elementToPath(element: MorphElement, fonts: FontsRecord<'computed'>) {
   let icon = element.icon, text = element.text;

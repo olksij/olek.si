@@ -1,4 +1,4 @@
-import { worker } from "./resolve";
+import { _worker } from "./resolve";
 
 // list of fonts to download
 let fonts = {
@@ -22,7 +22,7 @@ export default function fontLoader() {
       fontResult[font] = res;
       // if all fonts are there, postMessage
       if (fontResult.display && fontResult.text)
-      worker.postMessage({ deliver: 'fonts', data: fontResult }, fontResult);
+      _worker.postMessage({ deliver: 'fonts', data: fontResult }, fontResult);
     }
     request.send();
   }

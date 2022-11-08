@@ -3,7 +3,7 @@
 import { parse } from 'opentype.js';
 import { FontsRecord } from '../interfaces';
 
-import print from '../modules/print';
+import print from '../scripts/print';
 
 // the class extends promise so we can ensure the 
 // fonts are loaded before we try to vectorize text

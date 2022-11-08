@@ -1,9 +1,9 @@
 import { ComputeAPI, ComputedTextData, InputMorphData, Languages, PageContent, ComputeRecord, TextConfig, Size, FromMorphElement, SkeletonTree, SkeletonConfig } from '../interfaces';
 
-import print from '../modules/print';
-import render from '../modules/render';
-import { byId } from '../modules/shorthands';
-import { worker } from '../skeleton/resolve';
+import print from '../scripts/print';
+import render from '../scripts/render';
+import { byId } from '../scripts/shorthands';
+import compute from '../scripts/worker';
 
 // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
 
@@ -13,7 +13,7 @@ export async function onload() {
   // webvitals file is loaded after load event and render call,
   // and meant to help measure this webpage quality
   print("😏 Loading web vitals");
-  import('../modules/webvitals');
+  import('../scripts/webvitals');
 
   // to contain navigator, theme specs, and other dynamic things
 }
@@ -55,16 +55,6 @@ export async function computeTexts(content: PageContent) {
   }
 
   // when done, post message
-  worker.postMessage({ 
-    deliver: 'texts', 
-    request: 'entryRender', 
-    data: inputData 
-  } as ComputeAPI<'initial'>);
-
-  worker.addEventListener('message', message => {
-    let data = message.data as ComputeAPI<'computed'>;
-
-    if (data.request == 'entryRender')
-      render(content, data.data as ComputeRecord<'computed'>);
-  });
+  compute(inputData)
+    .then((result) => render(content, result.data as ComputeRecord<'computed'>));
 }

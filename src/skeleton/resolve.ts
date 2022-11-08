@@ -16,4 +16,4 @@ export function resolveSkeleton(counter: number,  count: number) {
 }
 
 const workerURL = new URL('../compute/compute.ts', import.meta.url);
-export const worker = new Worker(workerURL, { type: 'module' });
+export const _worker = new Worker(workerURL, { type: 'module' });

@@ -1,7 +1,8 @@
 import { ComputeAPI, ComputeRecord } from "../interfaces";
-import { skeleton, worker } from "../skeleton/resolve";
+import { skeleton } from "../skeleton/resolve";
 import MotionBlur from "./motionBlur";
 import { byId, tagById } from "./shorthands";
+import compute from "./worker";
 
 /* --- --- --- --- --- --- --- --- ---
    --- CODE IN THIS FILE REQUIRES- ---
@@ -105,15 +106,7 @@ let isNavHovered = false;
 nav.onclick = function (event) {
   if (!cnt.classList.contains("navTapped")) {
     // open menu
-    worker.postMessage({ deliver: 'texts', request: 'menuRender', data: {'nav': {
-      from: {width: 200},
-      to: {
-        icon: '',
-        gap: 0,
-        text: 'Close'
-      },
-      style: 'action'
-    }} } as ComputeAPI<'initial'>);
+    compute({}).then(console.log)
 
     cnt.classList.add("navTapped", "navTransformed");
     tagById("nav", "text")!.innerHTML = "Close";
@@ -153,12 +146,3 @@ rg.onanimationend = () => navBlur.drop();
 rg.onmousemove = (event) => {
   if (ignoreMouse && event.movementX>0) openMenu(event), ignoreMouse = false;
 }
-
-function renderMenu(message) {
-  let data = message.data as ComputeAPI<'computed'>;
-
-  if (data.request == 'menuRender')
-    console.log(data.data as ComputeRecord<'computed'>);
-};
-
-skeleton.then(() => worker.addEventListener('message', renderMenu));

@@ -1,6 +1,6 @@
 import { FontStyle } from "../classes";
 import { FontStyleType, Languages } from "../interfaces";
-import { createElement, createFragment } from "../modules/jsx";
+import { createElement, createFragment } from "../scripts/jsx";
 
 export const head: HTMLElement[] = [
   <title>Oleksii Besida</title>,

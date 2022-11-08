@@ -6,7 +6,7 @@ import { interpolateAll } from "flubber"
 import fonts from "./fonts";
 import { ComputeAPI, ComputedTextData, InputMorphData, ComputeRecord } from "../interfaces";
 
-import print from '../modules/print';
+import print from '../scripts/print';
 import matrics from "./metrics";
 
 export default async function interpolate(request: string, textsData: ComputeRecord<'initial'>) {

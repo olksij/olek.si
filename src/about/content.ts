@@ -74,8 +74,8 @@ export const images: Record<string, string> = { pf }
 export const vectors: Record<string, string> = { tg, mx, gh, li, mt, cr, lg }
 
 import indexStylesheet from 'data-url:../index/styles.css';
-import { onMenuClick } from '../modules/menu';
-import { fontStyles } from '../modules/fontStyles';
+import { onMenuClick } from '../scripts/menu';
+import { fontStyles } from '../scripts/fontStyles';
 
 export const stylesheets: string[] = [indexStylesheet];
 

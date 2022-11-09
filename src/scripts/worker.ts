@@ -1,11 +1,11 @@
 // the file wraps requests to compute worker to promises
 // so its possible to request asynchronously
 
-import { ComputeAPI, ComputeRecord, DeliverType, FontsRecord } from "../interfaces";
+import { ComputeAPI, ComputeRequest, DeliverType, FontsTransmit } from "../interfaces";
 import { _worker } from "../skeleton/resolve";
 
 // simplify types
-type InitialRecord = FontsRecord<'initial'> | ComputeRecord<'initial'>;
+type InitialRecord = ComputeRequest<'initial'> | FontsTransmit<'initial'>;
 type Computed = ComputeAPI<'computed'>;
 
 // Map object containing all request to resolve them later

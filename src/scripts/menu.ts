@@ -1,4 +1,4 @@
-import { ComputeAPI, ComputeRecord } from "../interfaces";
+import { ComputeAPI, ComputeRequest } from "../interfaces";
 import { skeleton } from "../skeleton/resolve";
 import MotionBlur from "./motionBlur";
 import { byId, tagById } from "./shorthands";

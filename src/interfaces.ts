@@ -1,19 +1,10 @@
 import { Font } from 'opentype.js'
-import { type } from 'os';
 
-// `DeliverType`s used for communication with WebWorker
-export type DeliverType = 'fonts' | 'texts';
+// 🔤 transfering & storing fonts types
+export type FontsTransmit = Record<FontType, ArrayBuffer>;
+export type FontsRecord   = Record<FontType, Font>;
 
-export type Dir = 'initial' | 'computed';
-
-// types for each         🔛 Direction                                         📩 Input data   📤 Output data
-// DeliveryType          ______ ↓ ______                                        _____ ↓ _____   ______ ↓ _______
-export type ComputeRecord<D extends Dir> = Record<string,   D extends 'initial' ? InputMorphData : ComputedTextData>;
-export type FontsRecord  <D extends Dir> = Record<FontType, D extends 'initial' ? ArrayBuffer   : Font>;
-
-export type RenderType = 'img' | 'morph';
 export type FontType = 'display' | 'text';
-export type PreloadAssetType = 'stylesheet' | 'image';
 
 export type Languages = 'en' | 'sv' | 'uk'
 export type SourceTextData = Record<Languages, Record<string, string>>;
@@ -22,11 +13,22 @@ export type CSSColor = `var(--${'text' | 'secondary' | 'accent'})`;
 
 export type AnimationConfig = [Keyframe[], KeyframeAnimationOptions];
 
+
+//                        🕒 Send a request      ⚙️ Computed paths     📤 Send fonts
+//  Types that can be          to worker             by worker           to worker
+//  transfered                    _|____________   ______|______   ___________|_
+export type ComputeAPIDataTypes = ComputeRequest | ComputeResult | FontsTransmit;
+
+// [string] value for each [ComputeAPIData] Type so 
+// it can be used further in JS runtime
+export type _CAPIStringDT<Data> = Data extends FontsTransmit  ? 'FontsTransmit'  : 
+                                 (Data extends ComputeRequest ? 'ComputeRequest' : 'ComputeResult')
+
 // interface used for communicating with WebWorker
-export interface ComputeAPI<D extends Dir> {
-  deliver?: DeliverType,
-  request: string, // request ID
-  data: FontsRecord<D> | ComputeRecord<D>,
+export interface ComputeAPI<Data extends ComputeAPIDataTypes> {
+  deliver?: _CAPIStringDT<Data>;
+  request: Data extends FontsTransmit ? undefined : string; // request ID
+  data: Data,
 }
 
 // used to define each element to be rendered
@@ -37,22 +39,22 @@ export interface ElementConfig {
 }                    //    of dynamic change of webpage language
 
 // interface used to communicate with the render module
-export interface RenderElementConfig {
+export interface RenderElementInterface {
   id: string;
-  morph?: ComputedTextData;
+  morph?: ComputeResult;
   icon?: IconConfig;
   text?: TextConfig;
   height: number;
 }
 
 // input used by compute worker
-export interface InputMorphData {
+export interface ComputeRequest {
   from: FromMorphElement;
   to: MorphElement;
 }
 
 // response sent by compute worker
-export interface ComputedTextData {
+export interface ComputeResult {
   from: string;
   to: string;
   // calculated width of the element
@@ -82,9 +84,9 @@ export interface FromElement {
   path?: string;
 }
 
+// This Morph interface is defined during runtime
 export interface FromMorphElement extends FromElement {
-  size?: Size;
-  radius?: number;
+  skeleton: SkeletonBaseConfig;
 }
 
 export type Size = [number, number];
@@ -124,8 +126,8 @@ export interface PageContent {
 
 export interface SkeletonTree { [id: string]: SkeletonConfig | SkeletonTree; }
 
-//                           [width, height, borderRadius]
-export type _SkeletonBaseConfig = [...Size, BorderRadius?]
-export type SkeletonConfig = [_SkeletonBaseConfig, _SkeletonBaseConfig?]
+//                               [width, height, borderRadius]
+export type SkeletonBaseConfig = [...Size, BorderRadius?]
+export type SkeletonConfig = [SkeletonBaseConfig, SkeletonBaseConfig?]
 
 export type BorderRadius = number;

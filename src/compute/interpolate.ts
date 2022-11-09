@@ -4,13 +4,13 @@
 import { interpolateAll } from "flubber"
 
 import fonts from "./fonts";
-import { ComputeAPI, ComputedTextData, InputMorphData, ComputeRecord } from "../interfaces";
+import { ComputeAPI, ComputeResult, ComputeRequest, ComputeRequest } from "../interfaces";
 
 import print from '../scripts/print';
 import matrics from "./metrics";
 
-export default async function interpolate(request: string, textsData: ComputeRecord<'initial'>) {
-  let computed: Record<string, ComputedTextData> = {}
+export default async function interpolate(request: string, textsData: ComputeRequest<'initial'>) {
+  let computed: Record<string, ComputeResult> = {}
 
 
   // ensure that fonts are loaded and we can use them
@@ -19,7 +19,7 @@ export default async function interpolate(request: string, textsData: ComputeRec
   for (let id in textsData) {
     let start = Date.now();
 
-    let data = textsData[id] as InputMorphData;
+    let data = textsData[id] as ComputeRequest;
     
     let { fromPath, toPath, baseline, width } = matrics(fontsData, data);
 

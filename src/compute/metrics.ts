@@ -1,11 +1,11 @@
 // this file calculates metrics for both [data.from] and [data.to]
 // before animating
 
-import { FontsRecord, InputMorphData } from "../interfaces";
+import { FontsTransmit, ComputeRequest } from "../interfaces";
 
 import { elementToPath, splitPath } from "./element";
 
-export default function matrics(fonts: FontsRecord<'computed'>, data: InputMorphData) {
+export default function matrics(fonts: FontsTransmit<'computed'>, data: ComputeRequest) {
   let from = data.from, fromPath = new Array<string>();
 
   let { path, baseline, width } = elementToPath(data.to, fonts)

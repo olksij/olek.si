@@ -1,4 +1,4 @@
-import { ComputeAPI, ComputedTextData, InputMorphData, Languages, PageContent, ComputeRecord, TextConfig, Size, FromMorphElement, SkeletonTree, SkeletonConfig } from '../interfaces';
+import { ComputeAPI, ComputeResult, ComputeRequest, Languages, PageContent, ComputeRequest, TextConfig, Size, FromMorphElement, SkeletonTree, SkeletonConfig } from '../interfaces';
 
 import print from '../scripts/print';
 import render from '../scripts/render';
@@ -23,7 +23,7 @@ export async function onload() {
 // the function is used in order to prepeare content 
 // for sending to compute worker
 export async function computeTexts(content: PageContent) {
-  let inputData: ComputeRecord<'initial'> = {};
+  let inputData: ComputeRequest<'initial'> = {};
 
   const urlSearchParams = new URLSearchParams(window.location.search);
   let lang = Object.keys(Object.fromEntries(urlSearchParams.entries()))[0] as Languages | null;
@@ -42,7 +42,7 @@ export async function computeTexts(content: PageContent) {
     let skeletonConfig = window['current'][id];
 
     // map each text id to inputtextdata cell
-    let idData: InputMorphData = {
+    let idData: ComputeRequest = {
       from: config.from ?? { size: [
         skeletonConfig![0][0],
         skeletonConfig![0][1],
@@ -56,5 +56,5 @@ export async function computeTexts(content: PageContent) {
 
   // when done, post message
   compute(inputData)
-    .then((result) => render(content, result.data as ComputeRecord<'computed'>));
+    .then((result) => render(content, result.data as ComputeRequest<'computed'>));
 }

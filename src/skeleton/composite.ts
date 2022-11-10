@@ -11,13 +11,13 @@ export default async function composite(element: HTMLElement, config: SkeletonCo
   if (!config) return;
   window['current'] ??= [];
 
-  // wait till current frame is painted to make sure CSS is applied
-  // in order to make the skeleton animation smooth
-  await new Promise(resolve => requestAnimationFrame(resolve));
-
   // build a simpler SkeletonConfig interface
   window['current'][element.id] = config;
   element.classList.add('tr'); // to render mark
+
+  // wait till current frame is painted to make sure CSS is applied
+  // in order to make the skeleton animation smooth
+  await new Promise(resolve => requestAnimationFrame(resolve));
 
   setTimeout(function (count: number) {
     let style = element.style;

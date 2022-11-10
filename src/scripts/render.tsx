@@ -21,8 +21,8 @@ declare global {
 }
 
 export default async function render(content: PageContent): Promise<void> {
+  await skeleton;
   if (!sessionStorage.getItem('loaded')) {
-    await skeleton;
     sessionStorage.setItem('loaded', 'true');
   }
 
@@ -98,8 +98,10 @@ export default async function render(content: PageContent): Promise<void> {
         text: content.texts[lang as Languages][child],
         style: element.text,
       } as TextConfig : undefined;
+
+      let mobile: 0 | 1 = window.innerWidth < 920 ? 0 : ( window['current'][child][1] ? 1 : 0)
   
-      let skeletonConfig: SkeletonBaseConfig = window['current'][child][0];
+      let skeletonConfig: SkeletonBaseConfig = window['current'][child][mobile];
       //skeletonConfig[2] ??= parseInt(byId(child)?.style.borderRadius ?? '0');
 
       let config = {

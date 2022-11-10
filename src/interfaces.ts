@@ -14,10 +14,10 @@ export type CSSColor = `var(--${'text' | 'secondary' | 'accent'})`;
 export type AnimationConfig = [Keyframe[], KeyframeAnimationOptions];
 
 
-//                        🕒 Send a request      ⚙️ Computed paths     📤 Send fonts
-//  Types that can be          to worker             by worker           to worker
-//  transfered                    _|____________   ______|______   ___________|_
-export type ComputeAPIDataTypes = ComputeRequest | ComputeResult | FontsTransmit;
+//                    🕒 Send a request     ⚙️ Computed paths     📤 Send fonts
+// Types that can be       to worker             by worker           to worker
+// transfered                __|___________   ______|______   __________|__
+export type ComputeAPIData = ComputeRequest | ComputeResult | FontsTransmit;
 
 // [string] value for each [ComputeAPIData] Type so 
 // it can be used further in JS runtime
@@ -25,7 +25,7 @@ export type _CAPIStringDT<Data> = Data extends FontsTransmit  ? 'FontsTransmit' 
                                  (Data extends ComputeRequest ? 'ComputeRequest' : 'ComputeResult')
 
 // interface used for communicating with WebWorker
-export interface ComputeAPI<Data extends ComputeAPIDataTypes> {
+export interface ComputeAPI<Data extends ComputeAPIData> {
   deliver?: _CAPIStringDT<Data>;
   request: Data extends FontsTransmit ? undefined : string; // request ID
   data: Data,

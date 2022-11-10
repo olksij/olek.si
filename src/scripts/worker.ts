@@ -1,15 +1,11 @@
 // the file wraps requests to compute worker to promises
 // so its possible to request asynchronously
 
-import { ComputeAPI, ComputeRequest, DeliverType, FontsTransmit } from "../interfaces";
+import { ComputeAPI, ComputeAPIData, ComputeRequest, ComputeResult } from "../interfaces";
 import { _worker } from "../skeleton/resolve";
 
-// simplify types
-type InitialRecord = ComputeRequest<'initial'> | FontsTransmit<'initial'>;
-type Computed = ComputeAPI<'computed'>;
-
 // Map object containing all request to resolve them later
-let requests = new Map<string, (value: Computed) => void>();
+let requests = new Map<string, (value: ComputeResult) => void>();
 
 // unique id of a request
 function generateName() {
@@ -19,25 +15,25 @@ function generateName() {
 }
 
 // the function that sends requests to compute worker and return a promise
-export default function compute(data: InitialRecord, deliver: DeliverType = 'texts') {
+export default function compute(data: ComputeRequest) {
   let requestID = generateName();
-  let promise = new Promise<Computed>(resolve => requests.set(requestID, resolve));
+  let promise = new Promise<ComputeResult>(resolve => requests.set(requestID, resolve));
 
   _worker.postMessage({
-    deliver: deliver,
+    deliver: 'ComputeRequest',
     request: requestID,
     data: data,
-  } as ComputeAPI<'initial'>);
+  } as ComputeAPI<ComputeRequest>);
   
   return promise;
 }
 
 // resolve a corresponding promise when answer received.
-_worker.onmessage = function (event: MessageEvent<Computed>) {
+_worker.onmessage = function (event: MessageEvent<ComputeAPI<ComputeResult>>) {
   let data = event.data;
 
   if (requests.has(data.request))
-    return requests.get(data.request)!(data) 
+    return requests.get(data.request)!(data.data) 
 
   console.error('[worker] No such request: ', data.request, requests);
 }

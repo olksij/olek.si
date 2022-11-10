@@ -1,8 +1,8 @@
 import { Font } from "opentype.js";
-import { FontsTransmit, FontStyle, MorphElement } from "../interfaces";
+import { FontsRecord, FontsTransmit, FontStyle, MorphElement } from "../interfaces";
 import { fontStyles } from "../scripts/fontStyles";
 
-export function elementToPath(element: MorphElement, fonts: FontsTransmit<'computed'>) {
+export function elementToPath(element: MorphElement, fonts: FontsRecord) {
   let icon = element.icon, text = element.text;
 
   let path = new Array<string>();

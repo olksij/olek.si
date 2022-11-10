@@ -3,15 +3,24 @@
    --- -- [URGENT] REFACTORING --- ---
    --- --- --- --- --- --- --- --- --- */
 
-import { AnimatingOrder, ComputedTextData, ComputeRecord, InputMorphData, PageContent, RenderElementConfig, CSSColor, AnimationConfig, IconConfig, FontStyle, TextConfig } from "../interfaces";
+import { AnimatingOrder, ComputeResult, ComputeRequest, PageContent, RenderElementInterface, CSSColor, AnimationConfig, IconConfig, FontStyle, TextConfig, Languages, FromMorphElement, SkeletonConfig, SkeletonBaseConfig } from "../interfaces";
 import { createElement, createFragment } from "./jsx";
 import print from './print';
 import './menu.ts';
 import { byId, tagById } from "./shorthands";
 import { onMenuClick } from "./menu";
 import { skeleton } from "../skeleton/resolve";
+import compute from "./worker";
 
-export default async function render(content: PageContent, computed: ComputeRecord<'computed'>): Promise<void> {
+declare global { 
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}
+
+export default async function render(content: PageContent): Promise<void> {
   if (!sessionStorage.getItem('loaded')) {
     await skeleton;
     sessionStorage.setItem('loaded', 'true');
@@ -21,7 +30,7 @@ export default async function render(content: PageContent, computed: ComputeReco
 
   /* --- FROM OLD SOURCES.TSX --- */
 
-  let images = {};
+  let images: Record<string, string> = {};
   Object.assign(images, content.images, content.vectors);
 
   document.head.append(...content.head);
@@ -44,8 +53,8 @@ export default async function render(content: PageContent, computed: ComputeReco
   }
 
   byId('lg')!.addEventListener("mouseenter", function () {
-    for (let lg in content.languages) {
-      byId('lg')!.append(<div onclick={() => window.history.pushState({}, '', `?${lg}`)} class="lgItem">{content.languages[lg]}</div>);
+    for (let lg in Object.keys(content.languages)) {
+      byId('lg')!.append(<div onclick={() => window.history.pushState({}, '', `?${lg}`)} class="lgItem">{content.languages[lg as Languages]}</div>);
     }
   });
 
@@ -57,7 +66,7 @@ export default async function render(content: PageContent, computed: ComputeReco
   let delay: number = 0;
 
   const urlSearchParams = new URLSearchParams(window.location.search);
-  const lang = Object.keys(Object.fromEntries(urlSearchParams.entries()))[0];
+  const lang = Object.keys(Object.fromEntries(urlSearchParams.entries()))[0] as Languages ?? 'en';
 
   // restore everything;
   for (let item in content.animatingOrder) {
@@ -74,7 +83,7 @@ export default async function render(content: PageContent, computed: ComputeReco
         let node = <img src={images[child]} alt={item} />;
         byId(child)?.append(node);
         // schedule the animation
-        let render = child => byId(child)?.classList.add('rendered');
+        let render = (child: string) => byId(child)?.classList.add('rendered');
         setTimeout(render, delay += data.delay, child);
       } 
       // skip morphing as we have inserted the image element
@@ -84,17 +93,28 @@ export default async function render(content: PageContent, computed: ComputeReco
     // iterate over queue
     for (let child of queue) {
       let element = content.elementConfig[child];
+        
+      let text = element.text ? {
+        text: content.texts[lang as Languages][child],
+        style: element.text,
+      } as TextConfig : undefined;
+  
+      let skeletonConfig: SkeletonBaseConfig = window['current'][child][0];
+      //skeletonConfig[2] ??= parseInt(byId(child)?.style.borderRadius ?? '0');
 
       let config = {
         id: child,
         height: element.text?.height ?? element.icon?.height!,
-        morph: computed[child],
+        morph: await compute({
+          from: { ...element.from, skeleton: skeletonConfig },
+          to: { text, icon: element.icon },
+        }),
         icon: element.icon,
         text: {
           style: element.text,
-          text: content.texts[lang][child]
+          text: content.texts[lang as Languages][child]
         } as TextConfig,
-      } as RenderElementConfig;
+      } as RenderElementInterface;
 
       setTimeout(renderElement, delay += data.delay, config);
     }
@@ -103,7 +123,7 @@ export default async function render(content: PageContent, computed: ComputeReco
   document.body.classList.add('rendered');
 }
 
-function renderElement(element: RenderElementConfig) {
+function renderElement(element: RenderElementInterface) {
   let parent = byId(element.id)!;
 
   let morph: SVGPathElement, text: SVGTextElement, icon: SVGPathElement;

@@ -1,15 +1,18 @@
-import * as webvitals from 'web-vitals';
+import * as _webvitals from 'web-vitals';
 import print from './print';
 
 const vitalsUrl = 'https://vitals.vercel-analytics.com/v1/vitals';
 
-for (var item in webvitals) webvitals[item]((metric) => sendMetrics(metric));
+let webvitals = _webvitals as Record<string, any>
+for (var item in webvitals) webvitals[item]((metric: MetricType) => sendMetrics(metric));
 
-function sendMetrics(metric) {
-  let connection_type = 'connection' in navigator && navigator['connection'] && 'effectiveType' in navigator['connection'] ? navigator['connection']['effectiveType'] : '';
+type MetricType = { id: string; name: string; value: { toString: () => string; }; };
+
+function sendMetrics(metric: MetricType) {
+  let connection_type = (navigator as any)?.connection?.effectiveType ?? '';
 
   const body = {
-    dsn: process.env.VERCEL_ANALYTICS_ID,
+    dsn: process.env.VERCEL_ANALYTICS_ID ?? '',
     id: metric.id,
     page: location.href,
     href: location.href,

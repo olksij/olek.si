@@ -4,7 +4,7 @@
 // elements that require SVG namespace
 let vectorElements = ["svg", "path", "animate", "text"];
 
-export const createElement = (tag: string | Function, props: Object, ...children: any): Element => {
+export const createElement = (tag: string | Function, props: Record<string, any>, ...children: any): Element => {
   if (typeof tag === "function") return tag(props, ...children);
 
   // element that will be embedded
@@ -25,7 +25,7 @@ export const createElement = (tag: string | Function, props: Object, ...children
   }
 
   // recursively add children
-  children.forEach(child => appendChild(element, child));
+  children.forEach((child: string | Element | (string | Element)[]) => appendChild(element, child));
 
   return element;
 };

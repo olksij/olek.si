@@ -1,3 +1,4 @@
+import { ComputeAPI, FontsTransmit } from "../interfaces";
 import { _worker } from "./resolve";
 
 // list of fonts to download
@@ -13,7 +14,7 @@ export default function fontLoader() {
   for (let font in fonts) {
     // create a request
     var request = new XMLHttpRequest();
-    request.open('get', fonts[font], true);
+    request.open('get', fonts[font as 'display' | 'text'], true);
     request.responseType = 'arraybuffer';
     // when font is loaded, pass it to document and service worker
     request.onload = function () {
@@ -22,7 +23,7 @@ export default function fontLoader() {
       fontResult[font] = res;
       // if all fonts are there, postMessage
       if (fontResult.display && fontResult.text)
-      _worker.postMessage({ deliver: 'fonts', data: fontResult }, fontResult);
+      _worker.postMessage({ deliver: 'FontsTransmit', data: fontResult } as ComputeAPI<FontsTransmit>, fontResult);
     }
     request.send();
   }

@@ -30,6 +30,10 @@
   border-radius: 18px;
 }
 
+#dd{
+  gap: 4px;
+}
+
 #d1,
 #d2 {
   height: 24px;

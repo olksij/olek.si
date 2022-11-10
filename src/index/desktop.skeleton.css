@@ -40,6 +40,10 @@ body {
   border-radius: 24px;
 }
 
+#dd {
+  gap: 8px
+}
+
 #d1,
 #d2 {
   height: 28px;

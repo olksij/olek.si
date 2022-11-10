@@ -4,8 +4,7 @@
     "moduleResolution": "Node",
     "target": "ESNext",
     "jsx": "react",
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
+    "strict": true,
     "jsxFactory": "createElement",
     "jsxFragmentFactory": "createFragment",
     "lib": [

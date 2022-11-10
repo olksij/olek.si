@@ -1,7 +1,7 @@
 import { byId } from "./shorthands";
 
 export default class MotionBlur {
-  private previous: DOMRect;
+  private previous!: DOMRect;
   private blurInvoked: boolean;
   private blurID: string;
   private watchID: string;
@@ -12,6 +12,7 @@ export default class MotionBlur {
     this.blurID = config.blurID;
     this.watchID = config.watchID;
     this.mult = config.mult;
+    this.blurInvoked = false;
   }
 
   invoke() {

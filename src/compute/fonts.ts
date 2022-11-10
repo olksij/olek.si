@@ -1,40 +1,20 @@
 // this file is about parsing and responding to received font objects
 
 import { parse } from 'opentype.js';
-import { FontsTransmit, FontType } from '../interfaces';
+import { FontsRecord, FontsTransmit, FontType } from '../interfaces';
 
 import print from '../scripts/print';
 
-// the class extends promise so we can ensure the 
-// fonts are loaded before we try to vectorize text
-class FontsArrayBuffer extends Promise<FontsTransmit<'computed'>> {
-  parsed: Record<FontType, FontsTransmit<'computed'> | undefined>;
-  
-  resolve: (value: FontsTransmit<'computed'> | PromiseLike<FontsTransmit<'computed'>>) => void;
+let resolve: (value: FontsRecord) => void;
+export default new Promise<FontsRecord>(r => resolve = r);
 
-  constructor() {
-    let promiseResolve;
-    super((resolve) => promiseResolve = resolve);
-    this.resolve = promiseResolve;
-  }
+// resolve to notify texts section about successful font load
+export function loadFonts(data: FontsTransmit) {
+  let parsed = {
+    display: parse(data.display),
+    text: parse(data.text)
+  };
 
-  // the method is called usually by compute.ts
-  load(request: string, data: FontsTransmit<'initial'>) {
-    parsed[data]
-
-    // resolve to notify texts section about successful font load
-    this.resolve(parsed);
-    print('⌨️ Fonts')
-  }
-
-  static get [Symbol.species]() {
-    return Promise;
-  }
-
-  get [Symbol.toStringTag]() {
-    return 'FontsArrayBuffer';
-  }
+  resolve(parsed);
+  print('⌨️ Fonts')
 }
-
-const fonts = new FontsArrayBuffer();
-export default fonts;

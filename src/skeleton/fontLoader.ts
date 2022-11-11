@@ -1,5 +1,4 @@
 import { ComputeAPI, FontsTransmit } from "../interfaces";
-import { _worker } from "./resolve";
 
 // list of fonts to download
 let fonts = {
@@ -23,7 +22,8 @@ export default function fontLoader() {
       fontResult[font] = res;
       // if all fonts are there, postMessage
       if (fontResult.display && fontResult.text)
-      _worker.postMessage({ deliver: 'FontsTransmit', data: fontResult } as ComputeAPI<FontsTransmit>, fontResult);
+      //@ts-ignore
+      window['worker'].postMessage({ deliver: 'FontsTransmit', data: fontResult } as ComputeAPI<FontsTransmit>, fontResult);
     }
     request.send();
   }

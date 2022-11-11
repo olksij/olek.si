@@ -2,7 +2,8 @@
 // so its possible to request asynchronously
 
 import { ComputeAPI, ComputeAPIData, ComputeRequest, ComputeResult } from "../interfaces";
-import { _worker } from "../skeleton/resolve";
+// @ts-ignore
+let worker = window['worker'];
 
 // Map object containing all request to resolve them later
 let requests = new Map<string, (value: ComputeResult) => void>();
@@ -19,7 +20,7 @@ export default function compute(data: ComputeRequest) {
   let requestID = generateName();
   let promise = new Promise<ComputeResult>(resolve => requests.set(requestID, resolve));
 
-  _worker.postMessage({
+  worker.postMessage({
     deliver: 'ComputeRequest',
     request: requestID,
     data: data,
@@ -29,7 +30,7 @@ export default function compute(data: ComputeRequest) {
 }
 
 // resolve a corresponding promise when answer received.
-_worker.onmessage = function (event: MessageEvent<ComputeAPI<ComputeResult>>) {
+worker.onmessage = function (event: MessageEvent<ComputeAPI<ComputeResult>>) {
   let data = event.data;
 
   if (requests.has(data.request))

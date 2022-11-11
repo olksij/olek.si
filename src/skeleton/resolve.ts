@@ -6,14 +6,15 @@
 //  _____________|_____________  ______|_____
 let skeletonResolve: () => void, rendered = 0;
 
-export const skeleton = new Promise<void>(resolve => skeletonResolve = resolve);
+const skeleton = new Event('skeleton');
 
 // Called to resolve            the total number     rendered
 // skeleton promise if need     _______|_______   ______|______
 export function resolveSkeleton(counter: number,  count: number) {
   if ((rendered += count) == counter)
-    skeletonResolve()
+    dispatchEvent(skeleton);
 }
 
 const workerURL = new URL('../compute/compute.ts', import.meta.url);
-export const _worker = new Worker(workerURL, { type: 'module' });
+//@ts-ignore
+window['worker'] = new Worker(workerURL, { type: 'module' });

@@ -9,8 +9,9 @@ import print from './print';
 import './menu.ts';
 import { byId, tagById } from "./shorthands";
 import { onMenuClick } from "./menu";
-import { skeleton } from "../skeleton/resolve";
+import { } from "../skeleton/resolve";
 import compute from "./worker";
+import waitFor from "./eventAsync";
 
 declare global { 
   namespace JSX {
@@ -21,8 +22,8 @@ declare global {
 }
 
 export default async function render(content: PageContent): Promise<void> {
-  await skeleton;
   if (!sessionStorage.getItem('loaded')) {
+    await waitFor('skeleton');
     sessionStorage.setItem('loaded', 'true');
   }
 

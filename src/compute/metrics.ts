@@ -1,7 +1,7 @@
 // this file calculates metrics for both [data.from] and [data.to]
 // before animating
 
-import { FontsTransmit, ComputeRequest, FontsRecord } from "../interfaces";
+import { ComputeRequest, FontsRecord } from "../interfaces";
 
 import { elementToPath, splitPath } from "./element";
 

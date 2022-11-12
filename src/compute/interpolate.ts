@@ -3,16 +3,14 @@
 
 //@ts-ignore
 import { interpolateAll } from "flubber"
-
-import fonts from "./fonts";
-import { ComputeAPI, ComputeRequest, ComputeResult } from "../interfaces";
+import { ComputeAPI, ComputeRequest, ComputeResult, FontsRecord } from "../interfaces";
 
 import print from '../scripts/print';
 import matrics from "./metrics";
 
-export default async function interpolate(request: string, data: ComputeRequest) {
+export default async function interpolate(request: string, data: ComputeRequest, fonts: FontsRecord) {
   // ensure that fonts are loaded and we can use them
-  let fontsData = await fonts;
+  let fontsData = fonts;
   
   let { fromPath, toPath, baseline, width } = matrics(fontsData, data);
 

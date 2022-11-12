@@ -1,9 +1,7 @@
-import { ComputeAPI, ComputeResult, Languages, PageContent, ComputeRequest, TextConfig, Size, FromMorphElement, SkeletonTree, SkeletonConfig } from '../interfaces';
+import { PageContent } from '../interfaces';
 
 import print from '../scripts/print';
 import render from '../scripts/render';
-import { byId } from '../scripts/shorthands';
-import compute from '../scripts/worker';
 
 // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
 

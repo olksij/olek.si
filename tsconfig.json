@@ -5,6 +5,8 @@
     "target": "ESNext",
     "jsx": "react",
     "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "jsxFactory": "createElement",
     "jsxFragmentFactory": "createFragment",
     "lib": [

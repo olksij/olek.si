@@ -1,12 +1,13 @@
 // this file is about parsing and responding to received font objects
 
 import { parse } from 'opentype.js';
-import { FontsRecord, FontsTransmit, FontType } from '../interfaces';
+import { FontsRecord, FontsTransmit } from '../interfaces';
 
 import print from '../scripts/print';
 
 let resolve: (value: FontsRecord) => void;
-export default new Promise<FontsRecord>(r => resolve = r);
+
+export let fontsResolve = (_resolve: (value: FontsRecord) => void) => resolve = _resolve;
 
 // resolve to notify texts section about successful font load
 export function loadFonts(data: FontsTransmit) {

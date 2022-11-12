@@ -1,5 +1,3 @@
-import { ComputeAPI, ComputeRequest } from "../interfaces";
-import { skeleton } from "../skeleton/resolve";
 import MotionBlur from "./motionBlur";
 import { byId, tagById } from "./shorthands";
 import compute from "./worker";
@@ -103,7 +101,7 @@ function closeMenu () {
 
 let isNavHovered = false;
 
-nav.onclick = function (event) {
+nav.onclick = function () {
   if (!cnt.classList.contains("navTapped")) {
     // open menu
     compute({}).then(console.log)

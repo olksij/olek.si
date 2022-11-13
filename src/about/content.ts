@@ -1,4 +1,4 @@
-export { head, languages } from '../general/general';
+export { head, languages } from '../general/page';
 
 import { ElementConfig, Languages, AnimatingOrder, SourceTextData } from '../interfaces';
 

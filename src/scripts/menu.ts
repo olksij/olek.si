@@ -1,3 +1,5 @@
+import aboutDom from "../about/dom";
+import buildTree from "../skeleton/buildTree";
 import MotionBlur from "./motionBlur";
 import { byId, tagById } from "./shorthands";
 import compute from "./worker";
@@ -90,6 +92,7 @@ rg.onmouseleave = closeMenu;
 
 export function onMenuClick() {
   closeMenu(), ignoreMouse = true;
+  buildTree(aboutDom);
 }
 
 

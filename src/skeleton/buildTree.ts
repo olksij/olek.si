@@ -21,9 +21,11 @@ export default function buildTree(skeleton: SkeletonTree | SkeletonConfig, paren
 
     var child = document.createElement(tagName);
     child.id = elementID, parent.append(child);
+
+    let cnt = { lf: tree[elementID], rg }
     
     composite(child, tree.config as SkeletonConfig, Object.keys(tree).length);
-    buildTree(elementID == 'rg' ? rg : tree[elementID] as SkeletonTree, child);
+    buildTree(elementID == 'cnt' ? cnt : tree[elementID], child);
   }
 
   // after finished reconstruction of the DOM, call further

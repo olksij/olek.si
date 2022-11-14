@@ -14,7 +14,3 @@ export function resolveSkeleton(counter: number,  count: number) {
   if ((rendered += count) == counter)
     dispatchEvent(skeleton);
 }
-
-const workerURL = new URL('../compute/compute.ts', import.meta.url);
-//@ts-ignore
-window['worker'] = new Worker(workerURL, { type: 'module' });

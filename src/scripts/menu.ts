@@ -93,6 +93,7 @@ rg.onmouseleave = closeMenu;
 export function onMenuClick() {
   closeMenu(), ignoreMouse = true;
   buildTree(aboutDom);
+  import('../about/page').then(aboutPage => aboutPage.load());
 }
 
 

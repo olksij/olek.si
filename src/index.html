@@ -13,6 +13,8 @@
     import indexDom from './index/dom';
 
     buildTree(indexDom);
+
+    window['worker'] = new Worker(new URL('./compute/compute.ts', import.meta.url), { type: 'module' });
   </script>
 
   <noscript>the page is powered by js :(</noscript>

@@ -2,4 +2,6 @@ import { onload } from '../general/entry';
 import * as content from './content';
 import { PageContent } from '../interfaces';
 
-addEventListener('load', () => onload(content as PageContent));
+export let load = () => onload(content as PageContent);
+
+addEventListener('load', load);

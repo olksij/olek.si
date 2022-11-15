@@ -81,7 +81,7 @@ export default async function render(content: PageContent): Promise<void> {
       for (let child of queue) {
         // insert node to an appropriate skeleton element;
         let node = <img src={images[child]} alt={item} />;
-        byId(child)?.append(node);
+        byId(child)?.replaceChildren(node);
         // schedule the animation
         let render = (child: string) => byId(child)?.classList.add('rendered');
         setTimeout(render, delay += data.delay, child);
@@ -92,6 +92,7 @@ export default async function render(content: PageContent): Promise<void> {
 
     // iterate over queue
     for (let child of queue) {
+      console.log(queue.length)
       let element = content.elementConfig[child];
         
       let text = element.text ? {
@@ -168,7 +169,7 @@ function renderElement(element: RenderElementInterface) {
   }
 
   parent.classList.add('rendered');
-  parent.append(root);
+  parent.replaceChildren(root);
 }
 
 function animate(element: SVGPathElement | SVGTextElement, config: AnimationConfig) {

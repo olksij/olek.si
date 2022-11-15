@@ -1,7 +1,6 @@
 // this file's mission is building a DOM tree from JS's Objects provided by HTML page
 
 import { SkeletonConfig, SkeletonTree } from '../interfaces';
-import fontLoader from './fontLoader';
 import composite from './composite';
 import rg from '../general/menu';
 
@@ -25,12 +24,13 @@ export default function buildTree(skeleton: SkeletonTree | SkeletonConfig, paren
     }
     else parent.append(child)
 
-    let cnt = { lf: tree[elementID], rg }
-    
+    let cnt;
+    if (document.getElementById('rg'))
+      cnt = { lf: tree[elementID] }
+    else 
+      cnt = { lf: tree[elementID], rg }
+        
     composite(child, tree.config as SkeletonConfig, Object.keys(tree).length);
     buildTree(elementID == 'cnt' ? cnt : tree[elementID], child);
   }
-
-  // after finished reconstruction of the DOM, call further
-  if (parent == document.body) fontLoader();
 }

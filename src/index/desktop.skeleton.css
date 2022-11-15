@@ -25,33 +25,13 @@ body {
 }
 
 #pf {
-  width: 160px;
-  height: 160px;
   z-index: 1;
   box-shadow: 0 0 0 24px var(--bg);
   margin-right: -32px;
 }
 
-#tt {
-  width: 386px;
-  height: 112px;
-  border-radius: 24px;
-}
-
 #dd {
   gap: 8px
-}
-
-#d1,
-#d2 {
-  height: 28px;
-  width: 337px;
-  border-radius: 8px 8px 8px 0;
-}
-
-#d2 {
-  width: 148px;
-  border-radius: 0 0 8px 8px;
 }
 
 #ps>a:last-child,
@@ -66,8 +46,4 @@ body {
 #ft {
   margin: 24px 128px;
   justify-content: space-between;
-}
-
-#ft>div {
-  width: 162px;
 }

@@ -4,6 +4,8 @@ import { resolveSkeleton } from "./resolve";
 // the total number of skeletons in the virtual tree
 let counter = 0;
 
+export const resetCounter = () => counter = 0;
+
 //                                                                               Element count if it's a group
 // Apply [SkeletonConfig] which preserves                                       and should be animated together      
 // size & borderRadius to skeleton element                                            ________|________

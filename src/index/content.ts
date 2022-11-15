@@ -114,10 +114,10 @@ export const restoreLinks: Record<string, Array<string>> = {
 
 export const restoreClicks: Record<string, Array<Function>> = {
   rg: [
-    () => onMenuClick(),
-    () => onMenuClick(),
-    () => onMenuClick(),
-    () => onMenuClick(),
+    () => onMenuClick('index'),
+    () => onMenuClick('about'),
+    () => onMenuClick('projects'),
+    () => onMenuClick('work'),
   ],
 };
 

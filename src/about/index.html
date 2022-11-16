@@ -9,10 +9,10 @@
 
 <body>
   <script type="module">
-    import buildTree from '../skeleton/buildTree';
+    import init from '../skeleton/init';
     import aboutDom from './dom';
 
-    buildTree(aboutDom);
+    init(aboutDom);
 
     window['worker'] = new Worker(new URL('../compute/compute.ts', import.meta.url), { type: 'module' });
   </script>

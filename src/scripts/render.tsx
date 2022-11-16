@@ -47,8 +47,9 @@ export default async function render(content: PageContent): Promise<void> {
     let children = byId(id)!.children;
     for (var i = 0; i < children.length; i++) {
       let childIndex = i;
-      children[i].addEventListener("click", () => content.restoreClicks[id][childIndex]()),
-        children[i].setAttribute("onclick", "return false");
+      if (!children[i].getAttribute("onclick"))
+        children[i].addEventListener("click", () => content.restoreClicks[id][childIndex]()),
+          children[i].setAttribute("onclick", "return false");
     }
   }
 
@@ -76,6 +77,7 @@ export default async function render(content: PageContent): Promise<void> {
     // if it's about animation children, put children into a queue
     if (data.children) queue = [...byId(item)!.children]
       .map(child => child.id); 
+
       
     if (data.image) {
       for (let child of queue) {
@@ -92,7 +94,6 @@ export default async function render(content: PageContent): Promise<void> {
 
     // iterate over queue
     for (let child of queue) {
-      console.log(queue.length)
       let element = content.elementConfig[child];
         
       let text = element.text ? {

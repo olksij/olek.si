@@ -20,5 +20,5 @@ export default async function interpolate(request: string, data: ComputeRequest,
 
   // send to main thread computed paths
   postMessage({ request, data: computed } as ComputeAPI<ComputeResult>);
-  print('💿 Computed')
+  //print('💿 Computed')
 }

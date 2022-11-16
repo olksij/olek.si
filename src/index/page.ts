@@ -4,4 +4,5 @@ import { PageContent } from '../interfaces';
 
 export let load = () => onload(content as PageContent);
 
-addEventListener('load', load);
+// @ts-ignore
+if (!window['renderListener']) addEventListener('load', load), window['renderListener'] = true;

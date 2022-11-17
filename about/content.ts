@@ -1,46 +1,22 @@
 export { head, languages } from '../general/page';
 
-import { ElementConfig, Languages, AnimatingOrder, SourceTextData } from '../interfaces';
+import { ElementConfig, Languages, AnimatingOrder, SourceTextData } from '../src/interfaces';
 
-// specific dates with custom description
-const dates: Record<string, Record<Languages, [string, string]>> = {  
-  "6-12":  {
-    en: ["🎂 It's my birthday today!", "June 12"],
-    sv: ["🎂 Jag fyller år idag!", "Juni 12"],
-    uk: ["🎂 Ce moje deń narodžnńa!", "Červeń 12"],
-  },
-  "8-24": {
-    en: ["Restoration of independence of Ukraine", "🇺🇦 August 24"],
-    sv: ["Återställande av Ukrainas självständighet", "🇺🇦 Augusti 24"],
-    uk: ["Vidnovlenńa nezaležnosti Ukrajiny", "🇺🇦 Serpeń 24"],
-  },
-  // more dates to come such as celebrations and holidays
-  default: {
-    en: ["Redefining the way humans interact", "with computers."],
-    sv: ["Omdefinierar hur människor interagerar", "med datorer."],
-    uk: ["Pereosmysĺuju sposib vzajemodiji", "z compjuteramy."],
-  }
-};
-
-import titleFromPath from 'bundle-text:/assets/raw/titleFromPath.txt';
 import nav from 'bundle-text:/assets/raw/nav.txt';
 import cr from 'bundle-text:/assets/raw/copyright.txt';
 import lg from 'bundle-text:/assets/raw/language.txt';
-
-let date = new Date();
-let description = dates[date.getMonth() + '-' + (date.getDate() + 1)] ?? dates.default;
 
 let font = fontStyles;
 
 export const elementConfig: Record<string, ElementConfig> = {
 /*
-  🏷️ Element ID     ✨ FontStyle           ⚙️ Custom placeholder
-  ______|______   ________|________     _____________|_____________ */
-  tt:           { text: font.title,     from: { path: titleFromPath } },
+  🏷️ Element ID     ✨ FontStyle        
+  ______|______   ________|________  */
+  tt:           { text: font.title, }, 
   d1:           { text: font.subtitle, },
   d2:           { text: font.subtitle, },
-  home:         { text: font.menuSelected },
-  about:        { text: font.menu },
+  home:         { text: font.menu },
+  about:        { text: font.menuSelected },
   projects:     { text: font.menu }, //          🖼️ Icon
   work:         { text: font.menu }, // _____________|_____________
   nav:          { text: font.action,    icon: { path: nav, gap: 8 } },
@@ -50,9 +26,9 @@ export const elementConfig: Record<string, ElementConfig> = {
 
 export const texts: SourceTextData = {
   en: {
-    tt: "Oleksii",
-    d1: description["en"][0],
-    d2: description["en"][1],
+    tt: "About me",
+    d1: 'I’m a Ukrainian he/him living in',
+    d2: 'Stockholm, Sweden.',
     home: "oleksii.xyz",
     about: "about",
     projects: "projects",
@@ -63,8 +39,6 @@ export const texts: SourceTextData = {
   },
   sv: {
     tt: "Oleksiy",
-    d1: description["sv"][0],
-    d2: description["sv"][1],
     home: "oleksii.xyz",
     about: "om mig",
     projects: "projekts",
@@ -75,8 +49,6 @@ export const texts: SourceTextData = {
   },
   uk: {
     tt: "Oleksij",
-    d1: description["uk"][0],
-    d2: description["uk"][1],
     home: "oleksii.xyz",
     about: "pro mene",
     projects: "projekty",
@@ -101,7 +73,7 @@ export const images: Record<string, string> = { pf }
 
 export const vectors: Record<string, string> = { tg, mx, gh, li, mt, cr, lg }
 
-import indexStylesheet from 'data-url:./styles.css';
+import indexStylesheet from 'data-url:../index/styles.css';
 import { onMenuClick } from '../scripts/menu';
 import { fontStyles } from '../scripts/fontStyles';
 
@@ -124,7 +96,6 @@ export const restoreClicks: Record<string, Array<Function>> = {
 // order and details of animating each node
 
 export const animatingOrder: Record<string, AnimatingOrder> = {
-  "pf":  { image: true,  delay: 0, alt: 'Profile Picture' },
   "tt":  { delay: 50 },
   "d1":  { delay: 500 },
   "d2":  { delay: 0 },

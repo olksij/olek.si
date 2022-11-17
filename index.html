@@ -9,16 +9,18 @@
 
 <body>
   <script type="module">
+    import computeWorker from './src/compute/compute.ts?worker'
+
     import init from './skeleton/init';
     import indexDom from './index/dom';
 
     init(indexDom);
+    import('./index/page.ts').then(page => page.load())
 
-    window['worker'] = new Worker(new URL('./compute/compute.ts', import.meta.url), { type: 'module' });
+    window['worker'] = new computeWorker();
   </script>
 
   <noscript>the page is powered by js :(</noscript>
-  <script src="./index/page.ts" async type="module"></script>
 </body>
 
 </html>

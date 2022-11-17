@@ -1,8 +1,8 @@
 // this file's mission is building a DOM tree from JS's Objects provided by HTML page
 
-import { SkeletonConfig, SkeletonTree } from '../interfaces';
+import { SkeletonConfig, SkeletonTree } from '../src/interfaces';
 import composite from './composite';
-import rg from '../general/menu';
+import rg from '../src/general/menu';
 
 // default DOM structure for menu
 

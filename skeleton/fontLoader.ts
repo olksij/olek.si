@@ -1,4 +1,4 @@
-import { ComputeAPI, FontsTransmit } from "../interfaces";
+import { ComputeAPI, FontsTransmit } from "../src/interfaces";
 
 // list of fonts to download
 let fonts = {

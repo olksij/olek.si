@@ -1,21 +1,25 @@
 {
   "compilerOptions": {
+    "target": "ESNext",
+    "useDefineForClassFields": true,
     "module": "ESNext",
     "moduleResolution": "Node",
-    "target": "ESNext",
-    "jsx": "react",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    
     "strict": true,
+    "noEmit": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "skipLibCheck": true,
+
+    "jsx": "react",
     "jsxFactory": "createElement",
     "jsxFragmentFactory": "createFragment",
-    "lib": [
-      "DOM",
-      "ESNext",
-      "DOM.Iterable",
-    ]
+
+    "lib": ["ESNext", "DOM"],
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src", "about", "index", "skeleton"]
 }

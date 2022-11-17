@@ -1,22 +1,46 @@
-export { head, languages } from '../general/page';
+export { head, languages } from '../src/general/page';
 
-import { ElementConfig, Languages, AnimatingOrder, SourceTextData } from '../interfaces';
+import { ElementConfig, Languages, AnimatingOrder, SourceTextData } from '../src/interfaces';
 
-import nav from 'bundle-text:/assets/raw/nav.txt';
-import cr from 'bundle-text:/assets/raw/copyright.txt';
-import lg from 'bundle-text:/assets/raw/language.txt';
+// specific dates with custom description
+const dates: Record<string, Record<Languages, [string, string]>> = {  
+  "6-12":  {
+    en: ["🎂 It's my birthday today!", "June 12"],
+    sv: ["🎂 Jag fyller år idag!", "Juni 12"],
+    uk: ["🎂 Ce moje deń narodžnńa!", "Červeń 12"],
+  },
+  "8-24": {
+    en: ["Restoration of independence of Ukraine", "🇺🇦 August 24"],
+    sv: ["Återställande av Ukrainas självständighet", "🇺🇦 Augusti 24"],
+    uk: ["Vidnovlenńa nezaležnosti Ukrajiny", "🇺🇦 Serpeń 24"],
+  },
+  // more dates to come such as celebrations and holidays
+  default: {
+    en: ["Redefining the way humans interact", "with computers."],
+    sv: ["Omdefinierar hur människor interagerar", "med datorer."],
+    uk: ["Pereosmysĺuju sposib vzajemodiji", "z compjuteramy."],
+  }
+};
+
+import titleFromPath from '/assets/raw/titleFromPath.txt?raw';
+import nav from '/assets/raw/nav.txt?raw';
+import cr from '/assets/raw/copyright.txt?raw';
+import lg from '/assets/raw/language.txt?raw';
+
+let date = new Date();
+let description = dates[date.getMonth() + '-' + (date.getDate() + 1)] ?? dates.default;
 
 let font = fontStyles;
 
 export const elementConfig: Record<string, ElementConfig> = {
 /*
-  🏷️ Element ID     ✨ FontStyle        
-  ______|______   ________|________  */
-  tt:           { text: font.title, }, 
+  🏷️ Element ID     ✨ FontStyle           ⚙️ Custom placeholder
+  ______|______   ________|________     _____________|_____________ */
+  tt:           { text: font.title,     from: { path: titleFromPath } },
   d1:           { text: font.subtitle, },
   d2:           { text: font.subtitle, },
-  home:         { text: font.menu },
-  about:        { text: font.menuSelected },
+  home:         { text: font.menuSelected },
+  about:        { text: font.menu },
   projects:     { text: font.menu }, //          🖼️ Icon
   work:         { text: font.menu }, // _____________|_____________
   nav:          { text: font.action,    icon: { path: nav, gap: 8 } },
@@ -26,9 +50,9 @@ export const elementConfig: Record<string, ElementConfig> = {
 
 export const texts: SourceTextData = {
   en: {
-    tt: "About me",
-    d1: 'I’m a Ukrainian he/him living in',
-    d2: 'Stockholm, Sweden.',
+    tt: "Oleksii",
+    d1: description["en"][0],
+    d2: description["en"][1],
     home: "oleksii.xyz",
     about: "about",
     projects: "projects",
@@ -39,6 +63,8 @@ export const texts: SourceTextData = {
   },
   sv: {
     tt: "Oleksiy",
+    d1: description["sv"][0],
+    d2: description["sv"][1],
     home: "oleksii.xyz",
     about: "om mig",
     projects: "projekts",
@@ -49,6 +75,8 @@ export const texts: SourceTextData = {
   },
   uk: {
     tt: "Oleksij",
+    d1: description["uk"][0],
+    d2: description["uk"][1],
     home: "oleksii.xyz",
     about: "pro mene",
     projects: "projekty",
@@ -62,20 +90,20 @@ export const texts: SourceTextData = {
 // more things to come soon;
 
 // inline pictures
-import pf from 'data-url:/assets/images/profilePicture.webp';
-import tg from 'data-url:/assets/vectors/telegram.svg';
-import mx from 'data-url:/assets/vectors/matrix.svg';
-import gh from 'data-url:/assets/vectors/github.svg';
-import li from 'data-url:/assets/vectors/linkedin.svg';
-import mt from 'data-url:/assets/vectors/email.svg';
+import pf from '/assets/images/profilePicture.webp?raw';
+import tg from '/assets/vectors/telegram.svg?raw';
+import mx from '/assets/vectors/matrix.svg?raw';
+import gh from '/assets/vectors/github.svg?raw';
+import li from '/assets/vectors/linkedin.svg?raw';
+import mt from '/assets/vectors/email.svg?raw';
 
 export const images: Record<string, string> = { pf }
 
 export const vectors: Record<string, string> = { tg, mx, gh, li, mt, cr, lg }
 
-import indexStylesheet from 'data-url:../index/styles.css';
-import { onMenuClick } from '../scripts/menu';
-import { fontStyles } from '../scripts/fontStyles';
+import indexStylesheet from './styles.css';
+import { onMenuClick } from '../src/scripts/menu';
+import { fontStyles } from '../src/scripts/fontStyles';
 
 export const stylesheets: string[] = [indexStylesheet];
 
@@ -96,6 +124,7 @@ export const restoreClicks: Record<string, Array<Function>> = {
 // order and details of animating each node
 
 export const animatingOrder: Record<string, AnimatingOrder> = {
+  "pf":  { image: true,  delay: 0, alt: 'Profile Picture' },
   "tt":  { delay: 50 },
   "d1":  { delay: 500 },
   "d2":  { delay: 0 },

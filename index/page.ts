@@ -1,6 +1,6 @@
-import { onload } from '../general/entry';
+import { onload } from '../src/general/entry';
 import * as content from './content';
-import { PageContent } from '../interfaces';
+import { PageContent } from '../src/interfaces';
 
 export let load = () => onload(content as PageContent);
 

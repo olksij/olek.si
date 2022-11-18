@@ -90,12 +90,12 @@ export const texts: SourceTextData = {
 // more things to come soon;
 
 // inline pictures
-import pf from '/assets/images/profilePicture.webp?raw';
-import tg from '/assets/vectors/telegram.svg?raw';
-import mx from '/assets/vectors/matrix.svg?raw';
-import gh from '/assets/vectors/github.svg?raw';
-import li from '/assets/vectors/linkedin.svg?raw';
-import mt from '/assets/vectors/email.svg?raw';
+import pf from '/assets/images/profilePicture.webp';
+import tg from '/assets/vectors/telegram.svg';
+import mx from '/assets/vectors/matrix.svg';
+import gh from '/assets/vectors/github.svg';
+import li from '/assets/vectors/linkedin.svg';
+import mt from '/assets/vectors/email.svg';
 
 export const images: Record<string, string> = { pf }
 

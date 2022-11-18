@@ -1,10 +1,11 @@
 import { ComputeAPI, FontsTransmit } from "../src/interfaces";
 
+import display from '/assets/fonts/displayBold.ttf?url';
+import text from '/assets/fonts/textMedium.ttf?url';
+
 // list of fonts to download
-let fonts = {
-  display: new URL('/assets/fonts/displayBold.ttf', import.meta.url),
-  text: new URL('/assets/fonts/textMedium.ttf', import.meta.url)
-};
+let fonts = { display, text };
+console.log(fonts)
 
 // and resolved ones
 let fontResult: Record<string, ArrayBuffer> = {};

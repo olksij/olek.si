@@ -21,11 +21,13 @@ export default class MotionBlur {
     this.blurInvoked = true;
     this.previous = byId(this.watchID)!.getBoundingClientRect();
     requestAnimationFrame(() => this.motionBlur());
+    console.log("___________INVOKE__________")
   }
 
   drop() {
     this.blurInvoked = false;
-    byId(this.blurID)!.setAttribute("style", "");
+    byId(this.blurID)!.style.filter = '';
+    console.log("___________DROP__________")
   }
 
   motionBlur() {
@@ -33,11 +35,13 @@ export default class MotionBlur {
 
     let current = byId(this.watchID)!.getBoundingClientRect();
     let diff = Math.abs(current.left - this.previous.left);
-    let blur = Math.round(diff * this.mult * 5) / 5;
+    let blur = Math.round(diff * this.mult * 10) / 10;
 
     this.previous = current;
 
-    byId(this.blurID)!.setAttribute("style", `filter: blur(${blur}px)`);
+    console.log('*'.repeat(blur))
+
+    byId(this.blurID)!.style.filter = blur ? `blur(${blur}px)` : '';
     requestAnimationFrame(() => this.motionBlur());
   }
 }

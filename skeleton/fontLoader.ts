@@ -5,7 +5,6 @@ import text from '/assets/fonts/textMedium.ttf?url';
 
 // list of fonts to download
 let fonts = { display, text };
-console.log(fonts)
 
 // and resolved ones
 let fontResult: Record<string, ArrayBuffer> = {};

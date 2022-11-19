@@ -6,13 +6,13 @@ import { interpolateAll } from "flubber"
 import { ComputeAPI, ComputeRequest, ComputeResult, FontsRecord } from "../interfaces";
 
 import print from '../scripts/print';
-import matrics from "./metrics";
+import metrics from "./metrics";
 
 export default async function interpolate(request: string, data: ComputeRequest, fonts: FontsRecord) {
   // ensure that fonts are loaded and we can use them
   let fontsData = fonts;
   
-  let { fromPath, toPath, baseline, width } = matrics(fontsData, data);
+  let { fromPath, toPath, baseline, width } = metrics(fontsData, data);
 
   // create interpolatee paths for svg <animate>
   let interpolator = interpolateAll(fromPath, toPath, { maxSegmentLength: 4, single: true });

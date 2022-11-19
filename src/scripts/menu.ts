@@ -94,7 +94,7 @@ rg.onmouseleave = closeMenu;
 
 const routes = {
   index:    [indexDom, () => import('../../index/page')],
-  about:    [aboutDom, () => import('../../index/page')],
+  about:    [aboutDom, () => import('../../about/page')],
   projects: [indexDom, () => import('../../index/page')],
   work:     [indexDom, () => import('../../index/page')],
 }

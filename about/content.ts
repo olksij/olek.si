@@ -1,10 +1,10 @@
-export { head, languages } from '../general/page';
+export { head, languages } from '../src/general/page';
 
-import { ElementConfig, Languages, AnimatingOrder, SourceTextData } from '../src/interfaces';
+import { ElementConfig, AnimatingOrder, SourceTextData } from '../src/interfaces';
 
-import nav from 'bundle-text:/assets/raw/nav.txt';
-import cr from 'bundle-text:/assets/raw/copyright.txt';
-import lg from 'bundle-text:/assets/raw/language.txt';
+import nav from '/assets/raw/nav.txt?raw';
+import cr from '/assets/raw/copyright.txt?raw';
+import lg from '/assets/raw/language.txt?raw';
 
 let font = fontStyles;
 
@@ -62,20 +62,20 @@ export const texts: SourceTextData = {
 // more things to come soon;
 
 // inline pictures
-import pf from 'data-url:/assets/images/profilePicture.webp';
-import tg from 'data-url:/assets/vectors/telegram.svg';
-import mx from 'data-url:/assets/vectors/matrix.svg';
-import gh from 'data-url:/assets/vectors/github.svg';
-import li from 'data-url:/assets/vectors/linkedin.svg';
-import mt from 'data-url:/assets/vectors/email.svg';
+import pf from '/assets/images/profilePicture.webp';
+import tg from '/assets/vectors/telegram.svg';
+import mx from '/assets/vectors/matrix.svg';
+import gh from '/assets/vectors/github.svg';
+import li from '/assets/vectors/linkedin.svg';
+import mt from '/assets/vectors/email.svg';
 
 export const images: Record<string, string> = { pf }
 
 export const vectors: Record<string, string> = { tg, mx, gh, li, mt, cr, lg }
 
-import indexStylesheet from 'data-url:../index/styles.css';
-import { onMenuClick } from '../scripts/menu';
-import { fontStyles } from '../scripts/fontStyles';
+import indexStylesheet from '../index/styles.css?url';
+import { onMenuClick } from '../src/scripts/menu';
+import { fontStyles } from '../src/scripts/fontStyles';
 
 export const stylesheets: string[] = [indexStylesheet];
 

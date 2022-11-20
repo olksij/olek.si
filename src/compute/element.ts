@@ -5,7 +5,7 @@ export function elementToPath(element: MorphElement, fonts: FontsRecord) {
   let icon = element.icon, text = element.text;
 
   let path = new Array<string>();
-  let width = 0, baseline = 0;
+  let width = 0, baseline = 0, points = 0;
 
   if (icon) {
     path.push(...splitPath(icon.path));
@@ -25,7 +25,7 @@ export function elementToPath(element: MorphElement, fonts: FontsRecord) {
     path.push(...splitPath(pathData.toPathData(2)));
   }
 
-  return { path, baseline, width };
+  return { path, baseline, width, points };
 }
 
 export function splitPath(path?: string) {

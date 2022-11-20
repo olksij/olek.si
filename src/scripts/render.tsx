@@ -138,7 +138,7 @@ function renderElement(element: RenderElementInterface) {
 
   if (element.morph) {
     morph = <path fill="var(--el)" fill-rule="evenodd" clip-rule="evenodd">
-      <animate attributeName="d" dur="0.8s" values={computed!.from + ';' + computed!.to} calcMode="spline" keySplines="0.87 0 0.13 1" />
+      <animate attributeName="d" dur=".8s" values={computed!.from + ';' + computed!.to} calcMode="spline" keySplines="0.87 0 0.13 1" />
     </path>
 
     root.append(toColor(morphOpacity(morph), element.text?.style.color ?? element.icon?.color!));
@@ -154,19 +154,19 @@ function renderElement(element: RenderElementInterface) {
     setTimeout((color) => {
       text.setAttribute("opacity", "1");
       text.setAttribute("fill", color);
-    }, 600, element.text.style.color);
+    }, 700, element.text.style.color);
 
-    root.append(toColor(elementOpacity(text), element.text.style.color));
+    root.append(text);
   }
 
   if (element.icon) {
     icon = <path opacity="0" d={element.icon?.path ?? ''}/>
-    root.append(toColor(elementOpacity(icon), color));
+    root.append(icon);
 
     setTimeout((color) => {
       icon.setAttribute("opacity", "1");
       icon.setAttribute("fill", color);
-    }, 600, color);
+    }, 700, color);
   }
 
   parent.classList.add('rendered');
@@ -191,7 +191,7 @@ function toColor(element: SVGPathElement | SVGTextElement, color: CSSColor) {
 function morphOpacity(element: SVGPathElement | SVGTextElement) {
   let config =[
     [{ opacity: 1 }, { opacity: 0 }],
-    { delay: 600, duration: 200 },
+    { delay: 800, duration: 0 },
   ] as AnimationConfig;
 
   return animate(element, config);
@@ -200,7 +200,7 @@ function morphOpacity(element: SVGPathElement | SVGTextElement) {
 function elementOpacity(element: SVGPathElement | SVGTextElement) {
   let config =[
     [{ opacity: 0 }, { opacity: 1 }],
-    { delay: 600, duration: 200, easing: 'cubic-bezier(0.5, 0, 0.13, 1)' },
+    { delay: 800, duration: 0, easing: 'cubic-bezier(0.5, 0, 0.13, 1)' },
   ] as AnimationConfig;
 
   return animate(element, config);

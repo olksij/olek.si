@@ -156,12 +156,12 @@ function renderElement(element: RenderElementInterface) {
       text.setAttribute("fill", color);
     }, 700, element.text.style.color);
 
-    root.append(text);
+    root.append(toColor(elementOpacity(text), color));
   }
 
   if (element.icon) {
     icon = <path opacity="0" d={element.icon?.path ?? ''}/>
-    root.append(icon);
+    root.append(toColor(elementOpacity(icon), color))
 
     setTimeout((color) => {
       icon.setAttribute("opacity", "1");
@@ -191,7 +191,7 @@ function toColor(element: SVGPathElement | SVGTextElement, color: CSSColor) {
 function morphOpacity(element: SVGPathElement | SVGTextElement) {
   let config =[
     [{ opacity: 1 }, { opacity: 0 }],
-    { delay: 800, duration: 0 },
+    { delay: 700, duration: 100 },
   ] as AnimationConfig;
 
   return animate(element, config);
@@ -200,7 +200,7 @@ function morphOpacity(element: SVGPathElement | SVGTextElement) {
 function elementOpacity(element: SVGPathElement | SVGTextElement) {
   let config =[
     [{ opacity: 0 }, { opacity: 1 }],
-    { delay: 800, duration: 0, easing: 'cubic-bezier(0.5, 0, 0.13, 1)' },
+    { delay: 700, duration: 100, easing: 'cubic-bezier(0.5, 0, 0.13, 1)' },
   ] as AnimationConfig;
 
   return animate(element, config);

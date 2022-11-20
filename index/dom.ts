@@ -1,4 +1,4 @@
-import { SkeletonTree } from "../interfaces";
+import { SkeletonTree } from "../src/interfaces";
 
 const indexDom: SkeletonTree = {
   cnt: {

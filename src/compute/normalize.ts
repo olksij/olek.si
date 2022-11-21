@@ -80,7 +80,7 @@ export function distance(a: PathPoint, b: PathPoint) {
   return Math.sqrt((a[0] - b[0]) * (a[0] - b[0]) + (a[1] - b[1]) * (a[1] - b[1]));
 }
 
-const decimals = Math.pow(10, 2);
+const decimals = Math.pow(10, 1);
 // set float number precision
 function precise(number: number) {
   return Math.round(number * decimals) / decimals;

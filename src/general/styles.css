@@ -36,6 +36,10 @@ svg {
   overflow: visible;
 }
 
+svg>text, svg>path {
+  transition: 0s !important;
+}
+
 body.rendered {
   animation: 5s linear background;
   background:

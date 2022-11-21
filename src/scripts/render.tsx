@@ -21,8 +21,8 @@ declare global {
 }
 
 export default async function render(content: PageContent): Promise<void> {
+  await waitFor('skeleton');
   if (!sessionStorage.getItem('loaded')) {
-    await waitFor('skeleton');
     sessionStorage.setItem('loaded', 'true');
   }
 
@@ -133,16 +133,9 @@ function renderElement(element: RenderElementInterface) {
   let morph: SVGPathElement, text: SVGTextElement, icon: SVGPathElement;
   let computed = element.morph, width = element.morph?.width;
   let color = element.text?.style.color ?? element.icon?.color!;
-
+  
+  let elements: (SVGTextElement | SVGPathElement)[] = [];
   let root: SVGElement = <svg viewBox={`0 0 ${width} ${element.height}`}></svg>
-
-  if (element.morph) {
-    morph = <path fill="var(--el)" fill-rule="evenodd" clip-rule="evenodd">
-      <animate attributeName="d" dur=".8s" values={computed!.from + ';' + computed!.to} calcMode="spline" keySplines="0.87 0 0.13 1" />
-    </path>
-
-    root.append(toColor(morphOpacity(morph), element.text?.style.color ?? element.icon?.color!));
-  }
 
   if (element.text) {
     let font = element.text.style;
@@ -151,22 +144,34 @@ function renderElement(element: RenderElementInterface) {
     let style = `font-family:${font.type ?? 'text'}; letter-spacing:${font.letterSpacing}em; font-size:${font.fontSize}px`;
     text = <text opacity="0" style={style} x={textLeft} y={computed!.baseline! - .25}>{element.text.text}</text>;
 
-    setTimeout((color) => {
-      text.setAttribute("opacity", "1");
-      text.setAttribute("fill", color);
-    }, 700, element.text.style.color);
+    elements.push(text);
 
-    root.append(toColor(elementOpacity(text), color));
+    root.append(text);
   }
 
   if (element.icon) {
     icon = <path opacity="0" d={element.icon?.path ?? ''}/>
-    root.append(toColor(elementOpacity(icon), color))
+    root.append(icon)
 
-    setTimeout((color) => {
-      icon.setAttribute("opacity", "1");
-      icon.setAttribute("fill", color);
-    }, 700, color);
+    elements.push(icon);
+  }
+
+  if (element.morph) {
+    let renderElement = () => {
+      elements.forEach(e => { e.setAttribute("opacity", "1"), e.setAttribute("fill", color)})
+      morph.remove();
+    };
+    
+    morph = <path fill="var(--el)" d={computed!.to} fill-rule="evenodd" clip-rule="evenodd">
+      <animate attributeName="d" dur=".8s" values={computed!.from + ';' + computed!.to} 
+        calcMode="spline" keySplines="0.87 0 0.13 1" onendEvent={renderElement} />
+    </path>
+
+    setTimeout(() => {
+      morph.setAttribute('fill', color)
+    }, 600);
+
+    root.append(toColor(morph, color));
   }
 
   parent.classList.add('rendered');
@@ -181,26 +186,7 @@ function animate(element: SVGPathElement | SVGTextElement, config: AnimationConf
 function toColor(element: SVGPathElement | SVGTextElement, color: CSSColor) {
   let config = [
     [{ fill: 'var(--el)' }, { fill: color }],
-    { delay: 400, duration: 400, easing: 'cubic-bezier(0.87, 0, 0.13, 1)' }
-  ] as AnimationConfig;
-
-  return animate(element, config);
-}
-
-
-function morphOpacity(element: SVGPathElement | SVGTextElement) {
-  let config =[
-    [{ opacity: 1 }, { opacity: 0 }],
-    { delay: 700, duration: 100 },
-  ] as AnimationConfig;
-
-  return animate(element, config);
-}
-
-function elementOpacity(element: SVGPathElement | SVGTextElement) {
-  let config =[
-    [{ opacity: 0 }, { opacity: 1 }],
-    { delay: 700, duration: 100, easing: 'cubic-bezier(0.5, 0, 0.13, 1)' },
+    { delay: 200, duration: 600, easing: 'cubic-bezier(0.87, 0, 0.13, 1)' }
   ] as AnimationConfig;
 
   return animate(element, config);

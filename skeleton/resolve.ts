@@ -12,5 +12,5 @@ const skeleton = new Event('skeleton');
 // skeleton promise if need     _______|_______   ______|______
 export function resolveSkeleton(counter: number,  count: number) {
   if ((rendered += count) == counter)
-    dispatchEvent(skeleton);
+    dispatchEvent(skeleton), sessionStorage.setItem('skeleton', 'true');
 }

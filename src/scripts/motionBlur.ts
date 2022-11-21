@@ -21,13 +21,11 @@ export default class MotionBlur {
     this.blurInvoked = true;
     this.previous = byId(this.watchID)!.getBoundingClientRect();
     requestAnimationFrame(() => this.motionBlur());
-    console.log("___________INVOKE__________")
   }
 
   drop() {
     this.blurInvoked = false;
     byId(this.blurID)!.style.filter = '';
-    console.log("___________DROP__________")
   }
 
   motionBlur() {

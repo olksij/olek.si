@@ -26,10 +26,6 @@ export default async function render(content: PageContent): Promise<void> {
     sessionStorage.setItem('loaded', 'true');
   }
 
-  // TODO: organize things here
-
-  /* --- FROM OLD SOURCES.TSX --- */
-
   let images: Record<string, string> = {};
   Object.assign(images, content.images, content.vectors);
 
@@ -101,10 +97,12 @@ export default async function render(content: PageContent): Promise<void> {
         style: element.text,
       } as TextConfig : undefined;
 
-      let mobile: 0 | 1 = window.innerWidth < 920 ? 0 : ( window['current'][child][1] ? 1 : 0)
+      let mobile: 0 | 1 = window.innerWidth < 920 ? 0 : (window['current'][child][1] ? 1 : 0)
   
       let skeletonConfig: SkeletonBaseConfig = window['current'][child][mobile];
       //skeletonConfig[2] ??= parseInt(byId(child)?.style.borderRadius ?? '0');
+
+      if (byId(child)?.hasChildNodes()) continue;
 
       let config = {
         id: child,
@@ -163,7 +161,7 @@ function renderElement(element: RenderElementInterface) {
     };
     
     morph = <path fill="var(--el)" d={computed!.to} fill-rule="evenodd" clip-rule="evenodd">
-      <animate attributeName="d" dur=".8s" values={computed!.from + ';' + computed!.to} 
+      <animate attributeName="d" dur="0.8s" values={computed!.from + ';' + computed!.to} 
         calcMode="spline" keySplines="0.87 0 0.13 1" onendEvent={renderElement} />
     </path>
 

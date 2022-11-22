@@ -16,12 +16,13 @@ body {
 }
 
 #lf {
-  margin: 0 128px;
+  margin-left: 128px;
   gap: 48px;
 }
 
 #title {
   align-items: center;
+  justify-content: left !important;
 }
 
 #pf {

@@ -64,18 +64,20 @@
   }
 }
 
-.navTransformed {
+#cnt, #cnt>* {
   transition: all var(--outSmooth), transform 0s, filter 0s;
+}
+
+#cnt>*>* {
+  transition: all var(--outSmooth);
+}
+
+.navTransformed {
   transform: scaleY(0.001);
 }
 
 .navTransformed>* {
-  transition: all var(--outSmooth), transform 0s;
   transform: scaleY(1000);
-}
-
-.navTransformed>*>* {
-  transition: all var(--outSmooth);
 }
 
 .navOpened>#lf>div {
@@ -114,7 +116,7 @@
 #rg.hover>.rendered {
   padding: 16px 32px;
   margin: -16px -32px;
-  margin-right: 192px;
+  transform: translateX(-160px);
 }
 
 #rg.hover>.rendered>svg>text {

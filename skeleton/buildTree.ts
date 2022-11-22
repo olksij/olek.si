@@ -16,21 +16,22 @@ export default function buildTree(skeleton: SkeletonTree | SkeletonConfig, paren
 
   for (let elementID of Object.keys(tree)) {
     if (elementID == 'config') continue;
+    
+    let cnt: SkeletonTree = { lf: tree[elementID] };
 
-    var child = (document.getElementById(elementID) && (elementID == 'cnt' || elementID == 'rg')) ? document.getElementById(elementID)! : document.createElement(tagName);
-    child.id = elementID;
-    if (document.getElementById(elementID)) {
-      parent.replaceChild(child, document.getElementById(elementID)!);
+    if (!(document.getElementById(elementID) && (elementID == 'cnt' || elementID == 'lf'))) {
+      var child = document.createElement(tagName);
+      child.id = elementID;
+
+      if (document.getElementById(elementID)) {
+        parent.replaceChild(child, document.getElementById(elementID)!)
+      }
+      else parent.append(child)
+
+      cnt.rg = rg;
+      composite(child, tree.config as SkeletonConfig, Object.keys(tree).length);
     }
-    else parent.append(child)
 
-    let cnt;
-    if (document.getElementById('rg'))
-      cnt = { lf: tree[elementID] }
-    else 
-      cnt = { lf: tree[elementID], rg }
-        
-    composite(child, tree.config as SkeletonConfig, Object.keys(tree).length);
-    buildTree(elementID == 'cnt' ? cnt : tree[elementID], child);
+    buildTree(elementID == 'cnt' ? cnt : tree[elementID], document.getElementById(elementID)!);
   }
 }

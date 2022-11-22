@@ -12,7 +12,7 @@ export const elementConfig: Record<string, ElementConfig> = {
 /*
   🏷️ Element ID     ✨ FontStyle        
   ______|______   ________|________  */
-  tt:           { text: font.title, }, 
+  tt:           { text: font.h2, }, 
   d1:           { text: font.subtitle, },
   d2:           { text: font.subtitle, },
   home:         { text: font.menu },

@@ -10,6 +10,12 @@
   width: 100%;
 }
 
+@media (min-width: 920px) {
+  #rg {
+    width: 50vw;
+  }
+}
+
 #rg>a {
   height: 24px;
   border-radius: 6px;

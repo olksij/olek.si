@@ -8,6 +8,13 @@ export const fontStyles: Record<FontStyleType, FontStyle> = {
     letterSpacing: -.04,
     color: 'var(--text)',
   },
+  h2: {
+    type: 'display',
+    fontSize: 96,
+    height: 96,
+    letterSpacing: -.04,
+    color: 'var(--text)',
+  },
   subtitle: {
     fontSize: 20,
     height: 28,

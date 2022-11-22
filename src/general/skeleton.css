@@ -30,7 +30,7 @@ body {
   opacity: 0%;
 }
 
-.sl {
+.sl:not(.rendered) {
   animation: .6s cubic-bezier(0, 0.5, 0, 1) blur;
   background: -50vw 0/75% 100% fixed no-repeat linear-gradient(0.25turn, transparent, #FAFAFC88, transparent),
     linear-gradient(var(--el), var(--el));

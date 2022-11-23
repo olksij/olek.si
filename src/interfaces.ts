@@ -110,18 +110,14 @@ export interface FontStyle {
 }
 
 export interface PageContent {
-  // ↓ general data, to be refactored ↓ // 
-  head: HTMLElement[],
-  languages: Record<Languages, string>,
-  // ↑ general data, to be refactored ↑ // 
-  elementConfig: Record<string, ElementConfig>;
-  texts: SourceTextData;
-  images: Record<string, string>;
-  vectors: Record<string, string>;
-  stylesheets: string[];  
-  restoreLinks: Record<string, Array<string>>;  
-  restoreClicks: Record<string, Array<Function>>;  
-  animatingOrder: Record<string, AnimatingOrder>;  
+  animatingOrder?: Record<string, AnimatingOrder>;  
+  elementConfig?: Record<string, ElementConfig>;
+  texts?: SourceTextData;
+  images?: Record<string, string>;
+  vectors?: Record<string, string>;
+  stylesheets?: string[];  
+  restoreLinks?: Record<string, Array<string>>;  
+  restoreClicks?: Record<string, Array<Function>>;  
 }
 
 export interface SkeletonTree { [id: string]: SkeletonConfig | SkeletonTree; }

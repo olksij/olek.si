@@ -11,6 +11,7 @@ import { byId } from "./shorthands";
 import { onMenuClick } from "./menu";
 import compute from "./worker";
 import waitFor from "./eventAsync";
+import { head, languages } from "../general/page";
 
 declare global { 
   namespace JSX {
@@ -29,9 +30,9 @@ export default async function render(content: PageContent): Promise<void> {
   let images: Record<string, string> = {};
   Object.assign(images, content.images, content.vectors);
 
-  document.head.append(...content.head);
+  document.head.append(...head);
 
-  for (var style of content.stylesheets) {
+  for (var style of content.stylesheets ?? []) {
     document.head.append(<link rel="stylesheet" href={style} />)
   }
 
@@ -44,14 +45,14 @@ export default async function render(content: PageContent): Promise<void> {
     for (var i = 0; i < children.length; i++) {
       let childIndex = i;
       if (!children[i].getAttribute("onclick"))
-        children[i].addEventListener("click", () => content.restoreClicks[id][childIndex]()),
+        children[i].addEventListener("click", () => content.restoreClicks?.[id][childIndex]()),
           children[i].setAttribute("onclick", "return false");
     }
   }
 
   byId('lg')!.addEventListener("mouseenter", function () {
-    for (let lg in Object.keys(content.languages)) {
-      byId('lg')!.append(<div onclick={() => window.history.pushState({}, '', `?${lg}`)} class="lgItem">{content.languages[lg as Languages]}</div>);
+    for (let lg in Object.keys(languages)) {
+      byId('lg')!.append(<div onclick={() => window.history.pushState({}, '', `?${lg}`)} class="lgItem">{languages[lg as Languages]}</div>);
     }
   });
 
@@ -90,10 +91,10 @@ export default async function render(content: PageContent): Promise<void> {
 
     // iterate over queue
     for (let child of queue) {
-      let element = content.elementConfig[child];
+      let element = content.elementConfig?.[child]!;
         
       let text = element.text ? {
-        text: content.texts[lang as Languages][child],
+        text: content.texts?.[lang as Languages][child],
         style: element.text,
       } as TextConfig : undefined;
 
@@ -114,7 +115,7 @@ export default async function render(content: PageContent): Promise<void> {
         icon: element.icon,
         text: {
           style: element.text,
-          text: content.texts[lang as Languages][child]
+          text: content.texts?.[lang as Languages][child]
         } as TextConfig,
       } as RenderElementInterface;
 

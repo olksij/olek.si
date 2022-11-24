@@ -1,7 +1,7 @@
-import aboutDom from "../../about/dom";
-import indexDom from "../../index/dom";
-import buildTree from "../../skeleton/buildTree";
-import { resetCounter } from "../../skeleton/composite";
+import aboutDom from "../about/dom";
+import indexDom from "../index/dom";
+import buildTree from "../skeleton/buildTree";
+import { resetCounter } from "../skeleton/composite";
 import MotionBlur from "./motionBlur";
 import { byId, tagById } from "./shorthands";
 import compute from "./worker";
@@ -93,10 +93,10 @@ function openMenu(event: MouseEvent) {
 rg.onmouseleave = closeMenu;
 
 const routes = {
-  index:    [indexDom, () => import('../../index/page')],
-  about:    [aboutDom, () => import('../../about/page')],
-  projects: [indexDom, () => import('../../index/page')],
-  work:     [indexDom, () => import('../../index/page')],
+  index:    [indexDom, () => import('../index/page')],
+  about:    [aboutDom, () => import('../about/page')],
+  projects: [indexDom, () => import('../index/page')],
+  work:     [indexDom, () => import('../index/page')],
 }
 
 export function onMenuClick(route: string) {

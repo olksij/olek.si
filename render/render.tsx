@@ -11,7 +11,7 @@ import { byId } from "./shorthands";
 import { onMenuClick } from "./menu";
 import compute from "./worker";
 import waitFor from "./eventAsync";
-import { head, languages } from "../general/page";
+import { head, languages } from "../common/page";
 
 declare global { 
   namespace JSX {

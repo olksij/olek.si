@@ -1,4 +1,4 @@
-import { FontStyle, FontStyleType } from "../interfaces";
+import { FontStyle, FontStyleType } from "../../interfaces";
 
 export const fontStyles: Record<FontStyleType, FontStyle> = {
   title: {

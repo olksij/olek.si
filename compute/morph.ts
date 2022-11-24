@@ -1,7 +1,7 @@
 // this file's purpose is to vectorize and interpolate
 // texts before they are rendered in a second thread so ui isn't blocked
 
-import { ComputeAPI, ComputeRequest, ComputeResult, FontsRecord } from "../interfaces";
+import { ComputeAPI, ComputeRequest, ComputeResult, FontsRecord } from "../../interfaces";
 
 import normalize from "./normalize";
 import metrics from "./metrics";

@@ -1,4 +1,4 @@
-@import '../src/general/skeleton.css';
+@import '../common/skeleton.css';
 
 #cnt {
   flex-direction: row;

@@ -1,4 +1,4 @@
-import { ComputeAPI, FontsTransmit } from "../src/interfaces";
+import { ComputeAPI, FontsTransmit } from "../interfaces";
 
 import display from '/assets/fonts/displayBold.ttf?url';
 import text from '/assets/fonts/textMedium.ttf?url';

@@ -1,4 +1,4 @@
-import { SkeletonTree } from "../src/interfaces";
+import { SkeletonTree } from "../interfaces";
 
 import buildTree from "./buildTree";
 import fontLoader from "./fontLoader";

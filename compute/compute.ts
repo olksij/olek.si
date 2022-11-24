@@ -4,7 +4,7 @@
 import { ComputeAPI, FontsTransmit, ComputeRequest, ComputeAPIData, FontsRecord } from '../interfaces';
 
 import { fontsResolve, loadFonts } from './fonts';
-import interpolate from './interpolate';
+import morph from './morph';
 
 let fonts: Promise<FontsRecord> = new Promise(fontsResolve);
 
@@ -14,5 +14,5 @@ onmessage = async (message: MessageEvent<ComputeAPI<ComputeAPIData>>) => {
   let request = input.request, deliver = input.deliver, data = input.data;
 
   if (deliver == 'FontsTransmit') loadFonts(data as FontsTransmit);
-  if (deliver == 'ComputeRequest') interpolate(request!, data as ComputeRequest, await fonts);
+  if (deliver == 'ComputeRequest') morph(request!, data as ComputeRequest, await fonts);
 }

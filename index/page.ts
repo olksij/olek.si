@@ -1,4 +1,4 @@
-import { ElementConfig, Languages, AnimatingOrder, SourceTextData } from '../src/interfaces';
+import { ElementConfig, Languages, AnimatingOrder, SourceTextData } from '../interfaces';
 
 // specific dates with custom description
 const dates: Record<string, Record<Languages, [string, string]>> = {  
@@ -100,8 +100,8 @@ const images: Record<string, string> = { pf }
 const vectors: Record<string, string> = { tg, mx, gh, li, mt, cr, lg }
 
 import indexStylesheet from './styles.css';
-import { onMenuClick } from '../src/scripts/menu';
-import { fontStyles } from '../src/scripts/fontStyles';
+import { onMenuClick } from '../render/menu';
+import { fontStyles } from '../common/fontStyles';
 
 const stylesheets: string[] = [indexStylesheet];
 
@@ -133,6 +133,6 @@ const animatingOrder: Record<string, AnimatingOrder> = {
   "lg":  { delay: 100 },
 }
 
-import { onload } from '../src/general/entry';
+import { onload } from '../common/page';
 export let load = () => onload({ animatingOrder, elementConfig, images,
   restoreClicks, restoreLinks, stylesheets, texts, vectors });

@@ -1,4 +1,4 @@
-import { ElementConfig, AnimatingOrder, SourceTextData } from '../src/interfaces';
+import { ElementConfig, AnimatingOrder, SourceTextData } from '../interfaces';
 
 import nav from '/assets/raw/nav.txt?raw';
 import cr from '/assets/raw/copyright.txt?raw';
@@ -69,8 +69,8 @@ import mt from '/assets/vectors/email.svg';
 const vectors: Record<string, string> = { tg, mx, gh, li, mt, cr, lg }
 
 import indexStylesheet from '../index/styles.css?url';
-import { onMenuClick } from '../src/scripts/menu';
-import { fontStyles } from '../src/scripts/fontStyles';
+import { onMenuClick } from '../render/menu';
+import { fontStyles } from '../common/fontStyles';
 
 const stylesheets: string[] = [indexStylesheet];
 
@@ -100,6 +100,6 @@ const animatingOrder: Record<string, AnimatingOrder> = {
   lg:  { delay: 100 },
 }
 
-import { onload } from '../src/general/entry';
+import { onload } from '../common/page';
 export let load = () => onload({ animatingOrder, elementConfig, restoreClicks, 
   restoreLinks, stylesheets, texts, vectors });

@@ -3,7 +3,7 @@
 import { parse } from 'opentype.js';
 import { FontsRecord, FontsTransmit } from '../interfaces';
 
-import print from '../scripts/print';
+import print from '../render/print';
 
 let resolve: (value: FontsRecord) => void;
 

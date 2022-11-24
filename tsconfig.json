@@ -19,7 +19,7 @@
     "jsxFactory": "createElement",
     "jsxFragmentFactory": "createFragment",
 
-    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "lib": ["ESNext", "DOM", "DOM.Iterable"]
   },
-  "include": ["src", "about", "index", "skeleton"]
+  "include": ["src", "about", "index", "skeleton", "compute/fonts.ts", "general", "scripts", "compute", "interfaces.ts", "vite-env.d.ts"]
 }

@@ -47,45 +47,17 @@ const elementConfig: Record<string, ElementConfig> = {
 };
 
 const texts: SourceTextData = {
-  en: {
-    tt: "Oleksii",
-    d1: description["en"][0],
-    d2: description["en"][1],
-    home: "oleksii.xyz",
-    about: "about",
-    projects: "projects",
-    work: "work",
-    nav: "Navigation",
-    cr: "2018-2022 Oleksii Besida",
-    lg: "English",
-  },
-  sv: {
-    tt: "Oleksiy",
-    d1: description["sv"][0],
-    d2: description["sv"][1],
-    home: "oleksii.xyz",
-    about: "om mig",
-    projects: "projekts",
-    work: "alster",
-    nav: "Navigering",
-    cr: "2018-2022 Oleksiy Besida",
-    lg: "Svenska",
-  },
-  uk: {
-    tt: "Oleksij",
-    d1: description["uk"][0],
-    d2: description["uk"][1],
-    home: "oleksii.xyz",
-    about: "pro mene",
-    projects: "projekty",
-    work: "roboty",
-    nav: "Naviǧacija",
-    cr: "2018-2022 Oleksij Besida",
-    lg: "Ukrajinśka",
-  },
+  tt: { en: "Oleksii", sv: "Oleksiy", uk: "Oleksij" },
+  d1: { en: description["en"][0], sv: description["sv"][0], uk: description["uk"][0] },
+  d2: { en: description["en"][1], sv: description["sv"][1], uk: description["uk"][1] },
+  home: { en: "oleksii.xyz", sv: "oleksii.xyz", uk: "oleksii.xyz", },
+  about: { en: "about", sv: "om mig", uk: "pro mene" },
+  projects: { en: "projects", sv: "projekts", uk: "projekty" },
+  work: { en: "work", sv: "alster", uk: "roboty" },
+  nav: { en: "Navigation", sv: "Navigering", uk: "Naviǧacija" },
+  cr: { en: "2018-2022 Oleksii Besida", sv: "2018-2022 Oleksiy Besida", uk: "2018-2022 Oleksij Besida" },
+  lg: { en: "English", sv: "Svenska", uk: "Ukrajinśka" }
 };
-
-// more things to come soon;
 
 // inline pictures
 import pf from '/assets/images/profilePicture.webp';

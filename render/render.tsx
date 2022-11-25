@@ -94,7 +94,7 @@ export default async function render(content: PageContent): Promise<void> {
       let element = content.elementConfig?.[child]!;
         
       let text = element.text ? {
-        text: content.texts?.[lang as Languages][child],
+        text: content.texts?.[child][lang as Languages],
         style: element.text,
       } as TextConfig : undefined;
 
@@ -115,7 +115,7 @@ export default async function render(content: PageContent): Promise<void> {
         icon: element.icon,
         text: {
           style: element.text,
-          text: content.texts?.[lang as Languages][child]
+          text: content.texts?.[child][lang as Languages]
         } as TextConfig,
       } as RenderElementInterface;
 

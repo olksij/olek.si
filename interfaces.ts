@@ -7,16 +7,16 @@ export type FontsRecord   = Record<FontType, Font>;
 export type FontType = 'display' | 'text';
 
 export type Languages = 'en' | 'sv' | 'uk'
-export type SourceTextData = Record<Languages, Record<string, string>>;
+export type SourceTextData = Record<string, Record<Languages, string> >;
 
 export type CSSColor = `var(--${'text' | 'secondary' | 'accent'})`;
 
 export type AnimationConfig = [Keyframe[], KeyframeAnimationOptions];
 
 
-//                    🕒 Send a request     ⚙️ Computed paths     📤 Send fonts
-// Types that can be       to worker             by worker           to worker
-// transfered                __|___________   ______|______   __________|__
+//                     🕒 Send a request    ⚙️ Computed paths    📤 Send fonts
+// Types that can be        to worker            by worker          to worker
+// transfered                ___|__________   ______|______   _________|___
 export type ComputeAPIData = ComputeRequest | ComputeResult | FontsTransmit;
 
 // [string] value for each [ComputeAPIData] Type so 

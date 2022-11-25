@@ -23,38 +23,16 @@ const elementConfig: Record<string, ElementConfig> = {
 };
 
 const texts: SourceTextData = {
-  en: {
-    tt: "About me",
-    d1: 'I’m a Ukrainian he/him living in',
-    d2: 'Stockholm, Sweden.',
-    home: "oleksii.xyz",
-    about: "about",
-    projects: "projects",
-    work: "work",
-    nav: "Navigation",
-    cr: "2018-2022 Oleksii Besida",
-    lg: "English",
-  },
-  sv: {
-    tt: "Oleksiy",
-    home: "oleksii.xyz",
-    about: "om mig",
-    projects: "projekts",
-    work: "alster",
-    nav: "Navigering",
-    cr: "2018-2022 Oleksiy Besida",
-    lg: "Svenska",
-  },
-  uk: {
-    tt: "Oleksij",
-    home: "oleksii.xyz",
-    about: "pro mene",
-    projects: "projekty",
-    work: "roboty",
-    nav: "Naviǧacija",
-    cr: "2018-2022 Oleksij Besida",
-    lg: "Ukrajinśka",
-  },
+  tt: { en: "About me", sv: "Om mig", uk: "Pro mene" },
+  d1: { en: "I’m a Ukrainian he/him living", sv: "Jag är en ukrainare han/honom", uk: "Ja vin/joho ukrajineć, prožyvajučyj" },
+  d2: { en: "in Stockholm, Sweden.", sv: "som bor i Stockholm, Sverige.", uk: "v Stockhoĺm, Švecija." },
+  home: { en: "oleksii.xyz", sv: "oleksii.xyz", uk: "oleksii.xyz", },
+  about: { en: "about", sv: "om mig", uk: "pro mene" },
+  projects: { en: "projects", sv: "projekts", uk: "projekty" },
+  work: { en: "work", sv: "alster", uk: "roboty" },
+  nav: { en: "Navigation", sv: "Navigering", uk: "Naviǧacija" },
+  cr: { en: "2018-2022 Oleksii Besida", sv: "2018-2022 Oleksiy Besida", uk: "2018-2022 Oleksij Besida" },
+  lg: { en: "English", sv: "Svenska", uk: "Ukrajinśka" }
 };
 
 // more things to come soon;

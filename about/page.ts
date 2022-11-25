@@ -1,4 +1,4 @@
-import { ElementConfig, AnimatingOrder, SourceTextData } from '../interfaces';
+import { ElementConfig, AnimatingOrder, SourceTextData } from '/interfaces';
 
 import nav from '/assets/raw/nav.txt?raw';
 import cr from '/assets/raw/copyright.txt?raw';
@@ -35,20 +35,9 @@ const texts: SourceTextData = {
   lg: { en: "English", sv: "Svenska", uk: "Ukrajinśka" }
 };
 
-// more things to come soon;
-
-// inline pictures
-import tg from '/assets/vectors/telegram.svg';
-import mx from '/assets/vectors/matrix.svg';
-import gh from '/assets/vectors/github.svg';
-import li from '/assets/vectors/linkedin.svg';
-import mt from '/assets/vectors/email.svg';
-
-const vectors: Record<string, string> = { tg, mx, gh, li, mt, cr, lg }
-
-import indexStylesheet from '../index/styles.css?url';
-import { onMenuClick } from '../render/menu';
-import { fontStyles } from '../common/fontStyles';
+import indexStylesheet from './styles.css?url';
+import { onMenuClick } from '/render/menu';
+import { fontStyles } from '/common/fontStyles';
 
 const stylesheets: string[] = [indexStylesheet];
 
@@ -71,7 +60,6 @@ const animatingOrder: Record<string, AnimatingOrder> = {
   tt:  { delay: 50 },
   d1:  { delay: 500 },
   d2:  { delay: 0 },
-  ps:  { image: true, delay: 75, children: true },
   rg:  { delay: 50, children: true },
   nav: { delay: 100 },
   cr:  { delay: 100 },
@@ -80,4 +68,4 @@ const animatingOrder: Record<string, AnimatingOrder> = {
 
 import { onload } from '../common/page';
 export let load = () => onload({ animatingOrder, elementConfig, restoreClicks, 
-  restoreLinks, stylesheets, texts, vectors });
+  restoreLinks, stylesheets, texts });

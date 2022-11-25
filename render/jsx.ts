@@ -36,3 +36,11 @@ const appendChild = (parent: Element, children0: Array<Element | string> | Eleme
 };
 
 export const createFragment = (_: any, ...children: any[]) => children;
+
+declare global { 
+  namespace JSX {
+    interface IntrinsicElements {
+      [elemName: string]: any;
+    }
+  }
+}

@@ -1,0 +1,23 @@
+@import '../common/skeleton.css';
+
+#title{
+  flex-direction: row;
+}
+
+body {
+  padding-top: 160px;
+}
+
+#lf {
+  justify-content: start !important;
+}
+
+#page {
+  padding: 64px 128px;
+  flex-direction: row;
+  justify-content: space-between !important;
+}
+
+#rg {
+  display: none;
+}

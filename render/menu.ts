@@ -43,7 +43,7 @@ for (let child of rg.children) {
   });
 
   child.addEventListener("click", () => {
-    window.history.pushState({}, '', `/${child.id == 'home' ? '' : child.id}`)
+    window.history.pushState({}, '', `/${child.id == 'home' ? '' : child.id}/`)
   });
 }
 

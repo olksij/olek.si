@@ -1,18 +1,7 @@
 @import '../common/skeleton.css';
 
-#cnt {
-  flex-direction: row;
-  margin: auto;
-}
-
-#lf {
-  gap: 40px;
-  width: 100%;
-}
-
 #title,
-#ps,
-#ft {
+#ps {
   flex-direction: row;
 }
 
@@ -26,10 +15,6 @@
   gap: 4px;
 }
 
-#d2 {
-  border-radius: 0 0 8px 8px;
-}
-
 #ps {
   gap: 20px;
 }
@@ -37,15 +22,4 @@
 #ps>a:last-child,
 #rg {
   display: none;
-}
-
-#nav,
-#ft {
-  margin: 24px;
-  gap: 24px;
-}
-
-#nav {
-  border: 0px;
-  margin: 32px;
 }

@@ -30,7 +30,7 @@ body {
   opacity: 0%;
 }
 
-.sl:not(.rendered) {
+.sl {
   animation: .6s cubic-bezier(0, 0.5, 0, 1) blur;
   background: -50vw 0/75% 100% fixed no-repeat linear-gradient(0.25turn, transparent, #FAFAFC88, transparent),
     linear-gradient(var(--el), var(--el));
@@ -42,4 +42,23 @@ body {
   } to {
     filter: blur(0px);
   }
+}
+
+#cnt {
+  flex-direction: row;
+  margin: auto;
+}
+
+#lf {
+  gap: 40px;
+  width: 100%;
+}
+
+#ft {
+  flex-direction: row;
+}
+
+#ft {
+  margin: 24px;
+  gap: 24px;
 }

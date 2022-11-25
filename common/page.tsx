@@ -1,15 +1,17 @@
 import { PageContent, Languages } from '../interfaces';
 import { createElement } from "../render/jsx";
+import { onMenuClick } from '../render/menu';
 
 import print from '../render/print';
-import render from '../render/render';
+import construct from '../render/construct';
+import { byId } from '../render/shorthands';
 
 // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
 
 export async function onload(content: PageContent) {
   print("🔥 Load Event");
 
-  requestAnimationFrame(() => render(content));
+  requestAnimationFrame(() => construct(content));
 
   // webvitals file is loaded after load event and render call,
   // and meant to help measure this webpage quality
@@ -30,3 +32,16 @@ export const languages: Record<Languages, string> = {
   sv: 'Svenska',
   uk: 'Ukrajinśka',
 }
+
+let lg = byId('lg')!;
+
+lg.addEventListener("mouseenter", function () {
+  for (let lg in Object.keys(languages)) {
+    byId('lg')!.append(<div onclick={() => window.history.pushState({}, '', `?${lg}`)} class="lgItem">{languages[lg as Languages]}</div>);
+  }
+});
+
+lg.addEventListener("mouseleave", function () {
+  onMenuClick();
+  Array.from(byId('lg')!.getElementsByClassName('lgItem')).forEach(e => e.remove())
+});

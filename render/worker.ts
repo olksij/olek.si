@@ -1,7 +1,7 @@
 // the file wraps requests to compute worker to promises
 // so its possible to request asynchronously
 
-import { ComputeAPI, ComputeRequest, ComputeResult } from "../interfaces";
+import { ComputeAPI, ComputeRequest, ComputeResult } from "interfaces";
 // @ts-ignore
 let worker = window['worker'];
 

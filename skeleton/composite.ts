@@ -1,4 +1,4 @@
-import { SkeletonConfig } from "../interfaces";
+import { SkeletonConfig } from "interfaces";
 import { resolveSkeleton } from "./resolve";
 
 // the total number of skeletons in the virtual tree

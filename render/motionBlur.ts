@@ -37,8 +37,6 @@ export default class MotionBlur {
 
     this.previous = current;
 
-    console.log('*'.repeat(blur))
-
     byId(this.blurID)!.style.filter = blur ? `blur(${blur}px)` : '';
     requestAnimationFrame(() => this.motionBlur());
   }

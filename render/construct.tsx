@@ -1,10 +1,10 @@
-import { AnimatingOrder, PageContent, RenderElementInterface, TextConfig, Languages, SkeletonBaseConfig } from "../interfaces";
+import { AnimatingOrder, PageContent, RenderElementInterface, TextConfig, Languages, SkeletonBaseConfig } from "interfaces";
 import { createElement } from "./jsx";
 import print from './print';
 import { byId } from "./shorthands";
 import compute from "./worker";
 import waitFor from "./eventAsync";
-import { head } from "../common/page";
+import { head } from "/common/page";
 import render from './render';
 
 export default async function construct(content: PageContent): Promise<void> {

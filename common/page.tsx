@@ -1,10 +1,10 @@
-import { PageContent, Languages } from '../interfaces';
-import { createElement } from "../render/jsx";
-import { onMenuClick } from '../render/menu';
+import { PageContent, Languages } from 'interfaces';
+import { createElement } from "/render/jsx";
+import { closeMenu } from '/render/menu';
 
-import print from '../render/print';
-import construct from '../render/construct';
-import { byId } from '../render/shorthands';
+import print from '/render/print';
+import construct from '/render/construct';
+import { byId } from '/render/shorthands';
 
 // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
 
@@ -16,7 +16,7 @@ export async function onload(content: PageContent) {
   // webvitals file is loaded after load event and render call,
   // and meant to help measure this webpage quality
   print("😏 Loading web vitals");
-  import('../render/webvitals');
+  import('./webvitals');
 
   // to contain navigator, theme specs, and other dynamic things
 }
@@ -42,6 +42,6 @@ lg.addEventListener("mouseenter", function () {
 });
 
 lg.addEventListener("mouseleave", function () {
-  onMenuClick();
+  closeMenu();
   Array.from(byId('lg')!.getElementsByClassName('lgItem')).forEach(e => e.remove())
 });

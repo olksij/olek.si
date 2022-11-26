@@ -1,9 +1,9 @@
 // this file is about parsing and responding to received font objects
 
 import { parse } from 'opentype.js';
-import { FontsRecord, FontsTransmit } from '../interfaces';
+import { FontsRecord, FontsTransmit } from 'interfaces';
 
-import print from '../render/print';
+import print from '/render/print';
 
 let resolve: (value: FontsRecord) => void;
 

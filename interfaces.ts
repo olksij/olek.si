@@ -31,6 +31,15 @@ export interface ComputeAPI<Data extends ComputeAPIData> {
   data: Data,
 }
 
+export type FontStyleType =
+  'title'        |
+  'h2'           |
+  'subtitle'     |
+  'menuSelected' |
+  'menu'         |
+  'action'       |
+  'footer';
+
 // used to define each element to be rendered
 export interface ElementConfig {
   from?: FromElement;

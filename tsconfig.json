@@ -14,12 +14,20 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "skipLibCheck": true,
+    "suppressImplicitAnyIndexErrors": true,
 
     "jsx": "react",
     "jsxFactory": "createElement",
     "jsxFragmentFactory": "createFragment",
 
-    "lib": ["ESNext", "DOM", "DOM.Iterable"]
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+
+    "baseUrl": ".",
+    "paths": {
+      "/*": [
+        "*"
+      ]
+    }
   },
   "include": ["src", "about", "index", "skeleton", "compute/fonts.ts", "general", "scripts", "compute", "interfaces.ts", "vite-env.d.ts"]
 }

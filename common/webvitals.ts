@@ -1,5 +1,5 @@
 import * as _webvitals from 'web-vitals';
-import print from './print';
+import print from '/render/print';
 
 const vitalsUrl = 'https://vitals.vercel-analytics.com/v1/vitals';
 
@@ -9,6 +9,8 @@ for (var item in webvitals) webvitals[item]((metric: MetricType) => sendMetrics(
 type MetricType = { id: string; name: string; value: { toString: () => string; }; };
 
 function sendMetrics(metric: MetricType) {
+  if (!import.meta.env.PROD) return
+
   let connection_type = (navigator as any)?.connection?.effectiveType ?? '';
 
   const body = {
@@ -26,8 +28,6 @@ function sendMetrics(metric: MetricType) {
   });
 
   print('📊 ' + metric.name, metric.value.toString());
-
-  if (!import.meta.env.PROD) return
 
   if (navigator.sendBeacon) {
     navigator.sendBeacon(vitalsUrl, blob);

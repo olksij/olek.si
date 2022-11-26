@@ -3,19 +3,11 @@
    --- -- [URGENT] REFACTORING --- ---
    --- --- --- --- --- --- --- --- --- */
 
-import { RenderElementInterface, CSSColor, AnimationConfig } from "../interfaces";
+import { RenderElementInterface, CSSColor, AnimationConfig } from "interfaces";
 import { createElement } from "./jsx";
 import './menu.ts';
 import { byId } from "./shorthands";
-import '../render/menu.ts';
-
-declare global { 
-  namespace JSX {
-    interface IntrinsicElements {
-      [elemName: string]: any;
-    }
-  }
-}
+import '/render/menu.ts';
 
 export default function (element: RenderElementInterface) {
   let parent = byId(element.id)!;

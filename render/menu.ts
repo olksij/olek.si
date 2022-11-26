@@ -1,10 +1,11 @@
-import aboutDom from "../about/dom";
-import indexDom from "../index/dom";
-import buildTree from "../skeleton/buildTree";
-import { resetCounter } from "../skeleton/composite";
+import aboutDom from "/about/dom";
+import indexDom from "/index/dom";
+import buildTree from "/skeleton/buildTree";
+import { resetCounter } from "/skeleton/composite";
 import MotionBlur from "./motionBlur";
 import { byId, tagById } from "./shorthands";
 import compute from "./worker";
+import { fontStyles } from "/common/fontStyles";
 
 /* --- --- --- --- --- --- --- --- ---
    --- CODE IN THIS FILE REQUIRES- ---
@@ -33,9 +34,9 @@ let menuCloseBgKeyframes: Keyframe[] = [
   menuOpenBgKeyframes[0],
 ];
 
-var i = 0;
+//var i = 0;
 for (let child of rg.children) {
-  let curr = ++i;
+  //let curr = ++i;
   child.addEventListener("mouseover", () => {
     for (let subling of rg.children) subling.classList.remove("hover");
 
@@ -47,7 +48,7 @@ for (let child of rg.children) {
   });
 }
 
-function menuOpenBg(mouse: boolean) {
+function menuOpenBg() {
   document.body.animate(menuOpenBgKeyframes, {
     duration: 600,
     easing: "cubic-bezier(0.25, 0.25, 0, 1)",
@@ -58,7 +59,7 @@ function menuOpenBg(mouse: boolean) {
   );
 }
 
-function menuCloseBg(mouse: boolean) {
+function menuCloseBg() {
   document.body.animate(menuCloseBgKeyframes, {
     duration: 600,
     easing: "cubic-bezier(0.25, 0.25, 0, 1)",
@@ -74,7 +75,7 @@ function openMenu(event: MouseEvent) {
   if (!cnt.classList.contains("navTapped")) {
     cnt.classList.add("navOpened", "navTransformed");
     rg.classList.add("hover");
-    menuOpenBg(true);
+    menuOpenBg();
 
     var hovered = false;
     for (let child of rg.children) {
@@ -93,10 +94,10 @@ function openMenu(event: MouseEvent) {
 rg.onmouseleave = closeMenu;
 
 const routes = {
-  index:    [indexDom, () => import('../index/page')],
-  about:    [aboutDom, () => import('../about/page')],
-  projects: [indexDom, () => import('../index/page')],
-  work:     [indexDom, () => import('../index/page')],
+  index:    [indexDom, () => import('/index/page')],
+  about:    [aboutDom, () => import('/about/page')],
+  projects: [indexDom, () => import('/index/page')],
+  work:     [indexDom, () => import('/index/page')],
 }
 
 export function onMenuClick(route: string) {
@@ -111,10 +112,10 @@ export function onMenuClick(route: string) {
 }
 
 
-function closeMenu () {
+export function closeMenu () {
   cnt.classList.remove("navOpened");
   rg.classList.remove("hover");
-  menuCloseBg(true);
+  menuCloseBg();
 };
 
 let isNavHovered = false;
@@ -122,16 +123,19 @@ let isNavHovered = false;
 nav.onclick = function () {
   if (!cnt.classList.contains("navTapped")) {
     // open menu
-    compute({}).then(console.log)
+    compute({
+      from: { skeleton: [24, 24, 24]},
+      to: { text: { style: fontStyles.action, text: 'close' } }
+    }).then(console.log)
 
     cnt.classList.add("navTapped", "navTransformed");
     tagById("nav", "text")!.innerHTML = "Close";
-    menuOpenBg(false);
+    menuOpenBg();
   } else {
     //close menu
     cnt.classList.remove("navTapped");
     tagById("nav", "text")!.innerHTML = "Navigation";
-    menuCloseBg(false);
+    menuCloseBg();
   }
 };
 

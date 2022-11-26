@@ -1,4 +1,4 @@
-@import '../common/skeleton.css';
+@import '/common/skeleton.css';
 
 #title{
   flex-direction: row;

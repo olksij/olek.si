@@ -1,4 +1,4 @@
-import { ElementConfig, AnimatingOrder, SourceTextData } from '/interfaces';
+import { ElementConfig, AnimatingOrder, SourceTextData } from 'interfaces';
 
 import nav from '/assets/raw/nav.txt?raw';
 import cr from '/assets/raw/copyright.txt?raw';
@@ -66,6 +66,6 @@ const animatingOrder: Record<string, AnimatingOrder> = {
   lg:  { delay: 100 },
 }
 
-import { onload } from '../common/page';
+import { onload } from '/common/page';
 export let load = () => onload({ animatingOrder, elementConfig, restoreClicks, 
   restoreLinks, stylesheets, texts });

@@ -1,4 +1,4 @@
-import { SkeletonTree } from "../interfaces";
+import { SkeletonTree } from "interfaces";
 
 const rg: SkeletonTree = { 
   config: [[128, 24, 6]], 

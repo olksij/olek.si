@@ -8,7 +8,11 @@ import rg from '/common/dom';
 
 export default function buildTree(skeleton: SkeletonTree | SkeletonConfig, parent: HTMLElement = document.body): void | Promise<void> {
   if (skeleton[0]) 
-    return composite(parent, skeleton as SkeletonConfig);  
+    return composite(parent, skeleton as SkeletonConfig);
+    
+  Array.from(parent.children).forEach(child => {
+    if (!['cnt', 'lf', 'rg'].includes(child.id)) child.remove();
+  })
 
   // if [parent.id] is 'ps' | 'rg', then use <a/> tags.
   let tagName = ['ps', 'rg'].includes(parent.id) ? 'a' : 'div';
@@ -23,10 +27,7 @@ export default function buildTree(skeleton: SkeletonTree | SkeletonConfig, paren
       var child = document.createElement(tagName);
       child.id = elementID;
 
-      if (document.getElementById(elementID)) {
-        parent.replaceChild(child, document.getElementById(elementID)!)
-      }
-      else parent.append(child)
+      parent.append(child)
 
       cnt.rg = rg;
       composite(child, tree.config as SkeletonConfig, Object.keys(tree).length);

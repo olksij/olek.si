@@ -21,6 +21,12 @@ export default async function construct(content: PageContent): Promise<void> {
   document.head.append(...head);
 
   // stylesheets
+  let stylesheetsToRemove: HTMLElement[] = [];
+  Array.from(document.head.children).forEach((element: any) => {
+    if (element.tagName == 'STYLE' || element.rel == 'stylesheet') 
+      stylesheetsToRemove.push(element);
+  });
+
   for (var style of content.stylesheets ?? [])
     document.head.append(<link rel="stylesheet" href={style} />)
 
@@ -98,4 +104,5 @@ export default async function construct(content: PageContent): Promise<void> {
   }
 
   document.body.classList.add('rendered');
+  stylesheetsToRemove.forEach(ss => ss.remove())
 }

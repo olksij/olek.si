@@ -35,11 +35,13 @@ const texts: SourceTextData = {
   lg: { en: "English", sv: "Svenska", uk: "Ukrajinśka" }
 };
 
-import indexStylesheet from './styles.css?url';
+import mainStylesheet from './styles.css?url';
+import skeletonStylesheet from './skeleton.css?url';
+import desktopStylesheet from './desktop.skeleton.css?url';
 import { onMenuClick } from '/render/menu';
 import { fontStyles } from '/common/fontStyles';
 
-const stylesheets: string[] = [indexStylesheet];
+const stylesheets: string[] = [ mainStylesheet, skeletonStylesheet, desktopStylesheet ];
 
 const restoreLinks: Record<string, Array<string>> = {
   "ps": ["https://t.me/oleksiibesida", "https://matrix.to/#/@human:oleksii.xyz", "https://github.com/oleksiibesida", "https://linkedin.com/in/oleksiibesida/", "mailto:besida@oleksii.xyz"],

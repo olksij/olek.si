@@ -6,11 +6,9 @@
 //  _____________|_____________  ______|_____
 let skeletonResolve: () => void, rendered = 0;
 
-const skeleton = new Event('skeleton');
+window['skeleton'] = new Promise<void>(resolve => skeletonResolve = resolve);
 
 // Called to resolve            the total number     rendered
 // skeleton promise if need     _______|_______   ______|______
-export function resolveSkeleton(counter: number,  count: number) {
-  if ((rendered += count) == counter)
-    dispatchEvent(skeleton), sessionStorage.setItem('skeleton', 'true');
-}
+export const resolveSkeleton = (counter: number,  count: number) =>
+  (rendered += count) == counter ? skeletonResolve() : 0;

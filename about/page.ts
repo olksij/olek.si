@@ -35,9 +35,9 @@ const texts: SourceTextData = {
   lg: { en: "English", sv: "Svenska", uk: "Ukrajinśka" }
 };
 
-import mainStylesheet from './styles.css?url';
-import skeletonStylesheet from './skeleton.css?url';
-import desktopStylesheet from './desktop.skeleton.css?url';
+import mainStylesheet from './styles.css';
+import skeletonStylesheet from './skeleton.css';
+import desktopStylesheet from './desktop.skeleton.css';
 import { onMenuClick } from '/render/menu';
 import { fontStyles } from '/common/fontStyles';
 

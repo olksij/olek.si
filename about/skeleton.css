@@ -15,7 +15,11 @@ body {
 #page {
   padding: 64px 128px;
   flex-direction: row;
-  justify-content: space-between !important;
+}
+
+#paragraph {
+  width: 100%;
+  margin-right: 64px;
 }
 
 #rg {

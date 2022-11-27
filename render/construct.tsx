@@ -3,13 +3,12 @@ import { createElement } from "./jsx";
 import print from './print';
 import { byId } from "./shorthands";
 import compute from "./worker";
-import waitFor from "./eventAsync";
 import { head } from "/common/page";
 import render from './render';
 
 export default async function construct(content: PageContent): Promise<void> {
-  await waitFor('skeleton');
   if (!sessionStorage.getItem('loaded')) {
+    await window['skeleton'];
     sessionStorage.setItem('loaded', 'true');
   }
 
@@ -20,15 +19,15 @@ export default async function construct(content: PageContent): Promise<void> {
 
   document.head.append(...head);
 
-  // stylesheets
-  let stylesheetsToRemove: HTMLElement[] = [];
+  // remove old stylesheets
   Array.from(document.head.children).forEach((element: any) => {
     if (element.tagName == 'STYLE' || element.rel == 'stylesheet') 
-      stylesheetsToRemove.push(element);
+      element.remove();
   });
 
+  // appennd new
   for (var style of content.stylesheets ?? [])
-    document.head.append(<link rel="stylesheet" href={style} />)
+    document.head.append(<style>{style}</style>)
 
   // onclick
   for (let id in content.restoreClicks) {
@@ -55,7 +54,6 @@ export default async function construct(content: PageContent): Promise<void> {
     if (data.children) queue = [...byId(item)!.children]
       .map(child => child.id); 
 
-    
     if (data.image) {
       for (let child of queue) {
         // insert node to an appropriate skeleton element;
@@ -104,5 +102,4 @@ export default async function construct(content: PageContent): Promise<void> {
   }
 
   document.body.classList.add('rendered');
-  stylesheetsToRemove.forEach(ss => ss.remove())
 }

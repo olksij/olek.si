@@ -98,7 +98,9 @@ export interface FromMorphElement extends FromElement {
   skeleton: SkeletonBaseConfig;
 }
 
-export type Size = [number, number];
+export type SizeUnit = number | null;
+
+export type Size = [SizeUnit, SizeUnit];
 export interface AnimatingOrder {
   image?: boolean;
   alt?: string;

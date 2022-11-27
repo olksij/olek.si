@@ -71,9 +71,9 @@ const images: Record<string, string> = { pf }
 
 const vectors: Record<string, string> = { tg, mx, gh, li, mt, cr, lg }
 
-import mainStylesheet from './styles.css?url';
-import skeletonStylesheet from './skeleton.css?url';
-import desktopStylesheet from './desktop.skeleton.css?url';
+import mainStylesheet from './styles.css';
+import skeletonStylesheet from './skeleton.css';
+import desktopStylesheet from './desktop.skeleton.css';
 import { onMenuClick } from '/render/menu';
 import { fontStyles } from '/common/fontStyles';
 

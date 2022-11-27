@@ -1,4 +1,4 @@
-import { PageContent, Languages } from 'interfaces';
+import { PageContent, Languages, SourceTextData, ElementConfig } from 'interfaces';
 import { createElement } from "/render/jsx";
 import { closeMenu } from '/render/menu';
 
@@ -21,27 +21,73 @@ export async function onload(content: PageContent) {
   // to contain navigator, theme specs, and other dynamic things
 }
 
-export const head: HTMLElement[] = [
+const head: HTMLElement[] = [
   <title>Oleksii Besida</title>,
   <meta name="description" content="Oleksii Besida  |  Ukrainian he/him UI&UX designer and Frontend developer living in Stockholm, Sweden." />,
   <link rel="icon" type="image/x-icon" href={new URL('/favicon.ico', import.meta.url)} />
 ];
 
-export const languages: Record<Languages, string> = {
-  en: 'English',
-  sv: 'Svenska',
-  uk: 'Ukrajinśka',
+import nav from '/assets/raw/nav.txt?raw';
+import cr from '/assets/raw/copyright.txt?raw';
+import lg from '/assets/raw/language.txt?raw';
+
+let font = fontStyles;
+
+const elementConfig: Record<string, ElementConfig> = {
+/*
+  🏷️ Element ID     ✨ FontStyle
+  ______|______   ________|________  */
+  home:         { text: font.menuSelected },
+  about:        { text: font.menu },
+  projects:     { text: font.menu }, //          🖼️ Icon
+  work:         { text: font.menu }, // _____________|_____________
+  nav:          { text: font.action,    icon: { path: nav, gap: 8 } },
+  cr:           { text: font.footer,    icon: { path: cr,  gap: 0 } },
+  lg:           { text: font.footer,    icon: { path: lg,  gap: 2 } },
+};
+
+const texts: SourceTextData = {
+
+//                   🏴󠁧󠁢󠁥󠁮󠁧󠁿 English                  🇸🇪 Svenska               🇺🇦 Ukrajinśka
+//             ___________|____________   ___________|____________   ___________|____________ */
+  home:      { en: "oleksii.xyz",         sv: "oleksii.xyz",         uk: "oleksii.xyz", },
+  about:     { en: "about",               sv: "om mig",              uk: "pro mene" },
+  projects:  { en: "projects",            sv: "projekts",            uk: "projekty" },
+  work:      { en: "work",                sv: "alster",              uk: "roboty" },
+  nav:       { en: "Navigation",          sv: "Navigering",          uk: "Naviǧacija" },
+  cr:        { en: "2018-2022 Oleksii Besida", sv: "2018-2022 Oleksiy Besida", uk: "2018-2022 Oleksij Besida" },
+  lg:        { en: "English",             sv: "Svenska",             uk: "Ukrajinśka" }
+};
+
+import styelsheet from './styles.css';
+
+const stylesheets: string[] = [styelsheet];
+
+const restoreLinks: Record<string, Array<string>> = {
+  "rg": ["/", "/about/", "/projects/", "/works/"],
 }
 
-let lg = byId('lg')!;
+import { onMenuClick } from '/render/menu';
+import { fontStyles } from './fontStyles';
 
-lg.addEventListener("mouseenter", function () {
-  for (let lg in Object.keys(languages)) {
-    byId('lg')!.append(<div onclick={() => window.history.pushState({}, '', `?${lg}`)} class="lgItem">{languages[lg as Languages]}</div>);
-  }
-});
+const restoreClicks: Record<string, Array<Function>> = {
+  rg: [
+    () => onMenuClick('index'),
+    () => onMenuClick('about'),
+    () => onMenuClick('projects'),
+    () => onMenuClick('work'),
+  ],
+};
 
-lg.addEventListener("mouseleave", function () {
+let lgElem = byId('lg')!;
+
+export const content = { head, elementConfig, restoreClicks, 
+  restoreLinks, stylesheets, texts } as PageContent;
+
+lgElem.addEventListener("mouseenter", () => Object.keys(texts.lg).forEach(lg => 
+  byId('lg')!.append(<div onclick={() => window.history.pushState({}, '', `?${lg}`)} class="lgItem">{texts.lg[lg]}</div>)));
+
+lgElem.addEventListener("mouseleave", function () {
   closeMenu();
   Array.from(byId('lg')!.getElementsByClassName('lgItem')).forEach(e => e.remove())
 });

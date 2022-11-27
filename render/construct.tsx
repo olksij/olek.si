@@ -3,10 +3,21 @@ import { createElement } from "./jsx";
 import print from './print';
 import { byId } from "./shorthands";
 import compute from "./worker";
-import { head } from "/common/page";
+import { content as commonContent } from "/common/page";
 import render from './render';
 
 export default async function construct(content: PageContent): Promise<void> {
+  let assets = {
+    head: [ ...(content.head ?? []), ...(commonContent.head ?? []) ],
+    animatingOrder: { ...content.animatingOrder, ...commonContent.animatingOrder },
+    elementConfig:  { ...content.elementConfig,  ...commonContent.elementConfig },
+    images: { ...content.images, ...commonContent.images },
+    restoreClicks: { ...content.restoreClicks, ...commonContent.restoreClicks },
+    restoreLinks: { ...content.restoreLinks, ...commonContent.restoreLinks },
+    stylesheets: [ ...content.stylesheets, ...commonContent.stylesheets ],
+    texts: { ...content.texts, ...commonContent.texts },
+  } as PageContent;
+
   if (!sessionStorage.getItem('loaded')) {
     await window['skeleton'];
     sessionStorage.setItem('loaded', 'true');
@@ -14,28 +25,23 @@ export default async function construct(content: PageContent): Promise<void> {
 
   print("🎨 Render");
 
-  let images: Record<string, string> = {};
-  Object.assign(images, content.images, content.vectors);
-
-  document.head.append(...head);
+  document.head.append(...assets.head!);
 
   // remove old stylesheets
-  Array.from(document.head.children).forEach((element: any) => {
-    if (element.tagName == 'STYLE' || element.rel == 'stylesheet') 
-      element.remove();
-  });
+  Array.from(document.head.children).forEach((element: any) =>
+    element.tagName == 'STYLE' ? element.remove() : 0);
 
-  // appennd new
-  for (var style of content.stylesheets ?? [])
+  // appennd new stylesheets
+  for (var style of assets.stylesheets ?? [])
     document.head.append(<style>{style}</style>)
 
   // onclick
-  for (let id in content.restoreClicks) {
+  for (let id in assets.restoreClicks) {
     let children = byId(id)!.children;
     for (var i = 0; i < children.length; i++) {
       let childIndex = i;
       if (!children[i].getAttribute("onclick"))
-        children[i].addEventListener("click", () => content.restoreClicks?.[id][childIndex]()),
+        children[i].addEventListener("click", () => assets.restoreClicks?.[id][childIndex]()),
           children[i].setAttribute("onclick", "return false");
     }
   }
@@ -46,8 +52,8 @@ export default async function construct(content: PageContent): Promise<void> {
   const lang = Object.keys(Object.fromEntries(urlSearchParams.entries()))[0] as Languages ?? 'en';
 
   // restore everything;
-  for (let item in content.animatingOrder) {
-    let data: AnimatingOrder = content.animatingOrder[item];
+  for (let item in assets.animatingOrder) {
+    let data: AnimatingOrder = assets.animatingOrder[item];
     let queue: Array<string> = [item];
 
     // if it's about animation children, put children into a queue
@@ -57,7 +63,7 @@ export default async function construct(content: PageContent): Promise<void> {
     if (data.image) {
       for (let child of queue) {
         // insert node to an appropriate skeleton element;
-        let node = <img src={images[child]} alt={item} />;
+        let node = <img src={assets.images?.[child]} alt={item} />;
         byId(child)?.replaceChildren(node);
         // schedule the animation
         let render = (child: string) => byId(child)?.classList.add('rendered');
@@ -69,10 +75,10 @@ export default async function construct(content: PageContent): Promise<void> {
 
     // iterate over queue
     for (let child of queue) {
-      let element = content.elementConfig?.[child]!;
+      let element = assets.elementConfig?.[child]!;
         
       let text = element.text ? {
-        text: content.texts?.[child][lang as Languages],
+        text: assets.texts?.[child][lang as Languages],
         style: element.text,
       } as TextConfig : undefined;
 
@@ -93,7 +99,7 @@ export default async function construct(content: PageContent): Promise<void> {
         icon: element.icon,
         text: {
           style: element.text,
-          text: content.texts?.[child][lang as Languages]
+          text: assets.texts?.[child][lang as Languages]
         } as TextConfig,
       } as RenderElementInterface;
 

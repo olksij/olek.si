@@ -21,42 +21,29 @@ const dates: Record<string, Record<Languages, [string, string]>> = {
 };
 
 import titleFromPath from '/assets/raw/titleFromPath.txt?raw';
-import nav from '/assets/raw/nav.txt?raw';
-import cr from '/assets/raw/copyright.txt?raw';
-import lg from '/assets/raw/language.txt?raw';
 
 let date = new Date();
 let description = dates[date.getMonth() + '-' + (date.getDate() + 1)] ?? dates.default;
 
+import { fontStyles } from '/common/fontStyles';
 let font = fontStyles;
 
 const elementConfig: Record<string, ElementConfig> = {
 /*
-  🏷️ Element ID     ✨ FontStyle           ⚙️ Custom placeholder
-  ______|______   ________|________     _____________|_____________ */
-  tt:           { text: font.title,     from: { path: titleFromPath } },
-  d1:           { text: font.subtitle, },
-  d2:           { text: font.subtitle, },
-  home:         { text: font.menuSelected },
-  about:        { text: font.menu },
-  projects:     { text: font.menu }, //          🖼️ Icon
-  work:         { text: font.menu }, // _____________|_____________
-  nav:          { text: font.action,    icon: { path: nav, gap: 8 } },
-  cr:           { text: font.footer,    icon: { path: cr,  gap: 0 } },
-  lg:           { text: font.footer,    icon: { path: lg,  gap: 2 } },
+ 🏷️ ID     ✨ FontStyle           ⚙️ Custom placeholder
+  _|_    ________|________     _____________|_____________ */
+  tt:  { text: font.title,     from: { path: titleFromPath } },
+  d1:  { text: font.subtitle, },
+  d2:  { text: font.subtitle, },
 };
 
 const texts: SourceTextData = {
-  tt: { en: "Oleksii", sv: "Oleksiy", uk: "Oleksij" },
-  d1: { en: description["en"][0], sv: description["sv"][0], uk: description["uk"][0] },
-  d2: { en: description["en"][1], sv: description["sv"][1], uk: description["uk"][1] },
-  home: { en: "oleksii.xyz", sv: "oleksii.xyz", uk: "oleksii.xyz", },
-  about: { en: "about", sv: "om mig", uk: "pro mene" },
-  projects: { en: "projects", sv: "projekts", uk: "projekty" },
-  work: { en: "work", sv: "alster", uk: "roboty" },
-  nav: { en: "Navigation", sv: "Navigering", uk: "Naviǧacija" },
-  cr: { en: "2018-2022 Oleksii Besida", sv: "2018-2022 Oleksiy Besida", uk: "2018-2022 Oleksij Besida" },
-  lg: { en: "English", sv: "Svenska", uk: "Ukrajinśka" }
+
+/*             🏴󠁧󠁢󠁥󠁮󠁧󠁿 English                  🇸🇪 Svenska               🇺🇦 Ukrajinśka
+/        ___________|____________   ___________|____________   ___________|____________ */
+  tt:  { en: "Oleksii",             sv: "Oleksiy",             uk: "Oleksij" },
+  d1:  { en: description["en"][0],  sv: description["sv"][0],  uk: description["uk"][0] },
+  d2:  { en: description["en"][1],  sv: description["sv"][1],  uk: description["uk"][1] },
 };
 
 // inline pictures
@@ -67,31 +54,17 @@ import gh from '/assets/vectors/github.svg';
 import li from '/assets/vectors/linkedin.svg';
 import mt from '/assets/vectors/email.svg';
 
-const images: Record<string, string> = { pf }
-
-const vectors: Record<string, string> = { tg, mx, gh, li, mt, cr, lg }
+const images: Record<string, string> = { pf, tg, mx, gh, li, mt }
 
 import mainStylesheet from './styles.css';
 import skeletonStylesheet from './skeleton.css';
 import desktopStylesheet from './desktop.skeleton.css';
-import { onMenuClick } from '/render/menu';
-import { fontStyles } from '/common/fontStyles';
 
 const stylesheets: string[] = [ mainStylesheet, skeletonStylesheet, desktopStylesheet ];
 
 const restoreLinks: Record<string, Array<string>> = {
   "ps": ["https://t.me/oleksiibesida", "https://matrix.to/#/@human:oleksii.xyz", "https://github.com/oleksiibesida", "https://linkedin.com/in/oleksiibesida/", "mailto:besida@oleksii.xyz"],
-  "rg": ["https://oleksii.xyz", "https://oleksii.xyz", "https://oleksii.xyz", "https://oleksii.xyz"],
 }
-
-const restoreClicks: Record<string, Array<Function>> = {
-  rg: [
-    () => onMenuClick('index'),
-    () => onMenuClick('about'),
-    () => onMenuClick('projects'),
-    () => onMenuClick('work'),
-  ],
-};
 
 // order and details of animating each node
 
@@ -109,4 +82,4 @@ const animatingOrder: Record<string, AnimatingOrder> = {
 
 import { onload } from '/common/page';
 export let load = () => onload({ animatingOrder, elementConfig, images,
-  restoreClicks, restoreLinks, stylesheets, texts, vectors });
+  restoreLinks, stylesheets, texts });

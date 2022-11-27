@@ -121,14 +121,14 @@ export interface FontStyle {
 }
 
 export interface PageContent {
+  head?: HTMLElement[];
+  stylesheets: string[];  
   animatingOrder?: Record<string, AnimatingOrder>;  
   elementConfig?: Record<string, ElementConfig>;
-  texts?: SourceTextData;
   images?: Record<string, string>;
-  vectors?: Record<string, string>;
-  stylesheets?: string[];  
-  restoreLinks?: Record<string, Array<string>>;  
   restoreClicks?: Record<string, Array<Function>>;  
+  restoreLinks?: Record<string, Array<string>>;  
+  texts?: SourceTextData;
 }
 
 export interface SkeletonTree { [id: string]: SkeletonConfig | SkeletonTree; }

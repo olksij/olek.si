@@ -1,4 +1,4 @@
-import { SkeletonConfig } from "interfaces";
+import { SkeletonCompositeConfig, SkeletonConfig } from "interfaces";
 import { resolveSkeleton } from "./resolve";
 
 // the total number of skeletons in the virtual tree
@@ -12,10 +12,9 @@ export const resetCounter = () => counter = 0;
 // size & borderRadius to skeleton element                                            ________|________
 export default async function composite(element: HTMLElement, config: SkeletonConfig, count: number = 1) {
   if (!config) return;
-  window['current'] ??= [];
-
-  // build a simpler SkeletonConfig interface
-  window['current'][element.id] = config;
+  //                                       ⌛ used by render/construct.ts
+  // a simpler SkeletonConfig interface      _____________|_____________
+  window['elements'][element.id] = { config, delay: counter += 1 / count } as SkeletonCompositeConfig;
   element.classList.add('tr'); // to render mark
 
   // wait till current frame is painted to make sure CSS is applied
@@ -41,7 +40,7 @@ export default async function composite(element: HTMLElement, config: SkeletonCo
     // notify content dependency tree about skeleton readyness
     resolveSkeleton(counter, 1 / count);
 
-  }, (counter += 1 / count) * 100, count)
+  }, counter * 100, count)
 }
 
 // keyframes to apply that loading animation

@@ -6,13 +6,17 @@ import rg from '/common/dom';
 
 // default DOM structure for menu
 
-export default function buildTree(skeleton: SkeletonTree | SkeletonConfig, parent: HTMLElement = document.body): void | Promise<void> {
+export default function buildTree(skeleton: SkeletonTree | SkeletonConfig, parent?: HTMLElement): void | Promise<void> {
+  if (!parent) {
+    parent = document.body;
+    window['elements'] = [];
+  }
+
   if (skeleton[0]) 
     return composite(parent, skeleton as SkeletonConfig);
     
-  Array.from(parent.children).forEach(child => {
-    if (!['cnt', 'lf', 'rg'].includes(child.id)) child.remove();
-  })
+  Array.from(parent.children).forEach(child =>
+    !['cnt', 'lf', 'rg'].includes(child.id) ? child.remove() : 0);
 
   // if [parent.id] is 'ps' | 'rg', then use <a/> tags.
   let tagName = ['ps', 'rg'].includes(parent.id) ? 'a' : 'div';
@@ -25,11 +29,9 @@ export default function buildTree(skeleton: SkeletonTree | SkeletonConfig, paren
 
     if (!(document.getElementById(elementID) && (elementID == 'cnt' || elementID == 'lf'))) {
       var child = document.createElement(tagName);
-      child.id = elementID;
+      child.id = elementID, cnt.rg = rg;
 
       parent.append(child)
-
-      cnt.rg = rg;
       composite(child, tree.config as SkeletonConfig, Object.keys(tree).length);
     }
 

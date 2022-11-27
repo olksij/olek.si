@@ -101,12 +101,6 @@ export interface FromMorphElement extends FromElement {
 export type SizeUnit = number | null;
 
 export type Size = [SizeUnit, SizeUnit];
-export interface AnimatingOrder {
-  image?: boolean;
-  alt?: string;
-  delay: number;
-  children?: boolean;
-}
 
 export interface FontStyle {
   // display or text font, defaults to text
@@ -123,11 +117,10 @@ export interface FontStyle {
 export interface PageContent {
   head?: HTMLElement[];
   stylesheets: string[];  
-  animatingOrder?: Record<string, AnimatingOrder>;  
-  elementConfig?: Record<string, ElementConfig>;
+  elements?: Record<string, ElementConfig>;
   images?: Record<string, string>;
-  restoreClicks?: Record<string, Array<Function>>;  
-  restoreLinks?: Record<string, Array<string>>;  
+  clicks?: Record<string, Array<Function>>;  
+  links?: Record<string, Array<string>>;  
   texts?: SourceTextData;
 }
 
@@ -136,5 +129,7 @@ export interface SkeletonTree { [id: string]: SkeletonConfig | SkeletonTree; }
 //                               [width, height, borderRadius]
 export type SkeletonBaseConfig = [...Size, BorderRadius?]
 export type SkeletonConfig = [SkeletonBaseConfig, SkeletonBaseConfig?]
+
+export interface SkeletonCompositeConfig { config: SkeletonConfig; delay: number; };
 
 export type BorderRadius = number;

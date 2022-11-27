@@ -1,4 +1,4 @@
-import { ElementConfig, Languages, AnimatingOrder, SourceTextData } from 'interfaces';
+import { ElementConfig, Languages, SourceTextData } from 'interfaces';
 
 // specific dates with custom description
 const dates: Record<string, Record<Languages, [string, string]>> = {  
@@ -28,7 +28,7 @@ let description = dates[date.getMonth() + '-' + (date.getDate() + 1)] ?? dates.d
 import { fontStyles } from '/common/fontStyles';
 let font = fontStyles;
 
-const elementConfig: Record<string, ElementConfig> = {
+const elements: Record<string, ElementConfig> = {
 /*
  🏷️ ID     ✨ FontStyle           ⚙️ Custom placeholder
   _|_    ________|________     _____________|_____________ */
@@ -62,24 +62,9 @@ import desktopStylesheet from './desktop.skeleton.css';
 
 const stylesheets: string[] = [ mainStylesheet, skeletonStylesheet, desktopStylesheet ];
 
-const restoreLinks: Record<string, Array<string>> = {
+const links: Record<string, Array<string>> = {
   "ps": ["https://t.me/oleksiibesida", "https://matrix.to/#/@human:oleksii.xyz", "https://github.com/oleksiibesida", "https://linkedin.com/in/oleksiibesida/", "mailto:besida@oleksii.xyz"],
 }
 
-// order and details of animating each node
-
-const animatingOrder: Record<string, AnimatingOrder> = {
-  "pf":  { image: true,  delay: 0, alt: 'Profile Picture' },
-  "tt":  { delay: 50 },
-  "d1":  { delay: 500 },
-  "d2":  { delay: 0 },
-  "ps":  { image: true, delay: 75, children: true },
-  "rg":  { delay: 50, children: true },
-  "nav": { delay: 100 },
-  "cr":  { delay: 100 },
-  "lg":  { delay: 100 },
-}
-
 import { onload } from '/common/page';
-export let load = () => onload({ animatingOrder, elementConfig, images,
-  restoreLinks, stylesheets, texts });
+export let load = () => onload({ elements, images, links, stylesheets, texts });

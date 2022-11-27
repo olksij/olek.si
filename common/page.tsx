@@ -1,4 +1,4 @@
-import { PageContent, Languages, SourceTextData, ElementConfig } from 'interfaces';
+import { PageContent, SourceTextData, ElementConfig } from 'interfaces';
 import { createElement } from "/render/jsx";
 import { closeMenu } from '/render/menu';
 
@@ -33,7 +33,7 @@ import lg from '/assets/raw/language.txt?raw';
 
 let font = fontStyles;
 
-const elementConfig: Record<string, ElementConfig> = {
+const elements: Record<string, ElementConfig> = {
 /*
   🏷️ Element ID     ✨ FontStyle
   ______|______   ________|________  */
@@ -63,14 +63,14 @@ import styelsheet from './styles.css';
 
 const stylesheets: string[] = [styelsheet];
 
-const restoreLinks: Record<string, Array<string>> = {
+const links: Record<string, Array<string>> = {
   "rg": ["/", "/about/", "/projects/", "/works/"],
 }
 
 import { onMenuClick } from '/render/menu';
 import { fontStyles } from './fontStyles';
 
-const restoreClicks: Record<string, Array<Function>> = {
+const clicks: Record<string, Array<Function>> = {
   rg: [
     () => onMenuClick('index'),
     () => onMenuClick('about'),
@@ -81,8 +81,7 @@ const restoreClicks: Record<string, Array<Function>> = {
 
 let lgElem = byId('lg')!;
 
-export const content = { head, elementConfig, restoreClicks, 
-  restoreLinks, stylesheets, texts } as PageContent;
+export const content = { head, elements, clicks, links, stylesheets, texts } as PageContent;
 
 lgElem.addEventListener("mouseenter", () => Object.keys(texts.lg).forEach(lg => 
   byId('lg')!.append(<div onclick={() => window.history.pushState({}, '', `?${lg}`)} class="lgItem">{texts.lg[lg]}</div>)));

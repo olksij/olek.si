@@ -1,4 +1,4 @@
-import { AnimatingOrder, PageContent, RenderElementInterface, TextConfig, Languages, SkeletonBaseConfig } from "interfaces";
+import { PageContent, RenderElementInterface, TextConfig, Languages, SkeletonCompositeConfig } from "interfaces";
 import { createElement } from "./jsx";
 import print from './print';
 import { byId } from "./shorthands";
@@ -9,11 +9,10 @@ import render from './render';
 export default async function construct(content: PageContent): Promise<void> {
   let assets = {
     head: [ ...(content.head ?? []), ...(commonContent.head ?? []) ],
-    animatingOrder: { ...content.animatingOrder, ...commonContent.animatingOrder },
-    elementConfig:  { ...content.elementConfig,  ...commonContent.elementConfig },
+    elements:  { ...content.elements,  ...commonContent.elements },
     images: { ...content.images, ...commonContent.images },
-    restoreClicks: { ...content.restoreClicks, ...commonContent.restoreClicks },
-    restoreLinks: { ...content.restoreLinks, ...commonContent.restoreLinks },
+    clicks: { ...content.clicks, ...commonContent.clicks },
+    links: { ...content.links, ...commonContent.links },
     stylesheets: [ ...content.stylesheets, ...commonContent.stylesheets ],
     texts: { ...content.texts, ...commonContent.texts },
   } as PageContent;
@@ -36,75 +35,58 @@ export default async function construct(content: PageContent): Promise<void> {
     document.head.append(<style>{style}</style>)
 
   // onclick
-  for (let id in assets.restoreClicks) {
+  for (let id in assets.clicks) {
     let children = byId(id)!.children;
     for (var i = 0; i < children.length; i++) {
       let childIndex = i;
       if (!children[i].getAttribute("onclick"))
-        children[i].addEventListener("click", () => assets.restoreClicks?.[id][childIndex]()),
+        children[i].addEventListener("click", () => assets.clicks?.[id][childIndex]()),
           children[i].setAttribute("onclick", "return false");
     }
   }
-
-  let delay: number = 0;
 
   const urlSearchParams = new URLSearchParams(window.location.search);
   const lang = Object.keys(Object.fromEntries(urlSearchParams.entries()))[0] as Languages ?? 'en';
 
   // restore everything;
-  for (let item in assets.animatingOrder) {
-    let data: AnimatingOrder = assets.animatingOrder[item];
-    let queue: Array<string> = [item];
+  for (let id in window['elements']) {
+    let skeleton = window['elements'][id] as SkeletonCompositeConfig;
 
-    // if it's about animation children, put children into a queue
-    if (data.children) queue = [...byId(item)!.children]
-      .map(child => child.id); 
-
-    if (data.image) {
-      for (let child of queue) {
-        // insert node to an appropriate skeleton element;
-        let node = <img src={assets.images?.[child]} alt={item} />;
-        byId(child)?.replaceChildren(node);
-        // schedule the animation
-        let render = (child: string) => byId(child)?.classList.add('rendered');
-        setTimeout(render, delay += data.delay, child);
-      } 
+    if (assets.images?.[id]) {
+      // insert node to an appropriate skeleton element;
+      let node = <img src={assets.images?.[id]} alt={id} />;
+      byId(id)?.replaceChildren(node);
+      // schedule the animation
+      let render = (child: string) => byId(child)?.classList.add('rendered');
+      setTimeout(render, skeleton.delay * 200, id);
       // skip morphing as we have inserted the image element
       continue;
     }
 
-    // iterate over queue
-    for (let child of queue) {
-      let element = assets.elementConfig?.[child]!;
-        
-      let text = element.text ? {
-        text: assets.texts?.[child][lang as Languages],
-        style: element.text,
-      } as TextConfig : undefined;
+    let element = assets.elements?.[id] ?? {};
 
-      let mobile: 0 | 1 = window.innerWidth < 920 ? 0 : (window['current'][child][1] ? 1 : 0)
-  
-      let skeletonConfig: SkeletonBaseConfig = window['current'][child][mobile];
-      //skeletonConfig[2] ??= parseInt(byId(child)?.style.borderRadius ?? '0');
+    // iterate over queue    
+    let text = element.text ? {
+      text: assets.texts?.[id][lang as Languages],
+      style: element.text,
+    } as TextConfig : undefined;
 
-      if (byId(child)?.hasChildNodes()) continue;
+    let mobile: 0 | 1 = window.innerWidth < 920 ? 0 : (skeleton.config[1] ? 1 : 0)
 
-      let config = {
-        id: child,
-        height: element.text?.height ?? element.icon?.height!,
-        morph: await compute({
-          from: { ...element.from, skeleton: skeletonConfig },
-          to: { text, icon: element.icon },
-        }),
-        icon: element.icon,
-        text: {
-          style: element.text,
-          text: assets.texts?.[child][lang as Languages]
-        } as TextConfig,
-      } as RenderElementInterface;
+    if (byId(id)?.hasChildNodes()) continue;
 
-      setTimeout(render, delay += data.delay, config);
-    }
+    let config = {
+      id,
+      height: element.text?.height ?? element.icon?.height!,
+      morph: await compute({
+        from: { ...element.from, skeleton: skeleton.config[mobile]! },
+        to: { text, icon: element.icon },
+      }),
+      icon: element.icon,
+      text,
+    } as RenderElementInterface;
+
+    setTimeout(render, skeleton.delay * 200, config);
   }
 
   document.body.classList.add('rendered');

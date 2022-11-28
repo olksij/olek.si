@@ -42,10 +42,6 @@ for (let child of rg.children) {
 
     child.classList.add("hover");
   });
-
-  child.addEventListener("click", () => {
-    window.history.pushState({}, '', `/${child.id == 'home' ? '' : child.id + '/'}`)
-  });
 }
 
 function menuOpenBg() {
@@ -109,6 +105,7 @@ export function onMenuClick(route: string) {
   buildTree(routes[route][0]);
   //@ts-ignore
   routes[route][1]().then(page => page.load());
+  window.history.pushState({}, '', `/${route == 'index' ? '' : route + '/'}`)
 }
 
 

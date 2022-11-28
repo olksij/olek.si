@@ -29,5 +29,5 @@
       ]
     }
   },
-  "include": ["src", "about", "index", "skeleton", "compute/fonts.ts", "general", "scripts", "compute", "interfaces.ts", "vite-env.d.ts"]
+  "include": ["src", "about", "index", "skeleton", "compute/fonts.ts", "general", "scripts", "compute", "interfaces.d.ts", "vite-env.d.ts"]
 }

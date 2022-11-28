@@ -3,18 +3,8 @@
    --- -- AN URGENT REFACTORING -- ---
    --- --- --- --- --- --- --- --- --- */
 
-@media (min-width: 920px) {
-  #cnt {
-    height: 100%;
-  }
-}
-
 #pf>img {
   border-radius: 100%;
-}
-
-img {
-  opacity: 0;
 }
 
 
@@ -26,6 +16,10 @@ img {
   background: none;
   transition: background .3s;
   background-color: var(--bg);
+}
+
+#ps>a:hover {
+  background: #F0F0F2;
 }
 
 @keyframes psrender {
@@ -42,92 +36,4 @@ img {
       0 0 0 1px var(--border),
       0 0 0 8px var(--bg);
   }
-}
-
-#ps>a:hover {
-  background: #F0F0F2;
-}
-
-.rendered>img {
-  opacity: 1;
-  animation: 1s cubic-bezier(0.5, 0, 0.25, .75) imgrender;
-}
-
-@keyframes imgrender {
-  0% {
-    opacity: 0;
-  }
-
-  10% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-/* --- RENDER TITLE --- */
-
-#tt.rendered,
-#d1.rendered,
-#d2.rendered {
-  background: #0000;
-  align-items: flex-start;
-  text-decoration: none;
-}
-
-#ft {
-  align-items: flex-end;
-  height: 16px;
-}
-
-#cr,
-#lg {
-  flex-direction: row;
-}
-
-#cr.rendered,
-#lg.rendered {
-  background: #0000;
-}
-
-#lg.rendered {
-  gap: 4px;
-  z-index: 1;
-  border-radius: 8px;
-  margin: -12px;
-  padding: 12px 16px;
-}
-
-#lg:hover {
-  flex-direction: column;
-  height: 90px;
-  background: var(--overlay);
-  box-shadow: 0px 0px 0px 1px #0000000A,
-    0px 2px 8px 0px #0000000A;
-}
-
-#lg:not(:hover)>* {
-  height: 16px;
-  animation: 0s;
-}
-
-#lg:not(:hover) {
-  align-items: flex-end;
-}
-
-#lg:hover>div {
-  font-size: 14px;
-  margin: -12px;
-  padding: 16px;
-}
-
-#lg:hover>div:hover {
-  color: var(--accent) !important;
-}
-
-#lg:hover>svg,
-#lg:hover>img {
-  display: none;
 }

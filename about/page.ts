@@ -5,11 +5,12 @@ let font = fontStyles;
 
 const elements: Record<string, ElementConfig> = {
 /*
- 🏷️ ID     ✨ FontStyle
-  _|_    ________|________ */
-  tt:  { text: font.h2, }, 
-  d1:  { text: font.subtitle, },
-  d2:  { text: font.subtitle, },
+ 🏷️ ID            ✨ FontStyle
+  _|_           ________|________ */
+  tt:         { text: font.h2, }, 
+  d1:         { text: font.subtitle, },
+  d2:         { text: font.subtitle, },
+  bio:        { text: font.subtitle, },
 };
 
 const texts: SourceTextData = {
@@ -19,7 +20,11 @@ const texts: SourceTextData = {
   tt:  { en: "About me",                      sv: "Om mig",                        uk: "Pro mene" },
   d1:  { en: "I’m a Ukrainian he/him living", sv: "Jag är en ukrainare han/honom", uk: "Ja vin/joho ukrajineć, prožyvajučyj" },
   d2:  { en: "in Stockholm, Sweden.",         sv: "som bor i Stockholm, Sverige.", uk: "v Stockhoĺm, Švecija." },
+  bio: { en: "test.",         sv: "som bor i Stockholm, Sverige.", uk: "v Stockhoĺm, Švecija." },
 };
+
+import image from '/assets/images/profilePicture.webp';
+const images = { image };
 
 import mainStylesheet from './styles.css';
 import skeletonStylesheet from './skeleton.css';
@@ -28,4 +33,4 @@ import desktopStylesheet from './desktop.skeleton.css';
 const stylesheets: string[] = [ mainStylesheet, skeletonStylesheet, desktopStylesheet ];
 
 import { onload } from '/common/page';
-export let load = () => onload({ elements, stylesheets, texts });
+export let load = () => onload({ elements, images, stylesheets, texts });

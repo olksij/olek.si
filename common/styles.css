@@ -64,6 +64,21 @@ button {
   background: #0000;
 }
 
+img {
+  opacity: 0;
+}
+
+.rendered>img {
+  opacity: 1;
+  animation: 1s cubic-bezier(0.5, 0, 0.25, .75) imgrender;
+}
+
+@keyframes imgrender {
+  0% { opacity: 0; }
+  10% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
 #ft {
   align-items: flex-end;
   height: 16px;

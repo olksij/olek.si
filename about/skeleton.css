@@ -17,11 +17,7 @@ body {
   flex-direction: row;
 }
 
-#paragraph {
+#bio {
   width: 100%;
   margin-right: 64px;
-}
-
-#rg {
-  display: none;
 }

@@ -17,8 +17,8 @@ export default async function construct(content: PageContent): Promise<void> {
     texts: { ...content.texts, ...commonContent.texts },
   } as PageContent;
 
+  await window['skeleton'];
   if (!sessionStorage.getItem('loaded')) {
-    await window['skeleton'];
     sessionStorage.setItem('loaded', 'true');
   }
 
@@ -57,7 +57,7 @@ export default async function construct(content: PageContent): Promise<void> {
       let node = <img src={assets.images?.[id]} alt={id} />;
       byId(id)?.replaceChildren(node);
       // schedule the animation
-      let render = (child: string) => byId(child)?.classList.add('rendered');
+      let render = (id: string) => byId(id)?.classList.add('rendered');
       setTimeout(render, skeleton.delay * 200, id);
       // skip morphing as we have inserted the image element
       continue;
@@ -71,15 +71,20 @@ export default async function construct(content: PageContent): Promise<void> {
       style: element.text,
     } as TextConfig : undefined;
 
-    let mobile: 0 | 1 = window.innerWidth < 920 ? 0 : (skeleton.config[1] ? 1 : 0)
+    let skeletonConfig = skeleton.config[window.innerWidth < 920 ? 0 : 1] ?? skeleton.config[0];
 
     if (byId(id)?.hasChildNodes()) continue;
+
+    skeletonConfig.forEach((prop, index) => {
+      if (prop === null) 
+        skeletonConfig[index] = index == 0 ? byId(id)?.clientWidth : byId(id)?.clientHeight;
+    })
 
     let config = {
       id,
       height: element.text?.height ?? element.icon?.height!,
       morph: await compute({
-        from: { ...element.from, skeleton: skeleton.config[mobile]! },
+        from: { ...element.from, skeleton: skeletonConfig },
         to: { text, icon: element.icon },
       }),
       icon: element.icon,

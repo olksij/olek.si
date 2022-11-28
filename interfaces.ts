@@ -35,6 +35,7 @@ export type FontStyleType =
   'title'        |
   'h2'           |
   'subtitle'     |
+  'body'         |
   'menuSelected' |
   'menu'         |
   'action'       |
@@ -112,6 +113,7 @@ export interface FontStyle {
 
   height: number;
   color: CSSColor;
+  wrap?: boolean;
 }
 
 export interface PageContent {

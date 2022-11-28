@@ -51,7 +51,7 @@ export default async function construct(assets: PageContent): Promise<void> {
       let node = <img src={assets.images?.[id]} alt={id} />;
       byId(id)?.replaceChildren(node);
       // schedule the animation
-      let render = (id: string) => byId(id)?.classList.add('rendered');
+      let render = (id: string) => byId(id)?.classList.add('rendered', 'renderedImg');
       setTimeout(render, skeleton.delay * 200, id);
       // skip morphing as we have inserted the image element
       continue;

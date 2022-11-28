@@ -1,6 +1,6 @@
 import { FontStyle, FontStyleType } from "interfaces";
 
-export const fontStyles: Record<FontStyleType, FontStyle> = {
+export default {
   title: {
     type: 'display',
     fontSize: 128,
@@ -19,6 +19,12 @@ export const fontStyles: Record<FontStyleType, FontStyle> = {
     fontSize: 20,
     height: 28,
     color: 'var(--secondary)',
+  },
+  body: {
+    fontSize: 18,
+    height: 26,
+    color: 'var(--secondary)',
+    wrap: true,
   },
   menuSelected: {
     type: 'display',
@@ -43,4 +49,4 @@ export const fontStyles: Record<FontStyleType, FontStyle> = {
     height: 16,
     color: 'var(--secondary)',
   },
-};
+} as  Record<FontStyleType, FontStyle>;

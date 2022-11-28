@@ -17,7 +17,7 @@ export default function (element: RenderElementInterface) {
   let color = element.text?.style.color ?? element.icon?.color!;
   
   let elements: (SVGTextElement | SVGPathElement)[] = [];
-  let root: SVGElement = <svg height={element.height} viewBox={`0 0 ${width} ${element.height}`}></svg>
+  let root: SVGElement = <svg viewBox={`0 0 ${width} ${element.height}`}></svg>
 
   if (element.text) {
     let font = element.text.style;
@@ -25,6 +25,9 @@ export default function (element: RenderElementInterface) {
 
     let style = `font-family:${font.type ?? 'text'}; letter-spacing:${font.letterSpacing}em; font-size:${font.fontSize}px`;
     text = <text opacity="0" style={style} x={textLeft} y={computed!.baseline! - .25}>{element.text.text}</text>;
+
+    if (element.text.style.wrap) 
+      root.style.height = element.height + 'px';
 
     elements.push(text);
 

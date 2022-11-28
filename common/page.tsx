@@ -31,7 +31,7 @@ import nav from '/assets/raw/nav.txt?raw';
 import cr from '/assets/raw/copyright.txt?raw';
 import lg from '/assets/raw/language.txt?raw';
 
-let font = fontStyles;
+import font from '/common/fontStyles';
 
 const elements: Record<string, ElementConfig> = {
 /*
@@ -69,7 +69,6 @@ const links: Record<string, Array<string>> = {
 }
 
 import { onMenuClick } from '/render/menu';
-import { fontStyles } from './fontStyles';
 
 const clicks: Record<string, Array<Function>> = {
   rg: [

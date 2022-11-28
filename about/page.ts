@@ -1,7 +1,6 @@
 import { ElementConfig, SourceTextData } from 'interfaces';
 
-import { fontStyles } from '/common/fontStyles';
-let font = fontStyles;
+import font from '/common/fontStyles';
 
 const elements: Record<string, ElementConfig> = {
 /*
@@ -10,7 +9,7 @@ const elements: Record<string, ElementConfig> = {
   tt:         { text: font.h2, }, 
   d1:         { text: font.subtitle, },
   d2:         { text: font.subtitle, },
-  bio:        { text: font.subtitle, },
+  bio:        { text: font.body, },
 };
 
 const texts: SourceTextData = {

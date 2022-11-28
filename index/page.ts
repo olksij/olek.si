@@ -25,8 +25,7 @@ import titleFromPath from '/assets/raw/titleFromPath.txt?raw';
 let date = new Date();
 let description = dates[date.getMonth() + '-' + (date.getDate() + 1)] ?? dates.default;
 
-import { fontStyles } from '/common/fontStyles';
-let font = fontStyles;
+import font from '/common/fontStyles';
 
 const elements: Record<string, ElementConfig> = {
 /*

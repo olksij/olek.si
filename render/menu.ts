@@ -5,7 +5,7 @@ import { resetCounter } from "/skeleton/composite";
 import MotionBlur from "./motionBlur";
 import { byId, tagById } from "./shorthands";
 import compute from "./worker";
-import { fontStyles } from "/common/fontStyles";
+import fontStyles from "/common/fontStyles";
 
 /* --- --- --- --- --- --- --- --- ---
    --- CODE IN THIS FILE REQUIRES- ---

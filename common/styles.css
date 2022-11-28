@@ -33,6 +33,7 @@ img {
 }
 
 svg {
+  height: 100%;
   width: fit-content;
   overflow: visible;
 }
@@ -60,7 +61,7 @@ button {
   }
 }
 
-.rendered.sl {
+.rendered.sl:not(.renderedImg) {
   background: #0000;
 }
 

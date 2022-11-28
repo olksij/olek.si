@@ -1,3 +1,5 @@
+/* common > styles.css */
+
 @import './menu.css';
 
 :root {
@@ -31,7 +33,6 @@ img {
 }
 
 svg {
-  height: 100%;
   width: fit-content;
   overflow: visible;
 }
@@ -46,7 +47,6 @@ body.rendered {
     radial-gradient(var(--element) 5%, transparent 0),
     var(--bg);
   background-size: 24px 24px;
-  overflow-x: hidden;
 }
 
 button {

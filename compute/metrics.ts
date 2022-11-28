@@ -20,7 +20,8 @@ export default function matrics(fonts: FontsRecord, data: ComputeRequest) {
     
     //preserve aspect ratio
     let height = data.to.text?.style.height ?? data.to.icon?.height!;
-    let size = [sh != 0 ? sw!/sh!*height : sw, height]
+    //let size = [sh != 0 ? sw!/sh!*height : sw, height]
+    let size = [sw, sh]
 
     // letter width for placeholder
     let lw = Math.round(size[0]! / path.length * 100) / 100;

@@ -20,17 +20,17 @@ const texts: SourceTextData = {
   tt:  { en: "About me",                      sv: "Om mig",                        uk: "Pro mene" },
   d1:  { en: "I’m a Ukrainian he/him living", sv: "Jag är en ukrainare han/honom", uk: "Ja vin/joho ukrajineć, prožyvajučyj" },
   d2:  { en: "in Stockholm, Sweden.",         sv: "som bor i Stockholm, Sverige.", uk: "v Stockhoĺm, Švecija." },
-  bio: { en: "test.",         sv: "som bor i Stockholm, Sverige.", uk: "v Stockhoĺm, Švecija." },
+  bio: { en: "immm oleksiii super duper testtttt",         sv: "som bor i Stockholm, Sverige.", uk: "v Stockhoĺm, Švecija." },
 };
 
-import image from '/assets/images/profilePicture.webp';
+import image from '/assets/images/fullSized.jpg';
 const images = { image };
 
 import mainStylesheet from './styles.css';
 import skeletonStylesheet from './skeleton.css';
 import desktopStylesheet from './desktop.skeleton.css';
 
-const stylesheets: string[] = [ mainStylesheet, skeletonStylesheet, desktopStylesheet ];
+const stylesheets: string[] = [ skeletonStylesheet, desktopStylesheet, mainStylesheet ];
 
 import { onload } from '/common/page';
 export let load = () => onload({ elements, images, stylesheets, texts });

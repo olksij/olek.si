@@ -59,9 +59,10 @@ const texts: SourceTextData = {
   lg:        { en: "English",             sv: "Svenska",             uk: "Ukrajinśka" }
 };
 
-import styelsheet from './styles.css';
+import stylesheet from './styles.css';
+import skeleton from './skeleton.css';
 
-const stylesheets: string[] = [styelsheet];
+const stylesheets: string[] = [skeleton, stylesheet];
 
 const links: Record<string, Array<string>> = {
   "rg": ["/", "/about/", "/projects/", "/works/"],

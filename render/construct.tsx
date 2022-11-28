@@ -3,21 +3,15 @@ import { createElement } from "./jsx";
 import print from './print';
 import { byId } from "./shorthands";
 import compute from "./worker";
-import { content as commonContent } from "/common/page";
+import { content as common } from "/common/page";
 import render from './render';
 
-export default async function construct(content: PageContent): Promise<void> {
-  let assets = {
-    head: [ ...(content.head ?? []), ...(commonContent.head ?? []) ],
-    elements:  { ...content.elements,  ...commonContent.elements },
-    images: { ...content.images, ...commonContent.images },
-    clicks: { ...content.clicks, ...commonContent.clicks },
-    links: { ...content.links, ...commonContent.links },
-    stylesheets: [ ...content.stylesheets, ...commonContent.stylesheets ],
-    texts: { ...content.texts, ...commonContent.texts },
-  } as PageContent;
+export default async function construct(assets: PageContent): Promise<void> {
+  Object.keys(common).forEach(key => assets[key] = Array.isArray(common[key]) 
+    ? [...common[key], ...(assets[key] ?? [])] 
+    : {...common[key], ...(assets[key] ?? {})} );
 
-  await window['skeleton'];
+    await window['skeleton'];
   if (!sessionStorage.getItem('loaded')) {
     sessionStorage.setItem('loaded', 'true');
   }

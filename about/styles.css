@@ -1,4 +1,18 @@
+/* about > styles.css */
+
 /* --- --- --- --- --- --- --- --- ---
    --- CODE IN THIS FILE REQUIRES- ---
    --- -- AN URGENT REFACTORING -- ---
    --- --- --- --- --- --- --- --- --- */
+
+#bio {
+   justify-content: start !important;
+}
+
+#image {
+   overflow: hidden;
+}
+
+#image>img {
+   object-fit: cover;
+}

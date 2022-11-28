@@ -1,3 +1,5 @@
+/* common > skeleton.css */
+
 @import './menu.skeleton.css';
 
 :root {
@@ -19,6 +21,7 @@ body {
   width: 100%;
   background: var(--bg);
   margin: 0;
+  overflow-x: hidden;
 }
 
 body {

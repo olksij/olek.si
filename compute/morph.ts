@@ -4,16 +4,28 @@
 import { ComputeAPI, ComputeRequest, ComputeResult, FontsRecord } from "/interfaces";
 
 import normalize from "./normalize";
-import metrics from "./metrics";
+import convert   from "./convert";
+import vectorize from "./vectorize";
+import skeleton  from "./skeleton";
 
 export default async function interpolate(request: string, data: ComputeRequest, fonts: FontsRecord) {
   let startTime = performance.now();
-  
-  let { fromPath, toPath, baseline, width } = metrics(fonts, data);
+  let { from, to } = data;
 
-  // create interpolatee paths for svg <animate>
-  let { from, to } = normalize(fromPath, toPath);
-  let computed = { from, to, baseline, width };
+  // vectorize the [to] element
+  let { path, baseline, width } = vectorize(to, fonts)!;
+
+  // get [PathRings[]] out of PathData string
+  let toRings = convert(path);
+
+  // if there is a predefined from element, animate from it
+  let fromRings = from.element || from.path
+    ? convert((vectorize(from.element, fonts) ?? from).path!, toRings) 
+    : skeleton(data, toRings); // else, build a skeleton
+
+  //           rearrage points in rings for smooth animation
+  //                  ______________|______________
+  let computed = { ...normalize(fromRings, toRings), baseline, width };
 
   // send to main thread computed paths
   postMessage({ request, data: computed } as ComputeAPI<ComputeResult>);

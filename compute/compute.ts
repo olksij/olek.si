@@ -10,8 +10,7 @@ let fonts: Promise<FontsRecord> = new Promise(fontsResolve);
 
 // when message is received from main thread
 onmessage = async (message: MessageEvent<ComputeAPI<ComputeAPIData>>) => {
-  let input = message.data;
-  let request = input.request, deliver = input.deliver, data = input.data;
+  let { request, deliver, data } = message.data;
 
   if (deliver == 'FontsTransmit') loadFonts(data as FontsTransmit);
   if (deliver == 'ComputeRequest') morph(request!, data as ComputeRequest, await fonts);

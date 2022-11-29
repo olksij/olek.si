@@ -135,3 +135,6 @@ export type SkeletonConfig = [SkeletonBaseConfig, SkeletonBaseConfig?]
 export interface SkeletonCompositeConfig { config: SkeletonConfig; delay: number; };
 
 export type BorderRadius = number;
+
+export type PathPoint = [number, number];
+export type PathRing = PathPoint[];

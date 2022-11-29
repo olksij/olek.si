@@ -1,14 +1,16 @@
 import { Font } from "opentype.js";
 import { FontsRecord, FontStyle, MorphElement } from "/interfaces";
 
-export function elementToPath(element: MorphElement, fonts: FontsRecord) {
+export default function (element: MorphElement | undefined, fonts: FontsRecord) {
+  if (!element) return undefined;
+
   let icon = element.icon, text = element.text;
 
-  let path = new Array<string>();
+  let pathString = "";
   let width = 0, baseline = 0, points = 0;
 
   if (icon) {
-    path.push(...splitPath(icon.path));
+    pathString += icon.path;
     width = icon.height ?? 0;
   }
 
@@ -22,14 +24,10 @@ export function elementToPath(element: MorphElement, fonts: FontsRecord) {
     let pathData = font.getPath(text?.text, textLeft, baseline, style.fontSize, { letterSpacing: style.letterSpacing });
     width = pathData.getBoundingBox().x2;
 
-    path.push(...splitPath(pathData.toPathData(2)));
+    pathString += pathData.toPathData(2);
   }
 
-  return { path, baseline, width, points };
-}
-
-export function splitPath(path?: string) {
-  return path?.replaceAll('ZM', 'Z$M')?.split('$') ?? [];
+  return { path: pathString, baseline, width, points };
 }
 
 function calculateBaseline(font: Font, style: FontStyle) {

@@ -13,11 +13,13 @@ export default function (pathString: string, points?: PathRing[]) {
     let ring: PathRing = [], 
         props = new svgPathProperties(pathList[i]);
     
-    let total = props.getTotalLength();
+    let total = props.getTotalLength(),
+        count = points?.[i]?.length ?? total / 2;
     //                                                   default precision = one point per two px
     // record [x, y] points for each step                                          ____|____
-    for (let length = 0; length <= total; length += total / (points?.[i].length ?? total / 2)) {
-      let position = props.getPointAtLength(length);
+    for (let point = 0; point < count; point++) {
+      let length = point * total / count;
+      let position = props.getPointAtLength(length); 
       ring.push([position.x, position.y].map(precise) as PathPoint);
     }
 

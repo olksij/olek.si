@@ -5,6 +5,16 @@ export default function(from: PathRing[], to: PathRing[]) {
   let fromString = "", toString = "";
 
   let startTime = performance.now()
+  
+  let isFrom = from.length < to.length ? 1 : 0,
+      shorter = (n: number = 0) => isFrom ^ n ? from : to;
+      
+  while (from.length != to.length) {
+    shorter()[shorter().length] = [];
+    
+    for (var i = 0; i < shorter(1)[shorter().length-1].length; i++)
+    shorter()[shorter().length-1].push([0, 0]);
+  }
 
   // for each path
   for (let ring = 0; ring < from.length; ring++) {
@@ -18,7 +28,7 @@ export default function(from: PathRing[], to: PathRing[]) {
       let sum = 0;
 
       from[ring].forEach((point, i) => {
-        var d = distance(from[ring][(i + offset) % to[ring].length], point);
+        var d = distance(to[ring][(i + offset) % to[ring].length], point);
         sum += d * d;
       });
   

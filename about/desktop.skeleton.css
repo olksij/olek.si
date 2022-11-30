@@ -1,51 +1,53 @@
 /* about > desktop.skeleton.css */
 /* an incremental CSS file providing skeleton layout for desktop viewports. */
 
-*:not(style):not(script):not(title) {
-  align-items: stretch;
-  flex-direction: column;
-}
+@media (min-width: 920px) {
+  *:not(style):not(script):not(title) {
+    align-items: stretch;
+    flex-direction: column;
+  }
 
-body {
-  width: 100%;
-}
+  body {
+    width: 100%;
+  }
 
-#cnt {
-  margin: auto 0;
-  margin-bottom: auto;
-  flex-direction: row;
-}
+  #cnt {
+    margin: auto 0;
+    margin-bottom: auto;
+    flex-direction: row;
+  }
 
-#lf {
-  margin-left: 128px;
-  gap: 48px;
-}
+  #lf {
+    margin-left: 128px;
+    gap: 48px;
+  }
 
-#title {
-  align-items: center;
-  justify-content: left !important;
-}
+  #title {
+    align-items: center;
+    justify-content: left !important;
+  }
 
-#pf {
-  z-index: 1;
-  box-shadow: 0 0 0 24px var(--bg);
-  margin-right: -32px;
-}
+  #pf {
+    z-index: 1;
+    box-shadow: 0 0 0 24px var(--bg);
+    margin-right: -32px;
+  }
 
-#dd {
-  gap: 8px
-}
+  #dd {
+    gap: 8px
+  }
 
-#ps>a:last-child,
-#rg {
-  display: flex;
-}
+  #ps>a:last-child,
+  #rg {
+    display: flex;
+  }
 
-#nav {
-  display: none;
-}
+  #nav {
+    display: none;
+  }
 
-#ft {
-  margin: 24px 128px;
-  justify-content: space-between;
+  #ft {
+    margin: 24px 128px;
+    justify-content: space-between;
+  }
 }

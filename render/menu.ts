@@ -127,11 +127,15 @@ nav.onclick = function () {
 
     cnt.classList.add("navTapped", "navTransformed");
     tagById("nav", "text")!.innerHTML = "Close";
+    byId('nav')?.children[0].setAttribute("viewBox", "0 0 80 24");
+    byId('nav').style.opacity = 0.5;
     menuOpenBg();
   } else {
     //close menu
     cnt.classList.remove("navTapped");
     tagById("nav", "text")!.innerHTML = "Navigation";
+    byId('nav')?.children[0].setAttribute("viewBox", "0 0 114 24");
+    byId('nav').style.opacity = 1;
     menuCloseBg();
   }
 };

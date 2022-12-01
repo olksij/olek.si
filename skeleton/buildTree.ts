@@ -1,16 +1,17 @@
 // this file's mission is building a DOM tree from JS's Objects provided by HTML page
 
 import { SkeletonConfig, SkeletonTree } from 'interfaces';
-import composite from './composite';
+
+import composite, { resetCounter } from './composite';
+import { initResolver } from './resolve';
+
 import rg from '/common/dom';
 
 // default DOM structure for menu
 
-export default function buildTree(skeleton: SkeletonTree | SkeletonConfig, parent?: HTMLElement): void | Promise<void> {
-  if (!parent) {
-    parent = document.body;
-    window['elements'] = [];
-  }
+export default function buildTree(skeleton: SkeletonTree | SkeletonConfig, parent: HTMLElement = document.body): void | Promise<void> {
+  // initialie skeleton resolver 
+  parent == document.body ? (initResolver(), resetCounter()) : 0;
 
   if (skeleton[0]) 
     return composite(parent, skeleton as SkeletonConfig);

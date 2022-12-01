@@ -6,9 +6,12 @@
 //  _____________|_____________  ______|_____
 let skeletonResolve: () => void, rendered = 0;
 
-window['skeleton'] = new Promise<void>(resolve => skeletonResolve = resolve);
+// called before wiping all elements
+export const initResolver = () =>
+  [window['skeleton'], window['elements'], rendered] = [new Promise<void>(resolve => skeletonResolve = resolve), [], 0];
 
-// Called to resolve            the total number     rendered
-// skeleton promise if need     _______|_______   ______|______
-export const resolveSkeleton = (counter: number,  count: number) =>
+//             the total number     rendered
+//              _______|_______   ______|______
+export default (counter: number,  count: number) =>
+// if the number of rendered skeletons matches the total one, resolve
   (rendered += count) == counter ? skeletonResolve() : 0;

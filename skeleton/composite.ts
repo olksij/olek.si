@@ -1,5 +1,5 @@
 import { SkeletonCompositeConfig, SkeletonConfig } from "interfaces";
-import { resolveSkeleton } from "./resolve";
+import resolve from "./resolve";
 
 // the total number of skeletons in the virtual tree
 let counter = 0;
@@ -38,7 +38,7 @@ export default async function composite(element: HTMLElement, config: SkeletonCo
     element.animate(...skeletonKeyframes);
     
     // notify content dependency tree about skeleton readyness
-    resolveSkeleton(counter, 1 / count);
+    resolve(counter, 1 / count);
 
   }, counter * 100, count)
 }

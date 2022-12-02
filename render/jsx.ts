@@ -2,7 +2,7 @@
 // this file is based on code by [https://github.com/kartiknair]
 
 // elements that require SVG namespace
-let vectorElements = ["svg", "path", "animate", "text"];
+let vectorElements = ["svg", "path", "animate", "text", "foreignObject"];
 
 export const createElement = (tag: string | Function, props: Record<string, any>, ...children: any): Element => {
   if (typeof tag === "function") return tag(props, ...children);
@@ -13,8 +13,8 @@ export const createElement = (tag: string | Function, props: Record<string, any>
     : document.createElement(tag);
 
   // add required namespace
-  if (vectorElements.includes(tag))
-    element.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:xlink", "http://www.w3.org/1999/xlink");
+  //if (vectorElements.includes(tag))
+  //  element.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:xlink", "http://www.w3.org/1999/xlink");
 
   // add all props to element
   for (let name in props) {

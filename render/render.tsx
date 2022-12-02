@@ -23,15 +23,14 @@ export default function (element: RenderElementInterface) {
     let font = element.text.style;
     let textLeft = element.icon ? element.icon.gap + element.height : 0;
 
-    let style = `font-family:${font.type ?? 'text'}; letter-spacing:${font.letterSpacing}em; font-size:${font.fontSize}px`;
-    text = <text opacity="0" style={style} x={textLeft} y={computed!.baseline! - .25}>{element.text.text}</text>;
+    let style = `font-family: ${font.type ?? 'text'}; letter-spacing: ${font.letterSpacing}em; font-size: ${font.fontSize}px; line-height: ${element.height+1.5-(0.02*font.fontSize)}px; opacity: 0;`;
+    text = <p style={style}>{element.text.text}</p>;
 
     if (element.text.style.wrap) 
       root.style.height = element.height + 'px';
 
     elements.push(text);
-
-    root.append(text);
+    root.append(<foreignObject x={textLeft} width={element.morph?.width + 'px'} height="200px">{text}</foreignObject>);
   }
 
   if (element.icon) {
@@ -43,7 +42,7 @@ export default function (element: RenderElementInterface) {
 
   if (element.morph) {
     let renderElement = () => {
-      elements.forEach(e => { e.setAttribute("opacity", "1"), e.setAttribute("fill", color)})
+      elements.forEach(e => { e.style.opacity = "1", e.setAttribute("fill", color), e.style.color = color})
       morph.remove();
     };
     

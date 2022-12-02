@@ -50,8 +50,9 @@ svg {
   overflow: visible;
 }
 
-svg>text, svg>path {
+svg p, svg>path {
   transition: 0s !important;
+  margin-top: 0;
 }
 
 button {

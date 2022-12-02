@@ -1,11 +1,8 @@
-import aboutDom from "/about/dom";
-import indexDom from "/index/dom";
-import buildTree from "/skeleton/buildTree";
-import { resetCounter } from "/skeleton/composite";
 import MotionBlur from "./motionBlur";
 import { byId, tagById } from "./shorthands";
 import compute from "./worker";
 import fontStyles from "/common/fontStyles";
+import navigate, { RouteName } from "/common/navigate";
 
 /* --- --- --- --- --- --- --- --- ---
    --- CODE IN THIS FILE REQUIRES- ---
@@ -18,65 +15,48 @@ let nav = byId("nav")!;
 
 var ignoreMouse = false;
 
-let menuOpenBgKeyframes: Keyframe[] = [
-  {
-    backgroundPosition: "0px 0px",
-    boxShadow: "inset 0px 0px 0px 50vh #FFF0",
-  },
-  {
-    backgroundPosition: "-32px 0px",
-    boxShadow: "inset 0px 0px 0px 50vh var(--bg)",
-  },
+const backgroundKeyframes: Keyframe[] = [
+  { backgroundPosition: "0px 0px",   boxShadow: "inset 0px 0px 0px 50vh #FFF0" },
+  { backgroundPosition: "-32px 0px", boxShadow: "inset 0px 0px 0px 50vh var(--bg)" },
 ];
 
-let menuCloseBgKeyframes: Keyframe[] = [
-  menuOpenBgKeyframes[1],
-  menuOpenBgKeyframes[0],
-];
+const backgroundAnimation: KeyframeAnimationOptions = {
+  easing: "cubic-bezier(0.25, 0.25, 0, 1)",
+  duration: 600,
+};
 
-//var i = 0;
-for (let child of rg.children) {
-  //let curr = ++i;
-  child.addEventListener("mouseover", () => {
-    for (let subling of rg.children) subling.classList.remove("hover");
-
-    child.classList.add("hover");
-  });
+function menuItemHover(this: Element) {
+  Array.from(rg.children).forEach(subling => subling.classList.remove("hover"));
+  this.classList.add("hover");
 }
 
-function menuOpenBg() {
-  document.body.animate(menuOpenBgKeyframes, {
-    duration: 600,
-    easing: "cubic-bezier(0.25, 0.25, 0, 1)",
-  });
-  document.body.setAttribute(
-    "style",
-    "background-position: -32px 0px; background: box-shadow: inset 0px 0px 0px 50vh var(--bg)"
-  );
+Array.from(rg.children).forEach(child =>
+  child.addEventListener("mouseover", menuItemHover))
+
+function hideBGPattern() {
+  document.body.animate(backgroundKeyframes, backgroundAnimation);
+  document.body.classList.add("menu")
+  motionStart();
 }
 
-function menuCloseBg() {
-  document.body.animate(menuCloseBgKeyframes, {
-    duration: 600,
-    easing: "cubic-bezier(0.25, 0.25, 0, 1)",
-  });
-  document.body.setAttribute("style", "");
+function showBGPattern() {
+  document.body.animate(backgroundKeyframes.reverse(), backgroundAnimation);
+  document.body.classList.add("menu")
 
-  for (let child of rg.children) child.classList.remove("hover");
+  Array.from(rg.children).forEach(child => child.classList.remove("hover"));
+  navBlur.drop();
 }
 
-rg.onmouseenter = (event) => { if (!ignoreMouse) openMenu(event); }
-
-function openMenu(event: MouseEvent) {
+function openDesktopMenu(event: MouseEvent) {
   if (!cnt.classList.contains("navTapped")) {
-    cnt.classList.add("navOpened", "navTransformed");
+    cnt.classList.add("navOpened");
     rg.classList.add("hover");
-    menuOpenBg();
+
+    hideBGPattern();
 
     var hovered = false;
-    for (let child of rg.children) {
+    for (let child of rg.children)
       hovered = child.classList.contains("hover") || hovered;
-    }
 
     if (!hovered) {
       if (event.clientY < window.innerHeight / 2)
@@ -84,35 +64,19 @@ function openMenu(event: MouseEvent) {
       else rg.lastElementChild?.classList.add("hover");
     }
   }
-
 }
 
-rg.onmouseleave = closeMenu;
-
-const routes = {
-  index:    [indexDom, () => import('/index/page')],
-  about:    [aboutDom, () => import('/about/page')],
-  projects: [indexDom, () => import('/index/page')],
-  work:     [indexDom, () => import('/index/page')],
+export function onMenuItemClick(route: RouteName) {
+  hideDesktopMenu(true), navigate(route)
 }
 
-export function onMenuClick(route: string) {
-  cnt.classList.remove("navTransformed");
+export function hideDesktopMenu (clicked: boolean = false) {
+  if (clicked) ignoreMouse = true;
+  showBGPattern();
 
-  closeMenu(), ignoreMouse = true;
-  resetCounter();
-  //@ts-ignore
-  buildTree(routes[route][0]);
-  //@ts-ignore
-  routes[route][1]().then(page => page.load());
-  window.history.pushState({}, '', `/${route == 'index' ? '' : route + '/'}`)
-}
-
-
-export function closeMenu () {
+  // remove classes
   cnt.classList.remove("navOpened");
   rg.classList.remove("hover");
-  menuCloseBg();
 };
 
 let isNavHovered = false;
@@ -125,23 +89,28 @@ nav.onclick = function () {
       to: { text: { style: fontStyles.action, text: 'close' } }
     }).then(console.log)
 
-    cnt.classList.add("navTapped", "navTransformed");
+    cnt.classList.add("navTapped");
+    //motionStart()
     tagById("nav", "text")!.innerHTML = "Close";
     byId('nav')?.children[0].setAttribute("viewBox", "0 0 80 24");
     byId('nav').style.opacity = 0.5;
-    menuOpenBg();
+    hideBGPattern();
   } else {
     //close menu
     cnt.classList.remove("navTapped");
     tagById("nav", "text")!.innerHTML = "Navigation";
     byId('nav')?.children[0].setAttribute("viewBox", "0 0 114 24");
     byId('nav').style.opacity = 1;
-    menuCloseBg();
+    showBGPattern();
   }
 };
 
-nav.onmouseover = () => (isNavHovered = true);
-nav.onmouseleave = () => (isNavHovered = false);
+let navBlur = new MotionBlur({ blurID: "cnt", watchID: "work", mult: 1 });
+
+let motionStart = function () {
+  navBlur.mult = window.innerWidth < 920 ? 1 : 0.5;
+  navBlur.invoke();
+};
 
 document.body.onclick = function () {
   if (!isNavHovered) {
@@ -150,20 +119,10 @@ document.body.onclick = function () {
   }
 };
 
-let navBlur = new MotionBlur({ blurID: "cnt", watchID: "work", mult: 1 });
+nav.onmouseover = () => (isNavHovered = true);
+nav.onmouseleave = () => (isNavHovered = false);
 
-let motionStart = function () {
-  if (!byId("cnt")?.classList.contains("navTransformed")) return;
-  navBlur.mult = window.innerWidth < 920 ? 1 : 0.5;
-  navBlur.invoke();
-};
+rg.addEventListener("mousemove", event =>
+  (!ignoreMouse || (ignoreMouse && 0 < event.movementX)) ? (openDesktopMenu(event), ignoreMouse = false) : 0);
 
-rg.ontransitionrun = motionStart;
-rg.onanimationstart = motionStart;
-
-rg.ontransitionend = () => navBlur.drop();
-rg.onanimationend = () => navBlur.drop();
-
-rg.onmousemove = (event) => {
-  if (ignoreMouse && event.movementX>0) openMenu(event), ignoreMouse = false;
-}
+rg.addEventListener("mouseleave", () => hideDesktopMenu(false));

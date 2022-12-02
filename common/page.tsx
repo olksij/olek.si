@@ -1,6 +1,6 @@
 import { PageContent, SourceTextData, ElementConfig } from 'interfaces';
 import { createElement } from "/render/jsx";
-import { closeMenu } from '/render/menu';
+import { hideDesktopMenu } from '/render/menu';
 
 import print from '/render/print';
 import construct from '/render/construct';
@@ -68,14 +68,14 @@ const links: Record<string, Array<string>> = {
   "rg": ["/", "/about/", "/projects/", "/works/"],
 }
 
-import { onMenuClick } from '/render/menu';
+import { onMenuItemClick } from '/render/menu';
 
 const clicks: Record<string, Array<Function>> = {
   rg: [
-    () => onMenuClick('index'),
-    () => onMenuClick('about'),
-    () => onMenuClick('projects'),
-    () => onMenuClick('work'),
+    () => onMenuItemClick('index'),
+    () => onMenuItemClick('about'),
+    () => onMenuItemClick('projects'),
+    () => onMenuItemClick('work'),
   ],
 };
 
@@ -87,6 +87,6 @@ lgElem.addEventListener("mouseenter", () => Object.keys(texts.lg).forEach(lg =>
   byId('lg')!.append(<div onclick={() => window.history.pushState({}, '', `?${lg}`)} class="lgItem">{texts.lg[lg]}</div>)));
 
 lgElem.addEventListener("mouseleave", function () {
-  closeMenu();
+  hideDesktopMenu();
   Array.from(byId('lg')!.getElementsByClassName('lgItem')).forEach(e => e.remove())
 });

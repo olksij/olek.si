@@ -17,6 +17,7 @@
 
 #ps {
   gap: 20px;
+  justify-content: start;
 }
 
 #ps>a:last-child {

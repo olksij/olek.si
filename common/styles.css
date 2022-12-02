@@ -17,7 +17,7 @@
   --outSmooth: .6s cubic-bezier(0.25, 0.25, 0, 1);
 }
 
-*:not(#ps):not(#ft):not(body) {
+* {
   justify-content: center;
   font-family: 'text';
   color: var(--secondary);
@@ -25,6 +25,19 @@
 
 html {
   overflow: hidden;
+}
+
+body.rendered {
+  animation: 5s linear background;
+  background:
+    radial-gradient(var(--element) 5%, transparent 0),
+    var(--bg);
+  background-size: 24px 24px;
+}
+
+body.menu {
+  background-position: -32px 0px;
+  box-shadow: inset 0px 0px 0px 50vh var(--bg);
 }
 
 img {
@@ -40,14 +53,6 @@ svg {
 
 svg>text, svg>path {
   transition: 0s !important;
-}
-
-body.rendered {
-  animation: 5s linear background;
-  background:
-    radial-gradient(var(--element) 5%, transparent 0),
-    var(--bg);
-  background-size: 24px 24px;
 }
 
 button {

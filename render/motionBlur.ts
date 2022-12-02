@@ -3,13 +3,13 @@ import { byId } from "./shorthands";
 export default class MotionBlur {
   private previous!: DOMRect;
   private blurInvoked: boolean;
-  private blurID: string;
+  private blurElement: HTMLElement;
   private watchID: string;
 
   mult: number;
 
   constructor(config: { blurID: string; watchID: string; mult: number }) {
-    this.blurID = config.blurID;
+    this.blurElement = byId(config.blurID)!;
     this.watchID = config.watchID;
     this.mult = config.mult;
     this.blurInvoked = false;
@@ -18,6 +18,8 @@ export default class MotionBlur {
   invoke() {
     if (this.blurInvoked) return;
 
+    this.blurElement.classList.add('navTransformed')
+
     this.blurInvoked = true;
     this.previous = byId(this.watchID)!.getBoundingClientRect();
     requestAnimationFrame(() => this.motionBlur());
@@ -25,7 +27,8 @@ export default class MotionBlur {
 
   drop() {
     this.blurInvoked = false;
-    byId(this.blurID)!.style.filter = '';
+    this.blurElement.style.filter = '';
+    this.blurElement.classList.remove('navTransformed')
   }
 
   motionBlur() {
@@ -37,7 +40,7 @@ export default class MotionBlur {
 
     this.previous = current;
 
-    byId(this.blurID)!.style.filter = blur ? `blur(${blur}px)` : '';
+    this.blurElement.style.filter = blur ? `blur(${blur}px)` : '';
     requestAnimationFrame(() => this.motionBlur());
   }
 }

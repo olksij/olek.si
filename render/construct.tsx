@@ -11,7 +11,7 @@ export default async function construct(assets: PageContent): Promise<void> {
     ? [...common[key], ...(assets[key] ?? [])] 
     : {...common[key], ...(assets[key] ?? {})} );
 
-    await window['skeleton'];
+  await window['skeleton'];
   if (!sessionStorage.getItem('loaded')) {
     sessionStorage.setItem('loaded', 'true');
   }

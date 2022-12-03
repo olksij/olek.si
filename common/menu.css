@@ -119,9 +119,9 @@
   transform: translateX(-160px);
 }
 
-#rg.hover>.rendered>svg>text {
+#rg.hover>.rendered>svg p {
   font-size: 20px !important;
-  fill: var(--secondary) !important;
+  color: var(--secondary) !important;
   font-family: text !important;
 }
 
@@ -129,8 +129,8 @@
   padding-left: 48px;
 }
 
-#rg.hover>.rendered.hover>svg>text {
-  fill: var(--accent) !important;
+#rg.hover>.rendered.hover>svg p {
+  color: var(--accent) !important;
   font-family: display !important;
 }
 
@@ -138,6 +138,6 @@
   padding-left: 0px;
 }
 
-#rg.hover>.rendered.hover:active>svg>text {
-  fill: var(--text) !important;
+#rg.hover>.rendered.hover:active>svg p {
+  color: var(--text) !important;
 }

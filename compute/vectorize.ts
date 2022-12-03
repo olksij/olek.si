@@ -50,7 +50,7 @@ function calculateBaseline(font: Font, style: FontStyle) {
     .map(value => value / font.unitsPerEm * style.fontSize);
 
   // calculate baseline
-  let baseline = Math.ceil(ascender - (ascender - descender - style.height) / 2);
+  let baseline = ascender - (ascender - descender - style.height) / 2;
 
-  return baseline;
+  return baseline - style.fontSize * style.fontSize * -.0001;
 }

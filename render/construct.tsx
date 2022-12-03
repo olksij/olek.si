@@ -70,8 +70,10 @@ export default async function construct(assets: PageContent): Promise<void> {
     if (byId(id)?.hasChildNodes()) continue;
 
     skeletonConfig.forEach((prop, index) => {
-      if (prop === null) 
+      if (prop === null) {
         skeletonConfig[index] = index == 0 ? byId(id)?.clientWidth : byId(id)?.clientHeight;
+        console.log(skeletonConfig[index])
+      }
     })
 
     let config = {

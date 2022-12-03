@@ -91,14 +91,14 @@ nav.onclick = function () {
 
     cnt.classList.add("navTapped");
     //motionStart()
-    tagById("nav", "text")!.innerHTML = "Close";
+    tagById("nav", "p")!.innerHTML = "Close";
     byId('nav')?.children[0].setAttribute("viewBox", "0 0 80 24");
     byId('nav').style.opacity = 0.5;
     hideBGPattern();
   } else {
     //close menu
     cnt.classList.remove("navTapped");
-    tagById("nav", "text")!.innerHTML = "Navigation";
+    tagById("nav", "p")!.innerHTML = "Navigation";
     byId('nav')?.children[0].setAttribute("viewBox", "0 0 114 24");
     byId('nav').style.opacity = 1;
     showBGPattern();

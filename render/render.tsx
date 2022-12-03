@@ -23,7 +23,7 @@ export default function (element: RenderElementInterface) {
     let font = element.text.style;
     let textLeft = element.icon ? element.icon.gap + element.height : 0;
 
-    let style = `font-family: ${font.type ?? 'text'}; letter-spacing: ${font.letterSpacing}em; font-size: ${font.fontSize}px; line-height: ${element.height+1.5-(0.02*font.fontSize)}px; opacity: 0;`;
+    let style = `font-family: ${font.type ?? 'text'}; letter-spacing: ${font.letterSpacing}em; font-size: ${font.fontSize}px; line-height: ${element.height+.5}px; opacity: 0;`;
     text = <p style={style}>{element.text.text}</p>;
 
     if (element.text.style.wrap) 
@@ -51,10 +51,7 @@ export default function (element: RenderElementInterface) {
         calcMode="spline" keySplines="0.87 0 0.13 1" onendEvent={renderElement} />
     </path>
 
-    setTimeout(() => {
-      morph.setAttribute('fill', color)
-    }, 600);
-
+    setTimeout(() => morph.setAttribute('fill', color), 600);
     root.append(toColor(morph, color));
   }
 

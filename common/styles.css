@@ -53,6 +53,7 @@ svg {
 svg p, svg>path {
   transition: 0s !important;
   margin-top: 0;
+  align-items: start;
 }
 
 button {

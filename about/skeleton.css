@@ -18,6 +18,6 @@ body {
 }
 
 #bio {
-  width: 100%;
+  width: 100% !important;
   margin-right: 64px;
 }

@@ -1,23 +1,27 @@
 /* about > skeleton.css */
 
-#title{
-  flex-direction: row;
-}
-
 body {
   padding-top: 160px;
 }
 
-#lf {
-  justify-content: start !important;
+#image>img {
+  object-fit: cover;
+  width: 100%;
 }
 
 #page {
   padding: 64px 128px;
-  flex-direction: row;
+}
+
+#image {
+  width: 100% !important;
 }
 
 #bio {
   width: 100% !important;
   margin-right: 64px;
+}
+
+#lf {
+  justify-content: start !important;
 }

@@ -20,6 +20,7 @@
   #lf {
     margin-left: 128px;
     gap: 48px;
+    justify-content: start !important;
   }
 
   #title {
@@ -49,5 +50,14 @@
   #ft {
     margin: 24px 128px;
     justify-content: space-between;
+  }
+  
+  #page {
+    flex-direction: row;
+  }
+
+  #bio {
+    width: 100% !important;
+    margin-right: 64px;
   }
 }

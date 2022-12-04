@@ -12,7 +12,3 @@
 #image {
    overflow: hidden;
 }
-
-#image>img {
-   object-fit: cover;
-}

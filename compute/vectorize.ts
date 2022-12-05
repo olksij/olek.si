@@ -1,5 +1,5 @@
 import { Font } from "opentype.js";
-import { FontsRecord, FontStyle, MorphElement, SkeletonBaseConfig } from "/interfaces";
+import { FontsRecord, FontStyle, MorphElement, SkeletonBaseConfig, TextLines } from "interfaces";
 
 export default function (element: MorphElement | undefined, skeleton: SkeletonBaseConfig, fonts: FontsRecord) {
   if (!element) return undefined;
@@ -7,7 +7,8 @@ export default function (element: MorphElement | undefined, skeleton: SkeletonBa
   let icon = element.icon, text = element.text;
 
   let pathString = "";
-  let width = 0, baseline = 0, points = 0;
+  let width = 0, baseline = 0, points = 0, 
+      lines: TextLines = [{ text: [], width: 0 }];
 
   if (icon) {
     pathString += icon.path;
@@ -20,7 +21,7 @@ export default function (element: MorphElement | undefined, skeleton: SkeletonBa
 
     let textLeft = icon ? icon.gap + (icon.height ?? style.height) : 0;
 
-    let words = text.text.split(' '), lines: {text: string[], width: number}[] = [{text: [], width: 0}];
+    let words = text.text.split(' ');
     let whitespace = font.getAdvanceWidth(' ', style.fontSize);
 
     words.forEach(word => {
@@ -41,7 +42,7 @@ export default function (element: MorphElement | undefined, skeleton: SkeletonBa
       textLeft, baseline + style.height * i, style.fontSize, { letterSpacing: style.letterSpacing }).toPathData(2));
   }
 
-  return { path: pathString, baseline, width, points };
+  return { path: pathString, baseline, width, points, lines };
 }
 
 function calculateBaseline(font: Font, style: FontStyle) {

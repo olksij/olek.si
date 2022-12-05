@@ -138,3 +138,5 @@ export type BorderRadius = number;
 
 export type PathPoint = [number, number];
 export type PathRing = PathPoint[];
+
+export type TextLines = { text: string[], width: number }[]

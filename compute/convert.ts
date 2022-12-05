@@ -15,8 +15,8 @@ export default function (pathString: string, points?: PathRing[]) {
     
     let total = props.getTotalLength(),
         count = points?.[i]?.length ?? total / 2;
-    //                                                   default precision = one point per two px
-    // record [x, y] points for each step                                          ____|____
+
+    // record [x, y] points for each step
     for (let point = 0; point < count; point++) {
       let length = point * total / count;
       let position = props.getPointAtLength(length); 

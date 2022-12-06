@@ -1,11 +1,4 @@
-<h1 align="center"><code>next.oleksii.xyz</code></h1>
-<br>
-
-This branch contains the next version of `oleksii.xyz` webpage. The current successful deployment can be observed here: [next.oleksii.xyz](next.oleksii.xyz)
-
-<br>
-
----
+<h1 align="center"><code>the next version of `oleksii.xyz`</code></h1>
 
 <br>
 

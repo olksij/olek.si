@@ -6,12 +6,12 @@ export default function (element: MorphElement | undefined, skeleton: SkeletonBa
 
   let icon = element.icon, text = element.text;
 
-  let pathString = "";
+  let pathString: string[] = [];
   let width = 0, baseline = 0, points = 0, 
       lines: TextLines = [{ text: [], width: 0 }];
 
   if (icon) {
-    pathString += icon.path;
+    pathString = [icon.path];
     width = icon.height ?? 0;
   }
 
@@ -38,11 +38,11 @@ export default function (element: MorphElement | undefined, skeleton: SkeletonBa
     width = style.wrap ? skeleton[0]! : lines[0].width;
     baseline = calculateBaseline(font, style);    
 
-    lines.forEach((line, i) => pathString += font.getPath(line.text.join(' '), 
+    lines.forEach((line, i) => pathString[i] = (pathString[i] ?? '') + font.getPath(line.text.join(' '), 
       textLeft, baseline + style.height * i, style.fontSize, { letterSpacing: style.letterSpacing }).toPathData(2));
   }
 
-  return { path: pathString, baseline, width, points, lines };
+  return { path: pathString, baseline, width, points };
 }
 
 function calculateBaseline(font: Font, style: FontStyle) {

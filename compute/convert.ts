@@ -5,7 +5,8 @@ import { PathRing, PathPoint } from "interfaces";
 //                                  Use an existing ring to match number of points   
 //                                             _________|_________
 export default function (pathString: string[], points?: PathRing[]) {
-  let ringList: PathRing[] = [], multilineConfig: number[] = [];
+  let ringList: PathRing[] = [], multilineConfig: number[] = [],
+      pointCounter = 0;
 
   pathString.forEach(path => {
     // split the string from "M"
@@ -18,7 +19,7 @@ export default function (pathString: string[], points?: PathRing[]) {
           props = new svgPathProperties(pathList[i]);
       
       let total = props.getTotalLength(),
-          count = Math.ceil(points?.[i]?.length ?? total / 2);
+          count = Math.ceil(points?.[pointCounter]?.length ?? total / 2);
 
       // record [x, y] points for each step
       for (let point = 0; point < count; point++) {
@@ -29,6 +30,7 @@ export default function (pathString: string[], points?: PathRing[]) {
 
       // avoid adding empty rings such as space glyph (" ")
       if (polygonArea(ring)) ringList.push(ring), counter++;
+      pointCounter++;
     }
     multilineConfig.push(counter);
   })

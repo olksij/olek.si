@@ -18,7 +18,6 @@ export default function(from: PathRing[], to: PathRing[]) {
 
   // for each path
   for (let ring = 0; ring < from.length; ring++) {
-    if (from[ring].length != to[ring].length) console.log(from, to)
     // rotate rings so they are clockwise
     if (polygonArea(to[ring]) < 0) to[ring].reverse();
     if (polygonArea(from[ring]) < 0) from[ring].reverse();

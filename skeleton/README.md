@@ -1,4 +1,4 @@
-## oleksii.xyz > 🩻 **skeleton**
+## 🩻 skeleton
 
 files in this folder are script files, inlined into every `.html` file.
 

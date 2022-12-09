@@ -13,13 +13,10 @@ const elements: Record<string, ElementConfig> = {
 };
 
 const texts: SourceTextData = {
-
-/*             🏴󠁧󠁢󠁥󠁮󠁧󠁿 English                            🇸🇪 Svenska                         🇺🇦 Ukrajinśka         
-/        ___________|____________             ___________|____________             ___________|____________ */
   tt:  { en: "About me",                      sv: "Om mig",                        uk: "Pro mene" },
   d1:  { en: "I’m a Ukrainian he/him living", sv: "Jag är en ukrainare han/honom", uk: "Ja vin/joho ukrajineć, prožyvajučyj" },
   d2:  { en: "in Stockholm, Sweden.",         sv: "som bor i Stockholm, Sverige.", uk: "v Stockhoĺm, Švecija." },
-  bio: { en: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et.",         sv: "som bor i Stockholm, Sverige.", uk: "v Stockhoĺm, Švecija." },
+  bio: { en: "Hi! My name is Oleksii Besida. I find engineering as a way to express my designer soul.",         sv: "som bor i Stockholm, Sverige.", uk: "v Stockhoĺm, Švecija." },
 };
 
 import image from '/assets/images/fullSized.jpg';

@@ -8,7 +8,7 @@ const aboutDom: SkeletonTree = {
   nav: [[112, 24, 8]],
   page: {
     bio: [[null, 200, 8]],
-    image: [[240, 240, 8], [null, null, 8]],
+    image: [[null, null, 8], [320, 320, 8]],
   },
   ft: { config: [[96, 16, 8], [128, 16, 8]], cr: {}, lg: {} }
 };

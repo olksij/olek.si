@@ -10,16 +10,17 @@ body {
 }
 
 #page {
+  box-sizing: border-box;
   padding: 64px 128px;
+  width: 100%;
 }
 
 #image {
-  width: 100% !important;
+  width: 100%;
 }
 
 #bio {
   width: 100% !important;
-  margin-right: 64px;
 }
 
 #lf {

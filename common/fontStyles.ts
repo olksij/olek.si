@@ -21,8 +21,8 @@ export default {
     color: 'var(--secondary)',
   },
   body: {
-    fontSize: 18,
-    height: 26,
+    fontSize: 22,
+    height: 36,
     color: 'var(--secondary)',
     wrap: true,
   },

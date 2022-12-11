@@ -39,23 +39,10 @@ export default async function construct(assets: PageContent): Promise<void> {
     }
   }
 
-  prepeareRender(true);
-}
-
-const urlSearchParams = new URLSearchParams(window.location.search);
-const lang = Object.keys(Object.fromEntries(urlSearchParams.entries()))[0] as Languages ?? 'en';
-
-async function prepeareRender(initial: boolean = true) {
-  let assets = window["assets"] as PageContent;
-
   // restore everything;
   for (let id in window['skeletons']) {
     let skeleton = window['skeletons'][id] as SkeletonCompositeConfig,
-        config = assets.elements?.[id] ?? {},
         treeEl = byId(id)!;
-
-    // if the element already has content
-    //if (treeEl.hasChildNodes()) continue;
 
     // if the element doesn't require morphing
     if (assets.images?.[id]) {
@@ -69,37 +56,51 @@ async function prepeareRender(initial: boolean = true) {
       continue;
     }
 
-    let fromElement = window['elements'][id];
-
-    window['elements'][id] = {
-      icon: config.icon,
-      text: config.text ? {
-        text: assets.texts?.[id][lang as Languages],
-        style: config.text,
-      } : undefined
-    } as MorphElement;
-
-    //                                            Mobile or desktop
-    //                                        ___________|____________
-    let skeletonConfig = [...(skeleton.config[innerWidth < 920 ? 0 : 1] ?? skeleton.config[0])] as SkeletonBaseConfig;
-
-    skeletonConfig.forEach((_, index) =>
-      skeletonConfig[index] ??= [treeEl.clientWidth, treeEl.clientHeight][index]);
-
-    setTimeout(render, initial ? skeleton.delay * 200 : 0, treeEl, {
-      ...window['elements'][id],
-      height: config.text?.height ?? config.icon?.height ?? 0,
-      morph: await compute({
-        from: { ...config.from, element: fromElement, skeleton: skeletonConfig },
-        to: window['elements'][id],
-      }),
-    });
+    assembleAndRender(id, assets);
   }
 
   document.body.classList.add('rendered');  
 }
 
+const urlSearchParams = new URLSearchParams(window.location.search);
+const lang = Object.keys(Object.fromEntries(urlSearchParams.entries()))[0] as Languages ?? 'en';
+
+async function assembleAndRender(id: string, assets: PageContent, initial: boolean = true) {
+  let skeleton = window['skeletons'][id] as SkeletonCompositeConfig,
+      config = assets.elements?.[id] ?? {},
+      treeEl = byId(id)!;
+
+  let fromElement = window['elements'][id];
+
+  window['elements'][id] = {
+    icon: config.icon,
+    text: config.text ? {
+      text: assets.texts?.[id][lang as Languages],
+      style: config.text,
+    } : undefined
+  } as MorphElement;
+
+  //                                            Mobile or desktop
+  //                                        ___________|____________
+  let skeletonConfig = [...(skeleton.config[innerWidth < 920 ? 0 : 1] ?? skeleton.config[0])] as SkeletonBaseConfig;
+
+  window["toresize"] ??= new Set()
+  skeletonConfig.includes(null) ? window["toresize"].add(id) : 0;
+
+  skeletonConfig.forEach((_, index) =>
+    skeletonConfig[index] ??= [treeEl.clientWidth, treeEl.clientHeight][index]);
+
+  setTimeout(render, initial ? skeleton.delay * 200 : 0, treeEl, {
+    ...window['elements'][id],
+    height: config.text?.height ?? config.icon?.height ?? 0,
+    morph: await compute({
+      from: { ...config.from, element: fromElement, skeleton: skeletonConfig },
+      to: window['elements'][id],
+    }),
+  });
+}
+
 addEventListener("resize", () => {
-  buildTree(window["assets"].skeleton, document.body, false)
-  prepeareRender(false);
+  buildTree(window["assets"].skeleton, document.body, false);
+  window["toresize"].forEach((id: string) => assembleAndRender(id, window["assets"], false))
 })

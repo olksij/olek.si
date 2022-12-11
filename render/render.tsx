@@ -6,12 +6,9 @@
 import { RenderElementInterface, CSSColor, AnimationConfig } from "interfaces";
 import { createElement } from "./jsx";
 import './menu.ts';
-import { byId } from "./shorthands";
 import '/render/menu.ts';
 
-export default function (element: RenderElementInterface) {
-  let parent = byId(element.id)!;
-
+export default function (parent: HTMLElement, element: RenderElementInterface) {
   let morph: SVGPathElement, text: SVGTextElement, icon: SVGPathElement;
   let computed = element.morph, width = element.morph?.width;
   let color = element.text?.style.color ?? element.icon?.color!;

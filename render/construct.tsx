@@ -1,4 +1,4 @@
-import { PageContent, RenderElementInterface, TextConfig, Languages, SkeletonCompositeConfig } from "interfaces";
+import { PageContent, Languages, SkeletonCompositeConfig, MorphElement } from "interfaces";
 import { createElement } from "./jsx";
 import print from './print';
 import { byId } from "./shorthands";
@@ -7,6 +7,8 @@ import { content as common } from "/common/page";
 import render from './render';
 
 export default async function construct(assets: PageContent): Promise<void> {
+  window["assets"] = assets;
+
   Object.keys(common).forEach(key => assets[key] = Array.isArray(common[key]) 
     ? [...common[key], ...(assets[key] ?? [])] 
     : {...common[key], ...(assets[key] ?? {})} );
@@ -39,56 +41,67 @@ export default async function construct(assets: PageContent): Promise<void> {
     }
   }
 
-  const urlSearchParams = new URLSearchParams(window.location.search);
-  const lang = Object.keys(Object.fromEntries(urlSearchParams.entries()))[0] as Languages ?? 'en';
+  prepeareRender(true);
+}
+
+const urlSearchParams = new URLSearchParams(window.location.search);
+const lang = Object.keys(Object.fromEntries(urlSearchParams.entries()))[0] as Languages ?? 'en';
+
+async function prepeareRender(initial: boolean = false) {
+  let assets = window["assets"];
 
   // restore everything;
-  for (let id in window['elements']) {
-    let skeleton = window['elements'][id] as SkeletonCompositeConfig;
+  for (let id in window['skeletons']) {
+    let skeleton = window['skeletons'][id] as SkeletonCompositeConfig,
+        config = assets.elements?.[id] ?? {},
+        treeEl = byId(id)!;
 
+    // if the element already has content
+    //if (treeEl.hasChildNodes()) continue;
+
+    // if the element doesn't require morphing
     if (assets.images?.[id]) {
       // insert node to an appropriate skeleton element;
       let node = <img src={assets.images?.[id]} alt={id} />;
-      byId(id)?.replaceChildren(node);
+      treeEl?.replaceChildren(node);
       // schedule the animation
-      let render = (id: string) => byId(id)?.classList.add('rendered', 'renderedImg');
-      setTimeout(render, skeleton.delay * 200, id);
+      let render = (elem: HTMLElement) => elem.classList.add('rendered', 'renderedImg');
+      setTimeout(render, skeleton.delay * 200, treeEl);
       // skip morphing as we have inserted the image element
       continue;
     }
 
-    let element = assets.elements?.[id] ?? {};
+    let fromElement = window['elements'][id];
 
-    // iterate over queue    
-    let text = element.text ? {
-      text: assets.texts?.[id][lang as Languages],
-      style: element.text,
-    } as TextConfig : undefined;
+    window['elements'][id] = {
+      icon: config.icon,
+      text: config.text ? {
+        text: assets.texts?.[id][lang as Languages],
+        style: config.text,
+      } : undefined
+    } as MorphElement;
 
-    let skeletonConfig = skeleton.config[window.innerWidth < 920 ? 0 : 1] ?? skeleton.config[0];
+    //                                            Mobile or desktop
+    //                                        ___________|____________
+    let skeletonConfig = [...(skeleton.config[innerWidth < 920 ? 0 : 1] ?? skeleton.config[0])];
 
-    if (byId(id)?.hasChildNodes()) continue;
+    skeletonConfig.forEach((_, index) =>
+      skeletonConfig[index] ??= [treeEl.clientWidth, treeEl.clientHeight][index]);
+    console.log(skeletonConfig)
 
-    skeletonConfig.forEach((prop, index) => {
-      if (prop === null) {
-        skeletonConfig[index] = index == 0 ? byId(id)?.clientWidth : byId(id)?.clientHeight;
-        console.log(skeletonConfig[index])
-      }
-    })
-
-    let config = {
-      id,
-      height: element.text?.height ?? element.icon?.height!,
+    setTimeout(render, skeleton.delay * 200, treeEl, {
+      ...window['elements'][id],
+      height: config.text?.height ?? config.icon?.height ?? 0,
       morph: await compute({
-        from: { ...element.from, skeleton: skeletonConfig },
-        to: { text, icon: element.icon },
+        from: { ...config.from, element: fromElement, skeleton: skeletonConfig },
+        to: window['elements'][id],
       }),
-      icon: element.icon,
-      text,
-    } as RenderElementInterface;
-
-    setTimeout(render, skeleton.delay * 200, config);
+    });
   }
 
-  document.body.classList.add('rendered');
+  document.body.classList.add('rendered');  
 }
+
+addEventListener("resize", () => {
+  prepeareRender();
+})

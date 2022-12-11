@@ -53,7 +53,7 @@
   }
   
   #page {
-    flex-direction: row;
+    flex-direction: row-reverse;
   }
 
   #bio {

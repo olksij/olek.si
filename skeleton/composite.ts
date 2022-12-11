@@ -14,7 +14,7 @@ export default async function composite(element: HTMLElement, config: SkeletonCo
   if (!config) return;
   //                                       ⌛ used by render/construct.ts
   // a simpler SkeletonConfig interface      _____________|_____________
-  window['elements'][element.id] = { config, delay: counter += 1 / count } as SkeletonCompositeConfig;
+  window['skeletons'][element.id] = { config, delay: counter += 1 / count } as SkeletonCompositeConfig;
   element.classList.add('tr'); // to render mark
 
   // wait till current frame is painted to make sure CSS is applied

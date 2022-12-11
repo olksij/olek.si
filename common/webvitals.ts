@@ -1,4 +1,6 @@
 import * as _webvitals from 'web-vitals';
+import { inject } from '@vercel/analytics';
+
 import print from '/render/print';
 
 const vitalsUrl = 'https://vitals.vercel-analytics.com/v1/vitals';
@@ -7,6 +9,7 @@ let webvitals = _webvitals as Record<string, any>
 for (var item in webvitals) webvitals[item]((metric: MetricType) => sendMetrics(metric));
 
 type MetricType = { id: string; name: string; value: { toString: () => string; }; };
+!window['injected'] && import.meta.env.PROD ? (inject(), window['injected'] = true) : 0;
 
 function sendMetrics(metric: MetricType) {
   if (!import.meta.env.PROD) return

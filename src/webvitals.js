@@ -2,6 +2,10 @@ import { getCLS, getFCP, getFID, getLCP, getTTFB } from 'web-vitals';
 
 const vitalsUrl = 'https://vitals.vercel-analytics.com/v1/vitals';
 
+var insights = document.createElement('script');
+insights.src = '/_vercel/insights/script.js';
+document.head.append(insights);
+
 function sendMetrics(metric) {
   let connection_type = 'connection' in navigator && navigator['connection'] && 'effectiveType' in navigator['connection'] ? navigator['connection']['effectiveType'] : '';
 

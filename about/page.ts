@@ -28,5 +28,7 @@ import desktopStylesheet from './desktop.skeleton.css';
 
 const stylesheets: string[] = [ skeletonStylesheet, desktopStylesheet, mainStylesheet ];
 
+import skeleton from './dom';
+
 import { onload } from '/common/page';
-export let load = () => onload({ elements, images, stylesheets, texts });
+export let load = () => onload({ elements, images, stylesheets, texts, skeleton });

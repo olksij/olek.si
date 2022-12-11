@@ -9,15 +9,15 @@ import rg from '/common/dom';
 
 // default DOM structure for menu
 
-export default function buildTree(skeleton: SkeletonTree | SkeletonConfig, parent: HTMLElement = document.body): void | Promise<void> {
+export default function buildTree(skeleton: SkeletonTree | SkeletonConfig, parent: HTMLElement = document.body, insert: boolean = true): void | Promise<void> {
   // initialie skeleton resolver 
-  parent == document.body ? (initResolver(), resetCounter()) : 0;
+  parent == document.body && insert ? (initResolver(), resetCounter()) : 0;
 
   if (skeleton[0]) 
-    return composite(parent, skeleton as SkeletonConfig);
+    return composite(parent, skeleton as SkeletonConfig, 1, insert);
     
   Array.from(parent.children).forEach(child =>
-    !['cnt', 'lf', 'rg'].includes(child.id) ? child.remove() : 0);
+    insert && !['cnt', 'lf', 'rg'].includes(child.id) ? child.remove() : 0);
 
   // if [parent.id] is 'ps' | 'rg', then use <a/> tags.
   let tagName = ['ps', 'rg'].includes(parent.id) ? 'a' : 'div';
@@ -32,10 +32,10 @@ export default function buildTree(skeleton: SkeletonTree | SkeletonConfig, paren
       var child = document.createElement(tagName);
       child.id = elementID, cnt.rg = rg;
 
-      parent.append(child)
-      composite(child, tree.config as SkeletonConfig, Object.keys(tree).length);
+      insert ? parent.append(child) : 0;
+      composite(child, tree.config as SkeletonConfig, Object.keys(tree).length, insert);
     }
 
-    buildTree(elementID == 'cnt' ? cnt : tree[elementID], document.getElementById(elementID)!);
+    buildTree(elementID == 'cnt' ? cnt : tree[elementID], document.getElementById(elementID)!, insert);
   }
 }

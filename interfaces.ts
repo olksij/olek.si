@@ -118,7 +118,8 @@ export interface FontStyle {
 
 export interface PageContent {
   head?: HTMLElement[];
-  stylesheets: string[];  
+  stylesheets: string[];
+  skeleton: SkeletonTree;
   elements?: Record<string, ElementConfig>;
   images?: Record<string, string>;
   clicks?: Record<string, Array<Function>>;  

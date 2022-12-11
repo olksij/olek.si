@@ -65,5 +65,7 @@ const links: Record<string, Array<string>> = {
   "ps": ["https://t.me/oleksiibesida", "https://matrix.to/#/@human:oleksii.xyz", "https://github.com/oleksiibesida", "https://linkedin.com/in/oleksiibesida/", "mailto:besida@oleksii.xyz"],
 }
 
+import skeleton from './dom';
+
 import { onload } from '/common/page';
-export let load = () => onload({ elements, images, links, stylesheets, texts });
+export let load = () => onload({ elements, images, links, stylesheets, texts, skeleton });

@@ -1,10 +1,11 @@
-import { PageContent, Languages, SkeletonCompositeConfig, MorphElement } from "interfaces";
+import { PageContent, Languages, SkeletonCompositeConfig, MorphElement, SkeletonConfig, SkeletonBaseConfig } from "interfaces";
 import { createElement } from "./jsx";
 import print from './print';
 import { byId } from "./shorthands";
 import compute from "./worker";
 import { content as common } from "/common/page";
 import render from './render';
+import buildTree from "/skeleton/buildTree";
 
 export default async function construct(assets: PageContent): Promise<void> {
   window["assets"] = assets;
@@ -12,15 +13,12 @@ export default async function construct(assets: PageContent): Promise<void> {
   Object.keys(common).forEach(key => assets[key] = Array.isArray(common[key]) 
     ? [...common[key], ...(assets[key] ?? [])] 
     : {...common[key], ...(assets[key] ?? {})} );
+  
+  document.head.append(...assets.head!);
 
   await window['skeleton'];
-  if (!sessionStorage.getItem('loaded')) {
-    sessionStorage.setItem('loaded', 'true');
-  }
 
   print("🎨 Render");
-
-  document.head.append(...assets.head!);
 
   // remove old stylesheets
   Array.from(document.head.children).forEach((element: any) =>
@@ -47,8 +45,8 @@ export default async function construct(assets: PageContent): Promise<void> {
 const urlSearchParams = new URLSearchParams(window.location.search);
 const lang = Object.keys(Object.fromEntries(urlSearchParams.entries()))[0] as Languages ?? 'en';
 
-async function prepeareRender(initial: boolean = false) {
-  let assets = window["assets"];
+async function prepeareRender(initial: boolean = true) {
+  let assets = window["assets"] as PageContent;
 
   // restore everything;
   for (let id in window['skeletons']) {
@@ -83,13 +81,12 @@ async function prepeareRender(initial: boolean = false) {
 
     //                                            Mobile or desktop
     //                                        ___________|____________
-    let skeletonConfig = [...(skeleton.config[innerWidth < 920 ? 0 : 1] ?? skeleton.config[0])];
+    let skeletonConfig = [...(skeleton.config[innerWidth < 920 ? 0 : 1] ?? skeleton.config[0])] as SkeletonBaseConfig;
 
     skeletonConfig.forEach((_, index) =>
       skeletonConfig[index] ??= [treeEl.clientWidth, treeEl.clientHeight][index]);
-    console.log(skeletonConfig)
 
-    setTimeout(render, skeleton.delay * 200, treeEl, {
+    setTimeout(render, initial ? skeleton.delay * 200 : 0, treeEl, {
       ...window['elements'][id],
       height: config.text?.height ?? config.icon?.height ?? 0,
       morph: await compute({
@@ -103,5 +100,6 @@ async function prepeareRender(initial: boolean = false) {
 }
 
 addEventListener("resize", () => {
-  prepeareRender();
+  buildTree(window["assets"].skeleton, document.body, false)
+  prepeareRender(false);
 })

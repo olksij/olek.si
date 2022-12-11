@@ -10,7 +10,7 @@ export const resetCounter = () => counter = 0;
 //                                                                              🔢 Element count if it's a group
 // Apply [SkeletonConfig] which preserves                                       and should be animated together      
 // size & borderRadius to skeleton element                                            ________|________
-export default async function composite(element: HTMLElement, config: SkeletonConfig, count: number = 1) {
+export default async function composite(element: HTMLElement, config: SkeletonConfig, count: number = 1, insert: boolean) {
   if (!config) return;
   //                                       ⌛ used by render/construct.ts
   // a simpler SkeletonConfig interface      _____________|_____________
@@ -35,12 +35,12 @@ export default async function composite(element: HTMLElement, config: SkeletonCo
     
     // to render -> skeleton && animate
     element.classList.replace('tr', 'sl');
-    element.animate(...skeletonKeyframes);
+    insert ? element.animate(...skeletonKeyframes) : 0;
     
     // notify content dependency tree about skeleton readyness
     resolve(counter, 1 / count);
 
-  }, counter * 100, count)
+  }, insert ? counter * 100 : 0, count)
 }
 
 // keyframes to apply that loading animation

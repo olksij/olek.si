@@ -3,7 +3,7 @@ import { resolve } from 'path'
 
 export default defineConfig({
   build: {
-    assetsInlineLimit: 65536, // 64 kb
+    assetsInlineLimit: 36864, // 36 kb
     rollupOptions: {
       input: {
         index: resolve(__dirname, 'index.html'),

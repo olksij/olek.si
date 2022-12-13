@@ -1,4 +1,4 @@
-import { PageContent, Languages, SkeletonCompositeConfig, MorphElement, SkeletonConfig, SkeletonBaseConfig } from "interfaces";
+import { PageContent, Languages, SkeletonCompositeConfig, MorphElement, SkeletonConfig, SkeletonBaseConfig, ToMorphElement, FromMorphElement } from "interfaces";
 import { createElement } from "./jsx";
 import print from './print';
 import { byId } from "./shorthands";
@@ -70,16 +70,6 @@ async function assembleAndRender(id: string, assets: PageContent, initial: boole
       config = assets.elements?.[id] ?? {},
       treeEl = byId(id)!;
 
-  let fromElement = window['elements'][id];
-
-  window['elements'][id] = {
-    icon: config.icon,
-    text: config.text ? {
-      text: assets.texts?.[id][lang as Languages],
-      style: config.text,
-    } : undefined
-  } as MorphElement;
-
   //                                            Mobile or desktop
   //                                        ___________|____________
   let skeletonConfig = [...(skeleton.config[innerWidth < 920 ? 0 : 1] ?? skeleton.config[0])] as SkeletonBaseConfig;
@@ -87,16 +77,30 @@ async function assembleAndRender(id: string, assets: PageContent, initial: boole
   window["toresize"] ??= new Set()
   skeletonConfig.includes(null) ? window["toresize"].add(id) : 0;
 
+  let fromElement = {
+    element: config.from?.element ?? window['elements'][id],
+    skeleton: window['elements'][id]?.skeleton,
+    path: config.from?.path,
+  } as FromMorphElement;
+
+  let toElement = {
+    icon: config.icon,
+    text: config.text ? {
+      text: assets.texts?.[id][lang as Languages],
+      style: config.text,
+    } : undefined,
+    skeleton: skeletonConfig,
+  } as ToMorphElement;
+
   skeletonConfig.forEach((_, index) =>
     skeletonConfig[index] ??= [treeEl.clientWidth, treeEl.clientHeight][index]);
 
+  window['elements'][id] = toElement;
+
   setTimeout(render, initial ? skeleton.delay * 200 : 0, treeEl, {
-    ...window['elements'][id],
     height: config.text?.height ?? config.icon?.height ?? 0,
-    morph: await compute({
-      from: { ...config.from, element: fromElement, skeleton: skeletonConfig },
-      to: window['elements'][id],
-    }),
+    morph: await compute({ from: fromElement, to: toElement }),
+    ...toElement,
   });
 }
 

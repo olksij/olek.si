@@ -60,7 +60,7 @@ export interface RenderElementInterface {
 // input used by compute worker
 export interface ComputeRequest {
   from: FromMorphElement;
-  to: MorphElement;
+  to: ToMorphElement;
 }
 
 // response sent by compute worker
@@ -75,6 +75,7 @@ export interface ComputeResult {
 export interface MorphElement {
   text?: TextConfig;
   icon?: IconConfig;
+  skeleton?:
 }
 
 export interface TextConfig {
@@ -96,6 +97,10 @@ export interface FromElement {
 
 // This Morph interface is defined during runtime
 export interface FromMorphElement extends FromElement {
+  skeleton?: SkeletonBaseConfig;
+}
+
+export interface ToMorphElement extends FromElement {
   skeleton: SkeletonBaseConfig;
 }
 

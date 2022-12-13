@@ -13,19 +13,24 @@ export default async function interpolate(request: string, data: ComputeRequest,
   let { from, to } = data;
 
   // vectorize the [to] element
-  let { path, baseline, width } = vectorize(to, from.skeleton, fonts)!;
+  let { path, baseline, width } = vectorize(to, to.skeleton, fonts)!;
 
   // get [PathRings[]] out of PathData string
   let { ringList: toRings, multilineConfig } = convert(path);
 
   // if there is a predefined from element, animate from it
   let fromRings = from.element || from.path
-    ? convert(vectorize(from.element, from.skeleton, fonts)?.path ?? [from.path!], toRings).ringList
+    ? convert(vectorize(from.element, from.skeleton ?? to.skeleton, fonts)?.path ?? [from.path!], toRings).ringList
     : skeleton(data, multilineConfig, toRings). ringList; // else, build a skeleton
-
+  
   //           rearrage points in rings for smooth animation
   //                  ______________|______________
   let computed = { ...normalize(fromRings, toRings), baseline, width };
+
+  // == to fix == to fix == to fix ==
+  let {from:ff,to:tt} = normalize(fromRings, toRings);
+  if (ff==tt) return;
+  // == to fix == to fix == to fix ==
 
   // send to main thread computed paths
   postMessage({ request, data: computed } as ComputeAPI<ComputeResult>);

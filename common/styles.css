@@ -94,35 +94,3 @@ img {
 #ft>div {
   flex-direction: row;
 }
-
-#lg:hover {
-  flex-direction: column;
-  height: 90px;
-  background: var(--overlay);
-  box-shadow: 0px 0px 0px 1px #0000000A,
-    0px 2px 8px 0px #0000000A;
-}
-
-#lg:not(:hover)>* {
-  height: 16px;
-  animation: 0s;
-}
-
-#lg:not(:hover) {
-  align-items: flex-end;
-}
-
-#lg:hover>div {
-  font-size: 14px;
-  margin: -12px;
-  padding: 16px;
-}
-
-#lg:hover>div:hover {
-  color: var(--accent) !important;
-}
-
-#lg:hover>svg,
-#lg:hover>img {
-  display: none;
-}

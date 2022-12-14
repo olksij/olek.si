@@ -7,7 +7,7 @@ const indexDom: SkeletonTree = {
     ps: { config: [[48, 48, 24]], tg: {}, mx: {}, li: {}, gh: {}, mt: {} }
   },
   nav: [[112, 24, 8]],
-  ft: { config: [[96, 16, 8], [128, 16, 8]], cr: {}, lg: {} }
+  ft: { config: [[96, 16, 8], [128, 16, 8]], cr: {}, tm: {} }
 };
 
 

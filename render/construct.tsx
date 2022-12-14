@@ -65,7 +65,7 @@ export default async function construct(assets: PageContent): Promise<void> {
 const urlSearchParams = new URLSearchParams(window.location.search);
 const lang = Object.keys(Object.fromEntries(urlSearchParams.entries()))[0] as Languages ?? 'en';
 
-async function assembleAndRender(id: string, assets: PageContent, initial: boolean = true) {
+export async function assembleAndRender(id: string, assets: PageContent, initial: boolean = true) {
   let skeleton = window['skeletons'][id] as SkeletonCompositeConfig,
       config = assets.elements?.[id] ?? {},
       treeEl = byId(id)!;
@@ -83,10 +83,15 @@ async function assembleAndRender(id: string, assets: PageContent, initial: boole
     path: config.from?.path,
   } as FromMorphElement;
 
+  const toTime = () => {
+    let d = new Date();
+    return d.toLocaleTimeString();
+  };
+
   let toElement = {
     icon: config.icon,
     text: config.text ? {
-      text: assets.texts?.[id][lang as Languages],
+      text: id == 'tm' ? toTime() : assets.texts?.[id][lang as Languages],
       style: config.text,
     } : undefined,
     skeleton: skeletonConfig,

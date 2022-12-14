@@ -3,7 +3,7 @@ import { createElement } from "/render/jsx";
 import { hideDesktopMenu } from '/render/menu';
 
 import print from '/render/print';
-import construct from '/render/construct';
+import construct, { assembleAndRender } from '/render/construct';
 import { byId } from '/render/shorthands';
 
 // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
@@ -29,7 +29,6 @@ const head: HTMLElement[] = [
 
 import nav from '/assets/raw/nav.txt?raw';
 import cr from '/assets/raw/copyright.txt?raw';
-import lg from '/assets/raw/language.txt?raw';
 
 import font from '/common/fontStyles';
 
@@ -43,7 +42,7 @@ const elements: Record<string, ElementConfig> = {
   work:         { text: font.menu }, // _____________|_____________
   nav:          { text: font.action,    icon: { path: nav, gap: 8 } },
   cr:           { text: font.footer,    icon: { path: cr,  gap: 0 } },
-  lg:           { text: font.footer,    icon: { path: lg,  gap: 2 } },
+  tm:           { text: font.footer },
 };
 
 const texts: SourceTextData = {
@@ -56,11 +55,13 @@ const texts: SourceTextData = {
   work:      { en: "work",                sv: "alster",              uk: "roboty" },
   nav:       { en: "Navigation",          sv: "Navigering",          uk: "Naviǧacija" },
   cr:        { en: "2018-2022 Oleksii Besida", sv: "2018-2022 Oleksiy Besida", uk: "2018-2022 Oleksij Besida" },
-  lg:        { en: "English",             sv: "Svenska",             uk: "Ukrajinśka" }
+  tm:        { en: "English",             sv: "Svenska",             uk: "Ukrajinśka" }
 };
 
 import stylesheet from './styles.css';
 import skeleton from './skeleton.css';
+
+setInterval(() => assembleAndRender('tm', content, false), 1000)
 
 const stylesheets: string[] = [skeleton, stylesheet];
 
@@ -79,14 +80,4 @@ const clicks: Record<string, Array<Function>> = {
   ],
 };
 
-let lgElem = byId('lg')!;
-
 export const content = { head, elements, clicks, links, stylesheets, texts } as PageContent;
-
-lgElem.addEventListener("mouseenter", () => Object.keys(texts.lg).forEach(lg => 
-  byId('lg')!.append(<div onclick={() => window.history.pushState({}, '', `?${lg}`)} class="lgItem">{texts.lg[lg]}</div>)));
-
-lgElem.addEventListener("mouseleave", function () {
-  hideDesktopMenu();
-  Array.from(byId('lg')!.getElementsByClassName('lgItem')).forEach(e => e.remove())
-});

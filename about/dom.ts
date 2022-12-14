@@ -10,7 +10,7 @@ const aboutDom: SkeletonTree = {
     image: [[null, null, 8], [320, 320, 8]],
     bio: [[null, 200, 8]],
   },
-  ft: { config: [[96, 16, 8], [128, 16, 8]], cr: {}, lg: {} }
+  ft: { config: [[96, 16, 8], [128, 16, 8]], cr: {}, tm: {} }
 };
 
 

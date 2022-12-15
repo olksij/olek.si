@@ -1,19 +1,5 @@
 import { Font } from 'opentype.js'
 
-// 🔤 transfering & storing fonts types
-export type FontsTransmit = Record<FontType, ArrayBuffer>;
-export type FontsRecord   = Record<FontType, Font>;
-
-export type FontType = 'display' | 'text';
-
-export type Languages = 'en' | 'sv' | 'uk'
-export type SourceTextData = Record<string, Record<Languages, string> >;
-
-export type CSSColor = `var(--${'text' | 'secondary' | 'accent'})`;
-
-export type AnimationConfig = [Keyframe[], KeyframeAnimationOptions];
-
-
 //                     🕒 Send a request    ⚙️ Computed paths    📤 Send fonts
 // Types that can be        to worker            by worker          to worker
 // transfered                ___|__________   ______|______   _________|___
@@ -31,6 +17,28 @@ export interface ComputeAPI<Data extends ComputeAPIData> {
   data: Data,
 }
 
+// 🔤 transfering & storing fonts types
+export type FontsTransmit = Record<FontType, ArrayBuffer>;
+export type FontsRecord   = Record<FontType, Font>;
+
+// input used by compute worker
+export interface ComputeRequest {
+  from: RuntimeElementConfig;
+  to: RuntimeElementConfig;
+}
+
+// response sent by compute worker
+export interface ComputeResult {
+  from: PathData;
+  to: PathData;
+  // return the element with updated skeleton
+  element: RuntimeElementConfig;
+}
+
+export type FontType = 'display' | 'text';
+export type CSSColor = 'text'    | 'secondary' | 'accent';
+
+// font style indentificators
 export type FontStyleType =
   'title'        |
   'h2'           |
@@ -41,42 +49,7 @@ export type FontStyleType =
   'action'       |
   'footer';
 
-// used to define each element to be rendered
-export interface ElementConfig {
-  from?: FromElement;
-  text?: FontStyle;  // <- text property here uses [FontStyle] instead of [TextConfig]
-  icon?: IconConfig; //    because texts are stored separately becouse of possibility 
-}                    //    of dynamic change of webpage language
-
-// interface used to communicate with the render module
-export interface RenderElementInterface {
-  id: string;
-  morph?: ComputeResult;
-  icon?: IconConfig;
-  text?: TextConfig;
-  height: number;
-}
-
-// input used by compute worker
-export interface ComputeRequest {
-  from: FromMorphElement;
-  to: ToMorphElement;
-}
-
-// response sent by compute worker
-export interface ComputeResult {
-  from: string;
-  to: string;
-  // calculated width of the element
-  width: number;
-  baseline?: number;
-}
- 
-export interface MorphElement {
-  text?: TextConfig;
-  icon?: IconConfig;
-  skeleton?:
-}
+/* -------------------------------- elements ------------------------------- */
 
 export interface TextConfig {
   text: string;
@@ -84,65 +57,96 @@ export interface TextConfig {
 }
 
 export interface IconConfig {
-  path: string;
+  path: PathData;
   gap: number;
   height?: number;
   color?: CSSColor;
 }
 
-export interface FromElement {
-  element?: MorphElement;
-  path?: string;
+// static constant data about each element on page
+export interface StaticElementConfig {
+  text?:  string;
+  style?: FontStyle;
+  icon?:  IconConfig;
 }
 
-// This Morph interface is defined during runtime
-export interface FromMorphElement extends FromElement {
-  skeleton?: SkeletonBaseConfig;
+// used after the layout has been calculated
+export interface RuntimeElementConfig {
+  text?: TextConfig;
+  icon?: IconConfig;
+  skeleton?: SkeletonConfig<RuntimeSize>;
 }
 
-export interface ToMorphElement extends FromElement {
-  skeleton: SkeletonBaseConfig;
-}
-
-export type SizeUnit = number | null;
-
-export type Size = [SizeUnit, SizeUnit];
-
+// predefined font styles for text
 export interface FontStyle {
-  // display or text font, defaults to text
-  type?: FontType,
-  // yep, size of the font
-  fontSize: number;
-  // yep, distance between letters
-  letterSpacing?: number;
-
-  height: number;
+  type: FontType,
+  fontSize: FontSize;
+  spacing?: FontSpacing;
   color: CSSColor;
+  // line height
+  height: SizeUnit;
+  // should be singlelined or wrapped
   wrap?: boolean;
 }
 
+// assets loaded together with page
 export interface PageContent {
+  // page name for neat debugging
+  id: string; 
+  // elements to be injected into document.head
   head?: HTMLElement[];
+  
   stylesheets: string[];
   skeleton: SkeletonTree;
-  elements?: Record<string, ElementConfig>;
-  images?: Record<string, string>;
-  clicks?: Record<string, Array<Function>>;  
-  links?: Record<string, Array<string>>;  
-  texts?: SourceTextData;
+  
+  elements?: Record<ElementID, StaticElementConfig>;
+  images?:   Record<ElementID, string>;
+  clicks?:   Record<ElementID, Array<Function>>;  
+  links?:    Record<ElementID, Array<string>>;  
 }
 
-export interface SkeletonTree { [id: string]: SkeletonConfig | SkeletonTree; }
+/* -------------------------------- skeleton ------------------------------- */
 
-//                               [width, height, borderRadius]
-export type SkeletonBaseConfig = [...Size, BorderRadius?]
-export type SkeletonConfig = [SkeletonBaseConfig, SkeletonBaseConfig?]
+// used to build dom and injected as interface           The [SkeletonTree] might contain itself
+// into html's scripts to build skeleton tree                         ______|______
+export interface SkeletonTree { [id: string]: SkeletonExtendedConfig | SkeletonTree; }
 
-export interface SkeletonCompositeConfig { config: SkeletonConfig; delay: number; };
+// configured during DOM build for proper page construction
+export interface SkeletonCompositeConfig { config: SkeletonExtendedConfig; delay: Delay; };
+
+// the skeleton config contains sizes for both mobile and desktop views
+export type SkeletonExtendedConfig = [SkeletonConfig<StaticSize>, SkeletonConfig<StaticSize>?]
+
+// the basic skeleton config with dimensions and border radius
+export type SkeletonConfig<U extends SizeUnit> = [...BoundingBox<U>, BorderRadius?]
+
+// specifies width and height
+export type BoundingBox<U extends SizeUnit> = [U, U];
+
+// static size may have [null] values, meaning that the property is decided during runtime
+type SizeUnit = StaticSize | RuntimeSize;
+
+/* -------------------------------- morphing ------------------------------- */
+
+// a list of SVG path points
+export type PathRing = PathPoint[];
+//                       x       y
+export type PathPoint = [number, number];
+
+/* --------------------------------- units --------------------------------- */
+
+export type StaticSize = number | null;
+
+export type RuntimeSize = number;
+
+export type FontSize = number;
+
+export type FontSpacing = number;
+
+export type ElementID = string;
+
+export type PathData = string;
 
 export type BorderRadius = number;
 
-export type PathPoint = [number, number];
-export type PathRing = PathPoint[];
-
-export type TextLines = { text: string[], width: number }[]
+export type Delay = number;

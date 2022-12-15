@@ -1,8 +1,8 @@
-<h1 align="center">&nbsp;<br>✨ The next version of <a href="oleksii.xyz">oleksii.xyz</a><br>&nbsp;</h1>
+<h1 align="center">&nbsp;<br>✨ The next version of <a href="https://oleksii.xyz">oleksii.xyz</a><br>&nbsp;</h1>
 
 <br>
-<p style="padding-bottom: 8em !important" align="center"><i>The code is in active development and <code>haven't</code> been deployed yet.</i></p>
-<p align="center"><b>🌿 Check out the <a href="df"><code>production</code> branch</a></b></p>
+<p style="padding-bottom: 8em !important" align="center"><i>The code is in an ⚡ <code>active</code> development and <code>haven't</code> been deployed yet.</i></p>
+<p align="center"><b>🌿 Check out the <a href="https://github.com/oleksiibesida/oleksii.xyz/tree/production"><code>production</code> branch</a></b></p>
 <br>
 
 ## — 🧭 The source code guide

@@ -20,12 +20,12 @@ const dates: Record<string, Record<Languages, [string, string]>> = {
   }
 };
 
-import titleFromPath from '/assets/raw/titleFromPath.txt?raw';
+import titleFromPath from '/common/vectors/titleFromPath.txt?raw';
 
 let date = new Date();
 let description = dates[date.getMonth() + '-' + (date.getDate() + 1)] ?? dates.default;
 
-import font from '/common/fontStyles';
+import font from '/common/typography';
 
 const elements: Record<string, ElementConfig> = {
 /*
@@ -46,12 +46,12 @@ const texts: SourceTextData = {
 };
 
 // inline pictures
-import pf from '/assets/images/profilePicture.webp';
-import tg from '/assets/vectors/telegram.svg';
-import mx from '/assets/vectors/matrix.svg';
-import gh from '/assets/vectors/github.svg';
-import li from '/assets/vectors/linkedin.svg';
-import mt from '/assets/vectors/email.svg';
+import pf from '/common/images/profilePicture.webp';
+import tg from '/common/vectors/telegram.svg';
+import mx from '/common/vectors/matrix.svg';
+import gh from '/common/vectors/github.svg';
+import li from '/common/vectors/linkedin.svg';
+import mt from '/common/vectors/email.svg';
 
 const images: Record<string, string> = { pf, tg, mx, gh, li, mt }
 

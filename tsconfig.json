@@ -30,5 +30,5 @@
     }
   },
   "include": ["common", "compute", "render", "skeleton", 
-    "index", "about", "*.ts"]
+    "index", "about", "*.ts", "interfaces/interfaces.ts"]
 }

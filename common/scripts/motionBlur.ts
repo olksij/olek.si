@@ -1,5 +1,3 @@
-import { byId } from "./shorthands";
-
 export default class MotionBlur {
   private previous!: DOMRect;
   private blurInvoked: boolean;

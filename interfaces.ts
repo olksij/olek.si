@@ -23,7 +23,7 @@ export type FontsRecord   = Record<FontType, Font>;
 
 // input used by compute worker
 export interface ComputeRequest {
-  from: RuntimeElementConfig;
+  from: RuntimeElementConfig | null;
   to: RuntimeElementConfig;
 }
 
@@ -36,7 +36,7 @@ export interface ComputeResult {
 }
 
 export type FontType = 'display' | 'text';
-export type CSSColor = 'text'    | 'secondary' | 'accent';
+export type CSSColor = `var(--${ 'text' | 'secondary' | 'accent' })`;
 
 // font style indentificators
 export type FontStyleType =
@@ -74,7 +74,7 @@ export interface StaticElementConfig {
 export interface RuntimeElementConfig {
   text?: TextConfig;
   icon?: IconConfig;
-  skeleton?: SkeletonConfig<RuntimeSize>;
+  skeleton: SkeletonConfig<RuntimeSize>;
 }
 
 // predefined font styles for text
@@ -84,7 +84,7 @@ export interface FontStyle {
   spacing?: FontSpacing;
   color: CSSColor;
   // line height
-  height: SizeUnit;
+  height: RuntimeSize;
   // should be singlelined or wrapped
   wrap?: boolean;
 }
@@ -92,12 +92,12 @@ export interface FontStyle {
 // assets loaded together with page
 export interface PageContent {
   // page name for neat debugging
-  id: string; 
+  id?: string; 
   // elements to be injected into document.head
   head?: HTMLElement[];
   
   stylesheets: string[];
-  skeleton: SkeletonTree;
+  skeleton?: SkeletonTree;
   
   elements?: Record<ElementID, StaticElementConfig>;
   images?:   Record<ElementID, string>;

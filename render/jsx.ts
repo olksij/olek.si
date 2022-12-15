@@ -1,5 +1,5 @@
 // this file helps to handle xml in jsx files
-// this file is based on code by [https://github.com/kartiknair]
+// and is based on the code by [https://github.com/kartiknair]
 
 // elements that require SVG namespace
 let vectorElements = ["svg", "path", "animate", "text", "foreignObject"];
@@ -11,10 +11,6 @@ export const createElement = (tag: string | Function, props: Record<string, any>
   let element = vectorElements.includes(tag)
     ? document.createElementNS("http://www.w3.org/2000/svg", tag)
     : document.createElement(tag);
-
-  // add required namespace
-  //if (vectorElements.includes(tag))
-  //  element.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:xlink", "http://www.w3.org/1999/xlink");
 
   // add all props to element
   for (let name in props) {

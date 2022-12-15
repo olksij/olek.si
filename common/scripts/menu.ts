@@ -1,7 +1,6 @@
 import MotionBlur from "./motionBlur";
-import { byId, tagById } from "./shorthands";
-import compute from "./worker";
-import fontStyles from "/common/fontStyles";
+import compute from "../../render/worker";
+import fontStyles from "../typography";
 import navigate, { RouteName } from "/common/navigate";
 
 /* --- --- --- --- --- --- --- --- ---

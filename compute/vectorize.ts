@@ -1,9 +1,7 @@
 import { Font } from "opentype.js";
-import { FontsRecord, FontStyle, MorphElement, SkeletonBaseConfig, TextLines } from "interfaces";
+import { FontsRecord, FontStyle, MorphElement, SkeletonStaticConfig, TextLines } from "interfaces";
 
-export default function (element: MorphElement | undefined, skeleton: SkeletonBaseConfig, fonts: FontsRecord) {
-  if (!element) return undefined;
-
+export default function (element: MorphElement, skeleton: SkeletonStaticConfig, fonts: FontsRecord) {
   let icon = element.icon, text = element.text;
 
   let pathString: string[] = [];

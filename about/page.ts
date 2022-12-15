@@ -1,6 +1,6 @@
 import { ElementConfig, SourceTextData } from 'interfaces';
 
-import font from '/common/fontStyles';
+import font from '../common/typography';
 
 const elements: Record<string, ElementConfig> = {
 /*

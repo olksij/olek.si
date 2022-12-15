@@ -12,6 +12,9 @@ export interface RouteConfig { dom: SkeletonTree, page: () => Promise<Page> };
 
 // define routes of the page
 const routes: Record<RouteName, RouteConfig>  = {
+/* 
+   🏷️ Page    🩻 Skeleton                  🖼️ Assets
+  ____|____   ______|______        _____________|_____________ */
   index:    { dom: indexDom, page: () => import('/index/page') },
   about:    { dom: aboutDom, page: () => import('/about/page') },
   projects: { dom: indexDom, page: () => import('/index/page') },

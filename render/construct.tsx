@@ -1,11 +1,9 @@
-import { PageContent, Languages, SkeletonCompositeConfig, MorphElement, SkeletonConfig, SkeletonBaseConfig, ToMorphElement, FromMorphElement } from "interfaces";
+import { PageContent, SkeletonCompositeConfig } from "interfaces";
 import { createElement } from "./jsx";
-import print from './print';
-import { byId } from "./shorthands";
-import compute from "./worker";
+
+import print from '../common/scripts/print';
 import { content as common } from "/common/page";
-import render from './render';
-import buildTree from "/skeleton/buildTree";
+import runtimize from "./runtimize";
 
 export default async function construct(assets: PageContent): Promise<void> {
   window["assets"] = assets;
@@ -18,7 +16,7 @@ export default async function construct(assets: PageContent): Promise<void> {
 
   await window['skeleton'];
 
-  print("🎨 Render");
+  print("🏗️ Constructing the page");
 
   // remove old stylesheets
   Array.from(document.head.children).forEach((element: any) =>
@@ -30,7 +28,7 @@ export default async function construct(assets: PageContent): Promise<void> {
 
   // onclick
   for (let id in assets.clicks) {
-    let children = byId(id)!.children;
+    let children = document.getElementById(id)!.children;
     for (var i = 0; i < children.length; i++) {
       let childIndex = i;
       if (!children[i].getAttribute("onclick"))
@@ -42,7 +40,7 @@ export default async function construct(assets: PageContent): Promise<void> {
   // restore everything;
   for (let id in window['skeletons']) {
     let skeleton = window['skeletons'][id] as SkeletonCompositeConfig,
-        treeEl = byId(id)!;
+        treeEl = document.getElementById(id)!;
 
     // if the element doesn't require morphing
     if (assets.images?.[id]) {
@@ -56,60 +54,8 @@ export default async function construct(assets: PageContent): Promise<void> {
       continue;
     }
 
-    assembleAndRender(id, assets);
+    runtimize({ id, to: assets.elements![id] });
   }
 
   document.body.classList.add('rendered');  
 }
-
-const urlSearchParams = new URLSearchParams(window.location.search);
-const lang = Object.keys(Object.fromEntries(urlSearchParams.entries()))[0] as Languages ?? 'en';
-
-export async function assembleAndRender(id: string, assets: PageContent, initial: boolean = true) {
-  let skeleton = window['skeletons'][id] as SkeletonCompositeConfig,
-      config = assets.elements?.[id] ?? {},
-      treeEl = byId(id)!;
-
-  //                                            Mobile or desktop
-  //                                        ___________|____________
-  let skeletonConfig = [...(skeleton.config[innerWidth < 920 ? 0 : 1] ?? skeleton.config[0])] as SkeletonBaseConfig;
-
-  window["toresize"] ??= new Set()
-  skeletonConfig.includes(null) ? window["toresize"].add(id) : 0;
-
-  let fromElement = {
-    element: config.from?.element ?? window['elements'][id],
-    skeleton: window['elements'][id]?.skeleton,
-    path: config.from?.path,
-  } as FromMorphElement;
-
-  const toTime = () => {
-    let d = new Date();
-    return d.toLocaleTimeString();
-  };
-
-  let toElement = {
-    icon: config.icon,
-    text: config.text ? {
-      text: id == 'tm' ? toTime() : assets.texts?.[id][lang as Languages],
-      style: config.text,
-    } : undefined,
-    skeleton: skeletonConfig,
-  } as ToMorphElement;
-
-  skeletonConfig.forEach((_, index) =>
-    skeletonConfig[index] ??= [treeEl.clientWidth, treeEl.clientHeight][index]);
-
-  window['elements'][id] = toElement;
-
-  setTimeout(render, initial ? skeleton.delay * 200 : 0, treeEl, {
-    height: config.text?.height ?? config.icon?.height ?? 0,
-    morph: await compute({ from: fromElement, to: toElement }),
-    ...toElement,
-  });
-}
-
-addEventListener("resize", () => {
-  buildTree(window["assets"].skeleton, document.body, false);
-  window["toresize"].forEach((id: string) => assembleAndRender(id, window["assets"], false))
-})

@@ -1,4 +1,4 @@
-import { SkeletonCompositeConfig, SkeletonConfig } from "interfaces";
+import { SkeletonCompositeConfig, SkeletonExtendedConfig } from "interfaces";
 import resolve from "./resolve";
 
 // the total number of skeletons in the virtual tree
@@ -7,10 +7,10 @@ let counter = 0;
 // reset counter is used when new page renders
 export const resetCounter = () => counter = 0;
 
-//                                                                              🔢 Element count if it's a group
-// Apply [SkeletonConfig] which preserves                                       and should be animated together      
-// size & borderRadius to skeleton element                                            ________|________
-export default async function composite(element: HTMLElement, config: SkeletonConfig, count: number = 1, insert: boolean) {
+//                                                                                      🔢 Element count if it's a group
+// Apply [SkeletonConfig] which preserves                                               and should be animated together      
+// size & borderRadius to skeleton element                                                    ________|________
+export default async function composite(element: HTMLElement, config: SkeletonExtendedConfig, count: number = 1, insert: boolean) {
   if (!config) return;
   //                                       ⌛ used by render/construct.ts
   // a simpler SkeletonConfig interface      _____________|_____________

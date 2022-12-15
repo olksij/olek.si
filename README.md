@@ -7,15 +7,17 @@
 
 ## — 🧭 The source code guide
 
-• 🪨 `compute` – webworker files which respond to vectorize visual entry before morphing it
+• 🪨 <a href="./compute/">`compute`</a> – WebWorker files which vectorize visual entry before morphing it <br>
 
-• 🩻 `skeleton` – a set of *isolated* files working in separate dependency tree and *inlined* during build process into every `.html` file to provide instant animation.
+• 🩻 <a href="./skeleton/">`skeleton`</a> – a set of *isolated* files working in separate dependency tree and *inlined* during build process into every `.html` file to provide instant animation. <br>
 
-• 🖼️ `[pageName]` – includes skeleton structure, page assets, and usually `.html` file to enable multi-pageness to significantly improve loading time. 
+• 🖼️ <a href="./index/">`[pageName]`</a> – includes skeleton structure, page assets, and usually `.html` file to enable multi-pageness to significantly improve loading time.  <br>
 
-• 🧱 `render` – after page assets are loaded, construct and animate them.
+• 🧱 <a href="./render/">`render`</a> – after page assets are loaded, construct and animate them. <br>
 
-• 🔁 `common` – common styles and scripts between pages.
+• 🔁 <a href="./common/">`common`</a> – common styles and scripts between pages. <br>
+
+• <img align="center" height="16" width="22" src="https://cdn.simpleicons.org/typescript" /> <a href="./interfaces.ts/">`interfaces.ts`</a> – contains all types and interfaces of the project <br>
 
 <br>
 

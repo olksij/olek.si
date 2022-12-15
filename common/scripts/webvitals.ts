@@ -1,7 +1,7 @@
 import * as _webvitals from 'web-vitals';
 import { inject } from '@vercel/analytics';
 
-import print from '/render/print';
+import print from './print';
 
 const vitalsUrl = 'https://vitals.vercel-analytics.com/v1/vitals';
 

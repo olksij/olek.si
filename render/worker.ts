@@ -5,7 +5,7 @@ import { ComputeAPI, ComputeRequest, ComputeResult } from "interfaces";
 // @ts-ignore
 let worker = window['worker'];
 
-// Map object containing all request to resolve them later
+// Map object containing all promises and configs to resolve them later
 let requests = new Map<string, (value: ComputeResult) => void>();
 
 // unique id of a request
@@ -18,6 +18,7 @@ function generateName() {
 // the function that sends requests to compute worker and return a promise
 export default function compute(data: ComputeRequest) {
   let requestID = generateName();
+  // initialize a new Promise and store it's [resolve] function
   let promise = new Promise<ComputeResult>(resolve => requests.set(requestID, resolve));
 
   worker.postMessage({
@@ -31,10 +32,9 @@ export default function compute(data: ComputeRequest) {
 
 // resolve a corresponding promise when answer received.
 worker.onmessage = function (event: MessageEvent<ComputeAPI<ComputeResult>>) {
-  let data = event.data;
-
-  if (requests.has(data.request))
-    return requests.get(data.request)!(data.data) 
-
+  let request = requests.get(event.data.request),
+      data = event.data;
+  
+  if (request) return request(data.data) 
   console.error('[worker] No such request: ', data.request, requests);
 }

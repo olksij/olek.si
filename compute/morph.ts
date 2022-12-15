@@ -19,13 +19,13 @@ export default async function interpolate(request: string, data: ComputeRequest,
   let { ringList: toRings, multilineConfig } = convert(path);
 
   // if there is a predefined from element, animate from it
-  let fromRings = from.element || from.path
-    ? convert(vectorize(from.element, from.skeleton ?? to.skeleton, fonts)?.path ?? [from.path!], toRings).ringList
-    : skeleton(data, multilineConfig, toRings). ringList; // else, build a skeleton
+  let fromRings = from.text || from.icon
+    ? convert(vectorize(from, from.skeleton ?? to.skeleton, fonts)?.path, toRings).ringList
+    : skeleton(data, multilineConfig, toRings).ringList; // else, build a skeleton
   
   //           rearrage points in rings for smooth animation
   //                  ______________|______________
-  let computed = { ...normalize(fromRings, toRings), baseline, width };
+  let computed = { ...normalize(fromRings, toRings), baseline, width, element: to };
 
   // == to fix == to fix == to fix ==
   let {from:ff,to:tt} = normalize(fromRings, toRings);

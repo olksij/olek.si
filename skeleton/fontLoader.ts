@@ -1,7 +1,7 @@
 import { ComputeAPI, FontsTransmit } from "interfaces";
 
-import display from '/assets/fonts/displayBold.ttf?url';
-import text from '/assets/fonts/textMedium.ttf?url';
+import display from '/common/fonts/displayBold.ttf?url';
+import text from '/common/fonts/textMedium.ttf?url';
 
 // list of fonts to download
 let fonts = { display, text };

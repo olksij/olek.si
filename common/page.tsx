@@ -1,4 +1,4 @@
-import { PageContent, StaticElementConfig } from 'interfaces';
+import { ElementID, PageContent, StaticElementConfig } from 'interfaces';
 import { createElement } from "/render/jsx";
 
 import print from './scripts/print';
@@ -44,7 +44,7 @@ import cpr from '/common/vectors/copyright.txt?raw';
 
 import font from './typography';
 
-const elements: Record<string, StaticElementConfig> = {
+const elements: Record<ElementID, StaticElementConfig> = {
 /*
   🏷️ Element ID      ✍️ Strings           ✨ FontStyle
   ______|______   ________|_______      ________|________  */
@@ -57,10 +57,11 @@ const elements: Record<string, StaticElementConfig> = {
   tm:           { text: texts.tmc,      style: font.footer },
 };
 
+import runtimize from '/render/runtimize';
+setInterval(() => runtimize({ id: 'tm', to: { ...elements.tm, text: new Date().toLocaleTimeString() } }), 1000)
+
 import stylesheet from './styles/styles.css';
 import skeleton from './styles/skeleton.css';
-
-//setInterval(() => assembleAndRender('tm', content, false), 1000)
 
 const stylesheets: string[] = [skeleton, stylesheet];
 

@@ -1,5 +1,5 @@
 import MotionBlur from "./motionBlur";
-import compute from "../../render/worker";
+import runtimize from "/render/runtimize";
 import fontStyles from "../typography";
 import navigate, { RouteName } from "/common/navigate";
 
@@ -83,22 +83,22 @@ let isNavHovered = false;
 nav.onclick = function () {
   if (!cnt.classList.contains("navTapped")) {
     // open menu
-    compute({
-      from: { skeleton: [24, 24, 24]},
-      to: { text: { style: fontStyles.action, text: 'close' } }
-    }).then(console.log)
+    runtimize({
+      id: 'nav',
+      to: { style: fontStyles.action, text: 'close' },
+    });
 
     cnt.classList.add("navTapped");
     //motionStart()
-    nav.getElementsByTagName('p')[0]!.innerHTML = "Close";
-    nav.children[0].setAttribute("viewBox", "0 0 80 24");
     nav.style.opacity = 0.5;
     hideBGPattern();
   } else {
     //close menu
+    runtimize({
+      id: 'nav',
+      to: { style: fontStyles.action, text: 'Navigation' },
+    });
     cnt.classList.remove("navTapped");
-    nav.getElementsByTagName('p')[0]!.innerHTML = "Navigation";
-    nav.children[0].setAttribute("viewBox", "0 0 114 24");
     nav.style.opacity = 1;
     showBGPattern();
   }

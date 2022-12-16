@@ -1,4 +1,4 @@
-import { polygonArea } from "d3-polygon";
+import { polygonArea, polygonCentroid } from "d3-polygon";
 import { PathPoint, PathRing } from "/interfaces";
 
 export default function(from: PathRing[], to: PathRing[]) {
@@ -11,9 +11,11 @@ export default function(from: PathRing[], to: PathRing[]) {
       
   while (from.length != to.length) {
     shorter()[shorter().length] = [];
+
+    let point = polygonCentroid(shorter(1)[shorter().length-1]);
     
     for (var i = 0; i < shorter(1)[shorter().length-1].length; i++)
-    shorter()[shorter().length-1].push([0, 0]);
+      shorter()[shorter().length-1].push(point);
   }
 
   // for each path

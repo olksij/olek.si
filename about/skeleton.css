@@ -1,5 +1,7 @@
 /* about > skeleton.css */
 
+@import '/common/styles/skeleton.css';
+
 body {
   padding-top: 160px;
 }

@@ -4,6 +4,8 @@ import { createElement } from "/render/jsx";
 import print from './scripts/print';
 import construct from '/render/construct';
 
+import './scripts/menu.ts';
+
 // --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
 
 export async function onload(content: PageContent) {

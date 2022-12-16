@@ -7,7 +7,7 @@ export default class MotionBlur {
   mult: number;
 
   constructor(config: { blurID: string; watchID: string; mult: number }) {
-    this.blurElement = byId(config.blurID)!;
+    this.blurElement = document.getElementById(config.blurID)!;
     this.watchID = config.watchID;
     this.mult = config.mult;
     this.blurInvoked = false;

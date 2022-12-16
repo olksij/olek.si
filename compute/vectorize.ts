@@ -1,16 +1,18 @@
 import { Font } from "opentype.js";
-import { FontsRecord, FontStyle, MorphElement, SkeletonStaticConfig, TextLines } from "interfaces";
+import { FontsRecord, FontStyle, RuntimeElementConfig, RuntimeSize, SkeletonConfig } from "interfaces";
 
-export default function (element: MorphElement, skeleton: SkeletonStaticConfig, fonts: FontsRecord) {
+export type TextLines = { text: string[], width: number }[]
+
+export default function (element: RuntimeElementConfig, skeleton: SkeletonConfig<RuntimeSize>, fonts: FontsRecord) {
   let icon = element.icon, text = element.text;
 
   let pathString: string[] = [];
-  let width = 0, baseline = 0, points = 0, 
-      lines: TextLines = [{ text: [], width: 0 }];
+  let lines: TextLines = [{ text: [], width: 0 }],
+      toSkeleton: SkeletonConfig<RuntimeSize> = [0, 0];
 
   if (icon) {
     pathString = [icon.path];
-    width = icon.height ?? 0;
+    toSkeleton = [icon.height ?? 0, icon.height ?? 0];
   }
 
   if (text) {
@@ -33,14 +35,15 @@ export default function (element: MorphElement, skeleton: SkeletonStaticConfig, 
     });
 
     // unless multiline text is enabled, propose a new width for computed text
-    width = style.wrap ? skeleton[0]! : lines[0].width;
-    baseline = calculateBaseline(font, style);    
+    toSkeleton = style.wrap ? [skeleton[0]!, lines.length * style.height] : [toSkeleton[0] + lines[0].width, style.height];
+    let baseline = calculateBaseline(font, style);    
+
 
     lines.forEach((line, i) => pathString[i] = (pathString[i] ?? '') + font.getPath(line.text.join(' '), 
-      textLeft, baseline + style.height * i, style.fontSize, { letterSpacing: style.letterSpacing }).toPathData(2));
+      textLeft, baseline + style.height * i, style.fontSize, { letterSpacing: style.spacing }).toPathData(2));
   }
 
-  return { path: pathString, baseline, width, points };
+  return { path: pathString, skeleton };
 }
 
 function calculateBaseline(font: Font, style: FontStyle) {

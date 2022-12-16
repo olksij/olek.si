@@ -3,7 +3,7 @@ import convert from "./convert";
 
 export default function (data: ComputeRequest, lines: number[], rings: PathRing[]) {
   let { from, to } = data,
-      [sw, sh, sbr] = from.skeleton ?? to.skeleton,
+      [sw, sh, sbr] = from?.skeleton ?? to.skeleton,
       path: string[] = [];
 
   sbr ??= 0;

@@ -16,11 +16,13 @@ export default {
     color: 'var(--text)',
   },
   subtitle: {
+    type: 'text',
     fontSize: 20,
     height: 28,
     color: 'var(--secondary)',
   },
   body: {
+    type: 'text',
     fontSize: 22,
     height: 36,
     color: 'var(--secondary)',
@@ -34,17 +36,19 @@ export default {
     color: 'var(--text)',
   },
   menu: {
+    type: 'text',
     fontSize: 18,
     height: 24,
     color: 'var(--secondary)',
   },
   action: {
+    type: "display",
     fontSize: 16,
     height: 24,
-    type: "display",
     color: 'var(--text)'
   },
   footer: {
+    type: 'text',
     fontSize: 12,
     height: 16,
     color: 'var(--secondary)',

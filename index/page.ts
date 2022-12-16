@@ -1,48 +1,23 @@
-import { ElementConfig, Languages, SourceTextData } from 'interfaces';
-
 // specific dates with custom description
-const dates: Record<string, Record<Languages, [string, string]>> = {  
-  "6-12":  {
-    en: ["🎂 It's my birthday today!", "June 12"],
-    sv: ["🎂 Jag fyller år idag!", "Juni 12"],
-    uk: ["🎂 Ce moje deń narodžnńa!", "Červeń 12"],
-  },
-  "8-24": {
-    en: ["Restoration of independence of Ukraine", "🇺🇦 August 24"],
-    sv: ["Återställande av Ukrainas självständighet", "🇺🇦 Augusti 24"],
-    uk: ["Vidnovlenńa nezaležnosti Ukrajiny", "🇺🇦 Serpeń 24"],
-  },
+const dates: Record<string, [string, string]> = {  
+  "6-12": ["🎂 It's my birthday today!", "June 12"],
+  "8-24": ["Restoration of independence of Ukraine", "🇺🇦 August 24"],
   // more dates to come such as celebrations and holidays
-  default: {
-    en: ["Redefining the way humans interact", "with computers."],
-    sv: ["Omdefinierar hur människor interagerar", "med datorer."],
-    uk: ["Pereosmysĺuju sposib vzajemodiji", "z compjuteramy."],
-  }
+  default: ["Redefining the way humans interact", "with computers."],
 };
-
-import titleFromPath from '/common/vectors/titleFromPath.txt?raw';
 
 let date = new Date();
 let description = dates[date.getMonth() + '-' + (date.getDate() + 1)] ?? dates.default;
 
 import font from '/common/typography';
 
-const elements: Record<string, ElementConfig> = {
+const elements: Record<string, StaticElementConfig> = {
 /*
- 🏷️ ID     ✨ FontStyle           ⚙️ Custom placeholder
-  _|_    ________|________     _____________|_____________ */
-  tt:  { text: font.title,     from: { path: titleFromPath } },
-  d1:  { text: font.subtitle, },
-  d2:  { text: font.subtitle, },
-};
-
-const texts: SourceTextData = {
-
-/*             🏴󠁧󠁢󠁥󠁮󠁧󠁿 English                  🇸🇪 Svenska               🇺🇦 Ukrajinśka
-/        ___________|____________   ___________|____________   ___________|____________ */
-  tt:  { en: "Oleksii",             sv: "Oleksiy",             uk: "Oleksij" },
-  d1:  { en: description["en"][0],  sv: description["sv"][0],  uk: description["uk"][0] },
-  d2:  { en: description["en"][1],  sv: description["sv"][1],  uk: description["uk"][1] },
+ 🏷️ ID       ✍️ Text             ✨ FontStyle
+  _|_    _______|_______       ________|________ */
+  tt:  { text: 'Oleksii',      style: font.title, },
+  d1:  { text: description[0], style: font.subtitle, },
+  d2:  { text: description[1], style: font.subtitle, },
 };
 
 // inline pictures
@@ -68,4 +43,5 @@ const links: Record<string, Array<string>> = {
 import skeleton from './dom';
 
 import { onload } from '/common/page';
-export let load = () => onload({ elements, images, links, stylesheets, texts, skeleton });
+import { StaticElementConfig } from '/interfaces';
+export let load = () => onload({ id: 'index', elements, images, links, stylesheets, skeleton });

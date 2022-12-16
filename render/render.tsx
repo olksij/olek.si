@@ -6,8 +6,6 @@
 import { createElement } from "./jsx";
 import { ComputeResult, CSSColor } from "/interfaces";
 
-import '/common/menu.ts';
-
 export default function (parent: HTMLElement, computed: ComputeResult) {
   let { text, icon, skeleton } = computed.element;
 
@@ -21,11 +19,13 @@ export default function (parent: HTMLElement, computed: ComputeResult) {
     let font = text.style;
     let textLeft = icon ? icon.gap + (icon.height ?? font.height) : 0;
 
-    let style = `font-family: ${font.type}; letter-spacing: ${font.spacing}em; font-size: ${font.fontSize}px; line-height: ${font.height+.5}px; opacity: 0;`;
+    let style = `font-family: ${font.type}; letter-spacing: ${font.spacing}em; font-size: ${font.fontSize}px; line-height: ${font.height+.5}px; opacity: 0; ${!font.wrap ? 'width: max-content' : ''}`;
     let vector = <p style={style}>{text.text}</p>;
 
+    if (!font.wrap) root.setAttribute('viewBox', `0 0 ${skeleton[0]} ${font.height}`);
+
     elements.push(vector);
-    root.append(<foreignObject x={textLeft} width={skeleton[0] + 'px'} height={skeleton[1] + 'px'}>{vector}</foreignObject>);
+    root.append(<foreignObject x={textLeft} width={font.wrap ? skeleton[0] : skeleton[0] * (font.height/skeleton[1]) + 'px'} height={font.wrap ? skeleton[1] : font.height + 'px'}>{vector}</foreignObject>);
   }
 
   if (icon) {

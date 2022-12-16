@@ -8,9 +8,9 @@ import navigate, { RouteName } from "/common/navigate";
    --- -- [URGENT] REFACTORING --- ---
    --- --- --- --- --- --- --- --- --- */
 
-let rg = byId("rg")!;
-let cnt = byId("cnt")!;
-let nav = byId("nav")!;
+let rg = document.getElementById("rg")!;
+let cnt = document.getElementById("cnt")!;
+let nav = document.getElementById("nav")!;
 
 var ignoreMouse = false;
 
@@ -90,16 +90,16 @@ nav.onclick = function () {
 
     cnt.classList.add("navTapped");
     //motionStart()
-    tagById("nav", "p")!.innerHTML = "Close";
-    byId('nav')?.children[0].setAttribute("viewBox", "0 0 80 24");
-    byId('nav').style.opacity = 0.5;
+    nav.getElementsByTagName('p')[0]!.innerHTML = "Close";
+    nav.children[0].setAttribute("viewBox", "0 0 80 24");
+    nav.style.opacity = 0.5;
     hideBGPattern();
   } else {
     //close menu
     cnt.classList.remove("navTapped");
-    tagById("nav", "p")!.innerHTML = "Navigation";
-    byId('nav')?.children[0].setAttribute("viewBox", "0 0 114 24");
-    byId('nav').style.opacity = 1;
+    nav.getElementsByTagName('p')[0]!.innerHTML = "Navigation";
+    nav.children[0].setAttribute("viewBox", "0 0 114 24");
+    nav.style.opacity = 1;
     showBGPattern();
   }
 };

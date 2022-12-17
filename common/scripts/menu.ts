@@ -114,7 +114,7 @@ let motionStart = function () {
 document.body.onclick = function () {
   if (!isNavHovered) {
     cnt.classList.remove("navTapped");
-    tagById("nav", "text")!.innerHTML = "Navigation";
+    //tagById("nav", "text")!.innerHTML = "Navigation";
   }
 };
 

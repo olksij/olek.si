@@ -25,11 +25,11 @@ export default function (element: RuntimeElementConfig, skeleton: SkeletonConfig
     let whitespace = font.getAdvanceWidth(' ', style.fontSize);
 
     words.forEach(word => {
-      let width = font.getAdvanceWidth(word, style.fontSize),
+      let width = font.getAdvanceWidth(word, style.fontSize, { letterSpacing: style.spacing }),
           line = lines.length - 1, spaced = whitespace + width;
-      
+            
       if (lines[line].width + spaced <= skeleton[0]! || !style.wrap)
-        lines[line].text.push(word), lines[line].width += spaced;
+        lines[line].text.push(word), lines[line].width += lines[line].text.length > 1 ? spaced : width;
 
       else lines.push({ text: [word], width })
     });
@@ -38,12 +38,11 @@ export default function (element: RuntimeElementConfig, skeleton: SkeletonConfig
     toSkeleton = style.wrap ? [skeleton[0]!, lines.length * style.height] : [toSkeleton[0] + lines[0].width, style.height];
     let baseline = calculateBaseline(font, style);    
 
-
     lines.forEach((line, i) => pathString[i] = (pathString[i] ?? '') + font.getPath(line.text.join(' '), 
       textLeft, baseline + style.height * i, style.fontSize, { letterSpacing: style.spacing }).toPathData(2));
   }
 
-  return { path: pathString, skeleton };
+  return { path: pathString, skeleton: toSkeleton };
 }
 
 function calculateBaseline(font: Font, style: FontStyle) {

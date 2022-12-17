@@ -23,6 +23,11 @@ body {
 
 #bio {
   width: 100% !important;
+  height: min-content;
+}
+
+#bio:not(.rendered) {
+  height: 200px;
 }
 
 #lf {

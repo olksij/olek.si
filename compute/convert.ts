@@ -19,7 +19,7 @@ export default function (pathString: string[], points?: PathRing[]) {
           props = new svgPathProperties(pathList[i]);
       
       let total = props.getTotalLength(),
-          count = Math.ceil(points?.[pointCounter]?.length ?? total);
+          count = Math.ceil(points?.[pointCounter]?.length ?? total / 2);
 
       // record [x, y] points for each step
       for (let point = 0; point < count; point++) {

@@ -125,19 +125,19 @@
   font-family: text !important;
 }
 
-#rg.hover>.rendered.hover {
+#rg.hover>.rendered:hover {
   padding-left: 48px;
 }
 
-#rg.hover>.rendered.hover>svg p {
+#rg.hover>.rendered:hover>svg p {
   color: var(--accent) !important;
   font-family: display !important;
 }
 
-#rg.hover>.rendered.hover:active {
+#rg.hover>.rendered:hover:active {
   padding-left: 0px;
 }
 
-#rg.hover>.rendered.hover:active>svg p {
+#rg.hover>.rendered:hover:active>svg p {
   color: var(--text) !important;
 }

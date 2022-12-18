@@ -69,14 +69,14 @@ const links: Record<string, Array<string>> = {
   "rg": ["/", "/about/", "/projects/", "/works/"],
 }
 
-import { onMenuItemClick } from './scripts/menu';
+import navigate from './navigate';
 
 const clicks: Record<string, Array<Function>> = {
   rg: [
-    () => onMenuItemClick('index'),
-    () => onMenuItemClick('about'),
-    () => onMenuItemClick('projects'),
-    () => onMenuItemClick('work'),
+    () => navigate('index'),
+    () => navigate('about'),
+    () => navigate('projects'),
+    () => navigate('work'),
   ],
 };
 

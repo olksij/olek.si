@@ -1,4 +1,5 @@
 import { SkeletonTree } from 'interfaces';
+import { menuState } from './scripts/menu';
 
 import aboutDom from "/about/dom";
 import indexDom from "/index/dom";
@@ -25,4 +26,6 @@ export default function (route: RouteName) {
   buildTree(routes[route].dom);
   routes[route].page().then(page => page.load());
   window.history.pushState({}, '', `/${route == 'index' ? '' : route + '/'}`)
+
+  menuState(false);
 }

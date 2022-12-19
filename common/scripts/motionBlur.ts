@@ -1,44 +1,47 @@
-export default class MotionBlur {
-  private previous!: DOMRect;
-  private blurInvoked: boolean;
-  private blurElement: HTMLElement;
-  private watchID: string;
+let blurElement  = document.getElementById('cnt')!;
+let watchElement = document.getElementById('work')!;
 
-  mult: number;
+let previous: DOMRect;
+var blurInvoked = false;
 
-  constructor(config: { blurID: string; watchID: string; mult: number }) {
-    this.blurElement = document.getElementById(config.blurID)!;
-    this.watchID = config.watchID;
-    this.mult = config.mult;
-    this.blurInvoked = false;
+// multiply calculated blur by the coefficient
+var mult: number;
+
+// manipulate motion blur state
+export default function (state: boolean, multiplier: number = 1) {
+  // if the inner state equals the called one - avoid double calls of [motionBlur]
+  if (blurInvoked == state) return;
+
+  // update global variables
+  blurInvoked = state;
+  mult = multiplier;
+  //                    add the class when [state] is true
+  //                    ___________|____________
+  blurElement.classList[state ? 'add' : 'remove']('navTransformed')
+
+  if (state) {
+    // when it needs to invoke an animation
+    previous = watchElement.getBoundingClientRect();
+    return requestAnimationFrame(motionBlur);
   }
 
-  invoke() {
-    if (this.blurInvoked) return;
+  // remove filter: blur() from the element to avoid artifacts
+  blurElement.style.filter = '';
+  return;
+}
 
-    this.blurElement.classList.add('navTransformed')
+function motionBlur() {
+  if (!blurInvoked) return;
 
-    this.blurInvoked = true;
-    this.previous = byId(this.watchID)!.getBoundingClientRect();
-    requestAnimationFrame(() => this.motionBlur());
-  }
+  // calculate the blur
+  let current = watchElement.getBoundingClientRect();
+  let diff = Math.abs(current.left - previous.left);
+  let blur = Math.round(diff * mult * 10) / 10;
 
-  drop() {
-    this.blurInvoked = false;
-    this.blurElement.style.filter = '';
-    this.blurElement.classList.remove('navTransformed')
-  }
+  // save the current state
+  previous = current;
 
-  motionBlur() {
-    if (!this.blurInvoked) return;
-
-    let current = byId(this.watchID)!.getBoundingClientRect();
-    let diff = Math.abs(current.left - this.previous.left);
-    let blur = Math.round(diff * this.mult * 10) / 10;
-
-    this.previous = current;
-
-    this.blurElement.style.filter = blur ? `blur(${blur}px)` : '';
-    requestAnimationFrame(() => this.motionBlur());
-  }
+  // apply & call for next frame
+  blurElement.style.filter = blur ? `blur(${blur}px)` : '';
+  requestAnimationFrame(motionBlur);
 }

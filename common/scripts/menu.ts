@@ -1,3 +1,5 @@
+import motionBlur from './motionBlur';
+
 import runtimize from "/render/runtimize";
 import font from "../typography";
 
@@ -29,6 +31,9 @@ export function menuState(open: boolean, tapped: boolean = false) {
   //animate background
   document.body.animate(open ? backgroundKeyframes : backgroundKeyframes.reverse(), backgroundAnimation);
   body.classList[operation]("menu")
+
+  // configure motion blur
+  motionBlur(open, innerWidth < 920 ? 1 : 0.5)
 }
 
 function navTap() {

@@ -54,7 +54,7 @@ export default async function construct(assets: PageContent): Promise<void> {
       continue;
     }
 
-    runtimize({ id, to: assets.elements![id] });
+    treeEl.children.length ? 0 : runtimize({ id, to: assets.elements![id] });
   }
 
   document.body.classList.add('rendered');  

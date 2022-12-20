@@ -22,10 +22,11 @@ const routes: Record<RouteName, RouteConfig>  = {
   work:     { dom: indexDom, page: () => import('/index/page') },
 }
 
-export default function (route: RouteName) {  
-  buildTree(routes[route].dom);
+export default function (route: RouteName) {
+  // hide menu when navigated && build a new tree
+  menuState(false), buildTree(routes[route].dom);
+
+  // load assets and update URL
   routes[route].page().then(page => page.load());
   window.history.pushState({}, '', `/${route == 'index' ? '' : route + '/'}`)
-
-  menuState(false);
 }

@@ -1,7 +1,9 @@
 import motionBlur from './motionBlur';
+import { content } from "/common/page";
 
 import runtimize from "/render/runtimize";
-import font from "../typography";
+import font      from "/common/typography";
+
 
 let body = document.body;
 
@@ -16,14 +18,18 @@ menu.addEventListener("mouseleave", (   ) => menuState(false));
 
 // on navigation button click
 nav .addEventListener("click", navTap)
-body.addEventListener("click", () => nav.matches(':hover') ? 0 : navTap());
+body.addEventListener("click", () => !nav.matches(':hover') && cnt.classList.contains('navTapped') ? navTap() : 0);
 
 
-export function menuState(open: boolean, tapped: boolean = false) {
+export function menuState(open: boolean) {
+  // if the menu already has the state, return
+  if (cnt.classList.contains("navOpened") == open || 
+      cnt.classList.contains("navTapped") == open) return;
+
   let operation = open ? 'add' : 'remove';
 
   // css classes
-  if (!tapped) {
+  if (!cnt.classList.contains("navTapped")) {
     cnt. classList[operation]("navOpened");
     menu.classList[operation]("hover");
   }
@@ -41,12 +47,12 @@ function navTap() {
 
   // update the button
   runtimize({ id: 'nav', to: { style: font.action, 
-    text: closed ? 'Navigation' : 'Close' } });
+    text: closed ? 'Close' : 'Navigation', icon: content.elements!.nav.icon } });
 
   cnt.classList[closed ? 'add' : 'remove']("navTapped");
   nav.style.opacity = closed ? '0.5' : '1';
 
-  menuState(closed, true);
+  menuState(closed);
 }
 
 // keyframes used for background animation

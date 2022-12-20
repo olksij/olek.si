@@ -7,8 +7,8 @@
 let skeletonResolve: () => void, rendered = 0;
 
 // called before wiping all elements
-export const initResolver = () =>
-  [window['skeleton'], window['skeletons'], window['elements'], rendered] = [new Promise<void>(resolve => skeletonResolve = resolve), [], [], 0];
+export const initResolver = () => {
+  [window['skeleton'], window['skeletons'], window['elements'], rendered] = [new Promise<void>(resolve => skeletonResolve = resolve), [], [], 0]; console.log('ffffffffffffffffffffff')}
 
 //             the total number     rendered
 //              _______|_______   ______|______

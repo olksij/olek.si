@@ -40,5 +40,5 @@ export default function (data: ComputeRequest, lines: number[], rings: PathRing[
     path.push(pathString);
   })
   
-  return convert(path, rings);
+  return convert(path, false, rings);
 }

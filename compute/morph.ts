@@ -12,15 +12,18 @@ export default async function interpolate(request: string, data: ComputeRequest,
   let startTime = performance.now();
   let { from, to } = data;
 
+  // does the morph morphs from element or skeleton
+  let fromElement = (from?.text || from?.icon) ? true : false;
+
   // vectorize the [to] element
   let { path, skeleton: toSkeleton } = vectorize(to, to.skeleton, fonts)!;
 
   // get [PathRings[]] out of PathData string
-  let { ringList: toRings, multilineConfig } = convert(path);
+  let { ringList: toRings, multilineConfig } = convert(path, fromElement);
 
   // if there is a predefined from element, animate from it
   let fromRings = from?.text || from?.icon
-    ? convert(vectorize(from, from.skeleton ?? to.skeleton, fonts).path, toRings).ringList
+    ? convert(vectorize(from, from.skeleton ?? to.skeleton, fonts).path, fromElement, toRings).ringList
     : skeleton(data, multilineConfig, toRings).ringList; // else, build a skeleton
   
   //           rearrage points in rings for smooth animation

@@ -58,7 +58,7 @@ const elements: Record<ElementID, StaticElementConfig> = {
 };
 
 import runtimize from '/render/runtimize';
-setInterval(() => runtimize({ id: 'tm', to: { ...elements.tm, text: new Date().toLocaleTimeString() } }), 1000)
+setInterval(() => runtimize({ id: 'tm', to: { ...elements.tm, text: new Date().toLocaleTimeString([], { hour12: false }) } }), 1000)
 
 import stylesheet from './styles/styles.css';
 import skeleton from './styles/skeleton.css';

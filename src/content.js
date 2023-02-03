@@ -11,12 +11,12 @@ var content = `
     <a href="https://instagram.com/oleksiibesidaa" target="_blank"><img delay="2750" class="torender" id="ig" alt="Instagram" width="48px" height="48px" /></a>
     <a href="https://github.com/oleksiibesida" target="_blank"><img delay="2800" class="torender" id="gh" alt="GitHub" width="48px" height="48px" /></a>
     <a href="https://linkedin.com/in/oleksiibesida" target="_blank"><img delay="2850" class="torender" id="in" alt="LinkedIn" width="48px" height="48px" /></a>
-    <a href="mailto:besida@oleksii.xyz" id="mta"><img delay="2900" class="torender" id="mt" alt="Email" width="48px" height="48px" /></a>
+    <a href="mailto:human@oleksii.xyz" id="mta"><img delay="2900" class="torender" id="mt" alt="Email" width="48px" height="48px" /></a>
   </div>
 </div>
 <div delay="3000" id="footer" class="torender">
   <img id="cr" alt="(c)" width="16px" height="16px" />
-  <p>2018-2022 Oleksii Besida</p>
+  <p>2018-2023 Oleksii Besida</p>
 </div>`;
 
 var description = "Redefining the way humans interact*with computers.";

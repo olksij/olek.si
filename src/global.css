@@ -14,6 +14,7 @@ body,
   display: flex;
   flex-direction: column;
   align-content: center;
+  -webkit-font-smoothing: antialiased;
 }
 
 body {
@@ -89,6 +90,7 @@ img {
 
 #description {
   color: var(--secondary);
+  font-family: 'Inter';
   white-space: nowrap;
   user-select: auto;
 }

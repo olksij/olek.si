@@ -1,5 +1,4 @@
 var content = `
-<p id="top" class="torender" delay="3000">oleksii<span>besida</span></p>
 <div id="container" delay="800" class="torender">
   <div delay="500" id="title" class="torender">
     <div id="pf"><img id="pfi" alt="Profile picture"></img></div>
@@ -10,8 +9,8 @@ var content = `
     <a href="https://t.me/oleksiibesida" target="_blank"><img delay="2700" class="torender" id="tg" alt="Telegram" width="48px" height="48px" /></a>
     <a href="https://instagram.com/oleksiibesidaa" target="_blank"><img delay="2750" class="torender" id="ig" alt="Instagram" width="48px" height="48px" /></a>
     <a href="https://github.com/oleksiibesida" target="_blank"><img delay="2800" class="torender" id="gh" alt="GitHub" width="48px" height="48px" /></a>
-    <a href="https://linkedin.com/in/oleksiibesida" target="_blank"><img delay="2850" class="torender" id="in" alt="LinkedIn" width="48px" height="48px" /></a>
-    <a href="mailto:human@oleksii.xyz" id="mta"><img delay="2900" class="torender" id="mt" alt="Email" width="48px" height="48px" /></a>
+    <a href="https://linkedin.com/in/oleksiibesida" id="mta" target="_blank"><img delay="2850" class="torender" id="in" alt="LinkedIn" width="48px" height="48px" /></a>
+    <a href="mailto:human@oleksii.xyz"><img delay="2900" class="torender" id="mt" alt="Email" width="48px" height="48px" /></a>
   </div>
 </div>
 <div delay="3000" id="footer" class="torender">
@@ -28,7 +27,7 @@ if (new Date().getMonth() == 7 && new Date().getDate() == 24)
   description = "Restoration of independence of Ukraine*🇺🇦  August 24  🎉";
 
 var source = new Map([
-  ["pfi", new URL("/assets/profilePicture.jpg?as=webp&width=512", import.meta.url)],
+  ["pfi", new URL("/assets/profilePicture.jpeg?as=webp&width=512", import.meta.url)],
   ["tg", new URL("/assets/telegram.svg", import.meta.url)],
   ["ig", new URL("/assets/instagram.svg", import.meta.url)],
   ["gh", new URL("/assets/github.svg", import.meta.url)],
@@ -45,13 +44,19 @@ var fonts = new Promise((resolve) => {
     'url(' + new URL("/assets/fonts/GoogleSansDisplay-Bold.woff2", import.meta.url) + ')')
     .load().then((font) => {
       document.fonts.add(font);
-      if (++loaded == 2) resolve(), console.log("--- FONTS ---");
+      if (++loaded == 3) resolve(), console.log("--- FONTS ---");
     });
   new FontFace('Google Sans Text',
     'url(' + new URL("/assets/fonts/GoogleSansText-Medium.woff2", import.meta.url) + ')')
     .load().then((font) => {
       document.fonts.add(font);
-      if (++loaded == 2) resolve(), console.log("--- FONTS ---");
+      if (++loaded == 3) resolve(), console.log("--- FONTS ---");
+    });
+  new FontFace('Inter',
+    'url(' + new URL("/assets/fonts/Inter-Medium.woff2", import.meta.url) + ')')
+    .load().then((font) => {
+      document.fonts.add(font);
+      if (++loaded == 3) resolve(), console.log("--- FONTS ---");
     });
 });
 

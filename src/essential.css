@@ -1,10 +1,10 @@
 :root {
-  --background: #FAF7F9;
-  --text: #0F0D1A;
+  --background: #FAFAFA;
+  --text: #1A1A1A;
   --accent: #6549F2;
-  --secondary: #858391;
-  --element: #39364D3A;
-  --border: #39364D14;
+  --secondary: #929292;
+  --element: #4D4D4D3A;
+  --border: #4D4D4D14;
 }
 
 #loader {
@@ -14,14 +14,14 @@
   display: flex;
 }
 
-@media only screen and (min-width: 620px) {
+@media only screen and (min-width: 768px) {
   #loader svg {
     width: 192px;
     height: 192px;
   }
 }
 
-@media only screen and (max-width: 620px) {
+@media only screen and (max-width: 768px) {
   #loader svg {
     width: 96px;
     height: 96px;
@@ -30,6 +30,7 @@
 
 #loader svg {
   margin: auto;
+  translate: 0 -28px;
 }
 
 #loader #spinner {

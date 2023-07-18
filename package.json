@@ -1,10 +1,15 @@
 {
   "devDependencies": {
+    "@parcel/packager-raw-url": "^2.9.3",
+    "@parcel/transformer-inline-string": "^2.9.3",
+    "@parcel/transformer-webmanifest": "^2.9.3",
     "parcel": "^2.9.3",
     "parcel-reporter-static-files-copy": "^1.4.0",
     "sharp": "^0.31.1"
   },
   "dependencies": {
+    "@lottiefiles/lottie-js": "^0.4.1",
+    "@lottiefiles/lottie-player": "^2.0.2",
     "@vercel/analytics": "^0.1.6",
     "web-vitals": "^2.1.4"
   },

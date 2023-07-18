@@ -127,14 +127,38 @@ img {
   fill: var(--accent);
 }
 
+#signature {
+  position: absolute;
+  bottom: 0;
+  opacity: 0.4;
+  height: 56px;
+  padding-bottom: 3vh;
+  transition: padding 1.4s cubic-bezier(.75, 0, 0, 1), opacity .5s cubic-bezier(0, 0, 1, .25) !important;
+}
+
+#signature.rendered {
+  padding: 0;
+  opacity: 0;
+}
+
 #footer {
   display: flex;
   align-self: center;
   justify-content: center;
-  opacity: 0.6;
   color: var(--secondary);
-  margin-bottom: 16px;
-  margin-top: 24px;
+  margin-bottom: 24px;
+  opacity: 0;
+  margin-top: 32px;
+  transform: translateY(-3vh);
+}
+
+#footer.rendered {
+  transition-property: transform, opacity;
+  transition-duration: 1.4s, 0.7s;
+  transition-delay: 0s, .7s;
+  transition-timing-function: cubic-bezier(.75, 0, 0, 1), cubic-bezier(0, 1, 1, 1);
+  opacity: .6;
+  transform: translateY(0px);
 }
 
 #footer>img {

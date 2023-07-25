@@ -1,10 +1,21 @@
 :root {
-  --background: #FAFAFA;
-  --text: #1A1A1A;
+  --background: #FFF;
+  --text: #000;
   --accent: #6549F2;
-  --secondary: #929292;
-  --element: #4D4D4D3A;
-  --border: #4D4D4D14;
+  --secondary: #CCC;
+  --element: #E5E5E5;
+  --border: #EEE;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #000;
+    --text: #FFF;
+    --accent: #6549F2;
+    --secondary: #333;
+    --element: #111;
+    --border: #1A1A1A;
+  }
 }
 
 #loader {

@@ -43,7 +43,6 @@ img {
   margin-top: 32px;
   font-size: 18px;
   line-height: 24px;
-  user-select: auto;
   font-family: 'Google Sans Display',
     sans-serif;
   align-self: center;
@@ -92,7 +91,6 @@ img {
   color: var(--secondary);
   font-family: 'Inter';
   white-space: nowrap;
-  user-select: auto;
 }
 
 #profiles {
@@ -119,7 +117,7 @@ img {
 }
 
 #profiles>a:hover>img {
-  background: #F0EFF3;
+  background: #F7F7F7;
   transition: background .3s;
 }
 
@@ -130,10 +128,17 @@ img {
 #signature {
   position: absolute;
   bottom: 0;
-  opacity: 0.4;
-  height: 56px;
-  padding-bottom: 3vh;
+  opacity: 1;
+  height: 72px;
+  padding-bottom: 5vh;
+  filter: invert(85%);
   transition: padding 1.4s cubic-bezier(.75, 0, 0, 1), opacity .5s cubic-bezier(0, 0, 1, .25) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  #signature {
+    filter: invert(10%);
+  }
 }
 
 #signature.rendered {
@@ -171,7 +176,6 @@ img {
 #footer>p {
   font-size: 12px;
   line-height: 16px;
-  user-select: auto;
   text-shadow: none;
 }
 

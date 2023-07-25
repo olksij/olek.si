@@ -9,5 +9,5 @@ export function fireAnimation() {
     player.classList.add('rendered');
     document.getElementById('footer').classList.remove('torender');
     document.getElementById('footer').classList.add('rendered');
-  }, 3500);
+  }, 3800);
 }

@@ -147,7 +147,7 @@ img {
 
 @media (prefers-color-scheme: dark) {
   #signature {
-    filter: invert(10%);
+    filter: invert(15%);
   }
 }
 

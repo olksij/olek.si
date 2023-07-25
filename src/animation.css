@@ -51,7 +51,7 @@
   opacity: 0;
 }
 
-img.torender {
+img.torender, #profiles>a.torender {
   opacity: 0;
 }
 

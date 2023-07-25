@@ -19,6 +19,12 @@
   <link rel="icon" type="image/x-icon" href="/assets/favicons/favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
   <link rel="manifest" href="/assets/favicons/site.webmanifest">
+  <meta name="theme-color" content="#F5F5F5" />
+  <script>
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#111');
+    }
+  </script>
 </head>
 
 <body>

@@ -1,5 +1,9 @@
 import { fireAnimation } from "./signature";
 
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+  document.querySelector('meta[name="theme-color"]').setAttribute('content', event.matches ? '#111' : '#F5F5F5');
+});
+
 var content = `
 <div id="container" delay="700" class="torender">
   <div delay="400" id="title" class="torender">

@@ -101,13 +101,13 @@ img {
 
 #profiles>a {
   border-radius: 24px;
+  background: var(--background);
+  box-shadow: 0 0 0 1px var(--border), 0 0 0 8px var(--background);
 }
 
 #profiles>a>img {
   height: 48px;
   border-radius: 24px;
-  background: var(--background);
-  box-shadow: 0 0 0 1px var(--border), 0 0 0 8px var(--background);
 }
 
 @-moz-document url-prefix() {
@@ -116,9 +116,19 @@ img {
   }
 }
 
-#profiles>a:hover>img {
+#profiles>a:hover {
   background: #F7F7F7;
   transition: background .3s;
+}
+
+@media (prefers-color-scheme: dark) {
+  #profiles>a>img, #footer>img{
+    filter: invert(100%);
+  }
+
+  #profiles>a:hover {
+    background: #0F0F0F;
+  }
 }
 
 #profiles>a:hover>path {

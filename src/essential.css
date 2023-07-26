@@ -2,7 +2,7 @@
   --background: #FFF;
   --text: #000;
   --accent: #6549F2;
-  --secondary: #CCC;
+  --secondary: #999;
   --element: #E5E5E5;
   --border: #EEE;
 }
@@ -12,7 +12,7 @@
     --background: #000;
     --text: #FFF;
     --accent: #6549F2;
-    --secondary: #333;
+    --secondary: #666;
     --element: #111;
     --border: #1A1A1A;
   }

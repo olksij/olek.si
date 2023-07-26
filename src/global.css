@@ -139,15 +139,15 @@ img {
   position: absolute;
   bottom: 0;
   opacity: 1;
-  height: 72px;
+  height: 64px;
   padding-bottom: 5vh;
-  filter: invert(85%);
+  filter: invert(75%);
   transition: padding 1.4s cubic-bezier(.75, 0, 0, 1), opacity .5s cubic-bezier(0, 0, 1, .25) !important;
 }
 
 @media (prefers-color-scheme: dark) {
   #signature {
-    filter: invert(15%);
+    filter: invert(25%);
   }
 }
 

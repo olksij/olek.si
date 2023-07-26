@@ -13,10 +13,10 @@ var content = `
   <p delay="700" id="description" class="torender"></p>
   <div delay="3100" id="profiles" class="torender">
     <a href="https://t.me/oleksiibesida" target="_blank" delay="3100" class="torender"><img id="tg" alt="Telegram" width="48px" height="48px" /></a>
+    <a href="mailto:human@oleksii.xyz" delay="3150" class="torender"><img id="mt" alt="Email" width="48px" height="48px" /></a>
     <a href="https://instagram.com/oleksiibesidaa" target="_blank" delay="3150" class="torender"><img id="ig" alt="Instagram" width="48px" height="48px" /></a>
     <a href="https://github.com/oleksiibesida" target="_blank" delay="3200" class="torender"><img id="gh" alt="GitHub" width="48px" height="48px" /></a>
     <a href="https://linkedin.com/in/oleksiibesida" id="mta" target="_blank" delay="3250" class="torender"><img id="in" alt="LinkedIn" width="48px" height="48px" /></a>
-    <a href="mailto:human@oleksii.xyz" delay="3300" class="torender"><img id="mt" alt="Email" width="48px" height="48px" /></a>
   </div>
 </div>
 <div id="footer" class="torender">
@@ -101,9 +101,10 @@ function render() {
           document.querySelector(':root').style.setProperty('--background-position', 'left 50% top calc(50% - 48px)');
         }
         if (element.id == 'description') {
+          await new Promise((resolve) => setTimeout(resolve, 200))
           for (var letter of description) {
             element.innerHTML += letter == '*' ? "<br>" : letter;
-            var wait = ([' ', ','].includes(letter) ? 48 : 24) + Math.random() * 64;
+            var wait = ([' ', ',', '&'].includes(letter) ? 48 : 16) + Math.random() * 64;
             await new Promise((resolve) => setTimeout(resolve, wait));
           }
         }

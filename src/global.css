@@ -139,10 +139,10 @@ img {
   position: absolute;
   bottom: 0;
   opacity: 1;
-  height: 64px;
-  padding-bottom: 5vh;
+  height: 56px;
+  padding-bottom: 2.5vh;
   filter: invert(75%);
-  transition: padding 1.4s cubic-bezier(.75, 0, 0, 1), opacity .5s cubic-bezier(0, 0, 1, .25) !important;
+  transition: padding 2s cubic-bezier(.75, 0, 0, 1), opacity .8s cubic-bezier(0, 0, 1, .25) !important;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -169,8 +169,8 @@ img {
 
 #footer.rendered {
   transition-property: transform, opacity;
-  transition-duration: 1.4s, 0.7s;
-  transition-delay: 0s, .7s;
+  transition-duration: 2s, 1s;
+  transition-delay: 0s, 1s;
   transition-timing-function: cubic-bezier(.75, 0, 0, 1), cubic-bezier(0, 1, 1, 1);
   opacity: .6;
   transform: translateY(0px);

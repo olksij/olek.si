@@ -13,3 +13,5 @@ npm-debug.log*
 #local
 .parcel-cache
 .vercel
+
+static

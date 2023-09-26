@@ -1,5 +1,5 @@
 :root {
-  --animat: .6s cubic-bezier(0.6, 0, 0.4, 1);
+  --animat: 1s cubic-bezier(0.6, 0, 0.4, 1);
 }
 
 * {

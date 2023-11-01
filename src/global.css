@@ -15,6 +15,7 @@ body,
   flex-direction: column;
   align-content: center;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility
 }
 
 body {

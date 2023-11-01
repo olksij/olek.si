@@ -12,11 +12,11 @@ var content = `
   </div>
   <p delay="700" id="description" class="torender"></p>
   <div delay="3700" id="profiles" class="torender">
-    <a href="https://t.me/oleksiibesida" target="_blank" delay="3700" class="torender"><img id="tg" alt="Telegram" width="48px" height="48px" /></a>
+    <a href="https://t.me/olksij" target="_blank" delay="3700" class="torender"><img id="tg" alt="Telegram" width="48px" height="48px" /></a>
     <a href="mailto:h@oleksii.be" delay="3750" class="torender"><img id="mt" alt="Email" width="48px" height="48px" /></a>
-    <a href="https://instagram.com/oleksii.be" target="_blank" delay="3800" class="torender"><img id="ig" alt="Instagram" width="48px" height="48px" /></a>
-    <a href="https://github.com/oleksiibesida" target="_blank" delay="3850" class="torender"><img id="gh" alt="GitHub" width="48px" height="48px" /></a>
-    <a href="https://linkedin.com/in/oleksiibesida" id="mta" target="_blank" delay="3900" class="torender"><img id="in" alt="LinkedIn" width="48px" height="48px" /></a>
+    <a href="https://instagram.com/olksij" target="_blank" delay="3800" class="torender"><img id="ig" alt="Instagram" width="48px" height="48px" /></a>
+    <a href="https://github.com/olksij" target="_blank" delay="3850" class="torender"><img id="gh" alt="GitHub" width="48px" height="48px" /></a>
+    <a href="https://linkedin.com/in/olksij" id="mta" target="_blank" delay="3900" class="torender"><img id="in" alt="LinkedIn" width="48px" height="48px" /></a>
   </div>
 </div>
 <div id="footer" class="torender">

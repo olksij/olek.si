@@ -9,12 +9,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="essential.css">
   
-  <script src="./content.js" type="module"></script>
   <link rel="stylesheet" href="global.css">
   <link rel="stylesheet" media="screen and (min-width: 768px)" href="desktop.css">
   <link rel="stylesheet" media="screen and (max-width: 768px)" href="mobile.css">
   <link rel="stylesheet" href="animation.css">
-  <script src="./webvitals.js" type="module"></script>
   
   <link rel="icon" type="image/x-icon" href="/assets/favicons/favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
@@ -34,6 +32,21 @@
     </svg>
   </div>
   <div id="content"></div>
+  <script type="module">
+    window.addEventListener('load', async () => {
+      const scripts = [
+        new URL("/src/content.js", import.meta.url),
+        new URL("/src/webvitals.js", import.meta.url),
+      ];
+      
+      scripts.forEach(link => {
+        let element = document.createElement("script");
+        element.setAttribute("src", link);
+        element.setAttribute("type", "module");
+        document.body.appendChild(element);
+      });
+    });
+  </script>
 </body>
 
 </html>

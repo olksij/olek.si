@@ -76,7 +76,9 @@ var fetched = new Promise((resolve) => {
   }));
 });
 
-window.addEventListener('load', async () => {
+start();
+
+async function start() {
   await fetched;
   await fonts;
   document.getElementById("content").innerHTML += content;
@@ -90,7 +92,7 @@ window.addEventListener('load', async () => {
   document.getElementById('loader').remove();
 
   setTimeout(fireAnimation, 3700);
-});
+}
 
 function render() {
   for (let element of document.getElementsByClassName("torender")) {

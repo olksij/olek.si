@@ -76,9 +76,7 @@ var fetched = new Promise((resolve) => {
   }));
 });
 
-start();
-
-async function start() {
+export async function load() {
   await fetched;
   await fonts;
   document.getElementById("content").innerHTML += content;

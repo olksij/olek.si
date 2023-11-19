@@ -1,5 +1,5 @@
 import "@lottiefiles/lottie-player";
-import animationJson from 'bundle-text:../assets/signature.txt';
+import animationJson from '../assets/signature.txt';
 
 export function fireAnimation() {
   const player = document.querySelector("lottie-player");

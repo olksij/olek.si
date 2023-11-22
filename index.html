@@ -20,24 +20,19 @@
   <link rel="manifest" href="/assets/favicons/site.webmanifest">
   <meta name="theme-color" content="#F5F5F5" />
 
-  <script>
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  <script type="module">
+    // sync theme mode with browser
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
       document.querySelector('meta[name="theme-color"]').setAttribute('content', '#111');
     }
-  </script>
-</head>
 
-<body>
-  <div id="loader">
-    <svg viewBox="0 0 32 32"><circle id="spinner" cx="16" cy="16" r="15" fill="none" /></svg>
-  </div>
-
-  <div id="content" />
-
-  <script type="module">
     import('./src/content.js').then(page => page.load())
     import('./src/webvitals.ts')
   </script>
-</body>
+</head>
+
+<body> <div id="loader">
+  <svg viewBox="0 0 32 32"><circle id="spinner" cx="16" cy="16" r="15" fill="none" /></svg>
+</div> </body>
 
 </html>

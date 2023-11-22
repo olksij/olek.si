@@ -1,16 +1,17 @@
 import "@lottiefiles/lottie-player";
-import animationJson from '../assets/signature.txt';
+import animationJson from '/assets/lottie/signature.txt';
 
 export function fireAnimation() {
-  const player = document.querySelector("lottie-player");
+  const player = document.querySelector("lottie-player") as any;
+  const footer = document.getElementById('footer') as any;
 
   player.load(animationJson);
   player.animate(keyframes, timing);
 
   setTimeout(() => {
     player.classList.add('rendered');
-    document.getElementById('footer').classList.remove('torender');
-    document.getElementById('footer').classList.add('rendered');
+    footer.classList.remove('torender');
+    footer.classList.add('rendered');
   }, 1800);
 }
 

@@ -35,13 +35,13 @@ if (new Date().getMonth() == 7 && new Date().getDate() == 24)
   description = "Restoration of independence of Ukraine*🇺🇦  August 24  🎉";
 
 var source = new Map([
-  ["pfi", new URL("/assets/profilePicture.jpeg?as=webp&width=512", import.meta.url)],
-  ["tg", new URL("/assets/telegram.svg", import.meta.url)],
-  ["lt", new URL("/assets/layers.svg", import.meta.url)],
-  ["gh", new URL("/assets/github.svg", import.meta.url)],
-  ["in", new URL("/assets/linkedin.svg", import.meta.url)],
-  ["mt", new URL("/assets/email.svg", import.meta.url)],
-  ["cr", new URL("/assets/copyright.svg", import.meta.url)],
+  ["pfi", new URL("/assets/images/profilePicture.jpeg?as=webp&width=512", import.meta.url)],
+  ["tg", new URL("/assets/icons/telegram.svg", import.meta.url)],
+  ["lt", new URL("/assets/icons/layers.svg", import.meta.url)],
+  ["gh", new URL("/assets/icons/github.svg", import.meta.url)],
+  ["in", new URL("/assets/icons/linkedin.svg", import.meta.url)],
+  ["mt", new URL("/assets/icons/email.svg", import.meta.url)],
+  ["cr", new URL("/assets/icons/copyright.svg", import.meta.url)],
 ]);
 
 var fetches = new Map([]);
@@ -79,7 +79,7 @@ var fetched = new Promise((resolve) => {
 export async function load() {
   await fetched;
   await fonts;
-  document.getElementById("content").innerHTML += content;
+  document.body.innerHTML += content;
   console.log(fetches);
   fetches.forEach((value, key) => {
     document.getElementById(key).src = value;

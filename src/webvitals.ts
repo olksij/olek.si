@@ -19,7 +19,7 @@ function sendMetrics(metric: MetricType) {
   const body = {
     href: location.href,
     id:   metric.id,
-    dsn:  import.meta.env.VERCEL_ANALYTICS_ID ?? '',
+    dsn:  __VERCEL_INSIGHTS_ID__,
     page: location.href,
     event_name: metric.name,
     value: metric.value.toString(),

@@ -8,16 +8,10 @@
   <meta name="description"
     content="Oleksii Besida  |  Ukrainian he/him UI&UX designer and Flutter developer at Norditech AB based in Stockholm, Sweden.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/src/essential.css">
-
-  <link rel="stylesheet" href="/src/global.css">
-  <link rel="stylesheet" media="screen and (min-width: 768px)" href="/src/desktop.css">
-  <link rel="stylesheet" media="screen and (max-width: 768px)" href="/src/mobile.css">
-  <link rel="stylesheet" href="/src/animation.css">
+  <link rel="stylesheet" href="/src/style/essential.css">
 
   <link rel="icon" type="image/x-icon" href="/assets/favicons/favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
-  <link rel="manifest" href="/assets/favicons/site.webmanifest">
   <meta name="theme-color" content="#F5F5F5" />
 
   <script type="module">
@@ -26,8 +20,8 @@
       document.querySelector('meta[name="theme-color"]').setAttribute('content', '#111');
     }
 
-    import('./src/content.js').then(page => page.load())
-    import('./src/webvitals.ts')
+    import('./src/scripts/content.tsx').then(page => page.load())
+    import('./src/scripts/webvitals.ts')
   </script>
 </head>
 

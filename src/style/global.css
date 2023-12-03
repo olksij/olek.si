@@ -1,3 +1,5 @@
+@import './animation.css';
+
 :root {
   --background-position: left 50% top calc(50%);
 }
@@ -9,7 +11,7 @@ body,
   margin: 0;
   height: 100%;
   letter-spacing: -0.04em;
-  font-family: 'Google Sans Text';
+  font-family: 'text';
   color: var(--text);
   display: flex;
   flex-direction: column;
@@ -40,20 +42,6 @@ img {
   user-select: none;
 }
 
-#top {
-  margin-top: 32px;
-  font-size: 18px;
-  line-height: 24px;
-  font-family: 'Google Sans Display',
-    sans-serif;
-  align-self: center;
-  text-shadow: none;
-}
-
-#top>span {
-  color: var(--accent)
-}
-
 #container {
   display: flex;
   flex-direction: column;
@@ -75,10 +63,10 @@ img {
 
 #title>p {
   position: relative;
-  font-family: 'Google Sans Display';
+  font-family: 'display';
 }
 
-#pf {
+#pfc {
   border-radius: 96px;
   display: flex;
   flex-direction: row;
@@ -90,7 +78,7 @@ img {
 
 #description {
   color: var(--secondary);
-  font-family: 'Inter';
+  font-family: 'inter';
   white-space: nowrap;
 }
 

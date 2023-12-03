@@ -19,17 +19,17 @@
   letter-spacing: -2.56px;
 }
 
-#pf {
+#pfc {
   width: 96px;
   height: 96px;
   box-shadow: 0 0 0 12px var(--background);
 }
 
-#pf img {
+#pfc img {
   width: 100px;
   height: 100px;
 }
 
-#mta {
+#li {
   display: none;
 }

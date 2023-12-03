@@ -1,4 +1,4 @@
-import   * as _webvitals from 'web-vitals';
+import * as _webvitals  from  'web-vitals';
 import { inject } from '@vercel/analytics';
 
 import print from './print';

@@ -6,7 +6,7 @@
   transition: var(--animat);
 }
 
-.torender :not(#title):not(#pf):not(#pfi) {
+.torender :not(#title):not(#pfc):not(#pfc>img) {
   opacity: 0;
 }
 
@@ -14,7 +14,7 @@
   transition: all var(--animat), opacity 0s;
 }
 
-#pfi {
+#pfc {
   animation: appear .4s cubic-bezier(0.72, 0, 0.24, 1);
 }
 
@@ -85,7 +85,7 @@ img.torender, #profiles>a.torender {
   }
 
   #container.rendered {
-    /* 48*4 + #pf*/
+    /* 48*4 + #pfc*/
     height: 288px;
   }
 }

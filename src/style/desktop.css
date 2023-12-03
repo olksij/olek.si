@@ -19,13 +19,13 @@
   letter-spacing: -5.12px;
 }
 
-#pf {
+#pfc {
   width: 192px;
   height: 192px;
   box-shadow: 0 0 0 24px var(--background);
 }
 
-#pf img {
+#pfc img {
   width: 192px;
   height: 192px;
 }

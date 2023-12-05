@@ -5,6 +5,8 @@
   --secondary: #999;
   --element: #E5E5E5;
   --border: #EEE;
+
+  --background-position: left 50% top calc(50%);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -18,10 +20,19 @@
   }
 }
 
-body {
+html, body {
   padding: 0;
   margin: 0;
   height: 100%;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  background:
+    linear-gradient(90deg, var(--background) 23px, transparent 1%) var(--background-position),
+    linear-gradient(var(--background) 23px, transparent 1%) var(--background-position),
+    var(--element);
+  background-size: 24px 24px;
 }
 
 #loader {

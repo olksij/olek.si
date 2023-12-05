@@ -1,31 +1,8 @@
-@import './animation.css';
-
-:root {
-  --background-position: left 50% top calc(50%);
-}
-
-html,
-body,
-#content {
-  padding: 0;
-  margin: 0;
-  height: 100%;
+body {
   letter-spacing: -0.04em;
   font-family: 'text';
-  color: var(--text);
-  display: flex;
-  flex-direction: column;
-  align-content: center;
   -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility
-}
-
-body {
-  background:
-    linear-gradient(90deg, var(--background) 23px, transparent 1%) var(--background-position),
-    linear-gradient(var(--background) 23px, transparent 1%) var(--background-position),
-    var(--element);
-  background-size: 24px 24px;
+  text-rendering: optimizeLegibility;
 }
 
 p {

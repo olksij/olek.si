@@ -58,7 +58,7 @@ const stylesheets = [
   { style:  mobileStyle, media: '(max-width: 768px)' },
   { style: desktopStyle, media: '(min-width: 768px)' },
   { style:  globalStyle, },
-  { style: animateStyle, },   
+  { style: animateStyle, },
 ]
 
 export async function load() {

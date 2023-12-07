@@ -2,7 +2,7 @@
   --animat: 1s cubic-bezier(0.6, 0, 0.4, 1);
 }
 
-* {
+*:not(#pfc) {
   transition: var(--animat);
 }
 

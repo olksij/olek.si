@@ -76,12 +76,6 @@ img {
   border-radius: 24px;
 }
 
-@-moz-document url-prefix() {
-  #profiles>a>img {
-    box-shadow: 0 0 0 1.01px var(--border), 0 0 0 8px var(--background);
-  }
-}
-
 #profiles>a:hover {
   background: #F7F7F7;
   transition: background .3s;

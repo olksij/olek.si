@@ -6,7 +6,7 @@
   transition: var(--animat);
 }
 
-.torender :not(#title):not(#pfc):not(#pfc>img) {
+.torender :not(#title):not(#title *) {
   opacity: 0;
 }
 
@@ -19,13 +19,8 @@
 }
 
 @keyframes appear {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 #container {
@@ -47,22 +42,15 @@
   margin-bottom: -192px;
 }
 
-#top.torender {
-  opacity: 0;
-}
-
 img.torender, #profiles>a.torender {
   opacity: 0;
-}
-
-#top>span {
-  transition: 0s;
 }
 
 /* --- DESKTOP --- */
 @media only screen and (min-width: 768px) {
   #title.torender p {
     margin-left: -377px;
+    opacity: 0;
   }
 
   #container {
@@ -78,6 +66,7 @@ img.torender, #profiles>a.torender {
 @media only screen and (max-width: 768px) {
   #title.torender p {
     margin-left: -215px;
+    opacity: 0;
   }
 
   #container {

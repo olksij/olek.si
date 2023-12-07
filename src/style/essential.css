@@ -33,6 +33,10 @@ html, body {
     linear-gradient(var(--background) 23px, transparent 1%) var(--background-position),
     var(--element);
   background-size: 24px 24px;
+  letter-spacing: -0.04em;
+  font-family: 'text';
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 #loader {

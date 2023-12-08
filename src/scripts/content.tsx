@@ -82,10 +82,13 @@ import "@lottiefiles/lottie-player";
 import signature from '/assets/lottie/signature.json?raw';
 
 const elementResolve: Record<string, (e: HTMLElement) => void> = {
-  title: () => document.getElementById('loader')?.remove(),
+  title: () => {
+    document.getElementById('loader')?.remove();
+  },
   container: () => {
     let root = document.querySelector(':root') as HTMLElement;
-    root.style.setProperty('--background-position', 'left 50% top calc(50% - 48px)'); },
+    root.style.setProperty('--background-position', 'left 50% top calc(50% - 48px)'); 
+  },
   description: async (element: HTMLElement) => {
     await new Promise((resolve) => setTimeout(resolve, 200));
     for (var letter of description) {
@@ -100,8 +103,7 @@ const elementResolve: Record<string, (e: HTMLElement) => void> = {
   
     setTimeout(() => {
       player.classList.add('rendered');
-      footer.classList.remove('torender');
-      footer.classList.add('rendered');
+      footer.classList.replace('torender', 'rendered');
     }, 1800);
   },
 }

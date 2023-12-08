@@ -36,14 +36,14 @@ img {
   font-family: 'display';
 }
 
-#pfc {
+#pfc, #pfc img {
   border-radius: 96px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
   z-index: 1;
+  background: var(--background);
 }
 
 #description {
@@ -94,19 +94,24 @@ img {
   opacity: 1;
   height: 56px;
   padding-bottom: 2.5vh;
-  filter: invert(75%);
-  transition: padding 2s cubic-bezier(.75, 0, 0, 1), opacity .8s cubic-bezier(0, 0, 1, .25) !important;
+  filter: invert(75%) blur(0px);
+  transition: all 2s cubic-bezier(.75, 0, 0, 1), opacity .8s cubic-bezier(0, 0, 1, .25) !important;
 }
 
 @media (prefers-color-scheme: dark) {
   #signature {
-    filter: invert(25%);
+    filter: invert(25%) blur(0px);
+  }
+
+  #signature.rendered {
+    filter: invert(25%) blur(32px);
   }
 }
 
 #signature.rendered {
   padding: 0;
   opacity: 0;
+  filter: invert(75%) blur(32px);
 }
 
 #footer {
@@ -118,10 +123,12 @@ img {
   opacity: 0;
   margin-top: 32px;
   transform: translateY(-3vh);
+  filter: blur(16px);
 }
 
 #footer.rendered {
-  transition-property: transform, opacity;
+  filter: blur(0px);
+  transition-property: all, opacity;
   transition-duration: 2s, 1s;
   transition-delay: 0s, 1s;
   transition-timing-function: cubic-bezier(.75, 0, 0, 1), cubic-bezier(0, 1, 1, 1);

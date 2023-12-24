@@ -46,6 +46,12 @@ img {
   background: var(--background);
 }
 
+
+#pfc img {
+  width: 100%;
+  height: 100%;
+}
+
 #description {
   color: var(--secondary);
   font-family: 'inter';

@@ -42,7 +42,7 @@ const container = <div id='container' delay={700}>
 
 const footer = <div id='footer' tr>
   <img src={cr} alt='(c)' size='16px' />
-  <p>2018-2023 Oleksii Besida</p>
+  <p>2023 Oleksii Besida</p>
 </div>
 
 const player = <lottie-player id="signature" autoplay mode="normal" />;
